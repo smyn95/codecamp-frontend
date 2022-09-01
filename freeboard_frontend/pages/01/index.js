@@ -4,90 +4,58 @@ import {Box,Inputbx,Error,Submit,Setting,Textbx,Title,Adress} from '../../styles
 export default function Freeboard() {
   // const [input, setInput] = useState("")
   const [name, setName] = useState("")
-  const [input2, setInput2] = useState("")
-  const [input3, setInput3] = useState("")
-  const [input4, setInput4] = useState("")
-  const [input5, setInput5] = useState("")
-  const [input6, setInput6] = useState("")
+  const [password, setPassword] = useState("")
+  const [title, setTitle] = useState("")
+  const [writer, setWriter] = useState("")
 
-  // const [inputError,setInputError] = useState("")
-  const [nameError,setNameError] = useState("")
-  const [inputError2,setInputError2] = useState("")
-  const [inputError3,setInputError3] = useState("")
-  const [inputError4,setInputError4] = useState("")
-  const [inputError5,setInputError5] = useState("")
-  const [inputError6,setInputError6] = useState("")
-
+  const [nameError, setNameError] = useState("")
+  const [passwordError, setPasswordError] = useState("")
+  const [titleError, setTitleError] = useState("")
+  const [writerError, setWriterError] = useState("")
   
-  const onChangeName= (event) => {
-    console.log(onChangeName)
+  const onChangeName = (event) => {
     setName(event.target.value);
-    if (name === "") {
-      setNameError("이름을 적어주세요.");
-    } else {
-      setNameError("");
+    if(event.target.value !== ""){
+      setNameError("")
+    }
+  };
+  const onChangePassword = (event) => {
+    setPassword(event.target.value);
+    if(event.target.value !== ""){
+      setPasswordError("")
+    }
+  };
+  const onChangeTitle = (event) => {
+    setTitle(event.target.value);
+    if(event.target.value !== ""){
+      setTitleError("")
+    }
+  };
+  const onChangeWriter = (event) => {
+    setWriter(event.target.value);
+    if(event.target.value !== ""){
+      setWriterError("")
     }
   };
 
+  const onClickNotice = () => {
+    if (!name) {
+      setNameError("작성자를 입력해주세요.");
+    }
+    if (!password) {
+      setPasswordError("비밀번호를 입력해주세요.");
+    }
+    if (!title) {
+      setTitleError("제목을 입력해주세요.");
+    }
+    if (!writer) {
+      setWriterError("내용을 입력해주세요.");
+    }
+    if (name && password && title && writer) {
+        alert("게시글이 등록되었습니다.");
+    }
+  };
 
-  // function onChangeInput(event){
-  //   setInput(event.target.value)
-  // }
-  function onChangeInput2(event){
-    setInput2(event.target.value)
-  }
-  function onChangeInput3(event){
-    setInput3(event.target.value)
-  }
-  function onChangeInput4(event){
-    setInput4(event.target.value)
-  }
-  function onChangeInput5(event){
-    setInput5(event.target.value)
-  }
-  function onChangeInput6(event){
-    setInput6(event.target.value)
-  }
-
-  function onClickNotice(){
-    // if(input === ""){
-    //   setInputError("빈칸을 입력해주세요.")
-
-    //   } else {
-    //     setInputError("")
-    //   }
-
-    if(input2 === ""){
-      setInputError2("빈칸을 입력해주세요.")
-
-      } else {
-        setInputError2("")
-      }
-    if(input3 === ""){
-      setInputError3("빈칸을 입력해주세요.")
-
-      } else {
-        setInputError3("")
-      }
-    if(input4 === ""){
-      setInputError4("빈칸을 입력해주세요.")
-
-      } else {
-        setInputError4("")
-      }
-    if(input5 === ""){
-      setInputError5("빈칸을 입력해주세요.")
-
-      } else {
-        setInputError5("")
-      }
-    if(input6 === ""){
-      setInputError6("빈칸을 입력해주세요.")
-
-      } else {
-        setInputError6("")
-      }
-  }
 
   return(
     <Box>
@@ -102,41 +70,39 @@ export default function Freeboard() {
         </div>
         <div>
          <p>비밀번호</p>
-         <input type="text" onChange={onChangeInput2} placeholder="비밀번호를 입력해주세요."/>
-         <Error>{inputError2}</Error>
+         <input type="text" onChange={onChangePassword} placeholder="비밀번호를 입력해주세요."/>
+         <Error>{passwordError}</Error>
         </div>
       </Inputbx>
       <Textbx>
        <div>
          <p>제목</p>
-         <input type="text" onChange={onChangeInput3} placeholder="제목을 작성해주세요."/>
-         <Error>{inputError3}</Error>
+         <input type="text" onChange={onChangeTitle} placeholder="제목을 작성해주세요."/>
+         <Error>{titleError}</Error>
         </div>
       </Textbx>
       <Textbx>
        <div>
          <p>내용</p>
-         <textarea type="text" onChange={onChangeInput4} placeholder="내용을 작성해주세요."/>
-         <Error>{inputError4}</Error>
+         <textarea type="text" onChange={onChangeWriter} placeholder="내용을 작성해주세요."/>
+         <Error>{writerError}</Error>
         </div>
       </Textbx>
       <Textbx>
        <div>
          <p>주소</p>
          <Adress>
-            <input type="text" placeholder="00000" onChange={onChangeInput5}/>
+            <input type="text" placeholder="00000"/>
             <button type="button" onClick="openZipSearch()">우편번호 검색</button>    
          </Adress>
         <input type="text" />
         <input type="text" />
-        <Error>{inputError5}</Error> 
       </div>
       </Textbx>
       <Textbx>
        <div>
          <p>유튜브</p>
-         <input type="text" onChange={onChangeInput6} placeholder="링크를 복사해주세요."/>
-         <Error>{inputError6}</Error> 
+         <input type="text" placeholder="링크를 복사해주세요."/>
         </div>
       </Textbx>
       <Textbx>

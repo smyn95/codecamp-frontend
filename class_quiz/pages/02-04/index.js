@@ -9,36 +9,37 @@ export default function JoinPage() {
   const [emailError,setEmailError] = useState("")
   const [passwordError,setPasswordError] = useState("")
 
-  function onChangeEmail(event) {
-    setEmail(event.target.value)
-  }
-  function onChangePassword(event){
-    setPassword(event.target.value)
-  }
-
-  function onChangePassword2(event){
-    setPassword2(event.target.value)
-  }
-
-  function onClickSignup(){
-
-    if(email.includes("@") === false){
+  const onChangeEmail = (event) => {
+    setEmail(event.target.value);
+    if(event.target.value !== ""){
+      setEmailError("")
+    }
+  };
+  const onChangePassword = (event) => {
+    setPassword(event.target.value);
+    if(event.target.value !== ""){
+      setPasswordError("")
+    }
+  };
+  const onChangePassword2 = (event) => {
+    setPassword2(event.target.value);
+    if(event.target.value !== ""){
+      setPasswordError("")
+    }
+  };
+    const onClickSignup = () => {
+      if (email.includes("@") === false) {
         setEmailError("이메일이 올바르지 않습니다. @가 없음")
-
-      } else {
-           //메시지 알림 이후, backend 컴퓨터에 있는 API(함수) 요청하기
-          //alert("회원가입을 축하합니다!!")
-          setEmailError("")
+        return
       }
-
-    if(password.includes(password2) === false){
-
+      if (password.includes(password2) === false) {
         setPasswordError("비밀번호가 동일하지 않습니다.")
-
-      } else {
-        setPasswordError("")
+        return
       }
-  }
+      if (email && password) {//email, password도 충족시켜주는 조건식
+        alert("로그인이 완료되었습니다.");
+     }
+    };
 
   return(
     <Box>
