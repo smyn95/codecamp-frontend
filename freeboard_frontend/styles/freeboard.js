@@ -2,7 +2,7 @@ import styled from '@emotion/styled'
 
 export const Title = styled.h1`
   font-size:36px;
-  bont-weight:bold;
+  font-weight:bold;
   padding:30px 0 0 0;
   text-align:center;
 `
@@ -26,15 +26,21 @@ export const Box = styled.div`
   margin:50px auto;
   box-shadow:0px 0px 10px #ccc;
   p{
-    font-size:16px;
-    font-weight:bold;
+    font-size: 16px;
+    font-weight: bold;
+    background: #111;
+    width: 80px;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px 0;
   }
   input{
     height:50px;
     outline:none;
-    border:1px solid #bdbdbd;
+    border:1px solid transparent;
     padding:0 15px;
-    border-radius:10px
+    border-bottom:1px solid #ccc;
   }
 `
 export const Inputbx = styled.div`
@@ -58,6 +64,7 @@ export const Textbx = styled.div`
     padding: 15px;
     border:1px solid #bdbdbd;
     resize:none;
+    border-radius:10px;
   }
   span{
     width:80px;
@@ -81,7 +88,7 @@ export const Adress = styled.div`
     font-size:14px;
     color:#fff;
     font-weight:500;
-    background:#111;
+    background:orange;
     border: none;
   }
   

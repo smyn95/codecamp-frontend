@@ -1,17 +1,55 @@
 import {useState} from 'react'
-import {Box,Inputbx,Error,Submit,Setting,Textbx,Title,Adress} from '../../styles/freeboard' 
+import {gql,useMutation} from '@apollo/client'
+import {
+  Box,
+  Inputbx,
+  Error,
+  Submit,
+  Setting,
+  Textbx,
+  Title,
+  Adress
+} 
+from '../../styles/freeboard' 
+
+const CREATE_BOARD = gql`
+  mutation createBoard($createBoardInput: CreateBoardInput!) {
+    createBoard(createBoardInput: $createBoardInput) {
+      _id
+      writer
+      title
+      contents
+      youtubeUrl
+      likeCount
+      dislikeCount
+      images
+      createdAt
+      updatedAt
+      # boardAddress {
+      #   _id
+      # }
+    }
+  }
+`
 
 export default function Freeboard() {
-  // const [input, setInput] = useState("")
   const [name, setName] = useState("")
   const [password, setPassword] = useState("")
   const [title, setTitle] = useState("")
-  const [writer, setWriter] = useState("")
+  const [contents, setContents] = useState("")
+  const [youtubeUrl, setYoutubeUrl] = useState("")
+
+  const [boardAddress, setBoardAddress] = useState("")
+  const [boardAddressDetail, setBoardAddressDetail] = useState("")
+  const [boardZipcode, setBoardZipcode] = useState("")
 
   const [nameError, setNameError] = useState("")
   const [passwordError, setPasswordError] = useState("")
   const [titleError, setTitleError] = useState("")
-  const [writerError, setWriterError] = useState("")
+  const [contentsError, setContentsError] = useState("")
+
+  const [createBoard] =  useMutation(CREATE_BOARD)
+
   
   const onChangeName = (event) => {
     setName(event.target.value);
@@ -23,7 +61,7 @@ export default function Freeboard() {
     setPassword(event.target.value);
     if(event.target.value !== ""){
       setPasswordError("")
-    }
+    } 
   };
   const onChangeTitle = (event) => {
     setTitle(event.target.value);
@@ -31,14 +69,49 @@ export default function Freeboard() {
       setTitleError("")
     }
   };
-  const onChangeWriter = (event) => {
-    setWriter(event.target.value);
+  const onChangeContents = (event) => {
+    setContents(event.target.value);
     if(event.target.value !== ""){
-      setWriterError("")
+      setContentsError("")
     }
   };
 
-  const onClickNotice = () => {
+  const onChangeAddress = (event) => {
+    setBoardAddress(event.target.value);
+  };
+
+  const onChangeZipcode = (event) => {
+    setBoardZipcode(event.target.value);
+  };
+
+  const onChangeAddressDetail = (event) => {
+    setBoardAddressDetail(event.target.value);
+  };
+
+  const onChangeYoutubeUrl = (event) => {
+    setYoutubeUrl(event.target.value);
+  };
+
+
+  const onClickNotice = async () => {  
+    const result = await createBoard({
+      variables: {
+          createBoardInput : {
+          writer: name,
+          password,
+          title,
+          contents,
+          youtubeUrl,
+          boardAddress: {
+            zipcode: boardZipcode,
+            address:boardAddress,
+            addressDetail:boardAddressDetail,
+          },
+          images:[],
+          }
+      },
+    })
+
     if (!name) {
       setNameError("작성자를 입력해주세요.");
     }
@@ -48,14 +121,13 @@ export default function Freeboard() {
     if (!title) {
       setTitleError("제목을 입력해주세요.");
     }
-    if (!writer) {
-      setWriterError("내용을 입력해주세요.");
+    if (!contents) {
+      setContentsError("내용을 입력해주세요.");
     }
-    if (name && password && title && writer) {
-        alert("게시글이 등록되었습니다.");
+    if (name && password && title && contents) {
+      alert("게시글이 등록되었습니다.");
     }
-  };
-
+  }
 
   return(
     <Box>
@@ -84,25 +156,25 @@ export default function Freeboard() {
       <Textbx>
        <div>
          <p>내용</p>
-         <textarea type="text" onChange={onChangeWriter} placeholder="내용을 작성해주세요."/>
-         <Error>{writerError}</Error>
+         <textarea type="text" onChange={onChangeContents} placeholder="내용을 작성해주세요."/>
+         <Error>{contentsError}</Error>
         </div>
       </Textbx>
       <Textbx>
        <div>
          <p>주소</p>
          <Adress>
-            <input type="text" placeholder="00000"/>
+            <input type="text" placeholder="00000" onChange={onChangeZipcode}/>
             <button type="button" onClick="openZipSearch()">우편번호 검색</button>    
          </Adress>
-        <input type="text" />
-        <input type="text" />
+        <input type="text" onChange={onChangeAddress}/>
+        <input type="text" onChange={onChangeAddressDetail} placeholder="상세주소를 입력해주세요."/>
       </div>
       </Textbx>
       <Textbx>
        <div>
          <p>유튜브</p>
-         <input type="text" placeholder="링크를 복사해주세요."/>
+         <input type="text" placeholder="링크를 복사해주세요." onChange={onChangeYoutubeUrl}/>
         </div>
       </Textbx>
       <Textbx>

@@ -1,5 +1,4 @@
-import {gql,useMutation, useQuery} from '@apollo/client'
-import { useState } from 'react'
+import {gql,useMutation} from '@apollo/client'
 
 
 const CREATE_PRODUCT = gql `

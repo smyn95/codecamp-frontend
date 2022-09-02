@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import {gql,useMutation} from '@apollo/client'
+import { useRouter } from "next/router";
 
 
 const CREATE_BOARD = gql `
@@ -11,8 +12,9 @@ const CREATE_BOARD = gql `
     }
   }
 `
-
 export default function GraphqlMutationPage(){
+  const router = useRouter()
+
   const [writer,setWriter] = useState("")
   const [title,setTitle] = useState("")
   const [contents,setContetns] = useState("")
@@ -20,6 +22,7 @@ export default function GraphqlMutationPage(){
 
 
   const onClickSubmit = async () => {
+    try{
     //const writer = "qqq" //이 함수에 있으면 현재 스코프
     const result = await 나의함수({
       variables: { //variables 이게 $ 역할을 해줌
@@ -30,8 +33,16 @@ export default function GraphqlMutationPage(){
     })
     console.log(result)
     alert(result.data.createBoard.message)
-    
-  }
+    console.log(result.data.createBoard.number)
+    // router.push("/05-10-dynamic-routed-board-mutation/" + result.data.createBoard.message)
+    router.push(`/05-10-dynamic-routed-board-mutation/ ${result.data.createBoard.number}`) //위에 더하기를 생략한것과 같음
+    } catch (errer){
+      //try에 있는 내용을 시도하다가 실패하면, 아랫줄 모두 무시 !!! 하고 catch가 실행됨
+      console.log(error.message)
+      alert(error.message)
+
+    }
+ }
 
   //onChange 함수
   const onChangeWriter = (event) => {
