@@ -3,7 +3,7 @@ import {gql,useMutation} from '@apollo/client'
 import { useRouter } from "next/router";
 
 
-const CREATE_BOARD = gql `
+const CREATE_BOARD = gql `ㅈㅈ1
   mutation createBoard($writer:String, $title:String, $contents: String){  #타입 적는 곳
     createBoard(writer: $writer, title: $title, contents: $contents){   # 실제 우리가 전달할  변수 적는 곳
       _id

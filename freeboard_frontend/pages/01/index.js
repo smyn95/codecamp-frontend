@@ -1,5 +1,6 @@
 import {useState} from 'react'
 import {gql,useMutation} from '@apollo/client'
+import { useRouter } from "next/router";
 import {
   Box,
   Inputbx,
@@ -8,7 +9,12 @@ import {
   Setting,
   Textbx,
   Title,
-  Adress
+  Adress,
+  Input,
+  Font,
+  Contents,
+  Imgbx,
+  Codezip
 } 
 from '../../styles/freeboard' 
 
@@ -23,16 +29,22 @@ const CREATE_BOARD = gql`
       likeCount
       dislikeCount
       images
+      boardAddress{
+        _id,
+        zipcode,
+        address,
+        addressDetail,
+        createdAt,
+        updatedAt
+      },
       createdAt
       updatedAt
-      # boardAddress {
-      #   _id
-      # }
     }
   }
 `
-
 export default function Freeboard() {
+  const router = useRouter()
+  
   const [name, setName] = useState("")
   const [password, setPassword] = useState("")
   const [title, setTitle] = useState("")
@@ -50,6 +62,51 @@ export default function Freeboard() {
 
   const [createBoard] =  useMutation(CREATE_BOARD)
 
+  const onClickNotice = async () => { 
+    try{ 
+      const result = await createBoard({
+        variables: {
+            createBoardInput : {
+            writer: name,
+            password,
+            title,
+            contents,
+            youtubeUrl,
+            boardAddress: {
+              zipcode: boardZipcode,
+              address:boardAddress,
+              addressDetail:boardAddressDetail,
+            },
+            images:[]
+            }
+        },
+      })
+      console.log(result)
+      alert(result.data.createBoard.message)
+      console.log(result.data.createBoard.number)
+      router.push(`/01/board/${result.data.createBoard._id}`)
+    }catch{
+      if (!name) {
+        setNameError("작성자를 입력해주세요.");
+      }
+      if (!password) {
+        setPasswordError("비밀번호를 입력해주세요.");
+      }
+      if (!title) {
+        setTitleError("제목을 입력해주세요.");
+      }
+      if (!contents) {
+        setContentsError("내용을 입력해주세요.");
+      }
+      if (name && password && title && contents) {
+        alert("게시글이 등록되었습니다.");
+      }
+      
+      console.log(error.message)
+      alert(error.message);
+      alert(router.query.boardId);
+    }
+  }
   
   const onChangeName = (event) => {
     setName(event.target.value);
@@ -93,42 +150,6 @@ export default function Freeboard() {
   };
 
 
-  const onClickNotice = async () => {  
-    const result = await createBoard({
-      variables: {
-          createBoardInput : {
-          writer: name,
-          password,
-          title,
-          contents,
-          youtubeUrl,
-          boardAddress: {
-            zipcode: boardZipcode,
-            address:boardAddress,
-            addressDetail:boardAddressDetail,
-          },
-          images:[],
-          }
-      },
-    })
-
-    if (!name) {
-      setNameError("작성자를 입력해주세요.");
-    }
-    if (!password) {
-      setPasswordError("비밀번호를 입력해주세요.");
-    }
-    if (!title) {
-      setTitleError("제목을 입력해주세요.");
-    }
-    if (!contents) {
-      setContentsError("내용을 입력해주세요.");
-    }
-    if (name && password && title && contents) {
-      alert("게시글이 등록되었습니다.");
-    }
-  }
-
   return(
     <Box>
       <Title>
@@ -136,63 +157,65 @@ export default function Freeboard() {
       </Title>
       <Inputbx>
         <div>
-         <p>작성자</p>
-         <input type="text" onChange={onChangeName} placeholder="이름을 적어주세요."></input>
+        <Font>작성자</Font>
+         <Input type="text" onChange={onChangeName} placeholder="이름을 적어주세요."/>
          <Error>{nameError}</Error>
         </div>
         <div>
-         <p>비밀번호</p>
-         <input type="text" onChange={onChangePassword} placeholder="비밀번호를 입력해주세요."/>
+         <Font>비밀번호</Font>
+         <Input type="text" onChange={onChangePassword} placeholder="비밀번호를 입력해주세요."/>
          <Error>{passwordError}</Error>
         </div>
       </Inputbx>
       <Textbx>
        <div>
-         <p>제목</p>
-         <input type="text" onChange={onChangeTitle} placeholder="제목을 작성해주세요."/>
+         <Font>제목</Font>
+         <Input type="text" onChange={onChangeTitle} placeholder="제목을 작성해주세요."/>
          <Error>{titleError}</Error>
         </div>
       </Textbx>
       <Textbx>
        <div>
-         <p>내용</p>
-         <textarea type="text" onChange={onChangeContents} placeholder="내용을 작성해주세요."/>
+         <Font>내용</Font>
+         <Contents type="text" onChange={onChangeContents} placeholder="내용을 작성해주세요."/>
          <Error>{contentsError}</Error>
         </div>
       </Textbx>
       <Textbx>
        <div>
-         <p>주소</p>
+         <Font>주소</Font>
          <Adress>
-            <input type="text" placeholder="00000" onChange={onChangeZipcode}/>
-            <button type="button" onClick="openZipSearch()">우편번호 검색</button>    
+            <Codezip type="text" placeholder="00000" onChange={onChangeZipcode}/>
+            <button type="button" >우편번호 검색</button>    
          </Adress>
-        <input type="text" onChange={onChangeAddress}/>
-        <input type="text" onChange={onChangeAddressDetail} placeholder="상세주소를 입력해주세요."/>
+        <Input type="text" onChange={onChangeAddress}/>
+        <Input type="text" onChange={onChangeAddressDetail} placeholder="상세주소를 입력해주세요."/>
       </div>
       </Textbx>
       <Textbx>
        <div>
-         <p>유튜브</p>
-         <input type="text" placeholder="링크를 복사해주세요." onChange={onChangeYoutubeUrl}/>
+         <Font>유튜브</Font>
+         <Input type="text" placeholder="링크를 복사해주세요." onChange={onChangeYoutubeUrl}/>
         </div>
       </Textbx>
       <Textbx>
         <div>
-          <p>사진 첨부</p>
-          <span></span>
-          <span></span>
-          <span></span>
+          <Font>사진 첨부</Font>
+          <Imgbx></Imgbx>
+          <Imgbx></Imgbx>
+          <Imgbx></Imgbx>
         </div>
       </Textbx>
       <Setting>
         <div>
-          <p>메인 설정</p>
-          <span><input type="radio"/>유튜브</span>
-          <span><input type="radio"/>사진</span>
+          <Font>메인 설정</Font>
+          <span><Input type="radio"/>유튜브</span>
+          <span><Input type="radio"/>사진</span>
         </div>
       </Setting>
-      <Submit onClick={onClickNotice}><p>등록하기</p></Submit>
+      <Submit onClick={onClickNotice}>
+        <Font>등록하기</Font>
+        </Submit>
     </Box>
   )
 }
