@@ -3,18 +3,19 @@ import {gql,useMutation} from '@apollo/client'
 import { useRouter } from "next/router";
 import {
   Box,
-  Inputbx,
   Error,
   Submit,
   Setting,
   Textbx,
   Title,
-  Adress,
   Input,
   Font,
   Contents,
   Imgbx,
-  Codezip
+  Codezip,
+  Search,
+  Titlebx,
+  Routing
 } 
 from '../../styles/freeboard' 
 
@@ -153,69 +154,70 @@ export default function Freeboard() {
   return(
     <Box>
       <Title>
-        게시물 등록
+        Post registration
       </Title>
-      <Inputbx>
-        <div>
-        <Font>작성자</Font>
+      <Textbx>
+        <Titlebx>
+        <Font>작&nbsp;&nbsp;성&nbsp;&nbsp;자</Font>
          <Input type="text" onChange={onChangeName} placeholder="이름을 적어주세요."/>
          <Error>{nameError}</Error>
-        </div>
-        <div>
+        </Titlebx>
+        <Titlebx>
          <Font>비밀번호</Font>
          <Input type="text" onChange={onChangePassword} placeholder="비밀번호를 입력해주세요."/>
          <Error>{passwordError}</Error>
-        </div>
-      </Inputbx>
+        </Titlebx>
+      </Textbx>
       <Textbx>
-       <div>
-         <Font>제목</Font>
+       <Titlebx>
+         <Font>제&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;목</Font>
          <Input type="text" onChange={onChangeTitle} placeholder="제목을 작성해주세요."/>
          <Error>{titleError}</Error>
-        </div>
+        </Titlebx>
       </Textbx>
       <Textbx>
-       <div>
-         <Font>내용</Font>
+       <Titlebx>
+         <Font>내&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;용</Font>
          <Contents type="text" onChange={onChangeContents} placeholder="내용을 작성해주세요."/>
          <Error>{contentsError}</Error>
-        </div>
+        </Titlebx>
+      </Textbx>
+      
+      <Textbx>
+       <Titlebx>
+         <Font>주&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소</Font>
+         <Codezip type="text" placeholder="00000" onChange={onChangeZipcode}/>
+         <Search type="button" >우편번호 검색</Search>
+       </Titlebx>
+         <Input type="text" onChange={onChangeAddress}/>
+         <Input type="text" onChange={onChangeAddressDetail} placeholder="상세주소를 입력해주세요."/>
+      
       </Textbx>
       <Textbx>
-       <div>
-         <Font>주소</Font>
-         <Adress>
-            <Codezip type="text" placeholder="00000" onChange={onChangeZipcode}/>
-            <button type="button" >우편번호 검색</button>    
-         </Adress>
-        <Input type="text" onChange={onChangeAddress}/>
-        <Input type="text" onChange={onChangeAddressDetail} placeholder="상세주소를 입력해주세요."/>
-      </div>
-      </Textbx>
-      <Textbx>
-       <div>
-         <Font>유튜브</Font>
+       <Titlebx>
+         <Font>유&nbsp;튜&nbsp;브</Font>
          <Input type="text" placeholder="링크를 복사해주세요." onChange={onChangeYoutubeUrl}/>
-        </div>
+        </Titlebx>
       </Textbx>
       <Textbx>
-        <div>
-          <Font>사진 첨부</Font>
+        <Titlebx>
+          <Font>사진첨부</Font>
           <Imgbx></Imgbx>
           <Imgbx></Imgbx>
           <Imgbx></Imgbx>
-        </div>
+        </Titlebx>
       </Textbx>
       <Setting>
-        <div>
-          <Font>메인 설정</Font>
-          <span><Input type="radio"/>유튜브</span>
-          <span><Input type="radio"/>사진</span>
-        </div>
+        <Titlebx>
+          <Font>메인설정</Font>
+          <input type="radio" checked/> <span>유튜브</span>
+          <input type="radio"/> <span>사진</span>
+        </Titlebx>
       </Setting>
+      
       <Submit onClick={onClickNotice}>
-        <Font>등록하기</Font>
-        </Submit>
+        <Routing>등록하기</Routing>
+      </Submit>
     </Box>
   )
 }
