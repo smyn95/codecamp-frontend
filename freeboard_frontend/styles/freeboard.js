@@ -40,7 +40,7 @@ export const Contents = styled.textarea`
     width: 100%;
     height: 450px;
     padding: 15px;
-    border:1px solid #bdbdbd;
+    border:1px solid #777;
     resize:none;
     border-radius:10px;
     opacity:0.5;
@@ -69,7 +69,7 @@ export const Codezip = styled.input`
     outline:none;
     border:1px solid transparent;
     padding:0 15px;
-    border-bottom:1px solid #ccc;
+    border-bottom:1px solid #777;
     width:300px;
     opacity:0.5;
     margin:0 30px 10px 0;
@@ -100,11 +100,6 @@ export const Setting = styled.div`
   input[type=radio]{
     accent-color: currentcolor;
   }
-`
-
-export const Error = styled.div`
-  color:red;
-  margin-left:5px;
 `
 export const Submit = styled.h1`
   p{
