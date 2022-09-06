@@ -11,6 +11,16 @@ export const Box = styled.div`
   margin:50px auto;
   box-shadow:0px 0px 10px #ccc;
 `
+export const Title = styled.h1`
+  font-size:40px;
+  font-weight:bold;
+  text-align:center;
+  color:#e0e0e0;
+  font-family: 'Libre Bodoni', serif;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-top:30px;
+`
 export const Input = styled.input`
     height:50px;
     outline:none;
@@ -80,21 +90,6 @@ export const Icon = styled.img`
 `
 
 ////본문
-export const Title = styled.h1`
-margin-top:30px;
-  /* margin:30px 0 0 15px;
-  position:relative;
-      &&:after{
-        content:"";
-        display:block;
-        position:absolute;
-        width:5px;
-        height:40px;
-        background: deepskyblue;
-        top: 0;
-        left:-15px;
-      } */
-`
 export const Contents = styled.img`
   width:1100px;
   margin:50px auto;

@@ -2,7 +2,7 @@ import Freeboard from "../../../src/components/units/board/write/BoardWrite.Cont
 
 export default function FreeboardPage(){
 
-return(
-  <Freeboard/>
-)
+  return(
+    <Freeboard/>
+  )
 }

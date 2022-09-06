@@ -9,3 +9,31 @@ export const CREATE_PRODUCT = gql`
     }
   }
 `
+
+//Detail Query
+export const FETCH_PRODUCT = gql`
+  query fetchProduct($productId: ID) {
+    fetchProduct(productId: $productId) {
+      _id
+      seller
+      name
+      detail
+      price
+    }
+  }
+`;
+
+//상품목록 노출
+export const FETCH_PRODUCTS = gql`
+  query fetchProducts{
+    fetchProducts{
+      _id
+      seller
+      name
+      detail
+      price
+    }
+  }
+`;
+
+

@@ -110,3 +110,24 @@ export const Greeting = styled.button`
     color:dodgerblue;
   }
 `
+
+// 05파일의 emotion 활용을 위한 버튼
+export const Btncolor = styled.button`
+  border:none;
+  background-color:${props => props.change ? "deepskyblue" : "default"};
+  color:#fff;
+  width:150px;
+  height:50px;
+  margin-top:20px;
+  border-radius:10px;
+`
+
+
+// 상품목록 노출 fetchProducts
+export const Row = styled.div`
+    display: flex;
+`
+
+export const Column = styled.div`
+    width: 25%;
+`
