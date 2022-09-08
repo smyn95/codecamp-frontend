@@ -21,6 +21,16 @@ export const Title = styled.h1`
   letter-spacing: 3px;
   margin-top:30px;
 `
+export const DetailTitle = styled.h1`
+  font-size:40px;
+  font-weight:500;
+  text-align:center;
+  color:#111;
+  text-align:left;
+  letter-spacing: 3px;
+  margin-top:30px;
+`
+
 export const Input = styled.input`
     height:50px;
     outline:none;
@@ -140,6 +150,8 @@ export const Listbtn = styled.p`
   text-align:center;
   line-height:50px;
   margin-right:10px;
+  cursor:pointer;
+  &&:hover{background:#ccc;}
   &&:last-child{
     margin-right:0;
   }
@@ -177,6 +189,7 @@ export const Reviewbtn = styled.div`
   overflow:hidden;
   justify-content: space-between;
   padding-left:10px;
+  align-items: center;
   p{
     color:#bdbdbd;
     letter-spacing:1px;
@@ -185,7 +198,9 @@ export const Reviewbtn = styled.div`
     border: none;
     background: #111;
     color: #fff;
-    width: 100px;
+    width: 120px;
+    padding:15px 0;
+    border-radius:0;
   }
 `
 

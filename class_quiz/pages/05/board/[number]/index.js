@@ -2,12 +2,10 @@ import StaticRoutedPage from '../../../../src/units/product/detail/ProductDetail
 
 export default function ProductDetailPage(){
 
-
   return(
     <>
       <StaticRoutedPage/>
    </>
    
   )
-
 }

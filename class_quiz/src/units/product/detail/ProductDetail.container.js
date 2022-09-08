@@ -6,17 +6,24 @@ import ProductUI from './ProductDetail.presenter'
 export default function StaticRoutedPage(){
   
   const router = useRouter()
-  console.log(router)
+  console.log("router:",router)
   
   const {data} = useQuery(FETCH_PRODUCT,{
     variables:{productId:router.query.number} 
   })
 
-  console.log(data)
+  console.log("data",data)
+
+  const onClickMoveToEdit = () => {
+    console.log(router)
+    router.push(`/05/board/${router.query.number}/edit`)
+    
+  }
 
   return(
     <>
-      <ProductUI data={data}/>
+      <ProductUI data={data} onClickMoveToEdit={onClickMoveToEdit}
+      />
     </>
   )
 }

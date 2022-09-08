@@ -19,7 +19,7 @@ export const Title = styled.h1`
   font-size:40px;
   font-weight:bold;
   text-align:center;
-  color:#e0e0e0;
+  color:#111;
   font-family: 'Libre Bodoni', serif;
   text-transform: uppercase;
   letter-spacing: 3px;
@@ -57,6 +57,161 @@ export const Font = styled.p`
     font-family: 'Nanum Myeongjo', serif;
 `
 
+//header 부분
+export const Header = styled.header`
+  position: fixed;
+  width: 100%;
+  top:0;
+  background: #f6f5f0;
+  border-bottom:1px solid #c8c8c8;
+  z-index: 9;
+`
+export const Inner = styled.div`
+  height: 120px;
+  padding-top:10px;
+  box-sizing: border-box;
+  width:1400px;
+  margin:0 auto;
+  position:relative;
+`
+export const SubMenu = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+`
+export const Logo = styled.a`
+    height: 75px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+`
+export const Menu = styled.ul`
+  display: flex;
+  font-family:arial, sans-serif;
+`
+
+export const Mypage = styled.li`
+    position: relative;
+    &&::before{
+      content:"";
+      width: 1px;
+      background: #e5e5e5;
+      height: 12px;
+      position: absolute;
+      top:0;
+      bottom:0;
+      margin:auto;
+    }
+    &&:first-child::before{
+      display: none;
+    }
+`
+export const MypageLink = styled.a`
+  font-size: 13px;
+  padding: 11px 16px;
+  display: block;
+  color:#656565;
+  &&:hover{
+    color:#000;
+  }
+`
+export const HeaderSearch = styled.div`
+  height: 34px;
+  position: relative;
+  input{
+    width: 36px;
+    height: 34px;
+    padding: 4px 10px;
+    border:1px solid #ccc;
+    border-radius:5px;
+    box-sizing: border-box;
+    outline:none;
+    background: #fff;
+    color:#777;
+    font-size: 12px;
+    transition: width .4s;
+    &&:focus{
+      width: 190px;
+      border-color:#669900;
+    }
+  }
+`
+export const MaterialIcon = styled.div`
+  height: 24px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 5px;
+  margin: auto;
+  transition: .3s;
+  &&:hover{
+    cursor: pointer;
+  }
+`
+export const MainMenu = styled.ul`
+  display: flex;
+  z-index: 1;
+  justify-content: flex-end;
+  margin-top: 8px;
+`
+
+//208번줄
+export const ItemName = styled.div`
+  padding: 10px 20px 34px 20px;
+  font-family: arial, sans-serif;
+  font-size: 13px;
+  cursor:pointer;
+`
+export const ItemContents = styled.div`
+  width: 100%;
+  position: fixed;
+  left:0;
+  display: none;
+`
+export const Contentsmenu = styled.div`
+  background: #2c2a29;
+  ul{
+    display: flex;
+    padding: 20px 0 ;
+    li{
+      width: 220px;
+      ul li{
+        padding: 5px 0;
+        font-size: 12px;
+        color:#999;
+        cursor: pointer;
+        &&:hover{
+          color:#669900;
+        }
+      }
+      h4{
+        padding: 3px 0 12px 0;
+        font-size: 14px;
+        color:#fff;
+      }
+    }
+  }
+`
+export const ContentsTexture = styled.div`
+  padding: 26px 0;
+  height: 100px;
+  font-size: 12px;
+  background: url("../images/main_menu_pattern.jpg ");
+  h4{
+    color:#999;
+    font-weight: 700;
+  }
+  p{
+    color:#669900;
+     margin: 4px  0 14px;
+  }
+`
+
+
+
+//header End
 export const Imgbx = styled.span`
     width:80px;
     height:80px;
@@ -103,6 +258,8 @@ export const Setting = styled.div`
   }
 `
 export const Submit = styled.h1`
+  display:flex;
+  justify-content:center;
   p{
     background:deepskyblue;
     color:#fff;
@@ -117,11 +274,24 @@ export const Submit = styled.h1`
     font-family: 'Nanum Myeongjo', serif;
 }
 `
-export const Routing = styled.p`
+export const Routing = styled.button`
     border-radius: 5px;
     background: deepskyblue;
     color: #fff;
-    width: 800px;
+    height: 50px;
+    font-weight: 500;
+    text-align: center;
+    line-height: 50px;
+    margin-right: 10px;
+    font-size:18px;
+    width: 180px;
+`
+
+export const Replace = styled.button`
+    border-radius: 5px;
+    background:#ccc;
+    color:#fff;
+    width: 180px;
     height: 50px;
     font-weight: 500;
     text-align: center;
@@ -129,7 +299,6 @@ export const Routing = styled.p`
     margin-right: 10px;
     font-size:18px;
 `
-
 //게시글 목록
 export const Row = styled.div`
     display: flex;
@@ -262,17 +431,23 @@ export const Boardlist = styled.div`
 `
 
 export const Listfirst = styled.li`
-  border-top:1px solid #ccc;
+  border-bottom:1px solid #ccc;
   padding:15px 0;
   color:#111;
+  cursor:pointer;
+  &&:hover{
+    background:#dcf6ff8a;
+    transition:0.5s;
+  }
+  
   &&:first-child{
     border-top:none;
     font-size:18px;
     font-weight:500;
-    
   }
   > ul{
     display:flex;
+    justify-content: space-evenly;
     li:last-child{
       flex-grow:0.3;
     }
@@ -281,19 +456,24 @@ export const Listfirst = styled.li`
     }
     li:nth-child(2){
       flex-grow:2;
+      overflow: hidden;
+      white-space: nowrap;
     }
     li:first-child{
       flex-grow:0.2;
+      
     }
    > li{
       text-align:center;
       color:#777;
+      flex-basis: min-content;
     }
   }
 `
 export const Listtitle = styled.ul`
   li{
   color:#111 !important;
+  
 } 
 `
 
@@ -342,4 +522,5 @@ export const Registration = styled.button`
   justify-content: space-evenly;
   font-family: 'Nanum Myeongjo', serif;
   font-weight:500;
+
 `

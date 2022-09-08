@@ -1,12 +1,14 @@
 import { useRouter } from "next/router";
-import {useMutation} from '@apollo/client'
+import {useMutation,useQuery} from '@apollo/client'
 import {useState} from 'react'
-import { CREATE_BOARD } from '../../../commons/BoardWrite.queryes';
+import { CREATE_BOARD, UPDATE_BOARD ,FETCH_BOARD} from '../../../commons/BoardWrite.queryes';
 import BoardWriteUI from './BoardWrite.presenter';
 
-export default function Freeboard() {
-  const router = useRouter()
 
+export default function Freeboard(props) {
+  console.log(props.data)
+  const router = useRouter()
+  console.log(props.isEdit)
   const [input, setInput] = useState({
     name: "",
     password: "",
@@ -21,7 +23,38 @@ export default function Freeboard() {
   });
 
   const [createBoard] =  useMutation(CREATE_BOARD)
+  const [updateBoard] =  useMutation(UPDATE_BOARD)
+  const {data} = useQuery(FETCH_BOARD,{
+    variables:{boardId:router.query.boardId} 
+  })
+  console.log("fetch:",data?.fetchBoard)
 
+  //수정하기 함수
+  const onClickUpdate = async () => {
+    try{
+      const myvariables = {
+        boardId:router.query.boardId
+      }
+      if(writer)myvariables.writer = input.name
+      if(title)myvariables.title = input.title
+      if(contents)myvariables.contents = input.contents
+      console.log(myvariables);
+      // 1. 수정하기 뮤테이션 날리기
+      const result = await updateBoard({
+        variables:myvariables})
+  
+      // 2. 상세페이지로 이동하기
+      console.log(myvariables)
+      alert(result.data.updateBoard.message)
+      router.push(`/board/${result.data.updateBoard.boardId}`)
+    }catch(error){
+      console.log(error);
+    }
+  }
+
+
+
+  //게시글 작성한 뒤 등록해주는 로직
   const onClickNotice = async () => { 
     try{ 
       const result = await createBoard({
@@ -83,6 +116,10 @@ export default function Freeboard() {
     setInput({ ...input, youtubeUrl: event.target.value });
   };
 
+  //취소하기를 누르면 목록 페이지가 나오는 로직
+  const onClickMoveToBoard = () => {
+    router.push("/board/");
+  };
   return(
     <>
       <BoardWriteUI 
@@ -95,6 +132,10 @@ export default function Freeboard() {
         onChangeZipcode={onChangeZipcode}
         onChangeAddressDetail={onChangeAddressDetail}
         onChangeYoutubeUrl={onChangeYoutubeUrl}
+        onClickMoveToBoard={onClickMoveToBoard}
+        onClickUpdate={onClickUpdate}
+        isEdit={props.isEdit}
+        data={props.data}
       />
     </>
   )

@@ -1,8 +1,8 @@
 import * as S from '../../../../../styles/fetchboard'
 
 
-export default function  BoardDetailUI({data}) {
-  console.log(data);
+export default function  BoardDetailUI({data,onClickMoveToBoard,goEdit, updateData}) {
+  console.log(updateData);
   return(
     <S.Board>
       <S.Box>
@@ -24,8 +24,8 @@ export default function  BoardDetailUI({data}) {
           </S.Left>
         </div>
 
-        <S.Title>{data ? data.fetchBoard.title : "로딩중입니다..."}</S.Title>
-        {/* <div id="Img">{data ? data.fetchBoard.images : "로딩중입니다..."}</div> */}
+        <S.DetailTitle>{data ? data.fetchBoard.title : "로딩중입니다..."}</S.DetailTitle>
+        <div id="Img">{data ? data.fetchBoard.images : "로딩중입니다..."}</div>
         <S.Contents src="/content.png" alt="본문 이미지"></S.Contents>
         <S.Textcontent>{data ? data.fetchBoard.contents : "로딩중입니다..."}</S.Textcontent>
 
@@ -46,8 +46,8 @@ export default function  BoardDetailUI({data}) {
     </S.Box>
 
     <S.List>
-      <S.Listbtn>목록으로</S.Listbtn>
-      <S.Listbtn>수정하기</S.Listbtn>
+      <S.Listbtn onClick={onClickMoveToBoard}>목록으로</S.Listbtn>
+      <S.Listbtn onClick={goEdit}>수정하기</S.Listbtn>
       <S.Listbtn>삭제하기</S.Listbtn>
     </S.List>
 
@@ -88,7 +88,7 @@ export default function  BoardDetailUI({data}) {
       <S.Content placeholder="수정할 내용을 입력하세요."></S.Content>
       <S.Reviewbtn>
         <p><span>0</span>/100</p>
-        <button>수정하기</button>
+        <button >수정하기</button>
       </S.Reviewbtn>
     </div>
 

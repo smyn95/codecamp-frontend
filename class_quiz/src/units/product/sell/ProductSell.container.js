@@ -2,9 +2,9 @@ import {useMutation, useQuery} from '@apollo/client'
 import { useRouter } from "next/router";
 import PresenterPage from './ProductSell.presenter'
 import { useState } from 'react'
-import {CREATE_PRODUCT,} from '../../../commons/ProductSell.queryes'
+import {CREATE_PRODUCT, UPDATE_PRODUCT,} from '../../../commons/ProductSell.queryes'
 
-export default function RegistrationPage(){
+export default function RegistrationPage(props){
   const router = useRouter()
 
   const [btncolor,setBtncolor] = useState(false)
@@ -14,9 +14,29 @@ export default function RegistrationPage(){
   const [price,setPrice] = useState("")
 
   const [createProduct] =  useMutation(CREATE_PRODUCT)
+  const [updateProduct] = useMutation(UPDATE_PRODUCT)
+
+  const onClickUpdate= async() => {
+    const result = await updateProduct({
+      variables: { 
+        productId:router.query.number,
+        updateProductInput: {
+          name,
+          detail,
+          price: Number(price)
+        }
+      }
+    })
+    console.log(result)
+    alert(result.data.updateProduct.message)
+    router.push(`/05/board/${result.data.updateProduct._id}`)
+  }
 
 
-  const registration = async () => {
+
+
+  
+  const onClickSubmit = async () => {
     try{
       const result = await createProduct({
         variables: { 
@@ -28,6 +48,7 @@ export default function RegistrationPage(){
           }
         },
       })
+      
 
     console.log(result)
     alert(result.data.createProduct.message)
@@ -37,6 +58,7 @@ export default function RegistrationPage(){
     alert(error.message)
     }
   };
+  
 
   const onChangeSeller = (event) => {
     setSeller(event.target.value)
@@ -68,12 +90,15 @@ export default function RegistrationPage(){
   return(
     <>
       <PresenterPage
-      registration={registration}
+      // registration={registration}
       onChangeSeller={onChangeSeller}
       onChangeName={onChangeName}
       onChangeDetail={onChangeDetail}
       onChangePrice={onChangePrice}
+      onClickUpdate={onClickUpdate}
       btncolor={btncolor}
+      isEdit={props.isEdit}
+      onClickSubmit={onClickSubmit}
       />
    </>
   )

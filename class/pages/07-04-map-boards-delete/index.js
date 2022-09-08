@@ -47,9 +47,9 @@ export default function StaticRoutedPage(){
 
     return (
         <>
-            {data?.fetchBoards.map((el, index) => (
+            {data?.fetchBoards.map((el, _id) => (
                 // <Fragment key={index} />
-                <Row key={index}>
+                <Row key={el._id}>
                     <Column><input type="checkbox" /></Column>
                     <Column>{el.number}</Column>
                     <Column>{el.title}</Column>
