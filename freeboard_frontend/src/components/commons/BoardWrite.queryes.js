@@ -75,6 +75,7 @@ export const FETCH_BOARD = gql`
 
 
 // 게시물 목록 list
+
 export const FETCH_BOARDS = gql`
   query {
     fetchBoards{
@@ -96,4 +97,29 @@ export const FETCH_BOARDS = gql`
     }
   }
 `
+//댓글
+export const CREATE_BOARD_COMMENT = gql`
+  mutation createBoardComment($createBoardCommentInput: CreateBoardCommentInput!,
+    $boardId: ID!) {
+    createBoardComment(
+      createBoardCommentInput: $createBoardCommentInput
+      boardId: $boardId
+    ) {
+      _id
+      writer
+      contents
+      rating
+      createdAt
+    }
+  }
+`
 
+
+export const FETCH_BOARD_COMMENTS = gql`
+query fetchBoardComments($boardId:ID!,$page:Int){
+  _id
+  writer
+  contents
+  rating
+  }
+`

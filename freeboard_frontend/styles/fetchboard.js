@@ -168,6 +168,9 @@ export const Reviewbx = styled.div`
   }
 
 `
+export const Div = styled.div`
+
+`
 export const Reviewinfo = styled.div`
   display:flex;
   margin-bottom:30px;

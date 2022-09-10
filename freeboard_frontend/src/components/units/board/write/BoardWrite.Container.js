@@ -38,6 +38,7 @@ export default function Freeboard(props) {
       if(writer)myvariables.writer = input.name
       if(title)myvariables.title = input.title
       if(contents)myvariables.contents = input.contents
+      if(zipcode)myvariables.contents = input.zipcode
       console.log(myvariables);
       // 1. 수정하기 뮤테이션 날리기
       const result = await updateBoard({

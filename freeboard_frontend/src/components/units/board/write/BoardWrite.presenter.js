@@ -38,7 +38,7 @@ return(
        <S.Search type="button" >우편번호 검색</S.Search>
      </S.Titlebx>
        <S.Input type="text" onChange={props.onChangeAddress}/>
-       <S.Input type="text" onChange={props.onChangeAddressDetail} placeholder="상세주소를 입력해주세요." defaultValue={props.data?.fetchBoard.zipcode}/>
+       <S.Input type="text" onChange={props.onChangeAddressDetail} placeholder="상세주소를 입력해주세요." />
     
     </S.Textbx>
     <S.Textbx>
