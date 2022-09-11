@@ -9,7 +9,8 @@ export default function  BoardDetailUI({
   onChangeWriter,
   onChangePassword,
   onchangeContents,
-  commentdata,
+  commentData,onClickUpComment
+
 }) {
   return(
     <S.Board>
@@ -84,7 +85,7 @@ export default function  BoardDetailUI({
         </S.Reviewbtn>
       </div>
     </S.Div>
-      <BoardCommentsMap commentdata={commentdata}/>
+      <BoardCommentsMap commentData={commentData} onClickUpComment={onClickUpComment}/>
   </S.Board>
   )
 }

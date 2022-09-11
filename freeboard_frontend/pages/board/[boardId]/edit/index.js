@@ -15,5 +15,5 @@ export default function BoardsEditPage(props) {
       boardId : router.query.boardId
     }
   })
-  return <Freeboard isEdit={true} data={data}/>;
+  return <Freeboard isEdit={true} data={data} update={true}/>;
 }

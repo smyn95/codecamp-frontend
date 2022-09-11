@@ -173,7 +173,7 @@ export const Div = styled.div`
 `
 export const Reviewinfo = styled.div`
   display:flex;
-  margin-bottom:30px;
+  margin:30px 0;
   align-items: center;
   input{
     margin-right:30px;
@@ -269,4 +269,13 @@ export const Today = styled.span`
   color:#bdbdbd;
   font-size:16px;
   margin-left: 65px;
+`
+export const UpdateInput = styled.input`
+    height:50px;
+    outline:none;
+    border:1px solid #777;
+    padding:0 15px;
+    width:100%;
+    margin-bottom:10px;
+    opacity:0.5;
 `
