@@ -291,26 +291,22 @@ export const Listfirst = styled.li`
   }
   > ul{
     display:flex;
-    justify-content: space-evenly;
-    li:last-child{
-      flex-grow:0.3;
-    }
-    li:nth-child(3){
-      flex-grow:0.3;
-    }
-    li:nth-child(2){
-      flex-grow:2;
-      overflow: hidden;
-      white-space: nowrap;
-    }
-    li:first-child{
-      flex-grow:0.2;
-      
-    }
+    justify-content: space-between;
    > li{
       text-align:center;
       color:#777;
-      flex-basis: min-content;
+      &:nth-child(2){
+        width:50%;
+      }
+      &:nth-child(1){
+        width:10%;
+      }
+      &:nth-child(3){
+        width:10%;
+      }
+      &:nth-child(4){
+        width:10%;
+      }
     }
   }
 `

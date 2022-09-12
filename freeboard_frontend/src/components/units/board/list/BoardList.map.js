@@ -1,4 +1,4 @@
-import * as S from '../../../../../../styles/freeboard'
+import * as S from '../../../../../styles/freeboard'
 export default function  BoardListMap({data,onClickMoveToBoardDetail}) {
 
   return(

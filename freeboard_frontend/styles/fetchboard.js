@@ -97,6 +97,7 @@ export const Right = styled.div`
 `
 export const Icon = styled.img`
     height:35px;
+    cursor:pointer;
 `
 
 ////본문

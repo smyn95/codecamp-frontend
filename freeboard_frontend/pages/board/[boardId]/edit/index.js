@@ -1,8 +1,8 @@
 import Freeboard from "../../../../src/components/units/board/write/BoardWrite.Container";
 
-import { FETCH_BOARD } from "../../../../src/components/commons/BoardWrite.queryes";
 import { useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
+import { FETCH_BOARD } from "../../../../src/components/units/board/detail/BoardDetail.query";
 
 
 
@@ -15,5 +15,5 @@ export default function BoardsEditPage(props) {
       boardId : router.query.boardId
     }
   })
-  return <Freeboard isEdit={true} data={data} update={true}/>;
+  return <Freeboard isEdit={true} data={data}/>;
 }

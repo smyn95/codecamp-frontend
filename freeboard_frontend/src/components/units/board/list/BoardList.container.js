@@ -1,7 +1,7 @@
 import { useQuery} from '@apollo/client';
-import { FETCH_BOARDS} from '../../../commons/BoardWrite.queryes';
 import BoardListUI from '../list/BoardList.presenter'
 import { useRouter } from "next/router";
+import { FETCH_BOARDS } from './BoardList.query';
 
 
 

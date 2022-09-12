@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import {useMutation,useQuery} from '@apollo/client'
 import {useState} from 'react'
-import { CREATE_BOARD, UPDATE_BOARD ,FETCH_BOARD} from '../../../commons/BoardWrite.queryes';
+import { CREATE_BOARD, UPDATE_BOARD ,FETCH_BOARD} from './BoardWrite.query';
 import BoardWriteUI from './BoardWrite.presenter';
 
 

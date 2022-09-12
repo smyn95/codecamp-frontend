@@ -1,16 +1,11 @@
 import * as S from '../../../../../styles/fetchboard'
-import BoardCommentsMap from './components/BoardComments'
+import BoardComments from '../comments/BoardComments.container';
+
 
 export default function  BoardDetailUI({
   data,
   onClickMoveToBoard,
   goEdit,
-  onClickComment,
-  onChangeWriter,
-  onChangePassword,
-  onchangeContents,
-  commentData,onClickUpComment
-
 }) {
   return(
     <S.Board>
@@ -59,33 +54,7 @@ export default function  BoardDetailUI({
       <S.Listbtn onClick={goEdit}>수정하기</S.Listbtn>
       <S.Listbtn>삭제하기</S.Listbtn>
     </S.List>
-
-    {/* 댓글 */}
-
-    <S.Div>
-      <S.Reviewbx>
-        <S.Font>댓글</S.Font>
-      </S.Reviewbx>
-    
-      <S.Reviewinfo>
-        <S.Input type="text" placeholder="작성자" onChange={onChangeWriter}/>
-        <S.Input type="text" placeholder="비밀번호" onchange={onChangePassword}/>
-        <S.Icon src="/star.png" alt="별점아이콘"></S.Icon>
-        <S.Icon src="/star.png" alt="별점아이콘"></S.Icon>
-        <S.Icon src="/star.png" alt="별점아이콘"></S.Icon>
-        <S.Icon src="/star.png" alt="별점아이콘"></S.Icon>
-        <S.Icon src="/star.png" alt="별점아이콘"></S.Icon>
-      </S.Reviewinfo>
-
-      <div>
-        <S.Content placeholder="개인정보를 공유 및 요청하거나, 명예 훼손, 무단 광고, 불법 정보 유포시 모니터링 후 삭제될 수 있으며, 이에 대한 민형사상 책임은 게시자에게 있습니다." onChange={onchangeContents}></S.Content>
-        <S.Reviewbtn>
-          <p><span>0</span>/100</p>
-          <button onClick={onClickComment}>등록하기</button>
-        </S.Reviewbtn>
-      </div>
-    </S.Div>
-      <BoardCommentsMap commentData={commentData} onClickUpComment={onClickUpComment}/>
+    <BoardComments/>
   </S.Board>
   )
 }

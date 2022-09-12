@@ -1,5 +1,5 @@
 import * as S from '../../../../../styles/freeboard';
-import BoardListMap from './components/BoardList.list'
+import BoardListMap from './BoardList.map';
 
 export default function  BoardListUI({data, onClickMoveToBoardNew,onClickMoveToBoardDetail}) {
   return(
