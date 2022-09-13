@@ -23,7 +23,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "src/components/units/board/10-write/BoardWrite.styles.js"  ],
   "exclude": [
     "node_modules"
   ]
