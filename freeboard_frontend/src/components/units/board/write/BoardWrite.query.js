@@ -26,8 +26,8 @@ export  const CREATE_BOARD = gql`
 `
 export const UPDATE_BOARD = gql `
 mutation updateBoard($updateBoardInput:UpdateBoardInput!,$password:String,$boardId:ID!){
-  updateBoard{
-      ID
+  updateBoard(updateBoardInput: $updateBoardInput, password:$password, boardId:$boardId){
+      _id
       writer
       title
       contents
@@ -41,9 +41,9 @@ mutation updateBoard($updateBoardInput:UpdateBoardInput!,$password:String,$board
         address
         addressDetail
         createdAt
-        updateBoard
+        
       }
-      user
+      
       createdAt
       updatedAt
   }

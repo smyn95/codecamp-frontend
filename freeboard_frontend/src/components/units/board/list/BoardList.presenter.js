@@ -1,181 +1,64 @@
 import * as S from '../../../../../styles/freeboard';
+import Link from 'next/link';
 import BoardListMap from './BoardList.map';
 
-export default function  BoardListUI({data, onClickMoveToBoardNew,onClickMoveToBoardDetail}) {
+
+export default function  BoardListUI({data, onClickMoveToBoardNew,onClickMoveToBoardDetail,bestData,onClickMoveToBest,  ...props}) {
   return(
     <>
-      <S.Box >
+      <S.Logo>
+        <img src="/starbucks_logo.png" alt="STARBUCKS"/>
+      </S.Logo>
+      <S.SubMenu>
+        <S.Menu>
+          <li>
+            <p>Sign In</p>
+          </li>
+          <li>
+            <p>My starbucks</p>
+          </li>
+          <li>
+            <p>Costomer Service & Ideas</p>
+          </li>
+          <li>
+            <p>Find a Store</p>
+          </li>
+        </S.Menu>
+        <S.TopSearch className={props.inputClass} onClick={props.onClickText}>
+          <input type="text"/>
+          <S.Material><img src="/search.png" alt="검색아이콘"/></S.Material>
+        </S.TopSearch>
+      </S.SubMenu>
+
+      <S.Box >        
         <S.Title>BEST POST</S.Title>
         <S.Listall>
-          <S.Listbx>
+          {bestData?.fetchBoardsOfTheBest.map((best) => (
+          <S.Listbx key={best._id}>
               <S.Topbx></S.Topbx>
               <S.Bottombx>
-                <S.BxTitle>제목입니다.</S.BxTitle>
-                <S.Flex>
+                <Link href={`/board/${best._id}`}>
                   <div>
-                    <S.Userbx>
-                      <S.User></S.User>
-                      <S.Listname>작성자</S.Listname>
-                    </S.Userbx>
-                    <S.Listdate>2022-09-07</S.Listdate>
+                  <S.BxTitle>{best.title}</S.BxTitle>
+                    <S.Flex>
+                      <div>
+                        <S.Userbx>
+                          <S.User></S.User>
+                          <S.Listname>{best.writer.slice(0,6)}</S.Listname>
+                        </S.Userbx>
+                        <S.Listdate>{best.createdAt.slice(0,10)}</S.Listdate>
+                      </div>
+                    
+                      <S.Listlike>
+                        <img src="/like.png" alt="좋아요아이콘"></img>
+                        <S.Likecount>{best.likeCount}</S.Likecount>
+                      </S.Listlike>
+                    </S.Flex>
                   </div>
-                
-                <S.Listlike>
-                  <img src="/like.png" alt="좋아요아이콘"></img>
-                  <S.Likecount>377</S.Likecount>
-                </S.Listlike>
-                </S.Flex>
+                  </Link>
               </S.Bottombx>
           </S.Listbx>
-
-          <S.Listbx>
-              <S.Topbx></S.Topbx>
-              <S.Bottombx>
-                <S.BxTitle>제목입니다.</S.BxTitle>
-                <S.Flex>
-                  <div>
-                    <S.Userbx>
-                      <S.User></S.User>
-                      <S.Listname>작성자</S.Listname>
-                    </S.Userbx>
-                    <S.Listdate>2022-09-07</S.Listdate>
-                  </div>
-                
-                <S.Listlike>
-                  <img src="/like.png" alt="좋아요아이콘"></img>
-                  <S.Likecount>377</S.Likecount>
-                </S.Listlike>
-                </S.Flex>
-              </S.Bottombx>
-          </S.Listbx>
-
-          <S.Listbx>
-              <S.Topbx></S.Topbx>
-              <S.Bottombx>
-                <S.BxTitle>제목입니다.</S.BxTitle>
-                <S.Flex>
-                  <div>
-                    <S.Userbx>
-                      <S.User></S.User>
-                      <S.Listname>작성자</S.Listname>
-                    </S.Userbx>
-                    <S.Listdate>2022-09-07</S.Listdate>
-                  </div>
-                
-                <S.Listlike>
-                  <img src="/like.png" alt="좋아요아이콘"></img>
-                  <S.Likecount>377</S.Likecount>
-                </S.Listlike>
-                </S.Flex>
-              </S.Bottombx>
-          </S.Listbx>
-
-          <S.Listbx>
-              <S.Topbx></S.Topbx>
-              <S.Bottombx>
-                <S.BxTitle>제목입니다.</S.BxTitle>
-                <S.Flex>
-                  <div>
-                    <S.Userbx>
-                      <S.User></S.User>
-                      <S.Listname>작성자</S.Listname>
-                    </S.Userbx>
-                    <S.Listdate>2022-09-07</S.Listdate>
-                  </div>
-                
-                <S.Listlike>
-                  <img src="/like.png" alt="좋아요아이콘"></img>
-                  <S.Likecount>377</S.Likecount>
-                </S.Listlike>
-                </S.Flex>
-              </S.Bottombx>
-          </S.Listbx>
-        </S.Listall>
-  <br/><br/>
-        <S.Listall>
-          <S.Listbx>
-              <S.Topbx></S.Topbx>
-              <S.Bottombx>
-                <S.BxTitle>제목입니다.</S.BxTitle>
-                <S.Flex>
-                  <div>
-                    <S.Userbx>
-                      <S.User></S.User>
-                      <S.Listname>작성자</S.Listname>
-                    </S.Userbx>
-                    <S.Listdate>2022-09-07</S.Listdate>
-                  </div>
-                
-                <S.Listlike>
-                  <img src="/like.png" alt="좋아요아이콘"></img>
-                  <S.Likecount>377</S.Likecount>
-                </S.Listlike>
-                </S.Flex>
-              </S.Bottombx>
-          </S.Listbx>
-
-          <S.Listbx>
-              <S.Topbx></S.Topbx>
-              <S.Bottombx>
-                <S.BxTitle>제목입니다.</S.BxTitle>
-                <S.Flex>
-                  <div>
-                    <S.Userbx>
-                      <S.User></S.User>
-                      <S.Listname>작성자</S.Listname>
-                    </S.Userbx>
-                    <S.Listdate>2022-09-07</S.Listdate>
-                  </div>
-                
-                <S.Listlike>
-                  <img src="/like.png" alt="좋아요아이콘"></img>
-                  <S.Likecount>377</S.Likecount>
-                </S.Listlike>
-                </S.Flex>
-              </S.Bottombx>
-          </S.Listbx>
-
-          <S.Listbx>
-              <S.Topbx></S.Topbx>
-              <S.Bottombx>
-                <S.BxTitle>제목입니다.</S.BxTitle>
-                <S.Flex>
-                  <div>
-                    <S.Userbx>
-                      <S.User></S.User>
-                      <S.Listname>작성자</S.Listname>
-                    </S.Userbx>
-                    <S.Listdate>2022-09-07</S.Listdate>
-                  </div>
-                
-                <S.Listlike>
-                  <img src="/like.png" alt="좋아요아이콘"></img>
-                  <S.Likecount>377</S.Likecount>
-                </S.Listlike>
-                </S.Flex>
-              </S.Bottombx>
-          </S.Listbx>
-
-          <S.Listbx>
-              <S.Topbx></S.Topbx>
-              <S.Bottombx>
-                <S.BxTitle>제목입니다.</S.BxTitle>
-                <S.Flex>
-                  <div>
-                    <S.Userbx>
-                      <S.User></S.User>
-                      <S.Listname>작성자</S.Listname>
-                    </S.Userbx>
-                    <S.Listdate>2022-09-07</S.Listdate>
-                  </div>
-                
-                <S.Listlike>
-                  <img src="/like.png" alt="좋아요아이콘"></img>
-                  <S.Likecount>377</S.Likecount>
-                </S.Listlike>
-                </S.Flex>
-              </S.Bottombx>
-          </S.Listbx>
+          ))}
         </S.Listall>
         <S.Searchbx>
           <input type="text" placeholder="제목을 검색해주세요."/>

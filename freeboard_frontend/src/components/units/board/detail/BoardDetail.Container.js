@@ -1,11 +1,13 @@
 import { useRouter } from "next/router";
-import { useQuery} from '@apollo/client'
+import { useQuery,useMutation} from '@apollo/client'
 import BoardDetailUI from "../detail/BoardDetail.Presenter";
-import { FETCH_BOARD } from "./BoardDetail.query";
-
+import { FETCH_BOARD,DISLIKE_BOARD, LIKE_BOARD, DELETE_BOARD } from "./BoardDetail.query";
 
 export default function Fetchboard(props){
   const router = useRouter()  
+  const [likeboard] = useMutation(LIKE_BOARD)
+  const [deleteBoard] = useMutation(DELETE_BOARD)
+  const [dislikeboard] = useMutation(DISLIKE_BOARD)
   const {data} = useQuery(FETCH_BOARD,{
     variables:{boardId:router.query.boardId} 
   })
@@ -17,7 +19,39 @@ export default function Fetchboard(props){
   const goEdit = () => {
     router.push(`/board/${router.query.boardId}/edit`)
   }
-  
+
+  const onClickLike = async () => {
+    await likeboard({ 
+      variables: {boardId: router.query.boardId },
+        refetchQueries:[{
+          query:FETCH_BOARD,
+          variables:{boardId:router.query.boardId}
+        }]
+      })
+  }
+        
+
+  const onClickDisLike = async () => {
+    await dislikeboard({ 
+      variables: {boardId: router.query.boardId },
+       refetchQueries:[{
+          query:FETCH_BOARD,
+          variables:{boardId:router.query.boardId}
+      }]
+    })
+  }
+
+  const onClickDelete = async () => {
+    await deleteBoard({
+      variables:{boardId:router.query.boardId},
+      refetchQueries:[{
+        query:FETCH_BOARD,
+        variables:{boardId:router.query.boardId}
+      }]
+    },alert("삭제가 완료되었습니다.")
+    )
+    router.push(`/board/`)
+  }
  
 
   return(
@@ -27,6 +61,9 @@ export default function Fetchboard(props){
       goEdit={goEdit}
       updateData={props.data}
       data={data}
+      onClickLike={onClickLike}
+      onClickDisLike={onClickDisLike}
+      onClickDelete={onClickDelete}
       />
     </>
   )

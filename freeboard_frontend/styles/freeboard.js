@@ -15,6 +15,94 @@ export const Titlebx = styled.div`
       font-family: 'Nanum Myeongjo', serif;
     }
 `
+//NAVI
+export const Logo = styled.div`
+  height: 75px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+`
+export const SubMenu = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+`
+export const Menu = styled.div`
+  display: flex;
+  font-family:arial, sans-serif;
+  li{
+    position:relative;
+  }
+  li::before{
+    content:"";
+    width: 1px;
+    background: #e5e5e5;
+    height: 12px;
+    position: absolute;
+    top:0;
+    bottom:0;
+    margin:auto;
+  }
+  li:first-child{
+    display:none;
+  }
+  li p{
+    font-size: 13px;
+    padding: 11px 16px;
+    display: block;
+    color:#656565;
+  }
+  li p:hover{
+    color:#000;
+  }
+`
+export const TopSearch = styled.div`
+  height: 34px;
+  position: relative;
+  input{
+    width: 36px;
+    height: 34px;
+    padding: 4px 10px;
+    border:1px solid #ccc;
+    border-radius:5px;
+    box-sizing: border-box;
+    outline:none;
+    background: #fff;
+    color:#777;
+    font-size: 12px;
+    transition: width .4s;
+  }
+  input:focus{
+    width: 190px;
+    border-color:#669900;
+  }
+  
+  &.focus {
+    input {
+      width: 190px;
+    }
+  }
+
+`
+export const Material = styled.div`
+  height: 24px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 5px;
+  margin: auto;
+  transition: .3s;
+  &&hover{
+    cursor: pointer;
+  }
+  img{
+    height: 25px;
+    cursor: pointer;
+  }
+`
+//
 export const Title = styled.h1`
   font-size:40px;
   font-weight:bold;
@@ -169,16 +257,24 @@ export const Listbx = styled.div`
 export const Topbx = styled.div`
   width:300px;
   padding-bottom: 42%;
-  background:#ccc;
+  background-color:#ccc;
+  background-image: url(/top.jpeg);
+  background-position: 50% 73%;
+  background-size: cover;
+
 `
 export const Bottombx = styled.div`
   width:300px;
   padding:15px;
   box-sizing:border-box;
+  cursor:pointer;
 `
-export const BxTitle = styled.strong`
+export const BxTitle = styled.p`
   font-size:18px;
   font-weight:500;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 `
 export const Userbx = styled.div`
   display:flex;

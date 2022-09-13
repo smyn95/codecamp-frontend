@@ -6,9 +6,9 @@ import BoardWriteUI from './BoardWrite.presenter';
 
 
 export default function Freeboard(props) {
-  console.log(props.data)
+  // console.log(props.data)
   const router = useRouter()
-  console.log(props.isEdit)
+  // console.log(props.isEdit)
   const [input, setInput] = useState({
     name: "",
     password: "",
@@ -31,26 +31,28 @@ export default function Freeboard(props) {
 
   //수정하기 함수
   const onClickUpdate = async () => {
+    const myvariables = {
+      boardId:router.query.boardId,
+      password: input.password,
+      updateBoardInput: {}
+    }
     try{
-      const myvariables = {
-        boardId:router.query.boardId
-      }
-      if(writer)myvariables.writer = input.name
-      if(title)myvariables.title = input.title
-      if(contents)myvariables.contents = input.contents
-      if(zipcode)myvariables.contents = input.zipcode
+      if(input.title){
+        myvariables.updateBoardInput.title = input.title}
+      if(input.contents)myvariables.updateBoardInput.contents = input.contents
       console.log(myvariables);
+      
       // 1. 수정하기 뮤테이션 날리기
       const result = await updateBoard({
         variables:myvariables})
   
       // 2. 상세페이지로 이동하기
-      console.log(myvariables)
-      alert(result.data.updateBoard.message)
-      router.push(`/board/${result.data.updateBoard.boardId}`)
+      alert("수정이 완료되었습니다.")
+      router.push(`/board/${result.data.updateBoard._id}`)
     }catch(error){
       console.log(error);
     }
+    
   }
 
 
@@ -76,15 +78,12 @@ export default function Freeboard(props) {
         },
       })
       console.log(result)
-      // alert(result.data.createBoard.message)
       alert("게시글 등록 완료!")
 
       console.log(result.data.createBoard._id) //우리 보기 좋으라고 있는거
       router.push(`/board/${result.data.createBoard._id}`)
     }catch(error){
-      // console.log(error.message)
       alert(error.message);
-      // alert(router.query.boardId);
     }
   }
   

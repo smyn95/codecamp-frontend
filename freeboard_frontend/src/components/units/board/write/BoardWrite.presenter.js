@@ -11,7 +11,7 @@ return(
     <S.Textbx>
       <S.Titlebx>
       <S.Font>작&nbsp;&nbsp;성&nbsp;&nbsp;자</S.Font>
-       <S.Input type="text" onChange={props.onChangeName} placeholder="이름을 적어주세요." defaultValue={props.data?.fetchBoard.writer}/>
+       <S.Input type="text" disabled={true} onChange={props.onChangeName} placeholder="이름을 적어주세요." defaultValue={props.data?.fetchBoard.writer}/>
       </S.Titlebx>
       <S.Titlebx>
        <S.Font>비밀번호</S.Font>
@@ -63,7 +63,7 @@ return(
       </S.Titlebx>
     </S.Setting>
     
-    <S.Submit onClick={props.onClickNotice}>
+    <S.Submit>
       <S.Replace onClick={props.onClickMoveToBoard}>취소하기</S.Replace>
       <S.Routing onClick={props.isEdit ? props.onClickUpdate : props.onClickNotice}>
           {props.isEdit ? "수정하기": "등록하기"}

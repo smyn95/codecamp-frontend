@@ -1,25 +1,39 @@
 import { useQuery,useMutation} from '@apollo/client'
-import { CREATE_BOARD_COMMENT, FETCH_BOARD_COMMENTS,UPDATE_BOARD_COMMENTS} from './BoardComments.query'
+import {CREATE_BOARD_COMMENT, FETCH_BOARD_COMMENTS,UPDATE_BOARD_COMMENTS} from './BoardComments.query'
 import BoardCommentsUI from "./BoardComments.presenter";
 import { useState } from "react"; 
 import { useRouter } from "next/router";
 
 
-export default function BoardComments(props){
+export default function BoardComments(){
 const router = useRouter()  
 const [update,setUpdate] = useState(false)
+const [commentId, setCommentId] = useState("")
 const [comment,setComment] = useState({
-  writer:"",
   password:"",
-  contents:""
+  contents:"",
+  writer:""
 })
+
+
+const [commentPassword, setCommentPassword]= useState("")
+const [commentContents, setCommentContents]= useState("")
+
+console.log(commentPassword)
+
+const onChangeCommentPassword = (event) => {
+  setCommentPassword(event.target.value)
+}
+const onChangeCommentContents = (event) => {
+  setCommentContents(event.target.value)
+}
+
 
 const [createBoardComment] = useMutation(CREATE_BOARD_COMMENT)
 const [updateBoardComment] = useMutation(UPDATE_BOARD_COMMENTS)
 const {data : commentData} = useQuery(FETCH_BOARD_COMMENTS,{
   variables:{boardId:router.query.boardId}
   })
-
   const onClickComment = async () => {
     try{
       const result = await createBoardComment({
@@ -47,33 +61,39 @@ const {data : commentData} = useQuery(FETCH_BOARD_COMMENTS,{
 
   const onClickUpComment = async () => {
     try{
-    const upvariables = {
-      boardId:router.query.boardId
-    }
+    // const variables = {
+    //   boardId:router.query.boardId
+    // }
 
-    if(writer)upvariables.writer = comment.writer
-    if(contents)upvariables.contents = comment.contents
-    console.log(upvariables);
-
-    const upresult = await updateBoardComment({
+    // if(writer)upvariables.writer = commentUp.writer
+    // if(contents)upvariables.contents = commentUp.contents
+console.log(commentId, commentPassword, commentContents)
+    await updateBoardComment({
       variables:{
-        boardCommentId: "",
-        password:"",
+        boardCommentId: commentId,
+        password:commentPassword,
         updateBoardCommentInput:{
-          contents,
+          contents : commentContents,
           rating:1
         }
-      }})
-      alert(upresult.data.updateBoardComment.message)
+      },
+    refetchQueries:[{
+      query:FETCH_BOARD_COMMENTS,
+      variables : {
+        boardId:router.query.boardId
+      },
+    }]
+  })
+  setUpdate(!update)
     }catch(error){
       console.log(error)
       alert(error.message)
     }
   }
-  function onClickUpdate(){
-    setUpdate(true)
+  function onClickUpdate(event){
+    setCommentId(event.currentTarget.id)
+    setUpdate(!update)
   }
-  console.log(onClickUpdate)
 
 
   const onChangeWriter = (event) => {
@@ -81,6 +101,7 @@ const {data : commentData} = useQuery(FETCH_BOARD_COMMENTS,{
   }
   const onChangePassword = (event) => {
     setComment({...comment, password:event.target.value})
+    console.log(comment.password)
   }
   const onchangeContents = (event) => {
     setComment({...comment, contents:event.target.value})
@@ -96,8 +117,11 @@ const {data : commentData} = useQuery(FETCH_BOARD_COMMENTS,{
         onchangeContents={onchangeContents}
         commentData={commentData}
         onClickUpComment={onClickUpComment}
-        update={props.update}
+        update={update}
         onClickUpdate={onClickUpdate}
+        commentId={commentId}
+        onChangeCommentPassword={onChangeCommentPassword}
+        onChangeCommentContents={onChangeCommentContents}
       />
     </>
 

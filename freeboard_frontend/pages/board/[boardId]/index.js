@@ -9,7 +9,9 @@ export default function BoardDetailPage(){
 
 
   return(
-    <Fetchboard onClickUpdate={false}/>
+
+      <Fetchboard/>
+
   )
 
 }

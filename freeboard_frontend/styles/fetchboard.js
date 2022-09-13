@@ -128,6 +128,7 @@ export const Likebx = styled.div`
 `
 export const Likeimg = styled.img`
   height:50px;
+  cursor: pointer;
 `
 export const Dislikebx = styled.div`
   display:flex;

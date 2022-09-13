@@ -6,6 +6,9 @@ export default function  BoardDetailUI({
   data,
   onClickMoveToBoard,
   goEdit,
+  onClickLike,
+  onClickDisLike,
+  onClickDelete
 }) {
   return(
     <S.Board>
@@ -16,7 +19,7 @@ export default function  BoardDetailUI({
               <S.User></S.User>
               <S.Namebx>
                 <S.Name>{data ? data.fetchBoard.writer : "로딩중입니다..."}</S.Name>
-                <S.Date>{data ? data.fetchBoard.createdAt : "로딩중입니다..."}</S.Date>
+                <S.Date>{data ? data.fetchBoard.createdAt.slice(0,10) : "로딩중입니다..."}</S.Date>
               </S.Namebx>
             </S.Leftbx>
 
@@ -37,12 +40,12 @@ export default function  BoardDetailUI({
 
         <S.Bottombx>
         <S.Likebx>
-            <S.Likeimg src="/like.png" alt="좋아요아이콘"></S.Likeimg>
+            <S.Likeimg src="/like.png" alt="좋아요아이콘" onClick={onClickLike}></S.Likeimg>
             <p>{data ? data.fetchBoard.likeCount : "로딩중입니다..."}</p>
           </S.Likebx>
           
           <S.Dislikebx>
-            <S.Likeimg src="/dislike.png" alt="싫어요아이콘"></S.Likeimg>
+            <S.Likeimg src="/dislike.png" alt="싫어요아이콘" onClick={onClickDisLike}></S.Likeimg>
             <p>{data ? data.fetchBoard.dislikeCount : "로딩중입니다..."}</p>
           </S.Dislikebx>
         </S.Bottombx>
@@ -52,7 +55,7 @@ export default function  BoardDetailUI({
     <S.List>
       <S.Listbtn onClick={onClickMoveToBoard}>목록으로</S.Listbtn>
       <S.Listbtn onClick={goEdit}>수정하기</S.Listbtn>
-      <S.Listbtn>삭제하기</S.Listbtn>
+      <S.Listbtn onClick={onClickDelete}>삭제하기</S.Listbtn>
     </S.List>
     <BoardComments/>
   </S.Board>

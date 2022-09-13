@@ -10,6 +10,9 @@ export default function BoardCommentsUI({
   onClickUpComment,
   update,
   onClickUpdate,
+  commentId,
+  onChangeCommentPassword,
+  onChangeCommentContents,
 }) {
     return (
       <>
@@ -20,7 +23,7 @@ export default function BoardCommentsUI({
       
         <S.Reviewinfo>
           <S.Input type="text" placeholder="작성자" onChange={onChangeWriter}/>
-          <S.Input type="text" placeholder="비밀번호" onchange={onChangePassword}/>
+          <S.Input type="text" placeholder="비밀번호" onChange={onChangePassword}/>
           <S.Icon src="/star.png" alt="별점아이콘"></S.Icon>
           <S.Icon src="/star.png" alt="별점아이콘"></S.Icon>
           <S.Icon src="/star.png" alt="별점아이콘"></S.Icon>
@@ -36,7 +39,7 @@ export default function BoardCommentsUI({
           </S.Reviewbtn>
         </div>
       </S.Div>
-      <BoardCommentsMap commentData={commentData} onClickUpComment={onClickUpComment} onClickUpdate={onClickUpdate}/>
+      <BoardCommentsMap commentData={commentData} onClickUpComment={onClickUpComment} onClickUpdate={onClickUpdate} update={update} commentId={commentId} onChangeCommentContents={onChangeCommentContents} onChangeCommentPassword={onChangeCommentPassword}/>
       </>
     )
 

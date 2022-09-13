@@ -29,12 +29,14 @@ export const FETCH_BOARD_COMMENTS = gql`
     }
   }
 `
-export const UPDATE_BOARD_COMMENTS = gql `
+export const UPDATE_BOARD_COMMENTS = gql`
   mutation updateBoardComment($updateBoardCommentInput: UpdateBoardCommentInput!,$password: String, $boardCommentId: ID!){
       updateBoardComment(
         updateBoardCommentInput: $updateBoardCommentInput
         password:$password
         boardCommentId:$boardCommentId
-    )
+    ){
+      _id
+    }
   }
 `
