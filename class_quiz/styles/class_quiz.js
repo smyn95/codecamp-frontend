@@ -131,3 +131,9 @@ export const Row = styled.div`
 export const Column = styled.div`
     width: 25%;
 `
+
+export const Cal = styled(Calendar)`
+  width: 300px;
+  border: 1px solid #f0f0f0;
+  border-radius: 2px;
+`

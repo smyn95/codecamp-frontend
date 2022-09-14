@@ -10,22 +10,24 @@ a {
   color: inherit;
   text-decoration: none;
 }
-p{
+p {
   margin: 0;
+  margin-bottom: 0;
 }
-ul,ol{
+ul,
+ol {
   list-style-type: none;
   padding: 0;
   margin: 0;
 }
-li{
+li {
   list-style-type: none;
 }
-button{
-  border:none;
+button {
+  border: none;
   background-color: transparent;
-  border-radius:10px;
-  cursor:pointer;
+  border-radius: 10px;
+  cursor: pointer;
 }
 * {
   box-sizing: border-box;
