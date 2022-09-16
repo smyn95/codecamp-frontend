@@ -364,16 +364,24 @@ export const Searchbx = styled.div`
     left: 730px;
     z-index: 10;
   }
-  input {
-    background: #f2f2f2;
-    width: 780px;
+  .ant-picker-range {
+    position: relative;
+    display: inline-flex;
+    width: 450px;
     height: 50px;
-    outline: none;
-    border-radius: 10px;
-    border: none;
-    padding: 0 20px;
   }
 `;
+
+export const SearchInput = styled.input`
+  background: #f2f2f2;
+  width: 780px;
+  height: 50px;
+  outline: none;
+  border-radius: 10px;
+  border: none;
+  padding: 0 20px;
+`;
+
 export const Calender = styled.div`
   width: 300px;
   height: 100%;
@@ -435,6 +443,7 @@ export const Listfirst = styled.li`
   }
 `;
 export const Listtitle = styled.ul`
+  margin-bottom: 0;
   li {
     color: #111 !important;
   }

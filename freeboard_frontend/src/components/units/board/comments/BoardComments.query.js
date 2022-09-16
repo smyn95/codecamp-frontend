@@ -1,10 +1,10 @@
-import {gql} from '@apollo/client'
-
-
+import { gql } from "@apollo/client";
 
 export const CREATE_BOARD_COMMENT = gql`
-  mutation createBoardComment($createBoardCommentInput: CreateBoardCommentInput!,
-    $boardId: ID!) {
+  mutation createBoardComment(
+    $createBoardCommentInput: CreateBoardCommentInput!
+    $boardId: ID!
+  ) {
     createBoardComment(
       createBoardCommentInput: $createBoardCommentInput
       boardId: $boardId
@@ -16,10 +16,10 @@ export const CREATE_BOARD_COMMENT = gql`
       createdAt
     }
   }
-`
+`;
 export const FETCH_BOARD_COMMENTS = gql`
-  query fetchBoardComments($boardId:ID!){
-    fetchBoardComments(boardId: $boardId){
+  query fetchBoardComments($boardId: ID!) {
+    fetchBoardComments(boardId: $boardId) {
       _id
       writer
       contents
@@ -28,15 +28,28 @@ export const FETCH_BOARD_COMMENTS = gql`
       updatedAt
     }
   }
-`
+`;
 export const UPDATE_BOARD_COMMENTS = gql`
-  mutation updateBoardComment($updateBoardCommentInput: UpdateBoardCommentInput!,$password: String, $boardCommentId: ID!){
-      updateBoardComment(
-        updateBoardCommentInput: $updateBoardCommentInput
-        password:$password
-        boardCommentId:$boardCommentId
-    ){
+  mutation updateBoardComment(
+    $updateBoardCommentInput: UpdateBoardCommentInput!
+    $password: String
+    $boardCommentId: ID!
+  ) {
+    updateBoardComment(
+      updateBoardCommentInput: $updateBoardCommentInput
+      password: $password
+      boardCommentId: $boardCommentId
+    ) {
       _id
+      writer
+      rating
+      updatedAt
+      contents
     }
   }
-`
+`;
+export const DELETE_BOARD_COMMENT = gql`
+  mutation deleteBoardComment($password: String, $boardCommentId: ID!) {
+    deleteBoardComment(password: $password, boardCommentId: $boardCommentId)
+  }
+`;

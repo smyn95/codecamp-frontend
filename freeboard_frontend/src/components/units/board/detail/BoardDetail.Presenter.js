@@ -1,16 +1,15 @@
-import * as S from '../../../../../styles/fetchboard'
-import BoardComments from '../comments/BoardComments.container';
+import * as S from "../../../../../styles/fetchboard";
+import BoardComments from "../comments/BoardComments.container";
 
-
-export default function  BoardDetailUI({
+export default function BoardDetailUI({
   data,
   onClickMoveToBoard,
   goEdit,
   onClickLike,
   onClickDisLike,
-  onClickDelete
+  onClickDelete,
 }) {
-  return(
+  return (
     <S.Board>
       <S.Box>
         <div id="Head">
@@ -18,8 +17,14 @@ export default function  BoardDetailUI({
             <S.Leftbx>
               <S.User></S.User>
               <S.Namebx>
-                <S.Name>{data ? data.fetchBoard.writer : "로딩중입니다..."}</S.Name>
-                <S.Date>{data ? data.fetchBoard.createdAt.slice(0,10) : "로딩중입니다..."}</S.Date>
+                <S.Name>
+                  {data ? data.fetchBoard.writer : "로딩중입니다..."}
+                </S.Name>
+                <S.Date>
+                  {data
+                    ? data.fetchBoard.createdAt.slice(0, 10)
+                    : "로딩중입니다..."}
+                </S.Date>
               </S.Namebx>
             </S.Leftbx>
 
@@ -27,37 +32,49 @@ export default function  BoardDetailUI({
               <S.Icon src="/location_on.png" alt="위치아이콘"></S.Icon>
               <S.Icon src="/link.png" alt="링크아이콘"></S.Icon>
             </S.Right>
-
           </S.Left>
         </div>
 
-        <S.DetailTitle>{data ? data.fetchBoard.title : "로딩중입니다..."}</S.DetailTitle>
+        <S.DetailTitle>
+          {data ? data.fetchBoard.title : "로딩중입니다..."}
+        </S.DetailTitle>
         <div id="Img">{data ? data.fetchBoard.images : "로딩중입니다..."}</div>
         <S.Contents src="/content.png" alt="본문 이미지"></S.Contents>
-        <S.Textcontent>{data ? data.fetchBoard.contents : "로딩중입니다..."}</S.Textcontent>
+        <S.Textcontent>
+          {data ? data.fetchBoard.contents : "로딩중입니다..."}
+        </S.Textcontent>
 
-        <S.Youtube>{data ? data.fetchBoard.youtubeUrl : "로딩중입니다..."}</S.Youtube>
+        <S.Youtube>
+          {data ? data.fetchBoard.youtubeUrl : "로딩중입니다..."}
+        </S.Youtube>
 
         <S.Bottombx>
-        <S.Likebx>
-            <S.Likeimg src="/like.png" alt="좋아요아이콘" onClick={onClickLike}></S.Likeimg>
+          <S.Likebx>
+            <S.Likeimg
+              src="/like.png"
+              alt="좋아요아이콘"
+              onClick={onClickLike}
+            ></S.Likeimg>
             <p>{data ? data.fetchBoard.likeCount : "로딩중입니다..."}</p>
           </S.Likebx>
-          
+
           <S.Dislikebx>
-            <S.Likeimg src="/dislike.png" alt="싫어요아이콘" onClick={onClickDisLike}></S.Likeimg>
+            <S.Likeimg
+              src="/dislike.png"
+              alt="싫어요아이콘"
+              onClick={onClickDisLike}
+            ></S.Likeimg>
             <p>{data ? data.fetchBoard.dislikeCount : "로딩중입니다..."}</p>
           </S.Dislikebx>
         </S.Bottombx>
+      </S.Box>
 
-    </S.Box>
-
-    <S.List>
-      <S.Listbtn onClick={onClickMoveToBoard}>목록으로</S.Listbtn>
-      <S.Listbtn onClick={goEdit}>수정하기</S.Listbtn>
-      <S.Listbtn onClick={onClickDelete}>삭제하기</S.Listbtn>
-    </S.List>
-    <BoardComments/>
-  </S.Board>
-  )
+      <S.List>
+        <S.Listbtn onClick={onClickMoveToBoard}>목록으로</S.Listbtn>
+        <S.Listbtn onClick={goEdit}>수정하기</S.Listbtn>
+        <S.Listbtn onClick={onClickDelete}>삭제하기</S.Listbtn>
+      </S.List>
+      <BoardComments />
+    </S.Board>
+  );
 }

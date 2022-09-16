@@ -15,6 +15,13 @@ export default function BoardCommentsUI({
   commentId,
   onChangeCommentPassword,
   onChangeCommentContents,
+  onChangeMyStar,
+  onClickDeleteComment,
+  showModal,
+  handleCancel,
+  isModalOpen,
+  onChangeModalPassword,
+  onChangeCommentRating,
 }) {
   return (
     <>
@@ -30,7 +37,7 @@ export default function BoardCommentsUI({
             placeholder="비밀번호"
             onChange={onChangePassword}
           />
-          <Rate allowHalf defaultValue={2.5} />
+          <Rate sallowHalf defaultValue={2.5} onChange={onChangeMyStar} />
         </S.Reviewinfo>
 
         <div>
@@ -54,6 +61,13 @@ export default function BoardCommentsUI({
         commentId={commentId}
         onChangeCommentContents={onChangeCommentContents}
         onChangeCommentPassword={onChangeCommentPassword}
+        onClickDeleteComment={onClickDeleteComment}
+        showModal={showModal}
+        handleCancel={handleCancel}
+        isModalOpen={isModalOpen}
+        onChangeModalPassword={onChangeModalPassword}
+        onChangeMyStar={onChangeMyStar}
+        onChangeCommentRating={onChangeCommentRating}
       />
     </>
   );

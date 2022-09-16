@@ -2,7 +2,6 @@ import * as S from "../../../../../styles/freeboard";
 import Link from "next/link";
 import BoardListMap from "./BoardList.map";
 import { Pagination, Space } from "antd";
-import React from "react";
 import "antd/dist/antd.css";
 
 export default function BoardListUI({
@@ -75,7 +74,7 @@ export default function BoardListUI({
           ))}
         </S.Listall>
         <S.Searchbx>
-          <input type="text" placeholder="제목을 검색해주세요." />
+          <S.SearchInput type="text" placeholder="제목을 검색해주세요." />
           <Space direction="vertical" size={12}>
             <RangePicker />
           </Space>

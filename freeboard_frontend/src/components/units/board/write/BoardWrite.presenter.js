@@ -1,9 +1,11 @@
 import * as S from "../../../../../styles/freeboard";
 import ReactPlayer from "react-player";
-import "antd/dist/antd.css";
+import { Modal } from "antd";
+import DaumPostcodeEmbed from "react-daum-postcode";
 
 export default function BoardWriteUI(props) {
-  console.log(props.data);
+  console.log();
+
   return (
     <S.Box>
       <S.Title>Post registration</S.Title>
@@ -49,18 +51,26 @@ export default function BoardWriteUI(props) {
         </S.Titlebx>
       </S.Textbx>
 
+      {props.isOpen && (
+        <Modal
+          visible={true}
+          onOk={props.onToggleModal}
+          onCancel={props.onToggleModal}
+        >
+          <DaumPostcodeEmbed onComplete={props.handleComplete} />
+        </Modal>
+      )}
       <S.Textbx>
         <S.Titlebx>
           <S.Font>주&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소</S.Font>
           <S.Codezip
             type="text"
             placeholder="00000"
-            onChange={props.onChangeZipcode}
-            defaultValue={props.data?.fetchBoard.zipcode}
+            value={props.input.boardAddress.boardZipcode}
           />
-          <S.Search type="button">우편번호 검색</S.Search>
+          <S.Search onClick={props.onToggleModal}>우편번호 검색</S.Search>
         </S.Titlebx>
-        <S.Input type="text" onChange={props.onChangeAddress} />
+        <S.Input type="text" value={props.input.boardAddress.boardAddress} />
         <S.Input
           type="text"
           onChange={props.onChangeAddressDetail}

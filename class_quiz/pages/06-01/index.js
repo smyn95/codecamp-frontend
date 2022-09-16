@@ -13,8 +13,6 @@ export default function LibraryStarPage() {
     alert(value + "점");
   };
 
-  
-
   return (
     <span style={{display:'flex',flexDirection: 'column'}}>
       <Rate onChange={handleChange} value={value} />

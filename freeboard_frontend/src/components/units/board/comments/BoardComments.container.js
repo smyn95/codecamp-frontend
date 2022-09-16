@@ -1,114 +1,161 @@
-import { useQuery,useMutation} from '@apollo/client'
-import {CREATE_BOARD_COMMENT, FETCH_BOARD_COMMENTS,UPDATE_BOARD_COMMENTS} from './BoardComments.query'
+import { useQuery, useMutation } from "@apollo/client";
 import BoardCommentsUI from "./BoardComments.presenter";
-import { useState } from "react"; 
+import { useState } from "react";
 import { useRouter } from "next/router";
+import {
+  CREATE_BOARD_COMMENT,
+  DELETE_BOARD_COMMENT,
+  FETCH_BOARD_COMMENTS,
+  UPDATE_BOARD_COMMENTS,
+} from "./BoardComments.query";
+import { ErrorModal, SuccessModal } from "../../../../commons";
 
+export default function BoardComments() {
+  const router = useRouter();
+  const [update, setUpdate] = useState(false);
+  const [deleteComment] = useMutation(DELETE_BOARD_COMMENT);
+  const [commentId, setCommentId] = useState("");
+  const [MyStar, setMyStar] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [deleteModal, setDeleteModal] = useState("");
+  const [comment, setComment] = useState({
+    password: "",
+    contents: "",
+    writer: "",
+  });
+  //수정하기 state
+  const [commentPassword, setCommentPassword] = useState("");
+  const [commentContents, setCommentContents] = useState("");
+  const [commentDelId, setCommentDelId] = useState("");
 
-export default function BoardComments(){
-const router = useRouter()  
-const [update,setUpdate] = useState(false)
-const [commentId, setCommentId] = useState("")
-const [comment,setComment] = useState({
-  password:"",
-  contents:"",
-  writer:""
-})
+  const onChangeCommentPassword = (event) => {
+    setCommentPassword(event.target.value);
+  };
+  const onChangeCommentContents = (event) => {
+    setCommentContents(event.target.value);
+  };
 
-
-const [commentPassword, setCommentPassword]= useState("")
-const [commentContents, setCommentContents]= useState("")
-
-console.log(commentPassword)
-
-const onChangeCommentPassword = (event) => {
-  setCommentPassword(event.target.value)
-}
-const onChangeCommentContents = (event) => {
-  setCommentContents(event.target.value)
-}
-
-
-const [createBoardComment] = useMutation(CREATE_BOARD_COMMENT)
-const [updateBoardComment] = useMutation(UPDATE_BOARD_COMMENTS)
-const {data : commentData} = useQuery(FETCH_BOARD_COMMENTS,{
-  variables:{boardId:router.query.boardId}
-  })
+  const [createBoardComment] = useMutation(CREATE_BOARD_COMMENT);
+  const [updateBoardComment] = useMutation(UPDATE_BOARD_COMMENTS);
+  const { data: commentData } = useQuery(FETCH_BOARD_COMMENTS, {
+    variables: { boardId: router.query.boardId },
+  });
   const onClickComment = async () => {
-    try{
-      const result = await createBoardComment({
-        variables:{
-          createBoardCommentInput:{
-            writer:comment.writer,
-            password:comment.password,
-            contents:comment.contents,
-            rating: 5,
+    try {
+      await createBoardComment({
+        variables: {
+          createBoardCommentInput: {
+            writer: comment.writer,
+            password: comment.password,
+            contents: comment.contents,
+            rating: MyStar,
           },
-          boardId:router.query.boardId,
+          boardId: router.query.boardId,
         },
-        refetchQueries:[{
-          query: FETCH_BOARD_COMMENTS,
-          variables:{boardId:router.query.boardId}
-        },]
-      })
-      console.log(result)
-      console.log(result.data.createBoardComment.boardId)
-      alert("댓글 등록이 완료되었습니다.")
-    }catch(error){
-      alert(error.message)
-   } 
-  }
+        refetchQueries: [
+          {
+            query: FETCH_BOARD_COMMENTS,
+            variables: { boardId: router.query.boardId },
+          },
+        ],
+      });
+      SuccessModal("댓글이 등록되었습니다.");
+    } catch (error) {
+      ErrorModal(error.message);
+    }
+  };
 
   const onClickUpComment = async () => {
-    try{
-    // const variables = {
-    //   boardId:router.query.boardId
-    // }
+    const commentvariables = {
+      boardCommentId: commentId,
+      password: commentPassword,
+      rating: MyStar,
+      updateBoardCommentInput: {},
+    };
+    try {
+      if (commentContents) {
+        commentvariables.updateBoardCommentInput.contents = commentContents;
+      }
+      if (MyStar) {
+        commentvariables.updateBoardCommentInput.rating = MyStar;
+      }
 
-    // if(writer)upvariables.writer = commentUp.writer
-    // if(contents)upvariables.contents = commentUp.contents
-console.log(commentId, commentPassword, commentContents)
-    await updateBoardComment({
-      variables:{
-        boardCommentId: commentId,
-        password:commentPassword,
-        updateBoardCommentInput:{
-          contents : commentContents,
-          rating:1
-        }
-      },
-    refetchQueries:[{
-      query:FETCH_BOARD_COMMENTS,
-      variables : {
-        boardId:router.query.boardId
-      },
-    }]
-  })
-  setUpdate(!update)
-    }catch(error){
-      console.log(error)
-      alert(error.message)
+      await updateBoardComment({
+        variables: commentvariables,
+        refetchQueries: [
+          {
+            query: FETCH_BOARD_COMMENTS,
+            variables: {
+              boardId: router.query.boardId,
+            },
+          },
+        ],
+      });
+      setUpdate(!update);
+      SuccessModal("댓글 수정이 완료되었습니다.");
+    } catch (error) {
+      ErrorModal(error.message);
     }
-  }
-  function onClickUpdate(event){
-    setCommentId(event.currentTarget.id)
-    setUpdate(!update)
-  }
+  };
 
+  function onClickUpdate(event) {
+    setCommentId(event.target.id);
+    setUpdate(!update);
+  }
 
   const onChangeWriter = (event) => {
-    setComment({...comment, writer:event.target.value})
-  }
+    setComment({ ...comment, writer: event.target.value });
+  };
   const onChangePassword = (event) => {
-    setComment({...comment, password:event.target.value})
-    console.log(comment.password)
-  }
+    setComment({ ...comment, password: event.target.value });
+  };
   const onchangeContents = (event) => {
-    setComment({...comment, contents:event.target.value})
+    setComment({ ...comment, contents: event.target.value });
+  };
+
+  //별점
+  function onChangeMyStar(value) {
+    setMyStar(value);
   }
+  const onChangeModalPassword = (event) => {
+    setDeleteModal(event.target.value);
+  };
 
+  //삭제시 비밀번호 인풋 모달 출력
+  const showModal = (event) => {
+    setIsModalOpen(true);
+    setCommentDelId(event.currentTarget.id);
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
 
-  return(
+  //댓글 삭제
+  const onClickDeleteComment = async () => {
+    try {
+      await deleteComment({
+        variables: {
+          boardCommentId: commentDelId,
+          password: deleteModal,
+        },
+        refetchQueries: [
+          {
+            query: FETCH_BOARD_COMMENTS,
+            variables: {
+              boardId: router.query.boardId,
+            },
+          },
+        ],
+      });
+      SuccessModal("삭제가 완료되었습니다.");
+      setIsModalOpen((prev) => !prev);
+      setCommentPassword("");
+    } catch (error) {
+      ErrorModal(error.message);
+    }
+  };
+
+  return (
     <>
       <BoardCommentsUI
         onClickComment={onClickComment}
@@ -122,8 +169,13 @@ console.log(commentId, commentPassword, commentContents)
         commentId={commentId}
         onChangeCommentPassword={onChangeCommentPassword}
         onChangeCommentContents={onChangeCommentContents}
+        onChangeMyStar={onChangeMyStar}
+        onClickDeleteComment={onClickDeleteComment}
+        showModal={showModal}
+        handleCancel={handleCancel}
+        isModalOpen={isModalOpen}
+        onChangeModalPassword={onChangeModalPassword}
       />
     </>
-
-  )
+  );
 }

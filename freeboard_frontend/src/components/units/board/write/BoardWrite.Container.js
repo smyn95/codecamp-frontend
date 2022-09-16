@@ -1,12 +1,15 @@
 import { useRouter } from "next/router";
 import { useMutation, useQuery } from "@apollo/client";
 import { useState } from "react";
+import { ErrorModal, SuccessModal } from "../../../../commons/index";
 import { CREATE_BOARD, UPDATE_BOARD, FETCH_BOARD } from "./BoardWrite.query";
+import { Address } from "react-daum-postcode";
 import BoardWriteUI from "./BoardWrite.presenter";
 
 export default function Freeboard(props) {
   // console.log(props.data)
   const router = useRouter();
+  const [isOpen, setIsOpen] = useState(false);
   // console.log(props.isEdit)
   const [input, setInput] = useState({
     name: "",
@@ -49,10 +52,10 @@ export default function Freeboard(props) {
       });
 
       // 2. 상세페이지로 이동하기
-      alert("수정이 완료되었습니다.");
+      SuccessModal("게시글 수정이 완료되었습니다.");
       router.push(`/board/${result.data.updateBoard._id}`);
     } catch (error) {
-      console.log(error);
+      ErrorModal(error.message);
     }
   };
 
@@ -76,13 +79,11 @@ export default function Freeboard(props) {
           },
         },
       });
-      console.log(result);
-      alert("게시글 등록 완료!");
-
-      console.log(result.data.createBoard._id); //우리 보기 좋으라고 있는거
+      SuccessModal("게시글 등록이 완료되었습니다.");
+      //우리 보기 좋으라고 있는거
       router.push(`/board/${result.data.createBoard._id}`);
     } catch (error) {
-      alert(error.message);
+      ErrorModal(error.message);
     }
   };
 
@@ -97,20 +98,6 @@ export default function Freeboard(props) {
   };
   const onChangeContents = (event) => {
     setInput({ ...input, contents: event.target.value });
-  };
-
-  const onChangeAddress = (event) => {
-    setInput({
-      ...input,
-      boardAddress: { ...input.boardAddress, boardAddress: event.target.value },
-    });
-  };
-
-  const onChangeZipcode = (event) => {
-    setInput({
-      ...input,
-      boardAddress: { ...input.boardAddress, boardZipcode: event.target.value },
-    });
   };
 
   const onChangeAddressDetail = (event) => {
@@ -131,7 +118,24 @@ export default function Freeboard(props) {
   const onClickMoveToBoard = () => {
     router.push("/board/");
   };
+  //주소검색
+  const onToggleModal = () => {
+    setIsOpen((prev) => !prev);
+  };
 
+  const handleComplete = (value) => {
+    onToggleModal();
+    setInput({
+      ...input,
+      boardAddress: {
+        ...input.boardAddress,
+        boardZipcode: value.zonecode,
+        boardAddress: value.address,
+      },
+    });
+
+    console.log(value);
+  };
   return (
     <>
       <BoardWriteUI
@@ -140,14 +144,16 @@ export default function Freeboard(props) {
         onChangePassword={onChangePassword}
         onChangeTitle={onChangeTitle}
         onChangeContents={onChangeContents}
-        onChangeAddress={onChangeAddress}
-        onChangeZipcode={onChangeZipcode}
         onChangeAddressDetail={onChangeAddressDetail}
         onChangeYoutubeUrl={onChangeYoutubeUrl}
         onClickMoveToBoard={onClickMoveToBoard}
         onClickUpdate={onClickUpdate}
         isEdit={props.isEdit}
         data={props.data}
+        isOpen={isOpen}
+        handleComplete={handleComplete}
+        onToggleModal={onToggleModal}
+        input={input}
       />
     </>
   );
