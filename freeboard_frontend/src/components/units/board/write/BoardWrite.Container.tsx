@@ -1,12 +1,13 @@
 import { useRouter } from "next/router";
 import { useMutation, useQuery } from "@apollo/client";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { ErrorModal, SuccessModal } from "../../../../commons/index";
 import { CREATE_BOARD, UPDATE_BOARD, FETCH_BOARD } from "./BoardWrite.query";
 import { Address } from "react-daum-postcode";
 import BoardWriteUI from "./BoardWrite.presenter";
+import { IBoardWriteProps } from "./BoardWrite.types";
 
-export default function Freeboard(props) {
+export default function Freeboard(props: IBoardWriteProps) {
   // console.log(props.data)
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
@@ -87,20 +88,20 @@ export default function Freeboard(props) {
     }
   };
 
-  const onChangeName = (event) => {
+  const onChangeName = (event: ChangeEvent<HTMLInputElement>) => {
     setInput({ ...input, name: event.target.value });
   };
-  const onChangePassword = (event) => {
+  const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
     setInput({ ...input, password: event.target.value });
   };
-  const onChangeTitle = (event) => {
+  const onChangeTitle = (event: ChangeEvent<HTMLInputElement>) => {
     setInput({ ...input, title: event.target.value });
   };
-  const onChangeContents = (event) => {
+  const onChangeContents = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setInput({ ...input, contents: event.target.value });
   };
 
-  const onChangeAddressDetail = (event) => {
+  const onChangeAddressDetail = (event: ChangeEvent<HTMLInputElement>) => {
     setInput({
       ...input,
       boardAddress: {
@@ -110,7 +111,7 @@ export default function Freeboard(props) {
     });
   };
 
-  const onChangeYoutubeUrl = (event) => {
+  const onChangeYoutubeUrl = (event: ChangeEvent<HTMLInputElement>) => {
     setInput({ ...input, youtubeUrl: event.target.value });
   };
 
@@ -123,7 +124,7 @@ export default function Freeboard(props) {
     setIsOpen((prev) => !prev);
   };
 
-  const handleComplete = (value) => {
+  const handleComplete = (value: Address) => {
     onToggleModal();
     setInput({
       ...input,

@@ -2,8 +2,7 @@ import styled from "@emotion/styled";
 
 // HEADER
 export const Logo = styled.div`
-  img {
-  }
+  cursor: pointer;
 `;
 export const Navi = styled.div``;
 export const Navibx = styled.ul`
@@ -163,7 +162,7 @@ export const Set01 = styled.img`
 
 //Badge
 export const Badges = styled.div`
-  position: absolute;
+  position: fixed;
   right: 12px;
   top: 200px;
   display: block;

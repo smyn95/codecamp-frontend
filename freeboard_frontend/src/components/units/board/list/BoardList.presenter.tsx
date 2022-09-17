@@ -4,6 +4,7 @@ import BoardListMap from "./BoardList.map";
 import { Pagination, Space } from "antd";
 import "antd/dist/antd.css";
 import LayoutBanner from "../../../commons/layout/banner";
+import Search from "antd/lib/transfer/search";
 
 export default function BoardListUI({
   data,
@@ -14,9 +15,9 @@ export default function BoardListUI({
   showTotal,
   RangePicker,
   onChangeSearch,
-  onSearch,
   ...props
 }) {
+  const onSearch = (value) => console.log(value);
   return (
     <>
       <LayoutBanner />
@@ -51,10 +52,11 @@ export default function BoardListUI({
           ))}
         </S.Listall>
         <S.Searchbx>
-          <S.SearchInput
-            type="text"
-            placeholder="제목을 검색해주세요."
-            // onChange={onChangeSearch}
+          <Search
+            addonBefore="https://"
+            placeholder="검색어를 입력하세요."
+            allowClear
+            onSearch={onSearch}
           />
           <Space direction="vertical" size={12}>
             <RangePicker />

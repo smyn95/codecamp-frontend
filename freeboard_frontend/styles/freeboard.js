@@ -238,24 +238,15 @@ export const Searchbx = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  &&:after {
-    content: "";
-    background-image: url("/Vector.png");
-    background-size: cover;
-    display: block;
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    top: 15px;
-    left: 730px;
-    z-index: 10;
-    cursor: pointer;
-  }
+
   .ant-picker-range {
     position: relative;
     display: inline-flex;
     width: 450px;
     height: 50px;
+  }
+  .ant-input-affix-wrapper {
+    width: 800px;
   }
 `;
 

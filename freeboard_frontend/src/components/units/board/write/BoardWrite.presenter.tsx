@@ -1,9 +1,9 @@
 import * as S from "../../../../../styles/freeboard";
-import ReactPlayer from "react-player";
 import { Modal } from "antd";
 import DaumPostcodeEmbed from "react-daum-postcode";
+import { IBoardWriteUIProps } from "./BoardWrite.types";
 
-export default function BoardWriteUI(props) {
+export default function BoardWriteUI(props: IBoardWriteUIProps) {
   console.log();
 
   return (
@@ -44,7 +44,6 @@ export default function BoardWriteUI(props) {
         <S.Titlebx>
           <S.Font>내&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;용</S.Font>
           <S.Contents
-            type="text"
             onChange={props.onChangeContents}
             placeholder="내용을 작성해주세요."
             defaultValue={props.data?.fetchBoard.contents}

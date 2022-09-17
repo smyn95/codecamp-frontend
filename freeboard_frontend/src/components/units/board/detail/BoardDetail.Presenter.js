@@ -1,7 +1,8 @@
 import * as S from "../../../../../styles/fetchboard";
-import { Button, Divider, Tooltip } from "antd";
+import { Tooltip } from "antd";
 import ReactPlayer from "react-player";
 import BoardComments from "../comments/BoardComments.container";
+import "semantic-ui-css/semantic.min.css";
 
 export default function BoardDetailUI({
   data,

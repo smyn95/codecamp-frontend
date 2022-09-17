@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import BoardListUI from "./BoardList.presenter";
 import { DatePicker } from "antd";
 import "antd/dist/antd.css";

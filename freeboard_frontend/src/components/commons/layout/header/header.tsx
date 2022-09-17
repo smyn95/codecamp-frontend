@@ -1,3 +1,4 @@
+import Link from "next/link";
 import * as S from "../../../../commons/styles";
 
 export default function LayoutHeader(props) {
@@ -6,7 +7,9 @@ export default function LayoutHeader(props) {
       <S.Inner>
         <S.Header>
           <S.Logo>
-            <img src="/starbucks_logo.png" alt="스타벅스" />
+            <Link href="/board">
+              <img src="/starbucks_logo.png" alt="스타벅스" />
+            </Link>
           </S.Logo>
           <S.Navi>
             <S.Navibx>
