@@ -1,22 +1,30 @@
 import { useRouter } from "next/router";
 import { useQuery, useMutation } from "@apollo/client";
-import BoardDetailUI from "../detail/BoardDetail.Presenter";
-import { ErrorModal, SuccessModal } from "../../../../commons";
+import BoardDetailUI from "./BoardDetail.Presenter";
+import { SuccessModal } from "../../../../commons";
 import {
   FETCH_BOARD,
   DISLIKE_BOARD,
   LIKE_BOARD,
   DELETE_BOARD,
 } from "./BoardDetail.query";
+import {
+  IQuery,
+  IQueryFetchBoardArgs,
+} from "../../../../commons/types/generated/types";
+import { IBoardDetailUIProps } from "./BoardDetail.types";
 
-export default function Fetchboard(props) {
+export default function Fetchboard(props: IBoardDetailUIProps) {
   const router = useRouter();
   const [likeboard] = useMutation(LIKE_BOARD);
   const [deleteBoard] = useMutation(DELETE_BOARD);
   const [dislikeboard] = useMutation(DISLIKE_BOARD);
-  const { data } = useQuery(FETCH_BOARD, {
-    variables: { boardId: router.query.boardId },
-  });
+  const { data } = useQuery<Pick<IQuery, "fetchBoard">, IQueryFetchBoardArgs>(
+    FETCH_BOARD,
+    {
+      variables: { boardId: router.query.boardId },
+    }
+  );
 
   const onClickMoveToBoard = () => {
     router.push("/board/");

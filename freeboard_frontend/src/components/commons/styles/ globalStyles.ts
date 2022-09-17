@@ -4,11 +4,12 @@ export const globalStyles = css`
   * {
     box-sizing: border-box;
     margin: 0;
+    font-family: "myfont";
   }
 
   @font-face {
     font-family: "myfont";
-    src: url("/fonts/NanumMyeongjo.ttf");
+    src: url("/fonts/NanumSquare_acL.ttf");
   }
   html,
   body {

@@ -4,7 +4,7 @@ import { DatePicker } from "antd";
 import "antd/dist/antd.css";
 import { useRouter } from "next/router";
 import { FETCH_BOARDS, FETCH_BOARDS_OF_THE_BEST } from "./BoardList.query";
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 
 export default function FreeboardList() {
   const router = useRouter();
@@ -14,7 +14,7 @@ export default function FreeboardList() {
 
   console.log(data?.fetchBoards);
 
-  const onChangeSearch = (event) => {
+  const onChangeSearch = (event: ChangeEvent<HTMLInputElement>) => {
     setSearch(event.target.value);
   };
 
@@ -31,16 +31,10 @@ export default function FreeboardList() {
   const onClickMoveToBoardNew = () => {
     router.push("/board/new");
   };
-  const onClickMoveToBoardDetail = (event) => {
-    console.log(event.target.id);
+  const onClickMoveToBoardDetail = (event: any) => {
     router.push(`/board/${event.currentTarget.id}`);
   };
 
-  const onClickMoveToBest = (event) => {
-    router.push(`/board/${event.target.boardId}`);
-  };
-
-  const showTotal = (total) => `Total ${total} items`;
   const { RangePicker } = DatePicker;
 
   return (
@@ -50,8 +44,6 @@ export default function FreeboardList() {
         bestData={bestData}
         onClickMoveToBoardNew={onClickMoveToBoardNew}
         onClickMoveToBoardDetail={onClickMoveToBoardDetail}
-        onClickMoveToBest={onClickMoveToBest}
-        showTotal={showTotal}
         RangePicker={RangePicker}
         onChangeSearch={onChangeSearch}
       />

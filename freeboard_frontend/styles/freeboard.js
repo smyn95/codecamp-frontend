@@ -10,9 +10,6 @@ export const Titlebx = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  span {
-    font-family: "Nanum Myeongjo", serif;
-  }
 `;
 
 export const Title = styled.h1`
@@ -54,7 +51,6 @@ export const Font = styled.p`
   text-align: left;
   border-radius: 5px;
   padding: 5px 50px 5px 0;
-  font-family: "Nanum Myeongjo", serif;
 `;
 export const Imgbx = styled.span`
   width: 80px;
@@ -114,7 +110,6 @@ export const Submit = styled.h1`
     justify-content: space-around;
     margin: 0 auto;
     cursor: pointer;
-    font-family: "Nanum Myeongjo", serif;
   }
 `;
 export const Routing = styled.button`
@@ -271,7 +266,6 @@ export const Searchbtn = styled.button`
   color: #fff;
   width: 100px;
   font-size: 16px;
-  font-family: "Nanum Myeongjo", serif;
 `;
 
 //게시글 리스트
@@ -305,16 +299,16 @@ export const Listfirst = styled.li`
     > li {
       text-align: center;
       color: #777;
-      &:nth-child(2) {
+      &:nth-of-type(2) {
         width: 50%;
       }
-      &:nth-child(1) {
+      &:nth-of-type(1) {
         width: 10%;
       }
-      &:nth-child(3) {
+      &:nth-of-type(3) {
         width: 10%;
       }
-      &:nth-child(4) {
+      &:nth-of-type(4) {
         width: 10%;
       }
     }
@@ -368,6 +362,5 @@ export const Registration = styled.button`
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  font-family: "Nanum Myeongjo", serif;
   font-weight: 500;
 `;

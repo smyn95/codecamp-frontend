@@ -1,16 +1,12 @@
 import styled from "@emotion/styled";
 
 export const Board = styled.div`
-  width: 1300px;
-  padding: 30px 50px;
-  margin: 50px auto;
+  width: 1400px;
+  padding: 30px 0;
+  margin: 0 auto;
+  height: 1550px;
 `;
-export const Box = styled.div`
-  width: 1200px;
-  padding: 30px 50px;
-  margin: 50px auto;
-  box-shadow: 0px 0px 10px #ccc;
-`;
+export const Box = styled.div``;
 export const Title = styled.h1`
   font-size: 40px;
   font-weight: bold;

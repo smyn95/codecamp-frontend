@@ -1,8 +1,12 @@
-import {gql} from '@apollo/client'
+import { gql } from "@apollo/client";
 
-export const UPDATE_BOARD = gql `
-mutation updateBoard($updateBoardInput:UpdateBoardInput!,$password:String,$boardId:ID!){
-  updateBoard{
+export const UPDATE_BOARD = gql`
+  mutation updateBoard(
+    $updateBoardInput: UpdateBoardInput!
+    $password: String
+    $boardId: ID!
+  ) {
+    updateBoard {
       ID
       writer
       title
@@ -11,7 +15,7 @@ mutation updateBoard($updateBoardInput:UpdateBoardInput!,$password:String,$board
       likeCount
       dislikeCount
       images
-      boardAddress{
+      boardAddress {
         _id
         zipcode
         address
@@ -22,12 +26,12 @@ mutation updateBoard($updateBoardInput:UpdateBoardInput!,$password:String,$board
       user
       createdAt
       updatedAt
+    }
   }
-}
-`
+`;
 export const FETCH_BOARD = gql`
-  query ($boardId: ID!){ 
-    fetchBoard(boardId: $boardId){ 
+  query ($boardId: ID!) {
+    fetchBoard(boardId: $boardId) {
       _id
       writer
       title
@@ -36,7 +40,7 @@ export const FETCH_BOARD = gql`
       likeCount
       dislikeCount
       images
-      boardAddress{
+      boardAddress {
         _id
         zipcode
         address
@@ -45,20 +49,20 @@ export const FETCH_BOARD = gql`
       createdAt
     }
   }
-`
+`;
 export const LIKE_BOARD = gql`
-  mutation likeBoard($boardId:ID!){
-    likeBoard(boardId:$boardId)
+  mutation likeBoard($boardId: ID!) {
+    likeBoard(boardId: $boardId)
   }
-`
+`;
 export const DISLIKE_BOARD = gql`
-  mutation dislikeBoard($boardId:ID!){
-    dislikeBoard(boardId:$boardId)
+  mutation dislikeBoard($boardId: ID!) {
+    dislikeBoard(boardId: $boardId)
   }
-`
+`;
 
 export const DELETE_BOARD = gql`
-  mutation deleteBoard($boardId:ID!){
-    deleteBoard(boardId:$boardId)
+  mutation deleteBoard($boardId: ID!) {
+    deleteBoard(boardId: $boardId)
   }
-`
+`;

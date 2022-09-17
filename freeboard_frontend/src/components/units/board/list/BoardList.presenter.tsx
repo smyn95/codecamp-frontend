@@ -11,20 +11,17 @@ export default function BoardListUI({
   onClickMoveToBoardNew,
   onClickMoveToBoardDetail,
   bestData,
-  onClickMoveToBest,
-  showTotal,
   RangePicker,
   onChangeSearch,
-  ...props
 }) {
-  const onSearch = (value) => console.log(value);
+  const onSearch = (value: String) => console.log(value);
   return (
     <>
       <LayoutBanner />
       <S.Box>
         <S.Title>BEST POST</S.Title>
         <S.Listall>
-          {bestData?.fetchBoardsOfTheBest.map((best) => (
+          {bestData?.fetchBoardsOfTheBest.map((best: any) => (
             <S.Listbx key={best._id}>
               <S.Topbx></S.Topbx>
               <S.Bottombx>
@@ -52,12 +49,7 @@ export default function BoardListUI({
           ))}
         </S.Listall>
         <S.Searchbx>
-          <Search
-            addonBefore="https://"
-            placeholder="검색어를 입력하세요."
-            allowClear
-            onSearch={onSearch}
-          />
+          <Search placeholder="검색어를 입력하세요." onSearch={onSearch} />
           <Space direction="vertical" size={12}>
             <RangePicker />
           </Space>
