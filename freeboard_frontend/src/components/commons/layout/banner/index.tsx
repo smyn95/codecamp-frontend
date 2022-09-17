@@ -1,33 +1,29 @@
 import * as S from "../../../../commons/styles";
 
 export default function LayoutBanner() {
+  // const fadeEls = document.querySelector(".fade-in");
+  // fadeEls.forEach(function (fadeEl, index) {
+  //   gsap.to(fadeEl, 1, {
+  //     delay: (index + 1) * 0.7,
+  //     opacity: 1,
+  //   });
+  // });
   return (
     <>
       <S.Visual>
         <S.BannerInner>
           <S.BannerTitle className="fade-in">
-            <img
-              src="/visual_title.png"
-              alt="STARBUCKS DELIGHTFUL START TO THE YEARS"
-            />
+            <img src="/main_title.png" alt="AROUND AUTUMN, AROUND US" />
           </S.BannerTitle>
-          <S.FadeIn>
-            <S.Cup1Image src="/visual_cup1.png" alt="new OATMEAL LATTE" />
-            <S.Cup1Text src="/visual_cup1_text.png" alt="오트밀 라떼" />
-          </S.FadeIn>
-          <S.FadeIn>
-            <S.Cup2Image
-              src="/visual_cup2.png"
-              alt="new STARBUCKS CARAMEL CRUMBLE MOCHA"
-            />
-            <S.Cup2Text
-              src="/visual_cup2_text.png"
-              alt="스타벅스 카라멜 크럼블 모카"
-            />
-          </S.FadeIn>
-          <S.FadeIn>
-            <S.Spoon src="/visual_spoon.png" alt="Spoon" />
-          </S.FadeIn>
+          <div>
+            <S.Set03 src="/drink_03.png" alt="호두 블랙 티 라떼" />
+          </div>
+          <div>
+            <S.Set02 src="/drink_02.png" alt="그린애플 캐모마일 티" />
+          </div>
+          <div>
+            <S.Set01 src="/drink_01.png" alt="블랙 그레이즈드 라떼" />
+          </div>
         </S.BannerInner>
       </S.Visual>
     </>

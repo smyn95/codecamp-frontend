@@ -1,5 +1,4 @@
 import { useState } from "react";
-import LayoutBanner from "./banner";
 import LayoutHeader from "./header/header";
 
 //prettier-ignore
@@ -20,9 +19,7 @@ export default function Layout(props) {
         inputClass={inputClass}
         onClickText={onClickText}
       />
-      <LayoutBanner/>
         <div>{props.children}</div>
-
     </>
   );
 }

@@ -6,7 +6,7 @@ export default function LayoutHeader(props) {
       <S.Inner>
         <S.Header>
           <S.Logo>
-            <img src="/Logo.svg" alt="닥터지" />
+            <img src="/starbucks_logo.png" alt="스타벅스" />
           </S.Logo>
           <S.Navi>
             <S.Navibx>
@@ -27,6 +27,14 @@ export default function LayoutHeader(props) {
               <img src="/search.png" alt="검색아이콘" />
             </S.Material>
           </S.TopSearch>
+          <S.Badges>
+            <S.Badge>
+              <img src="/badge_01.png" alt="Badge" />
+            </S.Badge>
+            <S.Badge>
+              <img src="/badge_02.png" alt="Badge" />
+            </S.Badge>
+          </S.Badges>
         </S.Header>
       </S.Inner>
     </>

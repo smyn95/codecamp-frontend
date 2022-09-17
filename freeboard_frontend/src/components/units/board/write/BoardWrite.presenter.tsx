@@ -16,7 +16,8 @@ export default function BoardWriteUI(props) {
             type="text"
             onChange={props.onChangeName}
             placeholder="이름을 적어주세요."
-            defaultValue={props.data?.fetchBoard.writer}
+            defaultValue={props.data?.fetchBoard.writer ?? ""}
+            readOnly={!!props.data?.fetchBoard.writer}
           />
         </S.Titlebx>
         <S.Titlebx>
@@ -64,17 +65,31 @@ export default function BoardWriteUI(props) {
         <S.Titlebx>
           <S.Font>주&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소</S.Font>
           <S.Codezip
+            readOnly
             type="text"
             placeholder="00000"
-            value={props.input.boardAddress.boardZipcode}
+            value={
+              props.input.boardAddress.boardZipcode ||
+              (props.data?.fetchBoard.boardAddress?.zipcode ?? "")
+            }
           />
           <S.Search onClick={props.onToggleModal}>우편번호 검색</S.Search>
         </S.Titlebx>
-        <S.Input type="text" value={props.input.boardAddress.boardAddress} />
+        <S.Input
+          readOnly
+          type="text"
+          value={
+            props.input.boardAddress.boardAddress ||
+            (props.data?.fetchBoard.boardAddress?.address ?? "")
+          }
+        />
         <S.Input
           type="text"
           onChange={props.onChangeAddressDetail}
           placeholder="상세주소를 입력해주세요."
+          defaultValue={
+            props.data?.fetchBoard.boardAddress?.addressDetail ?? ""
+          }
         />
       </S.Textbx>
       <S.Textbx>

@@ -249,6 +249,7 @@ export const Searchbx = styled.div`
     top: 15px;
     left: 730px;
     z-index: 10;
+    cursor: pointer;
   }
   .ant-picker-range {
     position: relative;

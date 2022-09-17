@@ -1,4 +1,6 @@
 import * as S from "../../../../../styles/fetchboard";
+import { Button, Divider, Tooltip } from "antd";
+import ReactPlayer from "react-player";
 import BoardComments from "../comments/BoardComments.container";
 
 export default function BoardDetailUI({
@@ -9,6 +11,8 @@ export default function BoardDetailUI({
   onClickDisLike,
   onClickDelete,
 }) {
+  const colors = ["lime"];
+  const customColors = ["#87d068"];
   return (
     <S.Board>
       <S.Box>
@@ -29,8 +33,15 @@ export default function BoardDetailUI({
             </S.Leftbx>
 
             <S.Right>
-              <S.Icon src="/location_on.png" alt="위치아이콘"></S.Icon>
-              <S.Icon src="/link.png" alt="링크아이콘"></S.Icon>
+              <Tooltip
+                title={`${data?.fetchBoard.boardAddress?.address ?? ""} ${
+                  data?.fetchBoard.boardAddress?.addressDetail ?? ""
+                }`}
+                color={"lime"}
+              >
+                <S.Icon src="/location_on.png" alt="위치아이콘" />
+              </Tooltip>
+              <S.Icon src="/link.png" alt="링크아이콘" />
             </S.Right>
           </S.Left>
         </div>
@@ -43,10 +54,16 @@ export default function BoardDetailUI({
         <S.Textcontent>
           {data ? data.fetchBoard.contents : "로딩중입니다..."}
         </S.Textcontent>
-
-        <S.Youtube>
-          {data ? data.fetchBoard.youtubeUrl : "로딩중입니다..."}
-        </S.Youtube>
+        {data?.fetchBoard.youtubeUrl && (
+          <ReactPlayer
+            style={{ margin: "auto" }}
+            url={data ? data.fetchBoard.youtubeUrl : "로딩중입니다..."}
+            width={800}
+            height={450}
+            muted={true}
+            playing={true}
+          />
+        )}
 
         <S.Bottombx>
           <S.Likebx>

@@ -3,6 +3,7 @@ import Link from "next/link";
 import BoardListMap from "./BoardList.map";
 import { Pagination, Space } from "antd";
 import "antd/dist/antd.css";
+import LayoutBanner from "../../../commons/layout/banner";
 
 export default function BoardListUI({
   data,
@@ -12,10 +13,13 @@ export default function BoardListUI({
   onClickMoveToBest,
   showTotal,
   RangePicker,
+  onChangeSearch,
+  onSearch,
   ...props
 }) {
   return (
     <>
+      <LayoutBanner />
       <S.Box>
         <S.Title>BEST POST</S.Title>
         <S.Listall>
@@ -47,7 +51,11 @@ export default function BoardListUI({
           ))}
         </S.Listall>
         <S.Searchbx>
-          <S.SearchInput type="text" placeholder="제목을 검색해주세요." />
+          <S.SearchInput
+            type="text"
+            placeholder="제목을 검색해주세요."
+            // onChange={onChangeSearch}
+          />
           <Space direction="vertical" size={12}>
             <RangePicker />
           </Space>

@@ -3,7 +3,6 @@ import styled from "@emotion/styled";
 // HEADER
 export const Logo = styled.div`
   img {
-    height: 50px;
   }
 `;
 export const Navi = styled.div``;
@@ -118,43 +117,63 @@ export const Material = styled.div`
 
 //BANNER
 export const Visual = styled.div`
-  margin-top: 120px;
-  background: url("/visual_bg.jpg") no-repeat 50% 50%;
+  background: url("/main_bg.jpeg") no-repeat 50% 50%;
+  background-size: cover;
 `;
 export const BannerInner = styled.div`
+  position: relative;
+  width: 1100px;
+  margin: 0 auto;
   height: 646px;
 `;
 export const BannerTitle = styled.div`
   position: absolute;
-  top: 88px;
-  left: -10px;
+  width: 332px;
+  left: -10.8%;
+  top: 30%;
 `;
-export const Cup1Image = styled.img`
+export const Set02 = styled.img`
   position: absolute;
-  bottom: 0;
-  right: -47px;
+  z-index: 9;
+  top: 10.9%;
+  left: 26.4%;
+  width: 24.1%;
 `;
-export const Cup1Text = styled.img`
+
+export const Set03 = styled.img`
   position: absolute;
-  top: 38px;
-  right: 171px;
+  z-index: 10;
+  top: 7.8%;
+  right: 5.8%;
+  width: 24.2%;
+  max-width: 305px;
 `;
-export const Cup2Image = styled.img`
+export const Set01 = styled.img`
   position: absolute;
-  bottom: 0;
-  right: 162px;
+  z-index: 8;
+  top: 26.5%;
+  left: 48.2%;
+  width: 24.4%;
+  max-width: 294px;
 `;
-export const Cup2Text = styled.img`
-  position: absolute;
-  top: 321px;
-  right: 416px;
-`;
-export const Spoon = styled.img`
-  position: absolute;
-  bottom: 0;
-  left: 275px;
-`;
-export const FadeIn = styled.div`
-  opacity: 0;
-`;
+// export const FadeIn = styled.div`
+//   opacity: 0;
+// `;
 //BANNER -End
+
+//Badge
+export const Badges = styled.div`
+  position: absolute;
+  right: 12px;
+  top: 200px;
+  display: block;
+`;
+export const Badge = styled.div`
+  border-radius: 10px;
+  overflow: hidden;
+  display: block;
+  margin-bottom: 12px;
+  box-shadow: 4px 4px 10px, rgb(0 0 0 / 15%);
+  cursor: pointer;
+`;
+//Badge End
