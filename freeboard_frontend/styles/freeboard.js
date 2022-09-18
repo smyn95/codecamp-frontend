@@ -4,7 +4,6 @@ export const Box = styled.div`
   width: 1400px;
   padding: 30px 0;
   margin: 0 auto;
-  height: 1550px;
 `;
 export const Titlebx = styled.div`
   display: flex;
@@ -153,17 +152,17 @@ export const Listall = styled.div`
 `;
 export const Listbx = styled.div`
   width: 300px;
-  height: 250px;
+  padding-bottom: 1%;
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 5px 5px 10px #eee;
 `;
 export const Topbx = styled.div`
   width: 300px;
-  padding-bottom: 42%;
+  padding-bottom: 80%;
   background-color: #ccc;
-  background-image: url(/top.jpeg);
-  background-position: 50% 73%;
+  background-image: url(/menu_01.jpeg);
+  background-position: 50% 45%;
   background-size: cover;
 `;
 export const Bottombx = styled.div`

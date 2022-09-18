@@ -4,8 +4,6 @@ import DaumPostcodeEmbed from "react-daum-postcode";
 import { IBoardWriteUIProps } from "./BoardWrite.types";
 
 export default function BoardWriteUI(props: IBoardWriteUIProps) {
-  console.log();
-
   return (
     <S.Box>
       <S.Title>Post registration</S.Title>

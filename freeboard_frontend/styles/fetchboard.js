@@ -4,9 +4,13 @@ export const Board = styled.div`
   width: 1400px;
   padding: 30px 0;
   margin: 0 auto;
-  height: 1550px;
 `;
-export const Box = styled.div``;
+export const Box = styled.div`
+  width: 100%;
+  box-shadow: 0px 0px 9px #ccc;
+  padding: 50px;
+  margin-bottom: 30px;
+`;
 export const Title = styled.h1`
   font-size: 40px;
   font-weight: bold;
