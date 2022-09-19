@@ -1,10 +1,10 @@
 import * as S from "../../../../../styles/freeboard";
 import Link from "next/link";
 import BoardListMap from "./BoardList.map";
-import { Pagination, Space } from "antd";
-import "antd/dist/antd.css";
+import { Space } from "antd";
 import LayoutBanner from "../../../commons/layout/banner";
 import Search from "antd/lib/transfer/search";
+import PaginationPage from "../../../commons/pagination";
 
 export default function BoardListUI({
   data,
@@ -77,7 +77,7 @@ export default function BoardListUI({
         <S.Bottomrow>
           <S.Paging>
             <S.Paginglist>
-              <Pagination size="small" total={50} {...data?.fetchBoards._id} />
+              <PaginationPage />
             </S.Paginglist>
           </S.Paging>
 

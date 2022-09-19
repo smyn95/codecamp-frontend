@@ -166,6 +166,7 @@ export const Badges = styled.div`
   right: 12px;
   top: 200px;
   display: block;
+  z-index: 9999;
 `;
 export const Badge = styled.div`
   border-radius: 10px;
