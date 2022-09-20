@@ -108,6 +108,8 @@ export const Contents = styled.img`
 `;
 export const Textcontent = styled.p`
   padding-top: 10px;
+  font-size: 18px;
+  min-height: 200px;
 `;
 export const Youtube = styled.iframe`
   margin: 50px auto;

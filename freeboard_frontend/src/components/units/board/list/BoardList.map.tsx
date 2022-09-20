@@ -1,9 +1,5 @@
 import * as S from "../../../../../styles/freeboard";
-export default function BoardListMap({
-  data,
-  onClickMoveToBoardDetail,
-  refetch,
-}) {
+export default function BoardListMap({ data, onClickMoveToBoardDetail }) {
   return (
     <>
       {data?.fetchBoards.map((el, index) => (

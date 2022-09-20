@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { keyframes } from "@emotion/react";
 
 // HEADER
 export const Logo = styled.div`
@@ -119,12 +120,48 @@ export const Visual = styled.div`
   background: url("/main_bg.jpeg") no-repeat 50% 50%;
   background-size: cover;
 `;
+
+const opacity = keyframes`
+  0% {
+    opacity:0;
+  }
+  100% {
+    opacity:1;
+    
+  }
+`;
+
 export const BannerInner = styled.div`
   position: relative;
   width: 1100px;
   margin: 0 auto;
   height: 646px;
+
+  & div img {
+    opacity: 0;
+    transition: all 3s ease;
+    animation-fill-mode: forwards;
+    animation-duration: 2s;
+  }
+
+  div:nth-of-type(1) img {
+    animation-name: ${opacity};
+    animation-delay: 0.7s;
+  }
+  div:nth-of-type(2) img {
+    animation-name: ${opacity};
+    animation-delay: 2.8s;
+  }
+  div:nth-of-type(3) img {
+    animation-name: ${opacity};
+    animation-delay: 2.1s;
+  }
+  div:nth-of-type(4) img {
+    animation-name: ${opacity};
+    animation-delay: 1.4s;
+  }
 `;
+
 export const BannerTitle = styled.div`
   position: absolute;
   width: 332px;
@@ -155,9 +192,7 @@ export const Set01 = styled.img`
   width: 24.4%;
   max-width: 294px;
 `;
-// export const FadeIn = styled.div`
-//   opacity: 0;
-// `;
+
 //BANNER -End
 
 //Badge
