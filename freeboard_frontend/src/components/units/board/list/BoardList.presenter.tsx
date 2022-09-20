@@ -12,7 +12,7 @@ export default function BoardListUI({
   onClickMoveToBoardDetail,
   bestData,
   RangePicker,
-  refetch,
+  onClickPage,
 }) {
   return (
     <>
@@ -71,13 +71,12 @@ export default function BoardListUI({
         <BoardListMap
           onClickMoveToBoardDetail={onClickMoveToBoardDetail}
           data={data}
-          refetch={refetch}
         />
 
         <S.Bottomrow>
           <S.Paging>
             <S.Paginglist>
-              <PaginationPage />
+              <PaginationPage onClickPage={onClickPage} />
             </S.Paginglist>
           </S.Paging>
 

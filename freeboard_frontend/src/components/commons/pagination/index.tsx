@@ -1,11 +1,12 @@
 import { useQuery, gql } from "@apollo/client";
 import { Pagination } from "antd";
+import "antd/dist/antd.css";
+
 import {
   IQuery,
   IQueryFetchBoardsArgs,
   IQueryFetchBoardsCountArgs,
 } from "../../../commons/types/generated/types";
-import { FETCH_BOARDS } from "../../units/board/list/BoardList.query";
 
 const FETCH_BOARDS_COUNT = gql`
   query fetchBoardsCount {
@@ -13,29 +14,39 @@ const FETCH_BOARDS_COUNT = gql`
   }
 `;
 
-export default function PaginationPage(refetch) {
-  const { data } = useQuery<Pick<IQuery, "fetchBoards">, IQueryFetchBoardsArgs>(
-    FETCH_BOARDS
-  );
-
+export default function PaginationPage({ onClickPage }) {
   const { data: dataBoardsCount } = useQuery<
     Pick<IQuery, "fetchBoardsCount">,
     IQueryFetchBoardsCountArgs
   >(FETCH_BOARDS_COUNT);
 
-  console.log(data?.fetchBoards);
+  const lastPage =
+    dataBoardsCount != null
+      ? Math.ceil(dataBoardsCount.fetchBoardsCount / 10)
+      : 0;
 
-  // const onClickPage = (event: MouseEvent<HTMLSpanElement>) => {
-  //   void refetch({ page: Number(event.currentTarget.id) });
-  // };
-
-  const onClickPage = (page: any) => {
-    console.log("page", page);
-    refetch({ page: Number(page) });
-  };
   return (
     <>
-      <Pagination total={50} onChange={onClickPage} />
+      <Pagination
+        total={dataBoardsCount?.fetchBoardsCount}
+        showSizeChanger={false}
+        defaultCurrent={1}
+        itemRender={(page, type) => {
+          if (type === "next") {
+            return <li>&gt;</li>;
+          }
+          if (type === "prev") {
+            return <li>&lt;</li>;
+          }
+          if (type === "page") {
+            return (
+              <li onClick={onClickPage} id={page}>
+                {page}
+              </li>
+            );
+          }
+        }}
+      />
     </>
   );
 }

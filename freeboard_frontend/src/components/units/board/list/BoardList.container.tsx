@@ -17,6 +17,11 @@ export default function FreeboardList() {
     router.push(`/board/${event.currentTarget.id}`);
   };
 
+  const onClickPage = (event) => {
+    void refetch({ page: Number(event.currentTarget.id) });
+  };
+  console.log(onClickPage);
+
   const { RangePicker } = DatePicker;
 
   return (
@@ -27,7 +32,7 @@ export default function FreeboardList() {
         onClickMoveToBoardNew={onClickMoveToBoardNew}
         onClickMoveToBoardDetail={onClickMoveToBoardDetail}
         RangePicker={RangePicker}
-        refetch={refetch}
+        onClickPage={onClickPage}
       />
     </>
   );
