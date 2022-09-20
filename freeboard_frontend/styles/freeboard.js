@@ -80,19 +80,53 @@ export const Search = styled.button`
   border-radius: 5px;
 `;
 export const Setting = styled.div`
+  div {
+    margin: 0 10px;
+  }
   margin-top: 30px;
   input {
-    height: 30px;
-    vertical-align: middle;
-    margin-right: 5px;
+    display: none;
   }
-  span {
-    font-weight: bold;
-    display: inline-block;
-    margin-right: 20px;
+  label {
+    position: relative;
+    padding-left: 25px;
+    cursor: pointer;
   }
-  input[type="radio"] {
-    accent-color: currentcolor;
+  label::before,
+  label::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 50%;
+  }
+  label::before {
+    left: 0;
+    width: 10px;
+    height: 10px;
+    background-color: deepskyblue;
+  }
+  label::after {
+    left: -5px;
+    width: 20px;
+    height: 20px;
+    border: 2px solid deepskyblue;
+    opacity: 0;
+  }
+  input:checked ~ label::after {
+    opacity: 1;
+    animation: scaleInOut 0.25s;
+  }
+  @keyframes scaleInOut {
+    0% {
+      transform: translateY(-50%) scale(1.5);
+    }
+    50% {
+      transform: translateY(-50%) scale(0.5);
+    }
+    100% {
+      transform: translateY(-50%) scale(1);
+    }
   }
 `;
 export const Submit = styled.h1`

@@ -12,9 +12,8 @@ export default function BoardListUI({
   onClickMoveToBoardDetail,
   bestData,
   RangePicker,
-  onChangeSearch,
+  refetch,
 }) {
-  const onSearch = (value: String) => console.log(value);
   return (
     <>
       <LayoutBanner />
@@ -49,7 +48,7 @@ export default function BoardListUI({
           ))}
         </S.Listall>
         <S.Searchbx>
-          <Search placeholder="검색어를 입력하세요." onSearch={onSearch} />
+          <Search placeholder="검색어를 입력하세요." />
           <Space direction="vertical" size={12}>
             <RangePicker />
           </Space>
@@ -72,6 +71,7 @@ export default function BoardListUI({
         <BoardListMap
           onClickMoveToBoardDetail={onClickMoveToBoardDetail}
           data={data}
+          refetch={refetch}
         />
 
         <S.Bottomrow>
