@@ -212,3 +212,17 @@ export const Badge = styled.div`
   cursor: pointer;
 `;
 //Badge End
+
+//subBanner
+export const SubBanner01 = styled.div`
+  background: url("/subBanner.png") no-repeat 50% 50%;
+  background-size: cover;
+  height: 300px;
+`;
+export const SubBanner02 = styled.div`
+  background: url("/subBanner02.png") no-repeat 50% 50%;
+  background-size: cover;
+  height: 300px;
+`;
+
+//subBanner End

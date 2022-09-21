@@ -180,6 +180,7 @@ export const Column = styled.div`
 `;
 
 //fetchBoards 게시글 목록 부분
+
 export const Listall = styled.div`
   display: flex;
   justify-content: space-between;
@@ -190,6 +191,7 @@ export const Listbx = styled.div`
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 5px 5px 10px #eee;
+  position: relative;
 `;
 export const Topbx = styled.div`
   width: 300px;
