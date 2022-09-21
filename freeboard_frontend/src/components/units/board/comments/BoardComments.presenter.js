@@ -22,6 +22,8 @@ export default function BoardCommentsUI({
   isModalOpen,
   onChangeModalPassword,
   onChangeCommentRating,
+  onLoadMore,
+  setMyindex,
 }) {
   return (
     <>
@@ -68,6 +70,8 @@ export default function BoardCommentsUI({
         onChangeModalPassword={onChangeModalPassword}
         onChangeMyStar={onChangeMyStar}
         onChangeCommentRating={onChangeCommentRating}
+        onLoadMore={onLoadMore}
+        setMyindex={setMyindex}
       />
     </>
   );

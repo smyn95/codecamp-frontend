@@ -17,7 +17,8 @@ export default function BoardComments() {
   const [commentId, setCommentId] = useState("");
   const [MyStar, setMyStar] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [deleteModal, setDeleteModal] = useState("");
+  const [deleteModal, setDeleteModal] = useState(0);
+  const [myindex, setMyindex] = useState("");
   const [comment, setComment] = useState({
     password: "",
     contents: "",
@@ -37,7 +38,7 @@ export default function BoardComments() {
 
   const [createBoardComment] = useMutation(CREATE_BOARD_COMMENT);
   const [updateBoardComment] = useMutation(UPDATE_BOARD_COMMENTS);
-  const { data: commentData } = useQuery(FETCH_BOARD_COMMENTS, {
+  const { data: commentData, fetchMore } = useQuery(FETCH_BOARD_COMMENTS, {
     variables: { boardId: router.query.boardId },
   });
   const onClickComment = async () => {
@@ -154,7 +155,27 @@ export default function BoardComments() {
       ErrorModal(error.message);
     }
   };
-
+  //인피니트 스크롤
+  const onLoadMore = () => {
+    if (!commentData) return;
+    fetchMore({
+      variables: {
+        page: Math.ceil(commentData.fetchBoardComments.length / 10) + 1,
+      },
+      updateQuery: (prev, { fetchMoreResult }) => {
+        if (!fetchMoreResult?.fetchBoardComments)
+          return {
+            fetchBoardComments: [...prev.fetchBoardComments],
+          };
+        return {
+          fetchBoardComments: [
+            ...prev.fetchBoardComments,
+            ...fetchMoreResult?.fetchBoardComments,
+          ],
+        };
+      },
+    });
+  };
   return (
     <>
       <BoardCommentsUI
@@ -175,6 +196,8 @@ export default function BoardComments() {
         handleCancel={handleCancel}
         isModalOpen={isModalOpen}
         onChangeModalPassword={onChangeModalPassword}
+        onLoadMore={onLoadMore}
+        setMyindex={setMyindex}
       />
     </>
   );
