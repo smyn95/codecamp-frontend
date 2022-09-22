@@ -2,6 +2,7 @@ import * as S from "../../../../../styles/fetchboard";
 import { Rate } from "antd";
 import "antd/dist/antd.css";
 import BoardCommentsMap from "./BoardComments.map";
+import InfiniteScroll from "react-infinite-scroller";
 
 export default function BoardCommentsUI({
   onClickComment,
@@ -22,8 +23,8 @@ export default function BoardCommentsUI({
   isModalOpen,
   onChangeModalPassword,
   onChangeCommentRating,
-  onLoadMore,
   setMyindex,
+  boardCommentInfinite,
 }) {
   return (
     <>
@@ -55,24 +56,31 @@ export default function BoardCommentsUI({
           </S.Reviewbtn>
         </div>
       </S.Div>
-      <BoardCommentsMap
-        commentData={commentData}
-        onClickUpComment={onClickUpComment}
-        onClickUpdate={onClickUpdate}
-        update={update}
-        commentId={commentId}
-        onChangeCommentContents={onChangeCommentContents}
-        onChangeCommentPassword={onChangeCommentPassword}
-        onClickDeleteComment={onClickDeleteComment}
-        showModal={showModal}
-        handleCancel={handleCancel}
-        isModalOpen={isModalOpen}
-        onChangeModalPassword={onChangeModalPassword}
-        onChangeMyStar={onChangeMyStar}
-        onChangeCommentRating={onChangeCommentRating}
-        onLoadMore={onLoadMore}
-        setMyindex={setMyindex}
-      />
+      <InfiniteScroll
+        pageStart={0}
+        loadMore={boardCommentInfinite}
+        hasMore={true || false}
+      >
+        <div>
+          <BoardCommentsMap
+            commentData={commentData}
+            onClickUpComment={onClickUpComment}
+            onClickUpdate={onClickUpdate}
+            update={update}
+            commentId={commentId}
+            onChangeCommentContents={onChangeCommentContents}
+            onChangeCommentPassword={onChangeCommentPassword}
+            onClickDeleteComment={onClickDeleteComment}
+            showModal={showModal}
+            handleCancel={handleCancel}
+            isModalOpen={isModalOpen}
+            onChangeModalPassword={onChangeModalPassword}
+            onChangeMyStar={onChangeMyStar}
+            onChangeCommentRating={onChangeCommentRating}
+            setMyindex={setMyindex}
+          />
+        </div>
+      </InfiniteScroll>
     </>
   );
 }

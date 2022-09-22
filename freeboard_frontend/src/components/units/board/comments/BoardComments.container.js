@@ -156,26 +156,28 @@ export default function BoardComments() {
     }
   };
   //인피니트 스크롤
-  const onLoadMore = () => {
+  const boardCommentInfinite = () => {
     if (!commentData) return;
     fetchMore({
       variables: {
         page: Math.ceil(commentData.fetchBoardComments.length / 10) + 1,
       },
       updateQuery: (prev, { fetchMoreResult }) => {
-        if (!fetchMoreResult?.fetchBoardComments)
-          return {
-            fetchBoardComments: [...prev.fetchBoardComments],
-          };
+        if (!fetchMoreResult) {
+          return { fetchBoardComments: [...prev.fetchBoardComments] };
+        }
+
         return {
           fetchBoardComments: [
             ...prev.fetchBoardComments,
-            ...fetchMoreResult?.fetchBoardComments,
+            ...fetchMoreResult.fetchBoardComments,
           ],
         };
       },
     });
   };
+
+  console.log(commentData);
   return (
     <>
       <BoardCommentsUI
@@ -196,8 +198,9 @@ export default function BoardComments() {
         handleCancel={handleCancel}
         isModalOpen={isModalOpen}
         onChangeModalPassword={onChangeModalPassword}
-        onLoadMore={onLoadMore}
+        // onLoadMore={onLoadMore}
         setMyindex={setMyindex}
+        boardCommentInfinite={boardCommentInfinite}
       />
     </>
   );

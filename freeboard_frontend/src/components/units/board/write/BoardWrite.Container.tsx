@@ -3,15 +3,19 @@ import { useMutation, useQuery } from "@apollo/client";
 import { ChangeEvent, useState } from "react";
 import { ErrorModal, SuccessModal } from "../../../../commons/index";
 import { CREATE_BOARD, UPDATE_BOARD, FETCH_BOARD } from "./BoardWrite.query";
-import { Address } from "react-daum-postcode";
 import BoardWriteUI from "./BoardWrite.presenter";
 import { IBoardWriteProps } from "./BoardWrite.types";
+import {
+  IMutation,
+  IMutationCreateBoardArgs,
+  IMutationUpdateBoardArgs,
+  IQuery,
+  IQueryFetchBoardArgs,
+} from "../../../../commons/types/generated/types";
 
 export default function Freeboard(props: IBoardWriteProps) {
-  // console.log(props.data)
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
-  // console.log(props.isEdit)
   const [input, setInput] = useState({
     name: "",
     password: "",
@@ -25,12 +29,21 @@ export default function Freeboard(props: IBoardWriteProps) {
     },
   });
 
-  const [createBoard] = useMutation(CREATE_BOARD);
-  const [updateBoard] = useMutation(UPDATE_BOARD);
-  const { data } = useQuery(FETCH_BOARD, {
-    variables: { boardId: router.query.boardId },
-  });
-  console.log("fetch:", data?.fetchBoard);
+  const [createBoard] = useMutation<
+    Pick<IMutation, "createBoard">,
+    IMutationCreateBoardArgs
+  >(CREATE_BOARD);
+  const [updateBoard] = useMutation<
+    Pick<IMutation, "updateBoard">,
+    IMutationUpdateBoardArgs
+  >(UPDATE_BOARD);
+
+  const { data } = useQuery<Pick<IQuery, "fetchBoard">, IQueryFetchBoardArgs>(
+    FETCH_BOARD,
+    {
+      variables: { boardId: router.query.boardId },
+    }
+  );
 
   //수정하기 함수
   const onClickUpdate = async () => {
@@ -124,7 +137,7 @@ export default function Freeboard(props: IBoardWriteProps) {
     setIsOpen((prev) => !prev);
   };
 
-  const handleComplete = (value: Address) => {
+  const handleComplete = (value) => {
     onToggleModal();
     setInput({
       ...input,

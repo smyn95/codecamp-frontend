@@ -1,18 +1,5 @@
-import Fetchboard from '../../../src/components/units/board/detail/BoardDetail.Container';
+import Fetchboard from "../../../src/components/units/board/detail/BoardDetail.Container";
 
-
-
-export default function BoardDetailPage(){
-
-
-
-
-
-  return(
-
-      <Fetchboard/>
-
-  )
-
+export default function BoardDetailPage() {
+  return <Fetchboard />;
 }
-  

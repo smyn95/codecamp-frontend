@@ -1,5 +1,4 @@
 import { ChangeEvent } from "react";
-import { Address } from "react-daum-postcode";
 import { IQuery } from "../../../../commons/types/generated/types";
 
 export interface IBoardWriteProps {
@@ -27,4 +26,5 @@ export interface IBoardWriteUIProps {
 
 export interface IBoardWriteInput {
   title?: String;
+  contents?: String;
 }
