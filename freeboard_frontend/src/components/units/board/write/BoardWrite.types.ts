@@ -24,3 +24,7 @@ export interface IBoardWriteUIProps {
   isEdit: boolean;
   open: boolean;
 }
+
+export interface IBoardWriteInput {
+  title?: String;
+}

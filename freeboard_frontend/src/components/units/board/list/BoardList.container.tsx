@@ -4,22 +4,24 @@ import { DatePicker } from "antd";
 import "antd/dist/antd.css";
 import { useRouter } from "next/router";
 import { FETCH_BOARDS, FETCH_BOARDS_OF_THE_BEST } from "./BoardList.query";
+import { IBoardListProps } from "./BoardList.types";
+import { MouseEvent } from "react";
 // import { ChangeEvent, useState } from "react";
 
-export default function FreeboardList() {
+export default function FreeboardList(props: IBoardListProps) {
   const router = useRouter();
   const { data, refetch } = useQuery(FETCH_BOARDS);
   const { data: bestData } = useQuery(FETCH_BOARDS_OF_THE_BEST);
   // const [searchArray, setSearchArray] = useState([]);
 
   const onClickMoveToBoardNew = () => {
-    router.push("/board/new");
+    void router.push("/board/new");
   };
-  const onClickMoveToBoardDetail = (event: any) => {
-    router.push(`/board/${event.currentTarget.id}`);
+  const onClickMoveToBoardDetail = (event: MouseEvent<HTMLLIElement>) => {
+    void router.push(`/board/${event.currentTarget.id}`);
   };
 
-  const onClickPage = (event) => {
+  const onClickPage = (event: MouseEvent<HTMLLIElement>) => {
     void refetch({ page: Number(event.currentTarget.id) });
   };
 

@@ -1,0 +1,16 @@
+{
+  "name": "class_backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "ts-node index.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "pg": "^8.8.0",
+    "ts-node": "^10.9.1",
+    "typeorm": "^0.3.10"
+  }
+}
