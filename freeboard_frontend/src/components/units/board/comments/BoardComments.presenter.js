@@ -23,7 +23,6 @@ export default function BoardCommentsUI({
   isModalOpen,
   onChangeModalPassword,
   onChangeCommentRating,
-  setMyindex,
   boardCommentInfinite,
 }) {
   return (
@@ -77,7 +76,6 @@ export default function BoardCommentsUI({
             onChangeModalPassword={onChangeModalPassword}
             onChangeMyStar={onChangeMyStar}
             onChangeCommentRating={onChangeCommentRating}
-            setMyindex={setMyindex}
           />
         </div>
       </InfiniteScroll>

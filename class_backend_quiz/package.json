@@ -1,5 +1,5 @@
 {
-  "name": "class_backend",
+  "name": "class_backend_quiz",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,9 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "apollo-server": "^3.10.2",
-    "firebase": "^9.10.0",
-    "graphql": "^16.6.0",
     "pg": "^8.8.0",
     "ts-node": "^10.9.1",
     "typeorm": "^0.3.10"

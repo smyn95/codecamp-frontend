@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import LayoutHeader from "./header/header";
 import LayoutSubBanner from "./subBanner";
 
-const HIDDEN_BANNER = ["/board"];
+const HIDDEN_BANNER = ["/board", "/"];
 
 //prettier-ignore
 export default function Layout(props) {
@@ -22,10 +22,10 @@ export default function Layout(props) {
   
   return (
     <>
-      <LayoutHeader 
+      {!isHiddenBanner &&<LayoutHeader 
         inputClass={inputClass}
         onClickText={onClickText}
-      />
+      />}
       {!isHiddenBanner && <LayoutSubBanner/>}
         <div>{props.children}</div>
     </>

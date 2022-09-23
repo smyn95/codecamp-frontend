@@ -91,6 +91,7 @@ export default function BoardDetailUI({
         <S.Listbtn onClick={goEdit}>수정하기</S.Listbtn>
         <S.Listbtn onClick={onClickDelete}>삭제하기</S.Listbtn>
       </S.List>
+
       <BoardComments />
     </S.Board>
   );

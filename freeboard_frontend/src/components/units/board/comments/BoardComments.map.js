@@ -1,6 +1,5 @@
 import * as S from "../../../../../styles/fetchboard";
 import { Modal, Rate } from "antd";
-import InfiniteScroll from "react-infinite-scroller";
 
 export default function BoardCommentsMap({
   commentData,

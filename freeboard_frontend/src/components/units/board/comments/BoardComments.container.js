@@ -18,7 +18,6 @@ export default function BoardComments() {
   const [MyStar, setMyStar] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [deleteModal, setDeleteModal] = useState(0);
-  const [myindex, setMyindex] = useState("");
   const [comment, setComment] = useState({
     password: "",
     contents: "",
@@ -66,7 +65,7 @@ export default function BoardComments() {
     }
   };
 
-  const onClickUpComment = async () => {
+  const onClickUpComment = async (event) => {
     const commentvariables = {
       boardCommentId: commentId,
       password: commentPassword,
@@ -198,8 +197,6 @@ export default function BoardComments() {
         handleCancel={handleCancel}
         isModalOpen={isModalOpen}
         onChangeModalPassword={onChangeModalPassword}
-        // onLoadMore={onLoadMore}
-        setMyindex={setMyindex}
         boardCommentInfinite={boardCommentInfinite}
       />
     </>
