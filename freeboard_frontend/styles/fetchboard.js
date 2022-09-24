@@ -146,7 +146,7 @@ export const List = styled.div`
 `;
 export const Listbtn = styled.p`
   border-radius: 10px;
-  background: deepskyblue;
+  background: #00704a;
   color: #fff;
   width: 100px;
   height: 50px;
@@ -156,7 +156,7 @@ export const Listbtn = styled.p`
   margin-right: 10px;
   cursor: pointer;
   &&:hover {
-    background: #ccc;
+    filter: opacity(0.7);
   }
   &&:last-child {
     margin-right: 0;

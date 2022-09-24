@@ -74,6 +74,7 @@ export default function BoardListUI({
         />
 
         <S.Bottomrow>
+          <p></p>
           <S.Paging>
             <S.Paginglist>
               <PaginationPage onClickPage={onClickPage} />

@@ -180,13 +180,13 @@ export default function BoardComments() {
   return (
     <>
       <BoardCommentsUI
+        commentData={commentData}
+        update={update}
         onClickComment={onClickComment}
         onChangeWriter={onChangeWriter}
         onChangePassword={onChangePassword}
         onchangeContents={onchangeContents}
-        commentData={commentData}
         onClickUpComment={onClickUpComment}
-        update={update}
         onClickUpdate={onClickUpdate}
         commentId={commentId}
         onChangeCommentPassword={onChangeCommentPassword}

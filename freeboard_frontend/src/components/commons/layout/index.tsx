@@ -4,11 +4,13 @@ import LayoutHeader from "./header/header";
 import LayoutSubBanner from "./subBanner";
 
 const HIDDEN_BANNER = ["/board", "/"];
+const HIDDEN_RANDING = ["/"];
 
 //prettier-ignore
 export default function Layout(props) {
   const router = useRouter();
   const isHiddenBanner = HIDDEN_BANNER.includes(router.asPath);
+  const isHiddenRanding = HIDDEN_RANDING.includes(router.asPath);
 
   const [inputClass, setInputClass] = useState("test");
 
@@ -22,7 +24,7 @@ export default function Layout(props) {
   
   return (
     <>
-      {!isHiddenBanner &&<LayoutHeader 
+      {!isHiddenRanding&&<LayoutHeader 
         inputClass={inputClass}
         onClickText={onClickText}
       />}

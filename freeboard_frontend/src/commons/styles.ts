@@ -226,3 +226,61 @@ export const SubBanner02 = styled.div`
 `;
 
 //subBanner End
+
+//랜딩페이지
+export const Randing = styled.div`
+  img {
+    display: block;
+    margin: auto;
+  }
+`;
+const flip = keyframes`
+  35%{
+    transform: rotateX(360deg);
+  }
+  100%{
+    transform: rotateX(360deg);
+  
+  }
+`;
+
+export const Container = styled.div`
+  display: flex;
+  position: absolute;
+  left: 52%;
+  transform: translate(-50%, -50%);
+  span {
+    font-size: 5vw;
+    letter-spacing: 10px;
+    animation: flip 2.6s infinite linear;
+    transform-origin: 0 70%;
+    transform-style: preserve-3d;
+  }
+  span:nth-child(even) {
+    color: #64a70b;
+  }
+  span:nth-child(2) {
+    animation-delay: 0.3s;
+    animation-name: ${flip};
+  }
+  span:nth-child(3) {
+    animation-delay: 0.6s;
+    animation-name: ${flip};
+  }
+  span:nth-child(4) {
+    animation-delay: 0.9s;
+    animation-name: ${flip};
+  }
+  span:nth-child(5) {
+    animation-delay: 1.2s;
+    animation-name: ${flip};
+  }
+  span:nth-child(6) {
+    animation-delay: 1.5s;
+    animation-name: ${flip};
+  }
+  span:nth-child(7) {
+    animation-delay: 1.8s;
+    animation-name: ${flip};
+  }
+`;

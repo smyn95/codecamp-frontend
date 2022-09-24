@@ -75,9 +75,12 @@ export const Search = styled.button`
   font-size: 14px;
   color: #fff;
   font-weight: 500;
-  background: deepskyblue;
+  background: #00704a;
   border: none;
   border-radius: 5px;
+  &&:hover {
+    filter: opacity(0.7);
+  }
 `;
 export const Setting = styled.div`
   div {
@@ -104,13 +107,13 @@ export const Setting = styled.div`
     left: 0;
     width: 10px;
     height: 10px;
-    background-color: deepskyblue;
+    background-color: #00704a;
   }
   label::after {
     left: -5px;
     width: 20px;
     height: 20px;
-    border: 2px solid deepskyblue;
+    border: 2px solid #00704a;
     opacity: 0;
   }
   input:checked ~ label::after {
@@ -133,7 +136,7 @@ export const Submit = styled.h1`
   display: flex;
   justify-content: center;
   p {
-    background: deepskyblue;
+    background: #00704a;
     color: #fff;
     font-weight: bold;
     width: 180px;
@@ -147,7 +150,7 @@ export const Submit = styled.h1`
 `;
 export const Routing = styled.button`
   border-radius: 5px;
-  background: deepskyblue;
+  background: #00704a;
   color: #fff;
   height: 50px;
   font-weight: 500;
@@ -156,6 +159,9 @@ export const Routing = styled.button`
   margin-right: 10px;
   font-size: 18px;
   width: 180px;
+  &&:hover {
+    filter: opacity(0.7);
+  }
 `;
 
 export const Replace = styled.button`
@@ -169,6 +175,9 @@ export const Replace = styled.button`
   line-height: 50px;
   margin-right: 10px;
   font-size: 18px;
+  &&:hover {
+    filter: opacity(0.7);
+  }
 `;
 //게시글 목록
 export const Row = styled.div`
@@ -297,17 +306,20 @@ export const Calender = styled.div`
   border-radius: 10px;
 `;
 export const Searchbtn = styled.button`
-  background-color: deepskyblue;
+  background-color: #00704a;
   color: #fff;
   width: 100px;
   font-size: 16px;
+  transition: 0.3s;
+  &&:hover {
+    filter: opacity(0.7);
+  }
 `;
 
 //게시글 리스트
 export const Boardlist = styled.div`
-  border-top: 2px solid deepskyblue;
+  border-block: 2px solid #00704a;
   margin-top: 40px;
-  border-bottom: 2px solid deepskyblue;
   ul {
     margin: 0;
   }
@@ -319,7 +331,7 @@ export const Listfirst = styled.li`
   color: #111;
   cursor: pointer;
   &&:hover {
-    background: #dcf6ff8a;
+    background: #eaffdc8a;
     transition: 0.5s;
   }
 
@@ -398,4 +410,21 @@ export const Registration = styled.button`
   align-items: center;
   justify-content: space-evenly;
   font-weight: 500;
+  transform: translate(0);
+  overflow: hidden;
+  &&:before {
+    content: "";
+    position: absolute;
+    background: #00704a;
+    width: 15px;
+    top: 0;
+    bottom: 0;
+    left: -40px;
+    transform: rotate(-16deg);
+    filter: blur(10px);
+  }
+  &&:hover::before {
+    left: calc(100% + 32px);
+    transition: 0.75s;
+  }
 `;
