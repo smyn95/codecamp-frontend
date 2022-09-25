@@ -13,7 +13,11 @@ export default function BoardListUI({
   bestData,
   RangePicker,
   onClickPage,
+  onChangeSearch,
+  onClickSearch,
 }) {
+  console.log();
+
   return (
     <>
       <LayoutBanner />
@@ -48,11 +52,14 @@ export default function BoardListUI({
           ))}
         </S.Listall>
         <S.Searchbx>
-          <Search placeholder="검색어를 입력하세요." />
+          <Search
+            placeholder="검색어를 입력하세요."
+            onChange={onChangeSearch}
+          />
           <Space direction="vertical" size={12}>
             <RangePicker />
           </Space>
-          <S.Searchbtn>검색하기</S.Searchbtn>
+          <S.Searchbtn onClick={onClickSearch}>검색하기</S.Searchbtn>
         </S.Searchbx>
 
         <S.Boardlist>
