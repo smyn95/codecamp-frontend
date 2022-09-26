@@ -19,7 +19,8 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "src/components/units/board/write/BoardWrite.Container.js"
+    "src/components/units/board/write/BoardWrite.Container.js",
+    "src/components/commons/validationFile"
   ],
   "exclude": ["node_modules"]
 }

@@ -3,7 +3,6 @@ import {
   ApolloClient,
   InMemoryCache,
   ApolloLink,
-  inknown,
 } from "@apollo/client"; // module 요즘
 import { createUploadLink } from "apollo-upload-client";
 
@@ -16,7 +15,7 @@ export default function ApolloSetting(props: IApolloSettingProps) {
   });
 
   const client = new ApolloClient({
-    link: ApolloLink.from([uploadLink as inknown as ApolloLink]),
+    link: ApolloLink.from([uploadLink]),
     cache: new InMemoryCache(), // 나중에하기
   });
 

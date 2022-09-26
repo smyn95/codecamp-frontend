@@ -51,12 +51,27 @@ export const Font = styled.p`
   border-radius: 5px;
   padding: 5px 50px 5px 0;
 `;
-export const Imgbx = styled.span`
-  width: 80px;
-  height: 80px;
-  background: #bdbdbd;
-  display: inline-block;
-  margin-right: 10px;
+export const Imgbx = styled.div`
+  width: 104px;
+  height: 104px;
+  margin-right: 8px;
+  margin-bottom: 8px;
+  text-align: center;
+  vertical-align: top;
+  background-color: #fafafa;
+  border: 1px dashed #d9d9d9;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: border-color 0.3s;
+  &&:hover {
+    border-color: #1890ff;
+  }
+  div {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
 `;
 
 export const Codezip = styled.input`

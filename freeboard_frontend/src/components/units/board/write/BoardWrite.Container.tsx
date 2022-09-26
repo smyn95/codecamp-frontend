@@ -1,14 +1,22 @@
 import { useRouter } from "next/router";
 import { useMutation, useQuery } from "@apollo/client";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useRef, useState } from "react";
 import { ErrorModal, SuccessModal } from "../../../../commons/index";
-import { CREATE_BOARD, UPDATE_BOARD, FETCH_BOARD } from "./BoardWrite.query";
+import { checkValidationFile } from "../../../../commons/libraries/validation";
+
+import {
+  CREATE_BOARD,
+  UPDATE_BOARD,
+  FETCH_BOARD,
+  UPLOAD_FILE,
+} from "./BoardWrite.query";
 import BoardWriteUI from "./BoardWrite.presenter";
 import { IBoardWriteProps } from "./BoardWrite.types";
 import {
   IMutation,
   IMutationCreateBoardArgs,
   IMutationUpdateBoardArgs,
+  IMutationUploadFileArgs,
   IQuery,
   IQueryFetchBoardArgs,
 } from "../../../../commons/types/generated/types";
@@ -16,6 +24,9 @@ import {
 export default function Freeboard(props: IBoardWriteProps) {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
+  const [imgUrl, setimgUrl] = useState("");
+  const FileRef = useRef<HTMLInputElement>(null);
+
   const [input, setInput] = useState({
     name: "",
     password: "",
@@ -28,6 +39,11 @@ export default function Freeboard(props: IBoardWriteProps) {
       boardZipcode: "",
     },
   });
+
+  const [uploadFile] = useMutation<
+    Pick<IMutation, "uploadFile">,
+    IMutationUploadFileArgs
+  >(UPLOAD_FILE);
 
   const [createBoard] = useMutation<
     Pick<IMutation, "createBoard">,
@@ -101,6 +117,24 @@ export default function Freeboard(props: IBoardWriteProps) {
     }
   };
 
+  const onChangeFile = async (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0]; // multiple 속성으로 여러개 드래그 가능 !
+    console.log(file);
+
+    const isValid = checkValidationFile(file);
+    if (!isValid) return;
+
+    try {
+      const result = await uploadFile({
+        variables: { file },
+      });
+      console.log(result.data?.uploadFile.url);
+      setimgUrl(result.data?.uploadFile.url ?? "");
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+
   const onChangeName = (event: ChangeEvent<HTMLInputElement>) => {
     setInput({ ...input, name: event.target.value });
   };
@@ -150,6 +184,10 @@ export default function Freeboard(props: IBoardWriteProps) {
 
     console.log(value);
   };
+
+  const onClickImage = () => {
+    FileRef.current?.click();
+  };
   return (
     <>
       <BoardWriteUI
@@ -168,6 +206,10 @@ export default function Freeboard(props: IBoardWriteProps) {
         handleComplete={handleComplete}
         onToggleModal={onToggleModal}
         input={input}
+        onClickImage={onClickImage}
+        imgUrl={imgUrl}
+        onChangeFile={onChangeFile}
+        FileRef={FileRef}
       />
     </>
   );
