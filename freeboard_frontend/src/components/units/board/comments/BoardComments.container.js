@@ -10,7 +10,7 @@ import {
 } from "./BoardComments.query";
 import { ErrorModal, SuccessModal } from "../../../../commons";
 
-export default function BoardComments() {
+export default function BoardComments(props) {
   const router = useRouter();
   const [update, setUpdate] = useState(false);
   const [deleteComment] = useMutation(DELETE_BOARD_COMMENT);
@@ -90,7 +90,7 @@ export default function BoardComments() {
           },
         ],
       });
-      setUpdate(!update);
+      setUpdate(false);
       SuccessModal("댓글 수정이 완료되었습니다.");
     } catch (error) {
       ErrorModal(error.message);
@@ -195,7 +195,7 @@ export default function BoardComments() {
         isModalOpen={isModalOpen}
         onChangeModalPassword={onChangeModalPassword}
         boardCommentInfinite={boardCommentInfinite}
-        // onClikeEditComment={onClikeEditComment}
+        comment={props.comment}
       />
     </>
   );

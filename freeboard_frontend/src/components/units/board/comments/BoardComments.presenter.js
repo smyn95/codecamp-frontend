@@ -24,28 +24,36 @@ export default function BoardCommentsUI({
   onChangeModalPassword,
   onChangeCommentRating,
   boardCommentInfinite,
+  comment,
 }) {
   return (
     <>
       <S.Div>
-        <S.Reviewbx>
-          <S.Font>댓글</S.Font>
-        </S.Reviewbx>
-
+        {!update && (
+          <S.Reviewbx>
+            <S.Font>댓글</S.Font>
+          </S.Reviewbx>
+        )}
         <S.Reviewinfo>
-          <S.Input type="text" placeholder="작성자" onChange={onChangeWriter} />
+          <S.Input
+            type="text"
+            placeholder="작성자"
+            onChange={onChangeWriter}
+            defaultValue={comment?.writer}
+          />
           <S.Input
             type="text"
             placeholder="비밀번호"
             onChange={onChangePassword}
           />
-          <Rate sallowHalf defaultValue={2.5} onChange={onChangeMyStar} />
+          <Rate sallowHalf value={comment?.rating} onChange={onChangeMyStar} />
         </S.Reviewinfo>
 
         <div>
           <S.Content
             placeholder="개인정보를 공유 및 요청하거나, 명예 훼손, 무단 광고, 불법 정보 유포시 모니터링 후 삭제될 수 있으며, 이에 대한 민형사상 책임은 게시자에게 있습니다."
             onChange={onchangeContents}
+            defaultValue={comment?.contents}
           ></S.Content>
           <S.Reviewbtn>
             <p>
