@@ -61,22 +61,25 @@ export default function BoardCommentsUI({
         hasMore={true || false}
       >
         <div>
-          <BoardCommentsMap
-            commentData={commentData}
-            onClickUpComment={onClickUpComment}
-            onClickUpdate={onClickUpdate}
-            update={update}
-            commentId={commentId}
-            onChangeCommentContents={onChangeCommentContents}
-            onChangeCommentPassword={onChangeCommentPassword}
-            onClickDeleteComment={onClickDeleteComment}
-            showModal={showModal}
-            handleCancel={handleCancel}
-            isModalOpen={isModalOpen}
-            onChangeModalPassword={onChangeModalPassword}
-            onChangeMyStar={onChangeMyStar}
-            onChangeCommentRating={onChangeCommentRating}
-          />
+          {commentData?.fetchBoardComments.map((comment) => (
+            <BoardCommentsMap
+              onClickUpComment={onClickUpComment}
+              onClickUpdate={onClickUpdate}
+              update={update}
+              commentId={commentId}
+              onChangeCommentContents={onChangeCommentContents}
+              onChangeCommentPassword={onChangeCommentPassword}
+              onClickDeleteComment={onClickDeleteComment}
+              showModal={showModal}
+              handleCancel={handleCancel}
+              isModalOpen={isModalOpen}
+              onChangeModalPassword={onChangeModalPassword}
+              onChangeMyStar={onChangeMyStar}
+              onChangeCommentRating={onChangeCommentRating}
+              key={comment._id}
+              comment={comment}
+            />
+          ))}
         </div>
       </InfiniteScroll>
     </>

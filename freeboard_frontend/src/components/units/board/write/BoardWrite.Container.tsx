@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useMutation, useQuery } from "@apollo/client";
-import { ChangeEvent, useRef, useState } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { ErrorModal, SuccessModal } from "../../../../commons/index";
 import { checkValidationFile } from "../../../../commons/libraries/validation";
 
@@ -24,8 +24,11 @@ import {
 export default function Freeboard(props: IBoardWriteProps) {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
+  const [fileUrls, setFileUrls] = useState(["", "", ""]);
   const [imgUrl, setimgUrl] = useState("");
   const FileRef = useRef<HTMLInputElement>(null);
+
+  console.log(imgUrl);
 
   const [input, setInput] = useState({
     name: "",
@@ -105,7 +108,7 @@ export default function Freeboard(props: IBoardWriteProps) {
               address: input.boardAddress.boardAddress,
               addressDetail: input.boardAddress.boardAddressDetail,
             },
-            images: [],
+            images: [imgUrl],
           },
         },
       });
@@ -114,24 +117,6 @@ export default function Freeboard(props: IBoardWriteProps) {
       router.push(`/board/${result.data.createBoard._id}`);
     } catch (error) {
       ErrorModal(error.message);
-    }
-  };
-
-  const onChangeFile = async (event: ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0]; // multiple 속성으로 여러개 드래그 가능 !
-    console.log(file);
-
-    const isValid = checkValidationFile(file);
-    if (!isValid) return;
-
-    try {
-      const result = await uploadFile({
-        variables: { file },
-      });
-      console.log(result.data?.uploadFile.url);
-      setimgUrl(result.data?.uploadFile.url ?? "");
-    } catch (error) {
-      alert(error.message);
     }
   };
 
@@ -185,9 +170,45 @@ export default function Freeboard(props: IBoardWriteProps) {
     console.log(value);
   };
 
-  const onClickImage = () => {
-    FileRef.current?.click();
+  const onChangeFile = async (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0]; // multiple 속성으로 여러개 드래그 가능 !
+    console.log(file);
+
+    const isValid = checkValidationFile(file);
+    if (!isValid) return;
+
+    try {
+      const result = await uploadFile({
+        variables: { file },
+      });
+      onChangeFileUrls(result.data?.uploadFile.url, props.index);
+      console.log(result.data?.uploadFile.url);
+      setimgUrl(result.data?.uploadFile.url ?? "");
+    } catch (error) {
+      alert(error.message);
+    }
   };
+
+  // const onChangeFileUrls = (fileUrl: String, index: number) => {
+  //   fileUrls[index] = fileUrl;
+  //   setFileUrls(fileUrls);
+  // };
+  const onChangeFileUrls = (fileUrl: String, index: number) => {
+    const newFileUrls = [...fileUrls];
+    newFileUrls[index] = fileUrl;
+    setFileUrls(newFileUrls);
+  };
+
+  useEffect(() => {
+    if (data?.fetchBoard.images?.length) {
+      setFileUrls([...data?.fetchBoard.images]);
+    }
+  }, [data]);
+
+  const onClickUpload = () => {
+    FileRef.current.click();
+  };
+
   return (
     <>
       <BoardWriteUI
@@ -206,10 +227,12 @@ export default function Freeboard(props: IBoardWriteProps) {
         handleComplete={handleComplete}
         onToggleModal={onToggleModal}
         input={input}
-        onClickImage={onClickImage}
         imgUrl={imgUrl}
         onChangeFile={onChangeFile}
         FileRef={FileRef}
+        onChangeFileUrls={onChangeFileUrls}
+        fileUrls={fileUrls}
+        onClickUpload={onClickUpload}
       />
     </>
   );

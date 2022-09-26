@@ -64,7 +64,6 @@ export default function BoardComments() {
       ErrorModal(error.message);
     }
   };
-
   const onClickUpComment = async (event) => {
     const commentvariables = {
       boardCommentId: commentId,
@@ -98,8 +97,7 @@ export default function BoardComments() {
     }
   };
 
-  function onClickUpdate(event) {
-    setCommentId(event.target.id);
+  function onClickUpdate() {
     setUpdate(!update);
   }
 
@@ -176,7 +174,6 @@ export default function BoardComments() {
     });
   };
 
-  console.log(commentData);
   return (
     <>
       <BoardCommentsUI
@@ -198,6 +195,7 @@ export default function BoardComments() {
         isModalOpen={isModalOpen}
         onChangeModalPassword={onChangeModalPassword}
         boardCommentInfinite={boardCommentInfinite}
+        // onClikeEditComment={onClikeEditComment}
       />
     </>
   );

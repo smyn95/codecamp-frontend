@@ -3,6 +3,7 @@ import { Modal } from "antd";
 import DaumPostcodeEmbed from "react-daum-postcode";
 import { IBoardWriteUIProps } from "./BoardWrite.types";
 import { PlusOutlined } from "@ant-design/icons";
+import { v4 as uuidv4 } from "uuid";
 
 export default function BoardWriteUI(props: IBoardWriteUIProps) {
   return (
@@ -104,13 +105,29 @@ export default function BoardWriteUI(props: IBoardWriteUIProps) {
         <S.Textbx>
           <S.Titlebx>
             <S.Font>사진첨부</S.Font>
-            <S.Imgbx onClick={props.onClickImage}>
-              <div>
-                <PlusOutlined />
-                <span>Upload</span>
-                <img src={`https://storage.googleapis.com/${props.imgUrl}`} />
-              </div>
-            </S.Imgbx>
+            {props.fileUrls.map((el, index) => (
+              <img
+                key={uuidv4()}
+                index={index}
+                fileUrl={el}
+                onChange={props.onChangeFileUrls}
+              />
+            ))}
+
+            {props.fileUrl ? (
+              <S.Imgbx onClick={props.onClickUpload}>
+                <div>
+                  <img src={`https://storage.googleapis.com/${props.imgUrl}`} />
+                </div>
+              </S.Imgbx>
+            ) : (
+              <S.Imgbx onClick={props.onClickUpload}>
+                <div>
+                  <PlusOutlined />
+                  <span>Upload</span>
+                </div>
+              </S.Imgbx>
+            )}
             <input
               type="file"
               style={{ display: "none" }}

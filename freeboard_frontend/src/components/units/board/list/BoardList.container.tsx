@@ -34,7 +34,7 @@ export default function FreeboardList(props: IBoardListProps) {
     setSearch(event.target.value);
   };
   const onClickSearch = () => {
-    void refetch({ search, startDate, endDate });
+    void refetch({ search });
   };
 
   const { RangePicker } = DatePicker;

@@ -10,7 +10,6 @@ export const CREATE_BOARD = gql`
       youtubeUrl
       likeCount
       dislikeCount
-      images
       boardAddress {
         _id
         zipcode
@@ -21,6 +20,7 @@ export const CREATE_BOARD = gql`
       }
       createdAt
       updatedAt
+      images
     }
   }
 `;

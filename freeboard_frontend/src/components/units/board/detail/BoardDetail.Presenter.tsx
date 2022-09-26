@@ -50,7 +50,10 @@ export default function BoardDetailUI({
           {data ? data.fetchBoard.title : "로딩중입니다..."}
         </S.DetailTitle>
         <div id="Img">{data ? data.fetchBoard.images : "로딩중입니다..."}</div>
-        <S.Contents src="/content.png" alt="본문 이미지"></S.Contents>
+        <S.Contents
+          src={`https://storage.googleapis.com/${data?.fetchBoard.images}`}
+          alt="본문 이미지"
+        ></S.Contents>
         <S.Textcontent>
           {data ? data.fetchBoard.contents : "로딩중입니다..."}
         </S.Textcontent>
