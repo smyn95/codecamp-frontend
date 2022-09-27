@@ -114,12 +114,14 @@ export default function BoardWriteUI(props: IBoardWriteUIProps) {
               />
             ))}
 
-            {props.fileUrl ? (
-              <S.Imgbx onClick={props.onClickUpload}>
-                <div>
-                  <img src={`https://storage.googleapis.com/${props.imgUrl}`} />
-                </div>
-              </S.Imgbx>
+            {props.imgUrl ? (
+              <S.Imgbx
+                onClick={props.onClickUpload}
+                style={{
+                  background: `url(https://storage.googleapis.com/${props.imgUrl})`,
+                  backgroundSize: "cover",
+                }}
+              ></S.Imgbx>
             ) : (
               <S.Imgbx onClick={props.onClickUpload}>
                 <div>

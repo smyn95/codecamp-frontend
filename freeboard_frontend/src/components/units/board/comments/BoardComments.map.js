@@ -37,7 +37,7 @@ export default function BoardCommentsMap({
                       style={{ margin: "0 0 0 15px" }}
                     />
                   </S.Reviewname>
-                  <S.Reviewdate maxLength={100}>
+                  <S.Reviewdate maxLength="100">
                     {comment?.contents}
                   </S.Reviewdate>
                 </S.Rebx>
