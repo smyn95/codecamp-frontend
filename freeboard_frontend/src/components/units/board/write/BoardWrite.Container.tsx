@@ -189,16 +189,6 @@ export default function Freeboard(props: IBoardWriteProps) {
     }
   };
 
-  // const onChangeFileUrls = (fileUrl: String, index: number) => {
-  //   fileUrls[index] = fileUrl;
-  //   setFileUrls(fileUrls);
-  // };
-  const onChangeFileUrls = (fileUrl: String, index: number) => {
-    const newFileUrls = [...fileUrls];
-    newFileUrls[index] = fileUrl;
-    setFileUrls(newFileUrls);
-  };
-
   useEffect(() => {
     if (data?.fetchBoard.images?.length) {
       setFileUrls([...data?.fetchBoard.images]);
@@ -230,7 +220,6 @@ export default function Freeboard(props: IBoardWriteProps) {
         imgUrl={imgUrl}
         onChangeFile={onChangeFile}
         FileRef={FileRef}
-        onChangeFileUrls={onChangeFileUrls}
         fileUrls={fileUrls}
         onClickUpload={onClickUpload}
       />
