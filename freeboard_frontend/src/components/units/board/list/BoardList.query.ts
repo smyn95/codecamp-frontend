@@ -45,3 +45,8 @@ export const FETCH_BOARDS_OF_THE_BEST = gql`
     }
   }
 `;
+export const FETCH_BOARDS_COUNT = gql`
+  query {
+    fetchBoardsCount
+  }
+`;

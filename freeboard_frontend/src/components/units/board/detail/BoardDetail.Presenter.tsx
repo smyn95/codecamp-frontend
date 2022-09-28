@@ -2,7 +2,6 @@ import * as S from "../../../../../styles/fetchboard";
 import { Tooltip } from "antd";
 import ReactPlayer from "react-player";
 import BoardComments from "../comments/BoardComments.container";
-import "semantic-ui-css/semantic.min.css";
 import { IBoardDetailUIProps } from "./BoardDetail.types";
 
 export default function BoardDetailUI({
@@ -49,7 +48,6 @@ export default function BoardDetailUI({
         <S.DetailTitle>
           {data ? data.fetchBoard.title : "로딩중입니다..."}
         </S.DetailTitle>
-        <div id="Img">{data ? data.fetchBoard.images : "로딩중입니다..."}</div>
         <S.Contents
           src={`https://storage.googleapis.com/${data?.fetchBoard.images}`}
           alt="본문 이미지"
