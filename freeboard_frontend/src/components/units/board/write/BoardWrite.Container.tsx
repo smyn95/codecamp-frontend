@@ -24,7 +24,6 @@ import {
 export default function Freeboard(props: IBoardWriteProps) {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
-  const [fileUrls, setFileUrls] = useState(["", "", ""]);
   const [imgUrl, setimgUrl] = useState("");
   const FileRef = useRef<HTMLInputElement>(null);
 
@@ -181,19 +180,12 @@ export default function Freeboard(props: IBoardWriteProps) {
       const result = await uploadFile({
         variables: { file },
       });
-      onChangeFileUrls(result.data?.uploadFile.url, props.index);
       console.log(result.data?.uploadFile.url);
       setimgUrl(result.data?.uploadFile.url ?? "");
     } catch (error) {
       alert(error.message);
     }
   };
-
-  useEffect(() => {
-    if (data?.fetchBoard.images?.length) {
-      setFileUrls([...data?.fetchBoard.images]);
-    }
-  }, [data]);
 
   const onClickUpload = () => {
     FileRef.current.click();
@@ -220,7 +212,6 @@ export default function Freeboard(props: IBoardWriteProps) {
         imgUrl={imgUrl}
         onChangeFile={onChangeFile}
         FileRef={FileRef}
-        fileUrls={fileUrls}
         onClickUpload={onClickUpload}
       />
     </>

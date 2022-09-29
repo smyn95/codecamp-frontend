@@ -20,11 +20,13 @@ export const LoginModal = styled.section`
 `;
 export const BgLayer = styled.div`
   background: rgba(0, 0, 0, 0.7);
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
+  z-index: 10;
+  display: none;
 `;
 export const LoginForm = styled.form``;
 export const FormInput = styled.div`

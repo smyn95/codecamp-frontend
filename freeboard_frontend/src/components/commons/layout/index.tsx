@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import LayoutHeader from "./header/header";
 import LayoutSubBanner from "./subBanner";
 
-const HIDDEN_BANNER = ["/board", "/"];
+const HIDDEN_BANNER = ["/board", "/", "/join"];
 const HIDDEN_RANDING = ["/"];
 
 //prettier-ignore
