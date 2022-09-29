@@ -138,7 +138,7 @@ export default function BoardWriteUI(props: IBoardWriteUIProps) {
             </div>
 
             <div>
-              <input type="radio" id="picture" name="picture" />
+              <input type="radio" id="picture" name="youtube" />
               <label htmlFor="picture">사진</label>
             </div>
           </S.Titlebx>

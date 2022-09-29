@@ -113,7 +113,7 @@ export default function BoardComments(props) {
 
   //별점
   function onChangeMyStar(value) {
-    setMyStar(value);
+    setMyStar(3);
   }
   const onChangeModalPassword = (event) => {
     setDeleteModal(event.target.value);
@@ -195,7 +195,7 @@ export default function BoardComments(props) {
         isModalOpen={isModalOpen}
         onChangeModalPassword={onChangeModalPassword}
         boardCommentInfinite={boardCommentInfinite}
-        comment={props.comment}
+        comment={comment}
       />
     </>
   );
