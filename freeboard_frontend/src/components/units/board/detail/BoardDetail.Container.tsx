@@ -78,7 +78,6 @@ export default function Fetchboard(props: IBoardDetailUIProps) {
       <BoardDetailUI
         onClickMoveToBoard={onClickMoveToBoard}
         goEdit={goEdit}
-        updateData={props.data}
         data={data}
         onClickLike={onClickLike}
         onClickDisLike={onClickDisLike}

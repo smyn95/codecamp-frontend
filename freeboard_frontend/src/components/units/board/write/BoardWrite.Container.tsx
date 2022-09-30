@@ -196,7 +196,6 @@ export default function Freeboard(props: IBoardWriteProps) {
         onChangeYoutubeUrl={onChangeYoutubeUrl}
         onClickMoveToBoard={onClickMoveToBoard}
         onClickUpdate={onClickUpdate}
-        isEdit={props.isEdit}
         data={props.data}
         isOpen={isOpen}
         handleComplete={handleComplete}
@@ -206,6 +205,7 @@ export default function Freeboard(props: IBoardWriteProps) {
         FileRef={FileRef}
         onClickUpload={onClickUpload}
         onChangeFileUrls={onChangeFileUrls}
+        isEdit={props.isEdit}
       />
     </>
   );

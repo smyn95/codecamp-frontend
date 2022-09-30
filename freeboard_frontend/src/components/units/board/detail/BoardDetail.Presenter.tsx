@@ -19,7 +19,7 @@ export default function BoardDetailUI({
         <div id="Head">
           <S.Left>
             <S.Leftbx>
-              <S.User></S.User>
+              <img src="/avatar.png" style={{ height: "60px" }} />
               <S.Namebx>
                 <S.Name>
                   {data ? data.fetchBoard.writer : "로딩중입니다..."}
@@ -47,7 +47,6 @@ export default function BoardDetailUI({
         </div>
 
         <S.DetailTitle>
-          <span>Title :</span>{" "}
           {data ? data.fetchBoard.title : "로딩중입니다..."}
         </S.DetailTitle>
         <S.Contents>
@@ -97,8 +96,6 @@ export default function BoardDetailUI({
         <S.Listbtn onClick={goEdit}>수정하기</S.Listbtn>
         <S.Listbtn onClick={onClickDelete}>삭제하기</S.Listbtn>
       </S.List>
-
-      <BoardComments />
     </S.Board>
   );
 }
