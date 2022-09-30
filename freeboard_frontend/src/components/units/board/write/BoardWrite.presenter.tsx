@@ -2,7 +2,8 @@ import * as S from "../../../../../styles/freeboard";
 import { Modal } from "antd";
 import DaumPostcodeEmbed from "react-daum-postcode";
 import { IBoardWriteUIProps } from "./BoardWrite.types";
-import { PlusOutlined } from "@ant-design/icons";
+import Uploads01 from "../../../commons/uploads/01/Uploads01.container";
+import { v4 as uuidv4 } from "uuid";
 
 export default function BoardWriteUI(props: IBoardWriteUIProps) {
   return (
@@ -105,29 +106,14 @@ export default function BoardWriteUI(props: IBoardWriteUIProps) {
         <S.Textbx>
           <S.Titlebx>
             <S.Font>사진첨부</S.Font>
-
-            {props.imgUrl ? (
-              <S.Imgbx
-                onClick={props.onClickUpload}
-                style={{
-                  background: `url(https://storage.googleapis.com/${props.imgUrl})`,
-                  backgroundSize: "cover",
-                }}
-              ></S.Imgbx>
-            ) : (
-              <S.Imgbx onClick={props.onClickUpload}>
-                <div>
-                  <PlusOutlined />
-                  <span>Upload</span>
-                </div>
-              </S.Imgbx>
-            )}
-            <input
-              type="file"
-              style={{ display: "none" }}
-              ref={props.FileRef}
-              onChange={props.onChangeFile}
-            />
+            {props.imgUrl.map((el, index) => (
+              <Uploads01
+                key={uuidv4()}
+                index={index}
+                imgUrlIndex={el}
+                onChangeFileUrls={props.onChangeFileUrls}
+              />
+            ))}
           </S.Titlebx>
         </S.Textbx>
         <S.Setting>

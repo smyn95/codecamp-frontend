@@ -24,7 +24,7 @@ import {
 export default function Freeboard(props: IBoardWriteProps) {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
-  const [imgUrl, setimgUrl] = useState("");
+  const [imgUrl, setimgUrl] = useState(["", "", ""]);
   const FileRef = useRef<HTMLInputElement>(null);
 
   console.log(imgUrl);
@@ -107,7 +107,7 @@ export default function Freeboard(props: IBoardWriteProps) {
               address: input.boardAddress.boardAddress,
               addressDetail: input.boardAddress.boardAddressDetail,
             },
-            images: [imgUrl],
+            images: [...imgUrl],
           },
         },
       });
@@ -169,23 +169,17 @@ export default function Freeboard(props: IBoardWriteProps) {
     console.log(value);
   };
 
-  const onChangeFile = async (event: ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0]; // multiple 속성으로 여러개 드래그 가능 !
-    console.log(file);
-
-    const isValid = checkValidationFile(file);
-    if (!isValid) return;
-
-    try {
-      const result = await uploadFile({
-        variables: { file },
-      });
-      console.log(result.data?.uploadFile.url);
-      setimgUrl(result.data?.uploadFile.url ?? "");
-    } catch (error) {
-      alert(error.message);
-    }
+  const onChangeFileUrls = (imgUrlIndex: String, index: number) => {
+    const newImgUrl = [...imgUrl];
+    newImgUrl[index] = imgUrlIndex;
+    setimgUrl(newImgUrl);
   };
+
+  useEffect(() => {
+    if (props.data?.fetchBoard.images?.length) {
+      setFileUrls([...props.data?.fetchBoard.images]);
+    }
+  }, [props.data]);
 
   const onClickUpload = () => {
     FileRef.current.click();
@@ -210,9 +204,9 @@ export default function Freeboard(props: IBoardWriteProps) {
         onToggleModal={onToggleModal}
         input={input}
         imgUrl={imgUrl}
-        onChangeFile={onChangeFile}
         FileRef={FileRef}
         onClickUpload={onClickUpload}
+        onChangeFileUrls={onChangeFileUrls}
       />
     </>
   );

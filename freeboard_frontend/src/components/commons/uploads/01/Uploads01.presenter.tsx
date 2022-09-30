@@ -4,10 +4,10 @@ import * as S from "./Uploads01.styles";
 export default function Uploads01UI(props) {
   return (
     <>
-      {props.fileUrl ? (
+      {props.imgUrlIndex ? (
         <S.UploadImage
           onClick={props.onClickUpload}
-          src={`https://storage.googleapis.com/${props.fileUrl}`}
+          src={`https://storage.googleapis.com/${props.imgUrlIndex}`}
         />
       ) : (
         <S.Imgbx onClick={props.onClickUpload}>
