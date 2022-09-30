@@ -30,7 +30,7 @@ export const UPDATE_BOARD = gql`
   }
 `;
 export const FETCH_BOARD = gql`
-  query ($boardId: ID!) {
+  query fetchBoard($boardId: ID!) {
     fetchBoard(boardId: $boardId) {
       _id
       writer
@@ -39,13 +39,12 @@ export const FETCH_BOARD = gql`
       youtubeUrl
       likeCount
       dislikeCount
-      images
       boardAddress {
-        _id
         zipcode
         address
         addressDetail
       }
+      images
       createdAt
     }
   }

@@ -12,6 +12,7 @@ export default function BoardDetailUI({
   onClickDisLike,
   onClickDelete,
 }) {
+  console.log(data);
   return (
     <S.Board>
       <S.Box>
@@ -46,12 +47,16 @@ export default function BoardDetailUI({
         </div>
 
         <S.DetailTitle>
+          <span>Title :</span>{" "}
           {data ? data.fetchBoard.title : "로딩중입니다..."}
         </S.DetailTitle>
-        <S.Contents
-          src={`https://storage.googleapis.com/${data?.fetchBoard.images}`}
-          alt="본문 이미지"
-        ></S.Contents>
+        <S.Contents>
+          {data?.fetchBoard.images
+            ?.filter((el: string) => el)
+            .map((el: string) => (
+              <S.Image key={el} src={`https://storage.googleapis.com/${el}`} />
+            ))}
+        </S.Contents>
         <S.Textcontent>
           {data ? data.fetchBoard.contents : "로딩중입니다..."}
         </S.Textcontent>

@@ -28,7 +28,12 @@ export const DetailTitle = styled.h1`
   color: #111;
   text-align: left;
   letter-spacing: 3px;
-  margin-top: 30px;
+  margin: 30px 0 70px 0;
+  padding-bottom: 15px;
+  span {
+    font-family: "Libre Bodoni", serif;
+    color: #e0e0e0;
+  }
 `;
 
 export const Input = styled.input`
@@ -101,22 +106,31 @@ export const Icon = styled.img`
 `;
 
 ////본문
-export const Contents = styled.img`
-  width: 1100px;
-  margin: 50px auto;
-  display: block;
+export const Contents = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+`;
+export const Image = styled.img`
+  width: 300px;
+  margin-bottom: 30px;
 `;
 export const Textcontent = styled.p`
-  padding-top: 10px;
   font-size: 18px;
-  min-height: 200px;
+  height: 300px;
+  border: 1px dashed #ccc;
+  padding: 15px;
+  word-break: break-word;
+  overflow: auto;
+  margin-top: 50px;
 `;
 export const Youtube = styled.iframe`
   margin: 50px auto;
   display: block;
-  width: 500px;
+  width: 300px;
   height: 250px;
 `;
+
 export const Bottombx = styled.div`
   display: flex;
   justify-content: center;
