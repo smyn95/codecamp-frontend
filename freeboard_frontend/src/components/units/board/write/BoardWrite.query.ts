@@ -26,33 +26,16 @@ export const CREATE_BOARD = gql`
 `;
 export const UPDATE_BOARD = gql`
   mutation updateBoard(
-    $updateBoardInput: UpdateBoardInput!
-    $password: String
     $boardId: ID!
+    $password: String
+    $updateBoardInput: UpdateBoardInput!
   ) {
     updateBoard(
-      updateBoardInput: $updateBoardInput
-      password: $password
       boardId: $boardId
+      password: $password
+      updateBoardInput: $updateBoardInput
     ) {
       _id
-      writer
-      title
-      contents
-      youtubeUrl
-      likeCount
-      dislikeCount
-      images
-      boardAddress {
-        _id
-        zipcode
-        address
-        addressDetail
-        createdAt
-      }
-
-      createdAt
-      updatedAt
     }
   }
 `;

@@ -42,11 +42,6 @@ export default function Freeboard(props: IBoardWriteProps) {
     },
   });
 
-  const [uploadFile] = useMutation<
-    Pick<IMutation, "uploadFile">,
-    IMutationUploadFileArgs
-  >(UPLOAD_FILE);
-
   const [createBoard] = useMutation<
     Pick<IMutation, "createBoard">,
     IMutationCreateBoardArgs
@@ -65,6 +60,10 @@ export default function Freeboard(props: IBoardWriteProps) {
 
   //수정하기 함수
   const onClickUpdate = async () => {
+    const currentFiles = JSON.stringify(imgUrl);
+    const defaultFiles = JSON.stringify(props.data?.fetchBoard.images);
+    const isChangedFiles = currentFiles !== defaultFiles;
+
     const myvariables = {
       boardId: router.query.boardId,
       password: input.password,
@@ -76,7 +75,7 @@ export default function Freeboard(props: IBoardWriteProps) {
       }
       if (input.contents)
         myvariables.updateBoardInput.contents = input.contents;
-      console.log(myvariables);
+      if (isChangedFiles) myvariables.updateBoardInput.images = imgUrl;
 
       // 1. 수정하기 뮤테이션 날리기
       const result = await updateBoard({

@@ -146,19 +146,19 @@ export const BannerInner = styled.div`
 
   div:nth-of-type(1) img {
     animation-name: ${opacity};
-    animation-delay: 0.7s;
+    animation-delay: 0.4s;
   }
   div:nth-of-type(2) img {
     animation-name: ${opacity};
-    animation-delay: 2.8s;
+    animation-delay: 1.4s;
   }
   div:nth-of-type(3) img {
     animation-name: ${opacity};
-    animation-delay: 2.1s;
+    animation-delay: 1.8s;
   }
   div:nth-of-type(4) img {
     animation-name: ${opacity};
-    animation-delay: 1.4s;
+    animation-delay: 0.8s;
   }
 `;
 

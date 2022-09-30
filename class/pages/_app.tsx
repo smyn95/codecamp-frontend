@@ -5,13 +5,7 @@ import Layout from "../src/components/commons/layout";
 import ApolloSetting from "../src/components/commons/apollo";
 import { Global } from "@emotion/react";
 import { globalStyles } from "../src/components/commons/styles/globalStyles";
-import {
-  RecoilRoot,
-  atom,
-  selector,
-  useRecoilState,
-  useRecoilValue,
-} from "recoil";
+import { RecoilRoot } from "recoil";
 
 function MyApp({ Component }: AppProps) {
   return (

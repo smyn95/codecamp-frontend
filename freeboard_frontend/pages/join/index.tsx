@@ -84,13 +84,13 @@ export default function JoinPage() {
                 이메일*
               </S.FormLabel>
             </S.FormInput>
-            {/* 
+
             <S.PreviewImg>
               <div class="img">
                 <span></span>
               </div>
               <p class="fileName"></p>
-            </S.PreviewImg> */}
+            </S.PreviewImg>
 
             <S.BtnMorebx>
               <S.BtnMore onClick={onClickJoin}>
