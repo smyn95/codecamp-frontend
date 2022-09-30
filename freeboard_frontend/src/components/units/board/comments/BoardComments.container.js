@@ -15,7 +15,7 @@ export default function BoardComments(props) {
   const [update, setUpdate] = useState(false);
   const [deleteComment] = useMutation(DELETE_BOARD_COMMENT);
   const [commentId, setCommentId] = useState("");
-  const [MyStar, setMyStar] = useState(0);
+  const [MyStar, setMyStar] = useState(2);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [deleteModal, setDeleteModal] = useState(0);
   const [comment, setComment] = useState({
