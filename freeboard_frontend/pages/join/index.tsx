@@ -3,9 +3,13 @@ import * as S from "./joinStyles";
 
 export default function JoinPage() {
   const focusJoinRef = useRef();
+  const profileImg = useRef();
 
   const onClickLabel = () => {
     focusJoinRef.current?.focus();
+  };
+  const onClickProfile = () => {
+    profileImg.current?.click();
   };
 
   const [input, setInput] = useState({
@@ -85,6 +89,15 @@ export default function JoinPage() {
               </S.FormLabel>
             </S.FormInput>
 
+            <S.FormFile>
+              <input type="file" id="" name="" ref={profileImg} />
+              <S.ProfileUp for="" onClick={onClickProfile}>
+                <span>프로필 사진 등록</span>
+              </S.ProfileUp>
+            </S.FormFile>
+            <S.Info>
+              댓글 등록시 나타납니다. 꼭 얼굴 사진이 아니여도 좋아요
+            </S.Info>
             <S.PreviewImg>
               <div class="img">
                 <span></span>

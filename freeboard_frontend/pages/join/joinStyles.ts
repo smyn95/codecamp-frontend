@@ -54,7 +54,70 @@ export const FormLabel = styled.label`
   color: #9b9b9b;
   transition: all 0.25s ease;
 `;
+export const FormFile = styled.span`
+  display: block;
+  position: relative;
+  margin-top: 45px;
+  input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    opacity: 0;
+  }
+`;
+export const ProfileUp = styled.a`
+  display: block;
+  position: relative;
+  margin-top: 30px;
+  padding: 15px 0;
+  border: 1px solid #c4c4c4;
+  font-size: 20px;
+  color: #333;
+  overflow: hidden;
+  cursor: pointer;
+  transition: color 0.3s ease;
 
+  &&::before {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: -5%;
+    left: -10%;
+    width: 0;
+    height: 120%;
+    background: #333;
+    transition: all 0.3s ease;
+    transform: skewX(15deg);
+  }
+  &&:hover {
+    ::before {
+      width: 120%;
+      z-index: -1;
+    }
+    span {
+      color: #fff;
+    }
+  }
+  span {
+    display: block;
+    position: relative;
+    z-index: 1;
+    transition: color 0.3s ease;
+    font-size: 14px;
+    color: #333;
+    text-align: center;
+    z-index: 10;
+  }
+`;
+export const Info = styled.span`
+  font-size: 12px;
+  color: #9b9b9b;
+  text-align: center;
+  margin: 15px auto;
+  display: block;
+`;
 export const PreviewImg = styled.div`
   margin-top: 50px;
   text-align: center;
