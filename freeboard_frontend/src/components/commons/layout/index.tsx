@@ -27,6 +27,7 @@ export default function Layout(props) {
       {!isHiddenRanding&&<LayoutHeader 
         inputClass={inputClass}
         onClickText={onClickText}
+        isLogin={false}
       />}
       {!isHiddenBanner && <LayoutSubBanner/>}
         <div>{props.children}</div>

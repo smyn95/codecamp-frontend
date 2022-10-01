@@ -4,8 +4,8 @@ import LoginPage from "../login";
 export default function FreeboardListPage() {
   return (
     <>
-      <FreeboardList isEdit={false} update={false} />;
-      <LoginPage />;
+      <FreeboardList isEdit={false} />;
+      <LoginPage isLogin={false} />;
     </>
   );
 }

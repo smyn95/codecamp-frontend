@@ -97,6 +97,10 @@ export const TopSearch = styled.div`
     }
   }
 `;
+
+export const Login = styled.img`
+  cursor: pointer;
+`;
 export const Material = styled.div`
   height: 24px;
   position: absolute;

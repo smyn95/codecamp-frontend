@@ -52,7 +52,7 @@ export const FormInput = styled.div`
     }
     & ~ label {
       transform: ${(props) =>
-        props.inputValue || props.inputValue2 ? "translate(0, -30px)" : ""};
+        props.email || props.password ? "translate(0, -30px)" : ""};
     }
   }
   label {

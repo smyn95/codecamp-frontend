@@ -21,12 +21,12 @@ export default function LayoutHeader(props) {
               <li>이벤트</li>
             </S.Navibx>
           </S.Navi>
-          <S.TopSearch className={props.inputClass} onClick={props.onClickText}>
-            <img src="/mypage.svg" alt="마이페이지 아이콘" />
+          <S.TopSearch className={props.inputClass}>
+            <S.Login src="/mypage.svg" alt="마이페이지 아이콘" />
             <img src="/car.svg" alt="배송 아이콘" />
             <img src="/cart.svg" alt="장바구니 아이콘" />
             <input type="text" />
-            <S.Material>
+            <S.Material onClick={props.onClickText}>
               <img src="/search.png" alt="검색아이콘" />
             </S.Material>
           </S.TopSearch>

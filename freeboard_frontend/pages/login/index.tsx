@@ -1,24 +1,48 @@
 import * as S from "./loginStyles";
 import { ChangeEvent, useRef, useState } from "react";
 import Link from "next/link";
+import { gql, useMutation } from "@apollo/client";
+import { ErrorModal, SuccessModal } from "../../src/commons";
+import { useRouter } from "next/router";
+import { useRecoilState } from "recoil";
+import {
+  IMutation,
+  IMutationLoginUserArgs,
+} from "../../src/commons/types/generated/types";
+import { accessTokenState } from "../../src/commons/store";
 
-export default function LoginPage() {
+const LOGIN_USER = gql`
+  mutation loginUser($email: String!, $password: String!) {
+    loginUser(email: $email, password: $password) {
+      accessToken
+    }
+  }
+`;
+
+export default function LoginPage(props) {
+  const router = useRouter();
   const focusRef = useRef();
-  const [inputValue, setInputValue] = useState("");
-  const [inputValueError, setInputValueError] = useState("");
-  const [inputValue2, setInputValue2] = useState("");
-  const [inputValue2Error, setInputValue2Error] = useState("");
+  const [email, setEmail] = useState("");
+  const [EmailError, setEmailError] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
 
-  const onChangeInput = (event: ChangeEvent<HTMLInputElement>) => {
-    setInputValue(event?.target.value);
+  const [loginUser] = useMutation<
+    Pick<IMutation, "loginUser">,
+    IMutationLoginUserArgs
+  >(LOGIN_USER);
+
+  const onChangeEmail = (event: ChangeEvent<HTMLInputElement>) => {
+    setEmail(event?.target.value);
     if (event.target.value !== "") {
-      setInputValueError("");
+      setEmailError("");
     }
   };
-  const onChangeInput2 = (event: ChangeEvent<HTMLInputElement>) => {
-    setInputValue2(event?.target.value);
+  const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
+    setPassword(event?.target.value);
     if (event.target.value !== "") {
-      setInputValue2Error("");
+      setPasswordError("");
     }
   };
 
@@ -26,16 +50,30 @@ export default function LoginPage() {
     focusRef.current?.focus();
   };
 
-  const onClickSubmit = () => {
-    if (!inputValue) {
-      setInputValueError("아이디를 입력해주세요.");
-    }
-    if (!inputValue2) {
-      setInputValue2Error("비밀번호를 입력해주세요.");
-    }
-    if (inputValue && inputValue2) {
+  const onClickLogin = async () => {
+    try {
+      // 1. 로그인 해서 accessToken 받아오기
+      const result = await loginUser({
+        variables: { email, password },
+      });
+      const accessToken = result.data?.loginUser.accessToken;
+      console.log(accessToken);
+
+      // 2. accessToken을 globalState에 저장하기
+      if (!accessToken) {
+        ErrorModal("로그인에 실패했습니다. 다시 시도해 주세요.");
+        return;
+      }
+      setAccessToken(accessToken);
+      SuccessModal("로그인에 성공하였습니다.");
+      // 3. 로그인 성공 페이지로 이동하기
+      void router.push("/success/");
+    } catch (error) {
+      ErrorModal(error.message);
     }
   };
+
+  console.log(accessToken);
   return (
     <>
       <S.BgLayer>
@@ -51,32 +89,29 @@ export default function LoginPage() {
             />
             <S.LoginForm>
               <div>
-                <S.FormInput inputValue={inputValue}>
-                  {inputValueError}
+                <S.FormInput email={email}>
+                  {EmailError}
                   <input
                     type="text"
                     name="tbuser_id"
-                    onChange={onChangeInput}
+                    onChange={onChangeEmail}
                     required=""
                     ref={focusRef}
                   />
-                  <label onClick={onClickLabel}>아이디</label>
+                  <label onClick={onClickLabel}>Email</label>
                 </S.FormInput>
-                <S.FormInput
-                  style={{ marginTop: "30px" }}
-                  inputValue2={inputValue2}
-                >
-                  {inputValue2Error}
+                <S.FormInput style={{ marginTop: "30px" }} password={password}>
+                  {passwordError}
                   <input
                     type="password"
                     name="tbuser_pw"
-                    onChange={onChangeInput2}
+                    onChange={onChangePassword}
                     required=""
                     ref={focusRef}
                   />
-                  <label onClick={onClickLabel}>비밀번호</label>
+                  <label onClick={onClickLabel}>passWord</label>
                 </S.FormInput>
-                <S.btnForm onClick={onClickSubmit}>
+                <S.btnForm onClick={onClickLogin}>
                   <span>LOGIN</span>
                 </S.btnForm>
               </div>
