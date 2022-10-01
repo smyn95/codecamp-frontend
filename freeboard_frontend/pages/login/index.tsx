@@ -72,14 +72,16 @@ export default function LoginPage(props) {
       ErrorModal(error.message);
     }
   };
-
-  console.log(accessToken);
   return (
     <>
       <S.BgLayer>
         <S.LoginModal>
           <S.BtnX>
-            <img src="/ico_close.png" alt="close 아이콘" />
+            <img
+              onClick={props.onclickIsOpne}
+              src="/ico_close.png"
+              alt="close 아이콘"
+            />
           </S.BtnX>
           <div>
             <img

@@ -26,7 +26,6 @@ export const BgLayer = styled.div`
   width: 100vw;
   height: 100vh;
   z-index: 10;
-  display: none;
 `;
 export const LoginForm = styled.form``;
 export const FormInput = styled.div`

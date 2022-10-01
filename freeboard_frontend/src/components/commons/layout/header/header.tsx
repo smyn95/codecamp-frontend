@@ -1,4 +1,5 @@
 import Link from "next/link";
+
 import * as S from "../../../../commons/styles";
 
 export default function LayoutHeader(props) {
@@ -22,7 +23,11 @@ export default function LayoutHeader(props) {
             </S.Navibx>
           </S.Navi>
           <S.TopSearch className={props.inputClass}>
-            <S.Login src="/mypage.svg" alt="마이페이지 아이콘" />
+            <S.Login
+              onClick={props.onclickIsOpne}
+              src="/mypage.svg"
+              alt="마이페이지 아이콘"
+            />
             <img src="/car.svg" alt="배송 아이콘" />
             <img src="/cart.svg" alt="장바구니 아이콘" />
             <input type="text" />
