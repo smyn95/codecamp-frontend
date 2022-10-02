@@ -2,21 +2,14 @@ import { useRouter } from "next/router";
 import { useMutation, useQuery } from "@apollo/client";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { ErrorModal, SuccessModal } from "../../../../commons/index";
-import { checkValidationFile } from "../../../../commons/libraries/validation";
 
-import {
-  CREATE_BOARD,
-  UPDATE_BOARD,
-  FETCH_BOARD,
-  UPLOAD_FILE,
-} from "./BoardWrite.query";
+import { CREATE_BOARD, UPDATE_BOARD, FETCH_BOARD } from "./BoardWrite.query";
 import BoardWriteUI from "./BoardWrite.presenter";
 import { IBoardWriteProps } from "./BoardWrite.types";
 import {
   IMutation,
   IMutationCreateBoardArgs,
   IMutationUpdateBoardArgs,
-  IMutationUploadFileArgs,
   IQuery,
   IQueryFetchBoardArgs,
 } from "../../../../commons/types/generated/types";

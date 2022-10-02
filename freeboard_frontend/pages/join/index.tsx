@@ -1,9 +1,23 @@
+import { useMutation } from "@apollo/client";
+import { useRouter } from "next/router";
 import { useRef, useState } from "react";
+import { ErrorModal, SuccessModal } from "../../src/commons";
+import {
+  IMutation,
+  IMutationCreateUserArgs,
+} from "../../src/commons/types/generated/types";
+import { CREATE_USER } from "../../src/components/commons/layout/layout.query";
 import * as S from "./joinStyles";
 
 export default function JoinPage() {
+  const router = useRouter();
   const focusJoinRef = useRef();
   const profileImg = useRef();
+
+  const [createUser] = useMutation<
+    Pick<IMutation, "createUser">,
+    IMutationCreateUserArgs
+  >(CREATE_USER);
 
   const onClickLabel = () => {
     focusJoinRef.current?.focus();
@@ -25,7 +39,24 @@ export default function JoinPage() {
       [event.target.id]: event.target.value,
     });
   };
-  const onClickJoin = async () => {};
+
+  const onClickJoin = async () => {
+    try {
+      await createUser({
+        variables: {
+          createUserInput: {
+            email: input.email,
+            password: input.password,
+            name: input.name,
+          },
+        },
+      });
+      SuccessModal("회원가입이 완료되었습니다.");
+      void router.push("/");
+    } catch (error) {
+      ErrorModal(error.message);
+    }
+  };
   return (
     <>
       <S.Join>
@@ -47,7 +78,7 @@ export default function JoinPage() {
               </S.FormLabel>
             </S.FormInput>
 
-            <S.FormInput>
+            {/* <S.FormInput>
               <input
                 type="text"
                 id="id"
@@ -59,13 +90,12 @@ export default function JoinPage() {
               <S.FormLabel onClick={onClickLabel} for="tbuser_id">
                 아이디*
               </S.FormLabel>
-            </S.FormInput>
+            </S.FormInput> */}
 
             <S.FormInput>
               <input
                 type="password"
                 id="password"
-                name="tbuser_pw"
                 required=""
                 onChange={onChangeJoinInput}
                 ref={focusJoinRef}

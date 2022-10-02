@@ -3,13 +3,12 @@ import { ChangeEvent, useRef, useState } from "react";
 import Link from "next/link";
 import { gql, useMutation } from "@apollo/client";
 import { ErrorModal, SuccessModal } from "../../src/commons";
-import { useRouter } from "next/router";
 import { useRecoilState } from "recoil";
 import {
   IMutation,
   IMutationLoginUserArgs,
 } from "../../src/commons/types/generated/types";
-import { accessTokenState } from "../../src/commons/store";
+import { accessTokenState, isLoginState } from "../../src/commons/store";
 
 const LOGIN_USER = gql`
   mutation loginUser($email: String!, $password: String!) {
@@ -20,13 +19,13 @@ const LOGIN_USER = gql`
 `;
 
 export default function LoginPage(props) {
-  const router = useRouter();
   const focusRef = useRef();
   const [email, setEmail] = useState("");
   const [EmailError, setEmailError] = useState("");
   const [password, setPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
+  const [isLogin, setIsLogin] = useRecoilState(isLoginState);
 
   const [loginUser] = useMutation<
     Pick<IMutation, "loginUser">,
@@ -66,8 +65,7 @@ export default function LoginPage(props) {
       }
       setAccessToken(accessToken);
       SuccessModal("로그인에 성공하였습니다.");
-      // 3. 로그인 성공 페이지로 이동하기
-      void router.push("/success/");
+      setIsLogin(!isLogin);
     } catch (error) {
       ErrorModal(error.message);
     }

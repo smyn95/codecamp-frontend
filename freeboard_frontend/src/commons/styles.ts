@@ -63,6 +63,85 @@ export const Header = styled.div`
   margin: 0 auto;
   height: 100%;
 `;
+export const UserImg = styled.img`
+  height: 30px;
+  margin-right: 5px;
+`;
+
+export const LoginName = styled.span`
+  padding: 0 5px;
+  border-bottom: 2px solid #333;
+  font-size: 14px;
+  font-weight: 500;
+`;
+export const MyPage = styled.p`
+  position: relative;
+  padding: 0 15px 0 5px;
+  cursor: pointer;
+  & > svg:hover {
+    color: red;
+    font-weight: 500;
+  }
+  svg {
+    cursor: pointer;
+  }
+`;
+// user Mypage
+export const MyPageTrue = styled.div`
+  border: 1px solid #ccc;
+  width: 250px;
+  height: 230px;
+  position: absolute;
+  border-radius: 15px;
+  background-color: #fff;
+  top: 40px;
+  right: 0;
+  z-index: 99;
+  & > div {
+    display: flex;
+    align-items: center;
+    padding: 15px 25px;
+    border-bottom: 2px solid #000;
+    img {
+      height: 40px;
+    }
+  }
+`;
+export const Logout = styled.ul`
+  height: 149px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  li {
+    border-bottom: 1px solid #efefef;
+    padding: 0 25px 0 30px;
+    height: 50%;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    svg {
+      font-size: 20px;
+      margin-right: 15px;
+    }
+    &:hover {
+      background: #e6f7ff;
+    }
+  }
+  li:last-child {
+    border-bottom: none;
+    border-radius: 0 0 15px 15px;
+  }
+`;
+
+export const UserPage = styled.div`
+  font-weight: 600;
+  margin-left: 10px;
+  p {
+    font-size: 16px;
+  }
+`;
+
+// user Mypage End
 export const Inner = styled.div`
   width: 100%;
   height: 115px;
