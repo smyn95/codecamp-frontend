@@ -1,6 +1,6 @@
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
-import { useRef, useState } from "react";
+import { ChangeEvent, useRef, useState } from "react";
 import { ErrorModal, SuccessModal } from "../../src/commons";
 import {
   IMutation,
@@ -33,7 +33,7 @@ export default function JoinPage() {
     email: "",
   });
 
-  const onChangeJoinInput = (event: any) => {
+  const onChangeJoinInput = (event: ChangeEvent<HTMLInputElement>) => {
     setInput({
       ...input,
       [event.target.id]: event.target.value,
@@ -64,6 +64,19 @@ export default function JoinPage() {
 
         <div class="contents">
           <S.JoinForm>
+            <S.FormInput>
+              <input
+                type="text"
+                id="email"
+                name="tbuser_email"
+                required=""
+                onChange={onChangeJoinInput}
+                ref={focusJoinRef}
+              />
+              <S.FormLabel onClick={onClickLabel} for="tbuser_email">
+                이메일*
+              </S.FormLabel>
+            </S.FormInput>
             <S.FormInput>
               <input
                 type="text"
@@ -102,20 +115,6 @@ export default function JoinPage() {
               />
               <S.FormLabel onClick={onClickLabel} for="tbuser_pw">
                 비밀번호*
-              </S.FormLabel>
-            </S.FormInput>
-
-            <S.FormInput>
-              <input
-                type="text"
-                id="email"
-                name="tbuser_email"
-                required=""
-                onChange={onChangeJoinInput}
-                ref={focusJoinRef}
-              />
-              <S.FormLabel onClick={onClickLabel} for="tbuser_email">
-                이메일*
               </S.FormLabel>
             </S.FormInput>
 
