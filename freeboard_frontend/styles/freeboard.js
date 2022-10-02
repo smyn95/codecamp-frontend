@@ -219,11 +219,13 @@ export const Listbx = styled.div`
 `;
 export const Topbx = styled.div`
   width: 300px;
-  padding-bottom: 80%;
-  background-color: #ccc;
-  background-image: url(/menu_01.jpeg);
-  background-position: 50% 45%;
-  background-size: cover;
+  height: 240px;
+  overflow: hidden;
+  img {
+    height: 100%;
+    margin: 0 auto;
+    display: block;
+  }
 `;
 export const Bottombx = styled.div`
   width: 300px;

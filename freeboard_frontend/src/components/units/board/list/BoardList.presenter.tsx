@@ -26,7 +26,15 @@ export default function BoardListUI({
         <S.Listall>
           {bestData?.fetchBoardsOfTheBest.map((best: any) => (
             <S.Listbx key={best._id}>
-              <S.Topbx></S.Topbx>
+              <S.Topbx>
+                <img
+                  src={
+                    (best.images[0] &&
+                      `https://storage.googleapis.com/${best.images[0]}`) ||
+                    `/no-image.png`
+                  }
+                />
+              </S.Topbx>
               <S.Bottombx>
                 <Link href={`/board/${best._id}`}>
                   <div>
