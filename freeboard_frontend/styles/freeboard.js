@@ -211,11 +211,11 @@ export const Listall = styled.div`
 `;
 export const Listbx = styled.div`
   width: 300px;
-  padding-bottom: 1%;
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 5px 5px 10px #eee;
   position: relative;
+  border: 1px solid #aaa;
 `;
 export const Topbx = styled.div`
   width: 300px;
@@ -231,6 +231,7 @@ export const Bottombx = styled.div`
   width: 300px;
   padding: 10px 15px;
   box-sizing: border-box;
+  border-top: 1px solid #aaa;
   cursor: pointer;
   p {
     margin-bottom: 0;
@@ -388,7 +389,12 @@ export const Listtitle = styled.ul`
 //페이징 부분
 export const Bottomrow = styled.div`
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+  & > div {
+    display: flex;
+    width: calc(100% / 3);
+    justify-content: flex-end;
+  }
 `;
 export const Paging = styled.div`
   display: flex;
@@ -420,28 +426,37 @@ export const Paginglist = styled.ul`
 
 //등록하기 버튼
 export const Registration = styled.button`
-  border: 1px solid #777;
-  width: 170px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  font-weight: 500;
-  transform: translate(0);
+  display: block;
+  position: relative;
+  margin-top: 30px;
+  padding: 10px 0;
+  border: 2px solid #333;
+  font-size: 14px;
+  color: #333;
   overflow: hidden;
-  &&:before {
+  width: 120px;
+  &&::before {
     content: "";
+    display: block;
     position: absolute;
-    background: #00704a;
-    width: 15px;
-    top: 0;
-    bottom: 0;
-    left: -40px;
-    transform: rotate(-16deg);
-    filter: blur(10px);
+    bottom: -5%;
+    left: -10%;
+    width: 0;
+    height: 120%;
+    background: #333;
+    transition: all 0.3s ease;
+    transform: skewX(15deg);
   }
-  &&:hover::before {
-    left: calc(100% + 32px);
-    transition: 0.75s;
+  &&:hover {
+    color: #fff;
+    ::before {
+      width: 120%;
+    }
+  }
+  span {
+    display: block;
+    position: relative;
+    z-index: 1;
+    transition: color 0.3s ease;
   }
 `;

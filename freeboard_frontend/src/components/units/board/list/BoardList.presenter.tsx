@@ -89,17 +89,20 @@ export default function BoardListUI({
         />
 
         <S.Bottomrow>
-          <p></p>
+          <div>
+            <p></p>
+          </div>
           <S.Paging>
             <S.Paginglist>
               <PaginationPage onClickPage={onClickPage} />
             </S.Paginglist>
           </S.Paging>
 
-          <S.Registration onClick={onClickMoveToBoardNew}>
-            <img src="/pencel.png" alt="글쓰기아이콘" />
-            게시물 등록하기
-          </S.Registration>
+          <div>
+            <S.Registration onClick={onClickMoveToBoardNew}>
+              <span>게시물 등록하기</span>
+            </S.Registration>
+          </div>
         </S.Bottomrow>
       </S.Box>
     </>

@@ -29,7 +29,6 @@ export default function PaginationPage({ onClickPage }) {
     <>
       <Pagination
         total={lastPage}
-        current={current}
         showSizeChanger={false}
         itemRender={(page, type) => {
           if (type === "next") {
