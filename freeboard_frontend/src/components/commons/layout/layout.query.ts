@@ -5,16 +5,10 @@ export const FETCH_USER_LOGGED_IN = gql`
     fetchUserLoggedIn {
       email
       name
-    }
-  }
-`;
-
-export const CREATE_USER = gql`
-  mutation createUser($createUserInput: CreateUserInput!) {
-    createUser(createUserInput: $createUserInput) {
-      password
-      email
-      name
+      picture
+      _id
+      createdAt
+      updatedAt
     }
   }
 `;

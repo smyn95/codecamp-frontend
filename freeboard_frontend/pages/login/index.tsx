@@ -56,7 +56,6 @@ export default function LoginPage(props) {
         variables: { email, password },
       });
       const accessToken = result.data?.loginUser.accessToken;
-      console.log(accessToken);
 
       // 2. accessToken을 globalState에 저장하기
       if (!accessToken) {

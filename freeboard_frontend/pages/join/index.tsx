@@ -6,7 +6,7 @@ import {
   IMutation,
   IMutationCreateUserArgs,
 } from "../../src/commons/types/generated/types";
-import { CREATE_USER } from "../../src/components/commons/layout/layout.query";
+import { CREATE_USER } from "./join.query";
 import * as S from "./joinStyles";
 
 export default function JoinPage() {
@@ -28,7 +28,6 @@ export default function JoinPage() {
 
   const [input, setInput] = useState({
     name: "",
-    id: "",
     password: "",
     email: "",
   });
@@ -45,9 +44,9 @@ export default function JoinPage() {
       await createUser({
         variables: {
           createUserInput: {
-            email: input.email,
-            password: input.password,
             name: input.name,
+            password: input.password,
+            email: input.email,
           },
         },
       });
