@@ -20,7 +20,6 @@ export default function LayoutHeader(props) {
   const onClickMyPage = () => {
     setMyPage(!myPage);
   };
-  console.log(myPage);
   return (
     <>
       <S.Inner>

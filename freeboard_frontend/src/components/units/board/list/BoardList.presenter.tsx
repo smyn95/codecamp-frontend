@@ -16,8 +16,6 @@ export default function BoardListUI({
   onChangeSearch,
   onClickSearch,
 }) {
-  console.log();
-
   return (
     <>
       <LayoutBanner />
@@ -28,6 +26,7 @@ export default function BoardListUI({
             <S.Listbx key={best._id}>
               <S.Topbx>
                 <img
+                  className="scale"
                   src={
                     (best.images[0] &&
                       `https://storage.googleapis.com/${best.images[0]}`) ||
@@ -35,14 +34,14 @@ export default function BoardListUI({
                   }
                 />
               </S.Topbx>
-              <S.Bottombx>
+              <S.Bottombx className="animation">
                 <Link href={`/board/${best._id}`}>
                   <div>
                     <S.BxTitle>{best.title}</S.BxTitle>
                     <S.Flex>
                       <div>
                         <S.Userbx>
-                          <S.User></S.User>
+                          <S.User src="avatar.png" alt="유저아이콘"></S.User>
                           <S.Listname>{best.writer.slice(0, 6)}</S.Listname>
                         </S.Userbx>
                         <S.Listdate>{best.createdAt.slice(0, 10)}</S.Listdate>

@@ -216,6 +216,15 @@ export const Listbx = styled.div`
   box-shadow: 5px 5px 10px #eee;
   position: relative;
   border: 1px solid #aaa;
+  cursor: pointer;
+  &&:hover .scale {
+    scale: 1.25;
+    transition: 0.3s;
+  }
+  &&:hover .animation {
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+  }
 `;
 export const Topbx = styled.div`
   width: 300px;
@@ -250,12 +259,9 @@ export const Userbx = styled.div`
   box-sizing: border-box;
   align-items: center;
 `;
-export const User = styled.div`
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: #bdbdbd;
+export const User = styled.img`
   margin: 0px 10px 0 0;
+  height: 35px; ;
 `;
 export const Listname = styled.p`
   font-size: 18px;

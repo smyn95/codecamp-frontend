@@ -62,7 +62,8 @@ export default function LoginPage(props) {
         ErrorModal("로그인에 실패했습니다. 다시 시도해 주세요.");
         return;
       }
-      setAccessToken(accessToken);
+      // setAccessToken(accessToken);
+      localStorage.setItem("accessToken", accessToken); //임시 사용 (나중에 지울 예정)
       SuccessModal("로그인에 성공하였습니다.");
       setIsLogin(!isLogin);
     } catch (error) {
