@@ -6,10 +6,17 @@ import { useRouter } from "next/router";
 import { FETCH_BOARDS, FETCH_BOARDS_OF_THE_BEST } from "./BoardList.query";
 import { IBoardListProps } from "./BoardList.types";
 import { ChangeEvent, MouseEvent, useState } from "react";
+import {
+  IQuery,
+  IQueryFetchBoardsArgs,
+} from "../../../../commons/types/generated/types";
 
 export default function FreeboardList(props: IBoardListProps) {
   const router = useRouter();
-  const { data, refetch } = useQuery(FETCH_BOARDS);
+  const { data, refetch } = useQuery<
+    Pick<IQuery, "fetchBoards">,
+    IQueryFetchBoardsArgs
+  >(FETCH_BOARDS);
   const { data: bestData } = useQuery(FETCH_BOARDS_OF_THE_BEST);
   const [search, setSearch] = useState("");
 

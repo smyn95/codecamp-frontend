@@ -19,12 +19,12 @@ export default function MainPage() {
   return (
     <>
       <LayoutBanner />
-      {starbuckUrl?.map((el) => (
+      {/* {starbuckUrl?.map((el) => (
         <>
           {console.log(el.image)}
           <img src={el.image} alt="tt" />
         </>
-      ))}
+      ))} */}
     </>
   );
 }

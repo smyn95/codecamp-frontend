@@ -18,9 +18,8 @@ export default function ApolloSetting(props: IApolloSettingProps) {
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
 
   useEffect(() => {
-    if (localStorage.getItem("accessToken")) {
-      setAccessToken(localStorage.getItem("accessToken") ?? "");
-    }
+    const result = localStorage.getItem("accessToken");
+    if (result) setAccessToken(result);
   }, []);
 
   const uploadLink = createUploadLink({

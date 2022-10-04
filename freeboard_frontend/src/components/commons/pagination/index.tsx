@@ -2,11 +2,9 @@ import { EllipsisOutlined } from "@ant-design/icons";
 import { useQuery, gql } from "@apollo/client";
 import { Pagination } from "antd";
 import "antd/dist/antd.css";
-import { useState } from "react";
 
 import {
   IQuery,
-  IQueryFetchBoardsArgs,
   IQueryFetchBoardsCountArgs,
 } from "../../../commons/types/generated/types";
 
@@ -17,8 +15,7 @@ const FETCH_BOARDS_COUNT = gql`
 `;
 
 export default function PaginationPage({ onClickPage }) {
-  const [current, setCurrent] = useState(1);
-  const { data: dataBoardsCount, refetch } = useQuery<
+  const { data: dataBoardsCount } = useQuery<
     Pick<IQuery, "fetchBoardsCount">,
     IQueryFetchBoardsCountArgs
   >(FETCH_BOARDS_COUNT);

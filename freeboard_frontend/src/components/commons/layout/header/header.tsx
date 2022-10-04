@@ -10,7 +10,7 @@ import Router, { useRouter } from "next/router";
 import { useState } from "react";
 import { useRecoilState } from "recoil";
 import LoginPage from "../../../../../pages/login";
-import { isLoginState } from "../../../../commons/store";
+import { accessTokenState, isLoginState } from "../../../../commons/store";
 
 import * as S from "../../../../commons/styles";
 import { IQuery } from "../../../../commons/types/generated/types";
@@ -22,6 +22,9 @@ export default function LayoutHeader(props) {
     useQuery<Pick<IQuery, "fetchUserLoggedIn">>(FETCH_USER_LOGGED_IN);
   const [myPage, setMyPage] = useState(false);
   const [isLogin, setIsLogin] = useRecoilState(isLoginState);
+  const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
+
+  console.log(accessToken);
 
   const onClickMyPage = () => {
     setMyPage(!myPage);
@@ -32,9 +35,7 @@ export default function LayoutHeader(props) {
   const conClickReview = () => {
     void router.push("/board");
   };
-  const conClickEvent = () => {
-    void router.push("/event");
-  };
+
   return (
     <>
       <S.Inner>
@@ -51,14 +52,14 @@ export default function LayoutHeader(props) {
               <li>베스트</li>
               <li>신상품</li>
               <li onClick={conClickReview}>리뷰</li>
-              <li onClick={conClickEvent}>이벤트</li>
+              <li>이벤트</li>
             </S.Navibx>
           </S.Navi>
           <S.TopSearch className={props.inputClass}>
-            {data ? (
+            {accessToken ? (
               <>
                 <S.UserImg src="/avatar.png" alt="유저아이콘"></S.UserImg>
-                <S.LoginName>{`${data.fetchUserLoggedIn.name}`}</S.LoginName>
+                <S.LoginName>{`${data?.fetchUserLoggedIn.name}`}</S.LoginName>
                 <S.MyPage>
                   <CaretDownOutlined onClick={onClickMyPage} myPage={myPage} />
                   {myPage && (
@@ -69,7 +70,7 @@ export default function LayoutHeader(props) {
                           alt="유저아이콘"
                         ></S.UserImg>
                         <S.UserPage>
-                          {`${data.fetchUserLoggedIn.name}`}
+                          {`${data?.fetchUserLoggedIn.name}`}
                           <p>0 &nbsp;P</p>
                         </S.UserPage>
                       </div>
