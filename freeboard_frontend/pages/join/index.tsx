@@ -63,7 +63,7 @@ export default function JoinPage() {
 
         <div class="contents">
           <S.JoinForm>
-            <S.FormInput>
+            <S.FormInput email={input.email}>
               <input
                 type="text"
                 id="email"
@@ -76,7 +76,8 @@ export default function JoinPage() {
                 이메일*
               </S.FormLabel>
             </S.FormInput>
-            <S.FormInput>
+
+            <S.FormInput name={input.name}>
               <input
                 type="text"
                 id="name"
@@ -104,7 +105,7 @@ export default function JoinPage() {
               </S.FormLabel>
             </S.FormInput> */}
 
-            <S.FormInput>
+            <S.FormInput password={input.password}>
               <input
                 type="password"
                 id="password"

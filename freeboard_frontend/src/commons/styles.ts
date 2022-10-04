@@ -6,6 +6,7 @@ export const Logo = styled.div`
   cursor: pointer;
 `;
 export const Navi = styled.div``;
+
 export const Navibx = styled.ul`
   display: flex;
   li.all_menue:before {

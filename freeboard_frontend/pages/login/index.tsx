@@ -9,6 +9,7 @@ import {
   IMutationLoginUserArgs,
 } from "../../src/commons/types/generated/types";
 import { accessTokenState, isLoginState } from "../../src/commons/store";
+import { useRouter } from "next/router";
 
 const LOGIN_USER = gql`
   mutation loginUser($email: String!, $password: String!) {
@@ -19,6 +20,7 @@ const LOGIN_USER = gql`
 `;
 
 export default function LoginPage(props) {
+  const router = useRouter();
   const focusRef = useRef();
   const [email, setEmail] = useState("");
   const [EmailError, setEmailError] = useState("");

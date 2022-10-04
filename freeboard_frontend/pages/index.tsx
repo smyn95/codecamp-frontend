@@ -10,7 +10,7 @@ export default function Home() {
   useEffect(() => {
     setTimeout(() => {
       setLoding(false);
-      void router.push("/board");
+      void router.push("/main");
     }, 2800);
 
     return;

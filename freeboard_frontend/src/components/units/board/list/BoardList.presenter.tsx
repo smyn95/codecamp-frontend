@@ -18,7 +18,6 @@ export default function BoardListUI({
 }) {
   return (
     <>
-      <LayoutBanner />
       <S.Box>
         <S.Title>BEST POST</S.Title>
         <S.Listall>

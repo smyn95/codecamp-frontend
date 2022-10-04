@@ -6,26 +6,41 @@ import {
 } from "@ant-design/icons";
 import { useQuery } from "@apollo/client";
 import Link from "next/link";
+import Router, { useRouter } from "next/router";
 import { useState } from "react";
+import { useRecoilState } from "recoil";
+import LoginPage from "../../../../../pages/login";
+import { isLoginState } from "../../../../commons/store";
 
 import * as S from "../../../../commons/styles";
 import { IQuery } from "../../../../commons/types/generated/types";
 import { FETCH_USER_LOGGED_IN } from "../layout.query";
 
 export default function LayoutHeader(props) {
+  const router = useRouter();
   const { data } =
     useQuery<Pick<IQuery, "fetchUserLoggedIn">>(FETCH_USER_LOGGED_IN);
   const [myPage, setMyPage] = useState(false);
+  const [isLogin, setIsLogin] = useRecoilState(isLoginState);
 
   const onClickMyPage = () => {
     setMyPage(!myPage);
+  };
+  const onclickIsOpne = () => {
+    setIsLogin((prev) => !prev);
+  };
+  const conClickReview = () => {
+    void router.push("/board");
+  };
+  const conClickEvent = () => {
+    void router.push("/event");
   };
   return (
     <>
       <S.Inner>
         <S.Header>
           <S.Logo>
-            <Link href="/board">
+            <Link href="/main">
               <img src="/starbucks_logo.png" alt="스타벅스" />
             </Link>
           </S.Logo>
@@ -35,8 +50,8 @@ export default function LayoutHeader(props) {
               <li>For U</li>
               <li>베스트</li>
               <li>신상품</li>
-              <li>리뷰</li>
-              <li>이벤트</li>
+              <li onClick={conClickReview}>리뷰</li>
+              <li onClick={conClickEvent}>이벤트</li>
             </S.Navibx>
           </S.Navi>
           <S.TopSearch className={props.inputClass}>
@@ -94,6 +109,7 @@ export default function LayoutHeader(props) {
             </S.Badge>
           </S.Badges>
         </S.Header>
+        {isLogin && <LoginPage onclickIsOpne={onclickIsOpne} />}
       </S.Inner>
     </>
   );

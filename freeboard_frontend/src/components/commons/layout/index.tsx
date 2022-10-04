@@ -5,7 +5,7 @@ import LayoutSubBanner from "./subBanner";
 import { useRecoilState } from "recoil";
 import { isLoginState } from "../../../commons/store";
 
-const HIDDEN_BANNER = ["/board", "/", "/join"];
+const HIDDEN_BANNER = ["/main", "/", "/join"];
 const HIDDEN_RANDING = ["/"];
 
 //prettier-ignore
@@ -39,6 +39,7 @@ export default function Layout(props) {
         isLogin={isLogin}
         onclickIsOpne={onclickIsOpne}
       />}
+
       {!isHiddenBanner && <LayoutSubBanner/>}
         <div>{props.children}</div>
     </>

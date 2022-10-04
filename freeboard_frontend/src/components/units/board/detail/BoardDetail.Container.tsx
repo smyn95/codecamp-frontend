@@ -22,6 +22,7 @@ export default function Fetchboard(props: IBoardDetailUIProps) {
   const { data } = useQuery<Pick<IQuery, "fetchBoard">, IQueryFetchBoardArgs>(
     FETCH_BOARD,
     {
+      fetchPolicy: "network-only",
       variables: { boardId: router.query.boardId },
     }
   );

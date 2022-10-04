@@ -1,13 +1,6 @@
 import * as S from "../../../../commons/styles";
 
 export default function LayoutBanner() {
-  // const fadeEls = document.querySelector(".fade-in");
-  // fadeEls.forEach(function (fadeEl, index) {
-  //   gsap.to(fadeEl, 1, {
-  //     delay: (index + 1) * 0.7,
-  //     opacity: 1,
-  //   });
-  // });
   return (
     <>
       <S.Visual>
