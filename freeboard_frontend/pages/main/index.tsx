@@ -1,30 +1,24 @@
+import { useState } from "react";
 import LayoutBanner from "../../src/components/commons/layout/banner";
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { result } from "lodash";
+import MenuList from "./starbucks";
+import menuList from "../../src/assets/api/menu";
+import CoffeeList from "./starbucks/coffeeList";
 
 export default function MainPage() {
-  const [starbuckUrl, setStarbuckUrl] = useState([]);
-
-  useEffect(() => {
-    const fetchStarbucks = async () => {
-      const result = await axios.get(
-        "https://starbugs.herokuapp.com/api/menus"
-      );
-      setStarbuckUrl(result.data.slice(0, 5));
-    };
-    void fetchStarbucks();
-  }, [starbuckUrl]);
+  const [data, setData] = useState(menuList);
+  const [menu, setMenu] = useState([
+    { name: "ALL" },
+    { name: "COLD BREW" },
+    { name: "ESPRESSO" },
+    { name: "FRAPPUCCINO" },
+    { name: "FIZZIO" },
+  ]);
 
   return (
     <>
       <LayoutBanner />
-      {/* {starbuckUrl?.map((el) => (
-        <>
-          {console.log(el.image)}
-          <img src={el.image} alt="tt" />
-        </>
-      ))} */}
+      <MenuList menu={menu} />
+      <CoffeeList data={data} />
     </>
   );
 }
