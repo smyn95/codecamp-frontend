@@ -1,6 +1,5 @@
 import * as S from "./loginStyles";
 import { ChangeEvent, useRef, useState } from "react";
-import Link from "next/link";
 import { gql, useMutation } from "@apollo/client";
 import { ErrorModal, SuccessModal } from "../../src/commons";
 import { useRecoilState } from "recoil";

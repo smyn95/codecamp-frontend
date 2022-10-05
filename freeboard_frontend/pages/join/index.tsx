@@ -9,6 +9,8 @@ import {
   IMutationCreateUserArgs,
 } from "../../src/commons/types/generated/types";
 import { useRef } from "react";
+import { ErrorModal, SuccessModal } from "../../src/commons";
+import { useRouter } from "next/router";
 
 const schema = yup.object({
   email: yup
@@ -16,10 +18,7 @@ const schema = yup.object({
     .email("이메일 형식에 적합하지 않습니다.")
     .required("이메일은 필수 입력입니다."),
   name: yup.string().required("이름을 입력해주세요."),
-  password: yup
-    .string()
-    .required("비밀번호를 입력해주세요.")
-    .required("비밀번호는 필수 입력입니다."),
+  password: yup.string().required("비밀번호는 필수 입력입니다."),
   // phone: yup
   //   .string()
   //   .matches(/^\d{3}-\d{3,4}-\d{4}$/, "휴대폰 형식에 알맞지 않습니다.")
@@ -33,6 +32,7 @@ interface IFormData {
 }
 
 export default function ReactHookFormPage() {
+  const router = useRouter();
   const focusJoinRef = useRef();
   const profileImg = useRef();
   const { register, handleSubmit, formState } = useForm<IFormData>({
@@ -50,29 +50,40 @@ export default function ReactHookFormPage() {
   const onClickProfile = () => {
     profileImg.current?.click();
   };
-  const onClickJoin = async (data: IFormData) => {};
+  const onClickJoin = async (data: IFormData) => {
+    try {
+      await createUser({
+        variables: {
+          createUserInput: {
+            ...data,
+          },
+        },
+      });
+      SuccessModal("회원가입이 완료되었습니다.");
+      void router.push("/");
+    } catch (error) {
+      ErrorModal(error.message);
+    }
+  };
 
+  // const {ref, ...rest} = register
   return (
     <S.Join>
       <S.Title>SIGN UP</S.Title>
-      <div class="contents">
+      <div className="contents">
         <S.JoinForm onSubmit={handleSubmit(onClickJoin)}>
           <S.FormInput>
-            <input type="text" {...register("email")} ref={focusJoinRef} />
+            <input type="text" {...register("email")} />
             <div>{formState.errors.email?.message}</div>
             <S.FormLabel onClickLabel={onClickLabel}>이메일*</S.FormLabel>
           </S.FormInput>
           <S.FormInput>
-            <input type="text" {...register("name")} ref={focusJoinRef} />
+            <input type="text" {...register("name")} />
             <div>{formState.errors.name?.message}</div>
             <S.FormLabel onClickLabel={onClickLabel}>이름*</S.FormLabel>
           </S.FormInput>
           <S.FormInput>
-            <input
-              type="password"
-              {...register("password")}
-              ref={focusJoinRef}
-            />
+            <input type="password" {...register("password")} />
             <div>{formState.errors.password?.message}</div>
             <S.FormLabel onClickLabel={onClickLabel}>비밀번호*</S.FormLabel>
           </S.FormInput>
