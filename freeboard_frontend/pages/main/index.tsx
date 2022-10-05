@@ -1,23 +1,25 @@
 import { useState } from "react";
 import LayoutBanner from "../../src/components/commons/layout/banner";
 import MenuList from "./starbucks";
-import menuList from "../../src/assets/api/menu";
+import { menuList } from "../../src/assets/api/menu";
 import CoffeeList from "./starbucks/coffeeList";
 
 export default function MainPage() {
   const [data, setData] = useState(menuList);
-  const [menu, setMenu] = useState([
-    { name: "ALL" },
-    { name: "COLD BREW" },
-    { name: "ESPRESSO" },
-    { name: "FRAPPUCCINO" },
-    { name: "FIZZIO" },
-  ]);
+  const [menu, setMenu] = useState([{ name: "Drink" }, { name: "Food" }]);
+
+  const onMenu = (name) => {
+    if (name === "all") {
+      setData(menuList);
+    } else {
+      setData(menuList.filter((item) => item.name === name));
+    }
+  };
 
   return (
     <>
       <LayoutBanner />
-      <MenuList menu={menu} />
+      <MenuList menu={menu} onMenu={onMenu} />
       <CoffeeList data={data} />
     </>
   );

@@ -1,8 +1,9 @@
-export default function MenuItem({ item }) {
+export default function MenuItem({ item, onMenu }) {
   const { name } = item;
+
   return (
     <>
-      <li>{name}</li>
+      <li onClick={() => onMenu(name)}>{name}</li>
     </>
   );
 }
