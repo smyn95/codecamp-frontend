@@ -50,6 +50,10 @@ export default function LoginPage(props) {
   const onClickLabel = () => {
     focusRef.current?.focus();
   };
+  const onClickjoin = () => {
+    void router.push("/join");
+    setIsLogin(!isLogin);
+  };
 
   const onClickLogin = async () => {
     try {
@@ -121,7 +125,7 @@ export default function LoginPage(props) {
             </S.LoginForm>
           </div>
           <S.BtnJoin>
-            <Link href="/join">회원가입</Link>
+            <p onClick={onClickjoin}>회원가입</p>
           </S.BtnJoin>
         </S.LoginModal>
       </S.BgLayer>

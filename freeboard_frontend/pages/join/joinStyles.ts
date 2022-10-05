@@ -13,7 +13,7 @@ export const Title = styled.h1`
   line-height: 1;
   text-transform: uppercase;
 `;
-export const JoinForm = styled.div`
+export const JoinForm = styled.form`
   width: 300px;
   margin: 0 auto;
 `;
@@ -151,13 +151,14 @@ export const BtnMorebx = styled.div`
   border: 0;
   text-align: center;
 `;
-export const BtnMore = styled.a`
+export const BtnMore = styled.button`
   display: inline-block;
   position: relative;
   padding: 15px 20px 10px;
   border-bottom: 6px solid #004438;
   color: #004438;
   text-align: center;
+  border-radius: 0;
   &&:hover {
     color: #fff;
   }
