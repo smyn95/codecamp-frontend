@@ -1,13 +1,14 @@
 import MenuItem from "./menuItem";
+import * as S from "../../../styles/starbucks";
 
 export default function MenuList({ menu, onMenu }) {
   return (
     <>
-      <ul className="menu">
+      <S.Menu>
         {menu.map((item, index) => (
           <MenuItem key={index} item={item} onMenu={onMenu} />
         ))}
-      </ul>
+      </S.Menu>
     </>
   );
 }
