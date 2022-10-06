@@ -19,6 +19,7 @@ export const Title = styled.h1`
   font-family: "Libre Bodoni", serif;
   text-transform: uppercase;
   letter-spacing: 3px;
+  -webkit-font-smoothing: antialiased;
 `;
 export const Textbx = styled.div`
   margin-top: 50px;
@@ -98,10 +99,10 @@ export const Search = styled.button`
   }
 `;
 export const Setting = styled.div`
-  div {
-    margin: 0 10px;
-  }
   margin-top: 30px;
+  & .radio {
+    width: 100px;
+  }
   input {
     display: none;
   }

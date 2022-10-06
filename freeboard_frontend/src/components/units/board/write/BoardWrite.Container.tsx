@@ -20,8 +20,6 @@ export default function Freeboard(props: IBoardWriteProps) {
   const [imgUrl, setimgUrl] = useState(["", "", ""]);
   const FileRef = useRef<HTMLInputElement>(null);
 
-  console.log(imgUrl);
-
   const [input, setInput] = useState({
     name: "",
     password: "",

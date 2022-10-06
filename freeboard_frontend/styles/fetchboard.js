@@ -20,6 +20,7 @@ export const Title = styled.h1`
   text-transform: uppercase;
   letter-spacing: 3px;
   margin-top: 30px;
+  -webkit-font-smoothing: antialiased;
 `;
 export const DetailTitle = styled.h1`
   font-size: 40px;

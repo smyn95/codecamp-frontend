@@ -103,6 +103,7 @@ export default function BoardWriteUI(props: IBoardWriteUIProps) {
             />
           </S.Titlebx>
         </S.Textbx>
+
         <S.Textbx>
           <S.Titlebx>
             <S.Font>사진첨부</S.Font>
@@ -116,15 +117,16 @@ export default function BoardWriteUI(props: IBoardWriteUIProps) {
             ))}
           </S.Titlebx>
         </S.Textbx>
+
         <S.Setting>
           <S.Titlebx>
-            <S.Font>메인설정</S.Font>
-            <div>
+            <S.Font style={{}}>메인설정</S.Font>
+            <div className="radio">
               <input type="radio" id="youtube" name="youtube" />
               <label htmlFor="youtube">유튜브</label>
             </div>
 
-            <div>
+            <div className="radio">
               <input type="radio" id="picture" name="youtube" />
               <label htmlFor="picture">사진</label>
             </div>
