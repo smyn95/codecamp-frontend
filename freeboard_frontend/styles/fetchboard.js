@@ -111,6 +111,9 @@ export const Contents = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
+  & .detailImg {
+    width: auto;
+  }
 `;
 export const Image = styled.img`
   width: 300px;

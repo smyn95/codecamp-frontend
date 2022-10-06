@@ -13,6 +13,7 @@ import {
 import { ErrorModal, SuccessModal } from "../../../src/commons";
 import { useRouter } from "next/router";
 import { CREATE_USED_ITEM } from "../product.queries";
+import { useMoveToPage } from "../../../src/components/commons/hooks/useMoveToPage";
 
 const schema = yup.object({
   name: yup.string().required("상품명을 입력해주세요."),
@@ -36,12 +37,15 @@ export default function ProductWritePage() {
   const { register, handleSubmit, watch, formState } = useForm<IFormData>({
     resolver: yupResolver(schema),
   });
+
   // console.log(typeof watch("price"));
 
   const [createUseditem] = useMutation<
     Pick<IMutation, "createUseditem">,
     IMutationCreateUseditemArgs
   >(CREATE_USED_ITEM);
+
+  const { onClickMoveToPage } = useMoveToPage();
 
   const onClickSubmit = async (data: IFormData) => {
     try {
@@ -51,7 +55,7 @@ export default function ProductWritePage() {
         },
       });
       SuccessModal("상품등록이 완료되었습니다.");
-      void router.push("/");
+      void router.push(`/product/${data.createUseditem._id}`);
     } catch (error) {
       ErrorModal(error.message);
     }
@@ -185,7 +189,7 @@ export default function ProductWritePage() {
             </S.InputBox>
           </S.Setting>
           <S.Submit>
-            <S.Cancel>취소하기</S.Cancel>
+            <S.Cancel onClick={onClickMoveToPage("/mainㄴ")}>취소하기</S.Cancel>
 
             <S.SubmitBtn>등록하기</S.SubmitBtn>
           </S.Submit>

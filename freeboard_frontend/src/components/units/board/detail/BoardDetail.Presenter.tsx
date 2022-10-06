@@ -1,8 +1,6 @@
 import * as S from "../../../../../styles/fetchboard";
 import { Tooltip } from "antd";
 import ReactPlayer from "react-player";
-import BoardComments from "../comments/BoardComments.container";
-import { IBoardDetailUIProps } from "./BoardDetail.types";
 
 export default function BoardDetailUI({
   data,

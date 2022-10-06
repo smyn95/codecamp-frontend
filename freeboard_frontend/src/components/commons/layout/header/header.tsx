@@ -2,7 +2,6 @@ import {
   CaretDownOutlined,
   DollarOutlined,
   LogoutOutlined,
-  UserAddOutlined,
 } from "@ant-design/icons";
 import { useQuery } from "@apollo/client";
 import Link from "next/link";
@@ -14,6 +13,7 @@ import { accessTokenState, isLoginState } from "../../../../commons/store";
 
 import * as S from "../../../../commons/styles";
 import { IQuery } from "../../../../commons/types/generated/types";
+import { useMoveToPage } from "../../hooks/useMoveToPage";
 import { FETCH_USER_LOGGED_IN } from "../layout.query";
 
 export default function LayoutHeader(props) {
@@ -24,7 +24,7 @@ export default function LayoutHeader(props) {
   const [isLogin, setIsLogin] = useRecoilState(isLoginState);
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
 
-  console.log(accessToken);
+  const { onClickMoveToPage } = useMoveToPage();
 
   const onClickMyPage = () => {
     setMyPage(!myPage);
@@ -32,10 +32,6 @@ export default function LayoutHeader(props) {
   const onclickIsOpne = () => {
     setIsLogin((prev) => !prev);
   };
-  const conClickReview = () => {
-    void router.push("/board");
-  };
-
   return (
     <>
       <S.Inner>
@@ -50,8 +46,8 @@ export default function LayoutHeader(props) {
               <li className="all_menue">전체메뉴</li>
               <li>For U</li>
               <li>베스트</li>
-              <li>메뉴</li>
-              <li onClick={conClickReview}>리뷰</li>
+              <li onClick={onClickMoveToPage("/product/new")}>메뉴</li>
+              <li onClick={onClickMoveToPage("/board")}>리뷰</li>
               <li>이벤트</li>
             </S.Navibx>
           </S.Navi>
