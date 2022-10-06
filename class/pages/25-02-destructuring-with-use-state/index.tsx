@@ -1,24 +1,21 @@
 import { useState } from "react";
 
 export default function CounterStatePage() {
-  const [count, setCount] = useState(0);
-
-  const qqq = Math.random();
-
-  console.log(qqq);
+  const result = useState(0);
 
   function onClickCountUp() {
-    setCount(1);
-    setCount(2);
-    setCount(3);
-    setCount(4);
-    setCount(5);
-    setCount(6);
+    // setCount(1)
+    // setCount(2)
+    // setCount(3)
+    // setCount(4)
+    // setCount(5)
+    // setCount(6)
+    result[1](6);
   }
 
   return (
     <>
-      <div>{count}</div>
+      <div>{result[0]}</div>
       <button onClick={onClickCountUp}>카운트 올리기!!!</button>
     </>
   );

@@ -6,7 +6,7 @@ import {
 } from "@ant-design/icons";
 import { useQuery } from "@apollo/client";
 import Link from "next/link";
-import Router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import { useRecoilState } from "recoil";
 import LoginPage from "../../../../../pages/login";
@@ -50,7 +50,7 @@ export default function LayoutHeader(props) {
               <li className="all_menue">전체메뉴</li>
               <li>For U</li>
               <li>베스트</li>
-              <li>신상품</li>
+              <li>메뉴</li>
               <li onClick={conClickReview}>리뷰</li>
               <li>이벤트</li>
             </S.Navibx>
