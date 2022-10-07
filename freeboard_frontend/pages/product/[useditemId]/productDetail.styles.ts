@@ -109,6 +109,9 @@ export const DetailBtn = styled.div`
     line-height: 50px;
     margin-right: 10px;
     cursor: pointer;
+    &:last-of-type {
+      background: #ff4d4f;
+    }
     &:hover {
       filter: opacity(0.7);
     }

@@ -81,7 +81,7 @@ export default function Freeboard(props: IBoardWriteProps) {
     }
   };
 
-  //게시글 작성한 뒤 등록해주는 로직
+  // 게시글 작성한 뒤 등록해주는 로직
   const onClickNotice = async () => {
     try {
       const result = await createBoard({
@@ -102,8 +102,8 @@ export default function Freeboard(props: IBoardWriteProps) {
         },
       });
       SuccessModal("게시글 등록이 완료되었습니다.");
-      //우리 보기 좋으라고 있는거
-      router.push(`/board/${result.data.createBoard._id}`);
+      // 우리 보기 좋으라고 있는거
+      void router.push(`/board/${result.data.createBoard._id}`);
     } catch (error) {
       ErrorModal(error.message);
     }

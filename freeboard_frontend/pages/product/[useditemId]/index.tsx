@@ -7,12 +7,18 @@ import {
   IQuery,
   IQueryFetchUseditemArgs,
 } from "../../../src/commons/types/generated/types";
+import { useRouter } from "next/router";
 
 export default function ProductDetailPage() {
+  const router = useRouter();
   const { data } = useQuery<
     Pick<IQuery, "fetchUseditem">,
     IQueryFetchUseditemArgs
-  >(FETCH_USED_ITEM);
+  >(FETCH_USED_ITEM, {
+    fetchPolicy: "network-only",
+    variables: { useditemId: router.query.useditemId },
+  });
+
   return (
     <>
       <S.Product>
@@ -23,7 +29,9 @@ export default function ProductDetailPage() {
               <S.Namebx>
                 <S.Name>유저네임</S.Name>
                 <S.Date>
-                  {data ? data.fetchUseditem.createdAt : "로딩중입니다..."}
+                  {data
+                    ? data.fetchUseditem.createdAt.slice(0, 10)
+                    : "로딩중입니다..."}
                 </S.Date>
               </S.Namebx>
             </S.Leftbx>
