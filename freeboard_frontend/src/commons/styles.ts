@@ -4,14 +4,20 @@ import { keyframes } from "@emotion/react";
 // HEADER
 export const Logo = styled.div`
   cursor: pointer;
+  margin-right: 50px;
   img {
     height: 100px;
   }
 `;
 export const Navi = styled.div``;
+export const LeftLogo = styled.div`
+  display: flex;
+  align-items: center;
+`;
 
 export const Navibx = styled.ul`
   display: flex;
+
   li.all_menue:before {
     content: "|";
     position: absolute;
@@ -25,8 +31,10 @@ export const Navibx = styled.ul`
     color: rgba(0, 0, 0, 0);
   }
   li {
-    font-family: "SourceHanSansKR";
-    font-size: 18px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
+      "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: 1.8em;
     font-weight: bold;
     font-stretch: normal;
     font-style: normal;
@@ -35,7 +43,7 @@ export const Navibx = styled.ul`
     display: block;
     padding: 0 15px;
     position: relative;
-    color: #333;
+    color: #2fcab0;
     letter-spacing: 1px;
     cursor: pointer;
     will-change: color;
@@ -300,19 +308,14 @@ export const Badge = styled.div`
 `;
 //Badge End
 
-//subBanner
-export const SubBanner01 = styled.div`
-  background: url("/subBanner.png") no-repeat 50% 50%;
-  background-size: cover;
+export const SubBaaner = styled.div`
+  background: #e6f3e6;
   height: 300px;
 `;
-export const SubBanner02 = styled.div`
-  background: url("/subBanner02.png") no-repeat 50% 50%;
-  background-size: cover;
+export const SubBaaner02 = styled.div`
+  background: #fbf7f2;
   height: 300px;
 `;
-
-//subBanner End
 
 //랜딩페이지
 export const Randing = styled.div`

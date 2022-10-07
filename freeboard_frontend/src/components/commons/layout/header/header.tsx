@@ -34,18 +34,20 @@ export default function LayoutHeader(props) {
     <>
       <S.Inner>
         <S.Header>
-          <S.Logo>
-            <Link href="/main">
-              <img src="/maket_logo.png" alt="shinmimall 로고" />
-            </Link>
-          </S.Logo>
-          <S.Navi>
-            <S.Navibx>
-              {/* <li className="all_menue">전체메뉴</li> */}
-              <li onClick={onClickMoveToPage("/product/list")}>중고거래</li>
-              <li onClick={onClickMoveToPage("/board")}>게시판</li>
-            </S.Navibx>
-          </S.Navi>
+          <S.LeftLogo>
+            <S.Logo>
+              <Link href="/main">
+                <img src="/maket_logo.png" alt="shinmimall 로고" />
+              </Link>
+            </S.Logo>
+            <S.Navi>
+              <S.Navibx>
+                {/* <li className="all_menue">전체메뉴</li> */}
+                <li onClick={onClickMoveToPage("/product/list")}>중고거래</li>
+                <li onClick={onClickMoveToPage("/board")}>게시판</li>
+              </S.Navibx>
+            </S.Navi>
+          </S.LeftLogo>
           <S.TopSearch className={props.inputClass}>
             {accessToken ? (
               <>

@@ -16,16 +16,20 @@ export default function ProductListPage() {
   >(FETCH_USED_ITEMS);
 
   const onClickMoveToProductDetail = (event: MouseEvent<HTMLLIElement>) => {
-    void router.push(`/product/${event.currentTarget._id}`);
+    void router.push(`/product/${event.currentTarget.id}`);
   };
   return (
     <>
       <S.ListPage>
-        <S.Title>중고거래 상품</S.Title>
+        <S.Title>Product</S.Title>
         <S.Box>
           {data?.fetchUseditems.map((el, index) => (
             <>
-              <S.ProductBox key={el._id} onClick={onClickMoveToProductDetail}>
+              <S.ProductBox
+                key={el._id}
+                id={el._id}
+                onClick={onClickMoveToProductDetail}
+              >
                 <S.BgLayer className="Layer">
                   <p>{el.remarks}</p>
                 </S.BgLayer>

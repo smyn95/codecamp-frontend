@@ -5,8 +5,8 @@ export default function LayoutSubBanner() {
   return (
     <>
       <Carousel autoplay>
-        <S.SubBanner01></S.SubBanner01>
-        <S.SubBanner02></S.SubBanner02>
+        <S.SubBaaner></S.SubBaaner>
+        <S.SubBaaner02></S.SubBaaner02>
       </Carousel>
     </>
   );

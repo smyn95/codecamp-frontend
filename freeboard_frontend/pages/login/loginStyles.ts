@@ -12,7 +12,7 @@ export const LoginModal = styled.section`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 100;
+  z-index: 99999;
   transform: matrix(1, 0, 0, 1, -175, -262.5);
   && > div {
     padding: 65px 25px 0;

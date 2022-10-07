@@ -2,31 +2,25 @@ import styled from "@emotion/styled";
 
 export const ListPage = styled.div`
   width: 1400px;
-  padding: 30px 0;
+  padding-bottom: 30px;
   margin: 0 auto;
 `;
 export const Box = styled.main`
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
-  margin-bottom: 50px;
+  gap: 66px;
 `;
 
 export const ProductBox = styled.section`
-  width: calc(100% / 4 - 35px);
-  margin-right: 35px;
+  width: 300px;
   height: 320px;
   overflow: hidden;
   border-radius: 10px;
   background: gray;
   position: relative;
-  margin-bottom: 35px;
   position: relative;
   cursor: pointer;
 
-  &:last-of-type {
-    margin-right: 0;
-  }
   &:hover .Layer {
     opacity: 1;
     transition: 0.5s;
@@ -67,11 +61,14 @@ export const BgLayer = styled.div`
 
 export const Title = styled.h1`
   font-size: 40px;
-  font-weight: 500;
+  font-weight: bold;
   text-align: center;
   color: #111;
+  font-family: "Libre Bodoni", serif;
   text-transform: uppercase;
   letter-spacing: 3px;
+  margin-top: 30px;
+  -webkit-font-smoothing: antialiased;
 `;
 export const Name = styled.p`
   font-family: "Libre Bodoni";
@@ -82,7 +79,7 @@ export const Name = styled.p`
   font-weight: 600;
   padding: 5px 10px;
   width: 100%;
-  z-index: 99;
+  z-index: 0;
   font-weight: 400;
   font-size: 16px;
   white-space: nowrap;
