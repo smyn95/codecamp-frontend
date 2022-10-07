@@ -1,4 +1,5 @@
 import * as S from "./productDetail.styles";
+import Head from "next/head";
 import { Tooltip } from "antd";
 import { HeartOutlined } from "@ant-design/icons";
 import { useQuery } from "@apollo/client";
@@ -8,6 +9,11 @@ import {
   IQueryFetchUseditemArgs,
 } from "../../../src/commons/types/generated/types";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
+
+declare const window: typeof globalThis & {
+  kakao: any;
+}; // window = globalthis라고 불리운다
 
 export default function ProductDetailPage() {
   const router = useRouter();
@@ -19,8 +25,25 @@ export default function ProductDetailPage() {
     variables: { useditemId: router.query.useditemId },
   });
 
+  useEffect(() => {
+    const container = document.getElementById("map"); // 지도를 담을 영역의 DOM 레퍼런스
+    const options = {
+      //  지도를 생성할 때 필요한 기본 옵션
+      center: new window.kakao.maps.LatLng(37.486739, 126.900467), // 지도의 중심좌표.
+      level: 3, // 지도의 레벨(확대, 축소 정도)
+    };
+
+    const map = new kakao.maps.Map(container, options); // 지도 생성 및 객체 리턴
+  }, []);
+
   return (
     <>
+      <Head>
+        <script
+          type="text/javascript"
+          src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4f0c1b881c4e4d3687061eaa18c7b05f"
+        ></script>
+      </Head>
       <S.Product>
         <S.Box>
           <S.Left>
@@ -73,7 +96,10 @@ export default function ProductDetailPage() {
             <span>{data ? data.fetchUseditem.tags : "로딩중입니다..."}</span>
           </S.Tags>
 
-          <S.MapAPI></S.MapAPI>
+          <S.MapAPI
+            id="map"
+            style={{ width: "500px", height: "400px" }}
+          ></S.MapAPI>
         </S.Box>
         <S.DetailBtn>
           <button>목록으로</button>

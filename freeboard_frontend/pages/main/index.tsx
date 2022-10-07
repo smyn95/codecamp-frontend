@@ -21,6 +21,10 @@ export default function MainPage() {
     <>
       <S.MenuBox>
         <LayoutBanner />
+        <S.WordWaves>
+          <span>Product List</span>
+          <span>Product List</span>
+        </S.WordWaves>
         <MenuList menu={menu} onMenu={onMenu} />
         <CoffeeList data={data.slice(0, 12)} />
       </S.MenuBox>
