@@ -51,11 +51,6 @@ export const AddressBox = styled.div`
 export const MapBox = styled.div`
   margin-right: 30px;
   height: 100%;
-  div {
-    width: 400px;
-    background: gray;
-    height: 200px;
-  }
 `;
 
 export const Coordinate = styled.ul`
