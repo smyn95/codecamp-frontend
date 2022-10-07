@@ -4,6 +4,9 @@ import { keyframes } from "@emotion/react";
 // HEADER
 export const Logo = styled.div`
   cursor: pointer;
+  img {
+    height: 100px;
+  }
 `;
 export const Navi = styled.div``;
 

@@ -5,7 +5,6 @@ import {
 } from "@ant-design/icons";
 import { useQuery } from "@apollo/client";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { useState } from "react";
 import { useRecoilState } from "recoil";
 import LoginPage from "../../../../../pages/login";
@@ -17,7 +16,6 @@ import { useMoveToPage } from "../../hooks/useMoveToPage";
 import { FETCH_USER_LOGGED_IN } from "../layout.query";
 
 export default function LayoutHeader(props) {
-  const router = useRouter();
   const { data } =
     useQuery<Pick<IQuery, "fetchUserLoggedIn">>(FETCH_USER_LOGGED_IN);
   const [myPage, setMyPage] = useState(false);
@@ -38,17 +36,14 @@ export default function LayoutHeader(props) {
         <S.Header>
           <S.Logo>
             <Link href="/main">
-              <img src="/starbucks_logo.png" alt="스타벅스" />
+              <img src="/maket_logo.png" alt="shinmimall 로고" />
             </Link>
           </S.Logo>
           <S.Navi>
             <S.Navibx>
-              <li className="all_menue">전체메뉴</li>
-              <li>For U</li>
-              <li>베스트</li>
-              <li onClick={onClickMoveToPage("/product/new")}>메뉴</li>
-              <li onClick={onClickMoveToPage("/board")}>리뷰</li>
-              <li>이벤트</li>
+              {/* <li className="all_menue">전체메뉴</li> */}
+              <li onClick={onClickMoveToPage("/product/list")}>중고거래</li>
+              <li onClick={onClickMoveToPage("/board")}>게시판</li>
             </S.Navibx>
           </S.Navi>
           <S.TopSearch className={props.inputClass}>
