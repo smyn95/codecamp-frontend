@@ -53,9 +53,9 @@ export const MapBox = styled.div`
   height: 100%;
 `;
 
-export const Coordinate = styled.ul`
+export const Coordinate = styled.div`
   display: flex;
-  li {
+  input {
     width: 120px;
     height: 40px;
     border: 1px solid #00704a;
@@ -80,6 +80,22 @@ export const CoordinateBottom = styled.div`
     opacity: 0.5;
   }
 `;
+export const Address = styled.div`
+  display: flex;
+  button {
+    width: 20%;
+    border: 1px solid #111;
+    background-color: #111;
+    color: #fff;
+    font-size: 18px;
+    margin-left: 5%;
+    &:hover {
+      background: transparent;
+      color: #111;
+    }
+  }
+`;
+
 export const MapAddressBox = styled.div`
   height: 250px;
   width: 100%;

@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import Input01 from "../../../src/components/commons/inputs/01";
-import { Tooltip } from "antd";
+import { Modal, Tooltip } from "antd";
 import { EnvironmentOutlined, PlusOutlined } from "@ant-design/icons";
 import { useMutation } from "@apollo/client";
 import {
@@ -15,6 +15,9 @@ import { useRouter } from "next/router";
 import { CREATE_USED_ITEM } from "../product.queries";
 import { useMoveToPage } from "../../../src/components/commons/hooks/useMoveToPage";
 import { useEffect } from "react";
+import { useRecoilState } from "recoil";
+import { isOpenState } from "../../../src/commons/store";
+import DaumPostcodeEmbed from "react-daum-postcode";
 
 declare const window: typeof globalThis & {
   kakao: any;
@@ -33,27 +36,47 @@ interface IFormData {
   contents: string;
   price: number;
   tags: string;
-  address: string;
-  addressDetail: string;
 }
 
 export default function ProductWritePage() {
   const router = useRouter();
-  const { register, handleSubmit, watch, formState } = useForm<IFormData>({
-    resolver: yupResolver(schema),
-  });
+  const [isOpen, setIsOpen] = useRecoilState(isOpenState);
 
-  // console.log(typeof watch("price"));
+  const { register, handleSubmit, watch, formState, getValues, setValue } =
+    useForm<IFormData>({
+      resolver: yupResolver(schema),
+      mode: "onChange",
+    });
 
   const [createUseditem] = useMutation<
     Pick<IMutation, "createUseditem">,
     IMutationCreateUseditemArgs
   >(CREATE_USED_ITEM);
 
+  // address
+  const onToggleModal = () => {
+    setIsOpen((prev) => !prev);
+  };
+
+  const handleComplete = (value: any) => {
+    setValue("useditemAddress", { address: value.address });
+    setValue("useditemAddress.lat", { lat: value.coords.La });
+    setValue("useditemAddress.lng");
+
+    onToggleModal();
+    // 모달에서 검색한 주소를 동적으로  input value값에 넣어주겠다 (출력)
+  };
+
+  const address = getValues("useditemAddress", {
+    lat: coords.La,
+    lng: coords.Ma,
+  });
+  // setValue로 가져온 값을
+
   useEffect(() => {
     const script = document.createElement("script"); // <script></script>
     script.src =
-      "//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=ea4a320c694c22dfa06c939a797eb783";
+      "//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=ea4a320c694c22dfa06c939a797eb783&libraries=services";
     document.head.appendChild(script);
 
     script.onload = () => {
@@ -66,42 +89,33 @@ export default function ProductWritePage() {
         };
 
         const map = new window.kakao.maps.Map(container, options); // 지도 생성 및 객체 리턴
-        console.log(map);
 
-        // 마커가 표시될 위치입니다
-        const markerPosition = new window.kakao.maps.LatLng(
-          37.486739,
-          126.900467
-        );
+        const geocoder = new window.kakao.maps.services.Geocoder();
 
-        // 마커를 생성합니다
-        const marker = new window.kakao.maps.Marker({
-          position: map.getCenter(),
-        });
+        // 주소로 좌표를 검색합니다
+        geocoder.addressSearch(address, function (result, status) {
+          // 정상적으로 검색이 완료됐으면
+          if (status === window.kakao.maps.services.Status.OK) {
+            const coords = new window.kakao.maps.LatLng(
+              result[0].y,
+              result[0].x
+            );
+            console.log(coords);
 
-        // 마커가 지도 위에 표시되도록 설정합니다
-        marker.setMap(map);
-        window.kakao.maps.event.addListener(
-          map,
-          "click",
-          function (mouseEvent) {
-            // 클릭한 위도, 경도 정보를 가져옵니다
-            const latlng = mouseEvent.latLng;
+            // 결과값으로 받은 위치를 마커로 표시합니다
+            const marker = new window.kakao.maps.Marker({
+              map,
+              position: coords,
+            });
 
-            // 마커 위치를 클릭한 위치로 옮깁니다
-            marker.setPosition(latlng);
-
-            // const message =
-            //   "클릭한 위치의 위도는 " + latlng.getLat() + " 이고, ";
-            // message += "경도는 " + latlng.getLng() + " 입니다";
-
-            // const resultDiv = document.getElementById("clickLatlng");
-            // resultDiv.innerHTML = message;
+            // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+            map.setCenter(coords);
+            marker.setMap(map);
           }
-        );
+        });
       });
     };
-  }, []);
+  }, [address]);
 
   const { onClickMoveToPage } = useMoveToPage();
 
@@ -118,7 +132,6 @@ export default function ProductWritePage() {
       ErrorModal(error.message);
     }
   };
-
   return (
     <>
       <S.Box>
@@ -190,17 +203,39 @@ export default function ProductWritePage() {
 
               <S.MapFlex>
                 <S.Coordinate>
-                  <li>위도(LAT)</li>
-                  <li>경도(LNG)</li>
+                  <Input01
+                    type="text"
+                    register={register("useitemAddress.lat")}
+                    placeholder=""
+                  />
+                  <Input01
+                    type="text"
+                    register={register("useitemAddress.lng")}
+                    placeholder=""
+                  />
                 </S.Coordinate>
 
                 <S.CoordinateBottom>
                   <S.InputName>주소</S.InputName>
-                  <Input01
-                    placeholder="주소가 입력됩니다."
-                    type="text"
-                    register={register("useditemAddress.address")}
-                  />
+                  <S.Address>
+                    <Input01
+                      placeholder="주소가 입력됩니다."
+                      type="text"
+                      register={register("useditemAddress.address")}
+                    />
+                    <button type="button" onClick={onToggleModal}>
+                      주소검색
+                    </button>
+                    {isOpen && (
+                      <Modal
+                        visible={true}
+                        onOk={onToggleModal}
+                        onCancel={onToggleModal}
+                      >
+                        <DaumPostcodeEmbed onComplete={handleComplete} />
+                      </Modal>
+                    )}
+                  </S.Address>
                   <Input01
                     placeholder="상세주소가 입력됩니다."
                     type="text"

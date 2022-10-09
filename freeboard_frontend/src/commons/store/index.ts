@@ -14,3 +14,8 @@ export const isLoginState = atom({
   key: "isLoginState",
   default: false,
 });
+
+export const isOpenState = atom({
+  key: "isOpenState",
+  default: false,
+});
