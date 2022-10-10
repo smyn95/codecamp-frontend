@@ -32,10 +32,13 @@ export default function KakaoMapPage(props) {
               result[0].y,
               result[0].x
             );
-            props.setValue("useditemAddress", {
-              lat: coords.Ma,
-              lng: coords.La,
-            });
+
+            if (!props.id) {
+              props.setValue("useditemAddress", {
+                lat: coords.Ma,
+                lng: coords.La,
+              });
+            }
 
             // 결과값으로 받은 위치를 마커로 표시합니다
             const marker = new window.kakao.maps.Marker({
@@ -54,7 +57,7 @@ export default function KakaoMapPage(props) {
 
   return (
     <>
-      <div id="map" style={{ width: 400, height: 200 }}></div>
+      <div id="map" style={{ minWidth: 400 }}></div>
     </>
   );
 }

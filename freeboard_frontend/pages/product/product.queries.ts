@@ -59,9 +59,43 @@ export const FETCH_USED_ITEM = gql`
       contents
       price
       tags
+      images
       pickedCount
+      useditemAddress {
+        _id
+        zipcode
+        address
+        addressDetail
+        lat
+        lng
+        createdAt
+        updatedAt
+        deletedAt
+      }
+      # buyer {
+      #   _id
+      #   email
+      #   name
+      #   picture
+      #   userPoint
+      #   createdAt
+      #   updatedAt
+      #   deletedAt
+      # }
+      # seller {
+      #   _id
+      #   email
+      #   name
+      #   picture
+      #   userPoint
+      #   createdAt
+      #   updatedAt
+      #   deletedAt
+      # }
       soldAt
       createdAt
+      updatedAt
+      deletedAt
     }
   }
 `;

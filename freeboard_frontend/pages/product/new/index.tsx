@@ -25,6 +25,7 @@ const schema = yup.object({
   contents: yup.string().required("상품설명을 입력해주세요."),
   price: yup.number().required("판매가격을 입력해주세요."),
   tags: yup.string(),
+  address: yup.string().required("주소를 입력해주세요."),
 });
 interface IFormData {
   name: string;
@@ -56,17 +57,15 @@ export default function ProductWritePage() {
   };
 
   const handleComplete = (value: any) => {
-    setValue("useditemAddress", { address: value.address });
+    setValue("useditemAddress.address", value.address);
     onToggleModal();
     // 모달에서 검색한 주소를 동적으로  input value값에 넣어주겠다 (출력)
   };
 
-  const address = getValues("useditemAddress.address");
-  // setValue로 가져온 값을
-
   const { onClickMoveToPage } = useMoveToPage();
 
   const onClickSubmit = async (data: IFormData) => {
+    console.log(data);
     try {
       await createUseditem({
         variables: {
@@ -137,7 +136,10 @@ export default function ProductWritePage() {
           <S.AddressBox>
             <S.MapBox>
               <S.InputName>거래위치</S.InputName>
-              <KakaoMapPage address={address} setValue={setValue} />
+              <KakaoMapPage
+                address={getValues("useditemAddress.address")}
+                setValue={setValue}
+              />
             </S.MapBox>
 
             <S.MapAddressBox>

@@ -12,12 +12,30 @@ export const Box = styled.div`
   padding: 50px;
   margin-bottom: 30px;
 `;
+export const ImageBox = styled.div`
+  height: 500px;
+  position: relative;
+  width: 700px;
+  margin: 0 auto;
+  height: 500px;
+  border-radius: 8px;
+  overflow: hidden;
+  img {
+    border-radius: 8px;
+    position: relative;
+    min-width: 100%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: transparent;
+  }
+`;
 export const Left = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid #bdbdbd;
-  padding: 10px 0 30px 0;
+  padding: 30px 0 10px 0;
 `;
 export const Leftbx = styled.div`
   display: flex;
@@ -46,26 +64,33 @@ export const Icon = styled.img`
   height: 35px;
   cursor: pointer;
 `;
-
 // 제품 정보
 export const ProductInfo = styled.div`
   padding: 30px 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  & > .ProductSub {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 30px;
+  }
 `;
+
 export const Remarks = styled.span`
   color: #bdbdbd;
   font-size: 18px;
   font-weight: 500;
 `;
 export const ProductName = styled.li`
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: -0.6px;
 `;
 export const ProductPrice = styled.li`
-  font-size: 36px;
-  font-weight: 600;
+  line-height: 1.76;
+  letter-spacing: -0.6px;
+  font-size: 18px;
+  font-weight: bold;
 `;
 export const Attention = styled.p`
   display: flex;
@@ -79,48 +104,32 @@ export const Attention = styled.p`
     font-size: 18px;
   }
 `;
-
 // 본문
-export const Detail = styled.main``;
+export const Detail = styled.main`
+  p {
+    font-size: 17px;
+    line-height: 1.6;
+    letter-spacing: -0.6px;
+    margin: 16px 0;
+    word-break: break-all;
+    min-height: 150px;
+  }
+`;
 
 export const Tags = styled.div`
-  span {
-    color: #bdbdbd;
-    font-size: 16px;
-    padding-right: 15px;
-  }
-`;
-
-export const MapAPI = styled.div``;
-
-export const DetailBtn = styled.div`
+  border-bottom: 1px solid #e9ecef;
+  padding: 30px 0;
   display: flex;
-  justify-content: flex-end;
-  border-bottom: 1px solid #bdbdbd;
-  padding-bottom: 30px;
-  button {
-    border-radius: 10px;
-    background: #00704a;
-    color: #fff;
-    width: 100px;
-    height: 50px;
-    font-weight: 500;
-    text-align: center;
-    line-height: 50px;
-    margin-right: 10px;
-    cursor: pointer;
-    &:last-of-type {
-      background: #ff4d4f;
-    }
-    &:hover {
-      filter: opacity(0.7);
-    }
-    &:last-child {
-      margin-right: 0;
-    }
+  align-items: flex-end;
+  justify-content: space-between;
+  span {
+    margin-top: 4px;
+    font-size: 13px;
+    line-height: 1.46;
+    letter-spacing: -0.6px;
+    color: #868e96;
   }
 `;
-
 // 댓글
 export const PencilIcon = styled.img``;
 
@@ -128,28 +137,14 @@ export const InputWrapper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-top: 40px;
   margin-bottom: 20px;
 `;
-export const Font = styled.p`
-  font-size: 20px;
-  font-weight: 500;
-  letter-spacing: 2px;
-  width: 200px;
-  color: #111;
-  text-align: left;
-  border-radius: 5px;
-  padding: 5px 0;
-  font-family: "Nanum Myeongjo", serif;
-  margin-top: 60px;
-`;
+
 export const ContentsWrapper = styled.div`
   border: 1px solid lightgray;
 `;
 export const Reviewinfo = styled.div`
-  display: flex;
   margin: 30px 0;
-  align-items: center;
   input {
     margin-right: 30px;
     width: 300px;
@@ -200,4 +195,39 @@ export const Button = styled.button`
   cursor: pointer;
   background-color: #00704a;
 `;
+// 버튼
+export const DetailBtn = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  button {
+    border-radius: 10px;
+    background: #00704a;
+    color: #fff;
+    width: 100px;
+    height: 50px;
+    font-weight: 500;
+    text-align: center;
+    line-height: 50px;
+    margin-right: 10px;
+    cursor: pointer;
+    &:last-of-type {
+      background: #ff4d4f;
+    }
+    &:hover {
+      filter: opacity(0.7);
+    }
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+`;
+
+export const Kakaomap = styled.div`
+  margin: 0 auto;
+  & > div {
+    width: 100%;
+    height: 360px !important;
+  }
+`;
+
 export const Star = styled(Rate)``;
