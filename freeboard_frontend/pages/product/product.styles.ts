@@ -55,15 +55,20 @@ export const MapBox = styled.div`
 
 export const Coordinate = styled.div`
   display: flex;
+  align-items: center;
+  border-bottom: 1px solid #777;
+  strong {
+    font-size: 16px;
+    color: red;
+  }
   input {
-    width: 120px;
     height: 40px;
-    border: 1px solid #00704a;
+    border: none;
     text-align: center;
     line-height: 40px;
     font-size: 16px;
     margin-right: 15px;
-    cursor: pointer;
+    outline: none;
   }
 `;
 export const CoordinateBottom = styled.div`

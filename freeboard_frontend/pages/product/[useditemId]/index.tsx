@@ -1,5 +1,4 @@
 import * as S from "./productDetail.styles";
-import Head from "next/head";
 import { Tooltip } from "antd";
 import { HeartOutlined } from "@ant-design/icons";
 import { useQuery } from "@apollo/client";
@@ -9,11 +8,6 @@ import {
   IQueryFetchUseditemArgs,
 } from "../../../src/commons/types/generated/types";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
-
-declare const window: typeof globalThis & {
-  kakao: any;
-}; // window = globalthis라고 불리운다
 
 export default function ProductDetailPage() {
   const router = useRouter();
@@ -25,49 +19,8 @@ export default function ProductDetailPage() {
     variables: { useditemId: router.query.useditemId },
   });
 
-  useEffect(() => {
-    const script = document.createElement("script"); // <script></script>
-    script.src =
-      "//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=ea4a320c694c22dfa06c939a797eb783";
-    document.head.appendChild(script);
-
-    script.onload = () => {
-      window.kakao.maps.load(function () {
-        const container = document.getElementById("map"); // 지도를 담을 영역의 DOM 레퍼런스
-        const options = {
-          // 지도를 생성할 때 필요한 기본 옵션
-          center: new window.kakao.maps.LatLng(37.486739, 126.900467), // 지도의 중심좌표.
-          level: 3, // 지도의 레벨(확대, 축소 정도)
-        };
-
-        const map = new window.kakao.maps.Map(container, options); // 지도 생성 및 객체 리턴
-        console.log(map);
-
-        // 마커가 표시될 위치입니다
-        const markerPosition = new window.kakao.maps.LatLng(
-          37.486739,
-          126.900467
-        );
-
-        // 마커를 생성합니다
-        const marker = new window.kakao.maps.Marker({
-          position: markerPosition,
-        });
-
-        // 마커가 지도 위에 표시되도록 설정합니다
-        marker.setMap(map);
-      });
-    };
-  }, []);
-
   return (
     <>
-      <Head>
-        <script
-          type="text/javascript"
-          src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4f0c1b881c4e4d3687061eaa18c7b05f"
-        ></script>
-      </Head>
       <S.Product>
         <S.Box>
           <S.Left>
