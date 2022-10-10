@@ -1,8 +1,8 @@
-import styled from '@emotion/styled';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-import React from 'react';
-import Slider from 'react-slick';
+import styled from "@emotion/styled";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import React from "react";
+import Slider from "react-slick";
 
 const Wrapper = styled.div`
   height: 350px;
@@ -29,32 +29,32 @@ export default function LayoutBanner() {
           <Slider {...settings}>
             <div>
               <h3>
-                <Banner src='/example_01.jpeg' alt='어쩌구저쩌구' />
+                <Banner src="/example_01.jpeg" alt="어쩌구저쩌구" />
               </h3>
             </div>
             <div>
               <h3>
-                <Banner src='/example_02.jpeg' alt='어쩌구저쩌구' />
+                <Banner src="/example_02.jpeg" alt="어쩌구저쩌구" />
               </h3>
             </div>
             <div>
               <h3>
-                <Banner src='/example_03.jpeg' alt='어쩌구저쩌구' />
+                <Banner src="/example_03.jpeg" alt="어쩌구저쩌구" />
               </h3>
             </div>
             <div>
               <h3>
-                <Banner src='/example_04.jpeg' alt='어쩌구저쩌구' />
+                <Banner src="/example_04.jpeg" alt="어쩌구저쩌구" />
               </h3>
             </div>
             <div>
               <h3>
-                <Banner src='/example_05.jpeg' alt='어쩌구저쩌구' />
+                <Banner src="/example_05.jpeg" alt="어쩌구저쩌구" />
               </h3>
             </div>
             <div>
               <h3>
-                <Banner src='/example_06.jpeg' alt='어쩌구저쩌구' />
+                <Banner src="/example_06.jpeg" alt="어쩌구저쩌구" />
               </h3>
             </div>
           </Slider>

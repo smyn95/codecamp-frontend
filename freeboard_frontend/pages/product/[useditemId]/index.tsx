@@ -27,6 +27,24 @@ export default function ProductDetailPage() {
   });
   const { Panel } = Collapse;
 
+  const onClickBasket = (basket) => () => {
+    console.log(basket);
+
+    // 1. 기존 장바구니 가져오기
+    const baskets = JSON.parse(localStorage.getItem("baskets") ?? "[]");
+
+    // 2. 이미 담겼는지 확인하기
+    const temp = baskets.filter((el) => el.useditemId === basket.useditemId);
+    if (temp.length === 1) {
+      alert("이미 담으신 물품입니다!!!");
+      return;
+    }
+
+    // 3. 해당 장바구니에 담기
+    baskets.push(basket);
+    localStorage.setItem("baskets", JSON.stringify(baskets));
+  };
+
   return (
     <>
       <S.Product>
@@ -82,7 +100,7 @@ export default function ProductDetailPage() {
                 <DollarOutlined />
                 &nbsp; 구매
               </button>
-              <button className="cart">
+              <button className="cart" onClick={onClickBasket}>
                 <ShoppingCartOutlined />
                 &nbsp; 장바구니
               </button>
@@ -90,7 +108,7 @@ export default function ProductDetailPage() {
 
             <S.Attention>
               <HeartOutlined />
-              <span>관심상품 20</span>
+              <span>관심상품</span>
             </S.Attention>
 
             <S.Detail>
