@@ -1,6 +1,10 @@
 import * as S from "./productDetail.styles";
-import { Tooltip } from "antd";
-import { HeartOutlined } from "@ant-design/icons";
+import { Collapse, Tooltip } from "antd";
+import {
+  DollarOutlined,
+  HeartOutlined,
+  ShoppingCartOutlined,
+} from "@ant-design/icons";
 import { useQuery } from "@apollo/client";
 import { FETCH_USED_ITEM } from "../product.queries";
 import {
@@ -21,81 +25,97 @@ export default function ProductDetailPage() {
     fetchPolicy: "network-only",
     variables: { useditemId: router.query.useditemId },
   });
+  const { Panel } = Collapse;
 
   return (
     <>
       <S.Product>
-        <S.Remarks>
-          {data ? data.fetchUseditem.remarks : "로딩중입니다..."}
-        </S.Remarks>
-        <S.ImageBox>
-          <img src="/dd.jpeg" alt="상품이미지" />
-        </S.ImageBox>
+        <div className="flexBox">
+          <S.ImageBox>
+            <img src="/dd.jpeg" alt="상품이미지" />
+          </S.ImageBox>
+          <S.Box>
+            <S.Left>
+              <S.Leftbx>
+                <img src="/avatar.png" style={{ height: "60px" }} />
+                <S.Namebx>
+                  <S.Name>유저네임</S.Name>
+                  <S.Date>
+                    {data
+                      ? data.fetchUseditem.createdAt.slice(0, 10)
+                      : "로딩중입니다..."}
+                  </S.Date>
+                </S.Namebx>
+              </S.Leftbx>
 
-        <S.Left>
-          <S.Leftbx>
-            <img src="/avatar.png" style={{ height: "60px" }} />
-            <S.Namebx>
-              <S.Name>유저네임</S.Name>
-              <S.Date>
-                {data
-                  ? data.fetchUseditem.createdAt.slice(0, 10)
-                  : "로딩중입니다..."}
-              </S.Date>
-            </S.Namebx>
-          </S.Leftbx>
+              <S.Right>
+                <Tooltip
+                  title={`d${
+                    data?.fetchUseditem.useditemAddress?.address ?? ""
+                  }d ${
+                    data?.fetchUseditem.useditemAddress?.addressDetail ?? ""
+                  }d`}
+                  color={"lime"}
+                >
+                  <S.Icon src="/location_on.png" alt="위치아이콘" />
+                </Tooltip>
+                <S.Icon src="/link.png" alt="링크아이콘" />
+              </S.Right>
+            </S.Left>
 
-          <S.Right>
-            <Tooltip
-              title={`d${data?.fetchUseditem.useditemAddress?.address ?? ""}d ${
-                data?.fetchUseditem.useditemAddress?.addressDetail ?? ""
-              }d`}
-              color={"lime"}
-            >
-              <S.Icon src="/location_on.png" alt="위치아이콘" />
-            </Tooltip>
-            <S.Icon src="/link.png" alt="링크아이콘" />
-          </S.Right>
-        </S.Left>
-
-        <S.ProductInfo>
-          <div className="ProductSub">
-            <ul>
-              <S.ProductName>
-                {data ? data.fetchUseditem.name : "로딩중입니다..."}
-              </S.ProductName>
+            <S.ProductInfo>
+              <ul>
+                <S.ProductName>
+                  {data ? data.fetchUseditem.name : "로딩중입니다..."}
+                </S.ProductName>
+                <S.Remarks>
+                  {data ? data.fetchUseditem.remarks : "로딩중입니다..."}
+                </S.Remarks>
+              </ul>
               <S.ProductPrice>
-                {data ? data.fetchUseditem.price : "로딩중입니다..."}
+                {data ? data.fetchUseditem.price : "로딩중입니다..."} 원
               </S.ProductPrice>
-            </ul>
-            <ul>
-              <S.Attention>
-                <HeartOutlined />
-                <span>20</span>
-              </S.Attention>
-            </ul>
-          </div>
+            </S.ProductInfo>
 
-          <S.Detail>
-            <p>{data ? data.fetchUseditem.contents : "로딩중입니다..."}</p>
-          </S.Detail>
+            <S.DetailBtn>
+              <button className="buy">
+                <DollarOutlined />
+                &nbsp; 구매
+              </button>
+              <button className="cart">
+                <ShoppingCartOutlined />
+                &nbsp; 장바구니
+              </button>
+            </S.DetailBtn>
 
-          <S.Kakaomap>
-            <KakaoMapPage
-              id={id}
-              address={data ? data.fetchUseditem.useditemAddress.address : ""}
-            />
-          </S.Kakaomap>
+            <S.Attention>
+              <HeartOutlined />
+              <span>관심상품 20</span>
+            </S.Attention>
 
-          <S.Tags>
-            <span>{data ? data.fetchUseditem.tags : "로딩중입니다..."}</span>
-          </S.Tags>
-        </S.ProductInfo>
+            <S.Detail>
+              <Collapse accordion>
+                <h1>구매 전 꼭 확인해주세요!</h1>
+                <Panel header="상세내용" key="1">
+                  <p>
+                    {data ? data.fetchUseditem.contents : "로딩중입니다..."}
+                  </p>
+                </Panel>
+              </Collapse>
+            </S.Detail>
 
-        <S.DetailBtn>
-          <button>목록으로</button>
-          <button>구매하기</button>
-        </S.DetailBtn>
+            <S.Kakaomap>
+              <KakaoMapPage
+                id={id}
+                address={data ? data.fetchUseditem.useditemAddress.address : ""}
+              />
+            </S.Kakaomap>
+
+            <S.Tags>
+              <span>{data ? data.fetchUseditem.tags : "로딩중입니다..."}</span>
+            </S.Tags>
+          </S.Box>
+        </div>
 
         <S.InputWrapper>
           <S.Reviewinfo>

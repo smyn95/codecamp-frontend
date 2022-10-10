@@ -5,22 +5,23 @@ export const Product = styled.div`
   width: 1400px;
   padding: 30px 0;
   margin: 0 auto;
+  & .flexBox {
+    display: flex;
+    justify-content: space-between;
+  }
 `;
 export const Box = styled.div`
-  width: 100%;
-  box-shadow: 0px 0px 9px #ccc;
-  padding: 50px;
-  margin-bottom: 30px;
+  width: 55%;
 `;
 export const ImageBox = styled.div`
-  height: 500px;
-  position: relative;
-  width: 700px;
-  margin: 0 auto;
-  height: 500px;
+  height: 550px;
+  width: 550px;
   border-radius: 8px;
   overflow: hidden;
+  /* position: fixed; */
   img {
+    width: 550px;
+    height: 550px;
     border-radius: 8px;
     position: relative;
     min-width: 100%;
@@ -67,12 +68,7 @@ export const Icon = styled.img`
 // 제품 정보
 export const ProductInfo = styled.div`
   padding: 30px 0;
-  & > .ProductSub {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 30px;
-  }
+  clear: both;
 `;
 
 export const Remarks = styled.span`
@@ -86,33 +82,58 @@ export const ProductName = styled.li`
   line-height: 1.5;
   letter-spacing: -0.6px;
 `;
-export const ProductPrice = styled.li`
-  line-height: 1.76;
-  letter-spacing: -0.6px;
-  font-size: 18px;
+export const ProductPrice = styled.p`
+  line-height: 26px;
   font-weight: bold;
+  float: right;
+  font-size: 20px;
+  letter-spacing: -0.1px;
 `;
-export const Attention = styled.p`
+export const Attention = styled.button`
+  height: 60px;
   display: flex;
-  flex-direction: column;
   align-items: center;
+  justify-content: center;
+  border: 1px solid #ebebeb;
+  border-radius: 10px;
+  color: #333;
+  width: 100%;
+  margin-top: 10px;
+  font-size: 18px;
+  font-weight: 400;
   svg {
     font-size: 30px;
-  }
-
-  span {
-    font-size: 18px;
+    margin-right: 15px;
   }
 `;
 // 본문
 export const Detail = styled.main`
+  margin: 40px 0;
+  border: none;
+  & > div {
+    background: transparent;
+    border: none;
+    & > div {
+      font-size: 16px;
+    }
+  }
   p {
+    border: none;
+    max-width: 320px;
     font-size: 17px;
     line-height: 1.6;
-    letter-spacing: -0.6px;
+    letter-spacing: -0.15px;
     margin: 16px 0;
     word-break: break-all;
     min-height: 150px;
+  }
+  h1 {
+    line-height: 22px;
+    padding-bottom: 12px;
+    font-size: 18px;
+    letter-spacing: -0.27px;
+    border-bottom: 1px solid #d9d9d9;
+    font-weight: bold;
   }
 `;
 
@@ -199,26 +220,23 @@ export const Button = styled.button`
 export const DetailBtn = styled.div`
   display: flex;
   justify-content: flex-end;
+  margin-top: 15px;
   button {
+    height: 60px;
     border-radius: 10px;
-    background: #00704a;
     color: #fff;
-    width: 100px;
-    height: 50px;
+    width: 50%;
+    font-size: 20px;
     font-weight: 500;
-    text-align: center;
-    line-height: 50px;
-    margin-right: 10px;
-    cursor: pointer;
-    &:last-of-type {
-      background: #ff4d4f;
-    }
-    &:hover {
-      filter: opacity(0.7);
-    }
-    &:last-child {
-      margin-right: 0;
-    }
+  }
+
+  button.buy {
+    background-color: #ef6253;
+    font-weight: 500;
+  }
+  button.cart {
+    background-color: #41b979;
+    margin-left: 10px;
   }
 `;
 

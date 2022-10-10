@@ -2,7 +2,6 @@ import * as S from "../../../../../styles/freeboard";
 import Link from "next/link";
 import BoardListMap from "./BoardList.map";
 import { Space } from "antd";
-import LayoutBanner from "../../../commons/layout/banner";
 import Search from "antd/lib/transfer/search";
 import PaginationPage from "../../../commons/pagination";
 
