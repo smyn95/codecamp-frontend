@@ -60,7 +60,6 @@ export default function ProductWritePage(props) {
     defaultValues: {
       name: props.data?.fetchUseditem.name,
       remarks: props.data?.fetchUseditem.remarks,
-      contents: props.data?.fetchUseditem.contents,
       price: props.data?.fetchUseditem.price,
       tags: props.data?.fetchUseditem.tags,
     },
@@ -153,8 +152,9 @@ export default function ProductWritePage(props) {
             <ReactQuill
               style={{ width: "100%", height: "300px" }}
               onChange={onChangeContents}
+              defaultValue={props.data?.fetchUseditem.contents}
             />
-            {/* <S.InputError>{formState.errors.contents?.message}</S.InputError> */}
+            <S.InputError>{formState.errors.contents?.message}</S.InputError>
           </S.InputBox>
 
           <S.InputBox>

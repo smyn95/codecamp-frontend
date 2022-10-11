@@ -56,8 +56,7 @@ export default function ProductListPage() {
                 </S.BgLayer>
                 <img src="/dd.jpeg" alt="상품이미지" />
                 <S.Name className="priceover">
-                  {el.name}
-                  <S.Price>{el.price}</S.Price>
+                  {el.name || "　 "} <S.Price>{el.price}</S.Price>
                 </S.Name>
               </S.ProductBox>
             ))}
