@@ -309,14 +309,14 @@ export const Badge = styled.div`
 //Badge End
 
 export const SubBaaner = styled.div`
-  background: url(/subbanner.png) no-repeat 50% 50%;
+  background: url(/subbanner.png) no-repeat 50% 85%;
   background-size: cover;
-  height: 500px;
+  height: 300px;
 `;
 export const SubBaaner02 = styled.div`
-  background: url(/subbanner02.png) no-repeat 50% 50%;
+  background: url(/subbanner02.png) no-repeat 50% 85%;
   background-size: cover;
-  height: 500px;
+  height: 300px;
 `;
 
 //랜딩페이지

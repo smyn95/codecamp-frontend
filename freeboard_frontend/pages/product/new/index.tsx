@@ -18,6 +18,9 @@ import { useRecoilState } from "recoil";
 import { isOpenState } from "../../../src/commons/store";
 import DaumPostcodeEmbed from "react-daum-postcode";
 import KakaoMapPage from "../../../src/components/commons/kakoMap";
+import "react-quill/dist/quill.snow.css";
+import { useState } from "react";
+import dynamic from "next/dynamic";
 
 const schema = yup.object({
   name: yup.string().required("상품명을 입력해주세요."),
@@ -38,6 +41,11 @@ interface IFormData {
 export default function ProductWritePage() {
   const router = useRouter();
   const [isOpen, setIsOpen] = useRecoilState(isOpenState);
+  const [isValue, setIsValue] = useState("");
+
+  const ReactQuill = dynamic(async () => await import("React-quill"), {
+    ssr: false,
+  }); // 서버에서 랜더링 X
 
   const { register, handleSubmit, watch, formState, getValues, setValue } =
     useForm<IFormData>({
@@ -110,6 +118,7 @@ export default function ProductWritePage() {
               placeholder="상품설명을 작성해주세요."
               {...register("contents")}
             />
+            <ReactQuill theme="snow" value={isValue} onChange={setIsValue} />
             <S.InputError>{formState.errors.contents?.message}</S.InputError>
           </S.InputBox>
 

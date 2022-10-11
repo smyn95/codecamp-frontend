@@ -48,11 +48,11 @@ export default function CachePage() {
         cache.modify({
           fields: {
             fetchBoards: (prev, { readField }) => {
-              const deletedId = data.deleteBoard; // 삭제된ID
+              const deletedId = data.deleteBoard;
               const filteredPrev = prev.filter(
-                (el) => readField("_id", el) !== deletedId // el._id가 안되므로, readField를 사용해서 꺼내오기
+                (el) => readField("_id", el) !== deletedId
               );
-              return [...filteredPrev]; // 삭제된ID를 제외한 나머지 9개만 리턴
+              return [...filteredPrev];
             },
           },
         });
@@ -89,7 +89,7 @@ export default function CachePage() {
         <div key={el._id}>
           <span style={{ margin: "10px" }}>{el.writer}</span>
           <span style={{ margin: "10px" }}>{el.title}</span>
-          <button onClick={onClickDelete(el._id)}>삭제하기</button>
+          <button onClick={onClickDelete(el._id)}>X</button>
         </div>
       ))}
       <button onClick={onClickCreate}>등록하기</button>

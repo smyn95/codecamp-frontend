@@ -21,20 +21,24 @@ export const ListOver = styled.li`
   p {
     font-family: "Libre Bodoni";
     position: absolute;
-    bottom: 21px;
+    max-width: 150px;
+    bottom: 27px;
     left: 25px;
     background: rgba(255, 255, 255, 0.7);
     font-weight: 600;
     padding: 5px 10px;
-    border-bottom: 1px solid #ccc;
-    border-left: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+    border-right: 1px solid #ccc;
     border-radius: 0 5px 0 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
   &&::before,
   &&:after {
     content: "";
     position: absolute;
-    top: 21px;
+    top: 27px;
     right: 25px;
   }
   &&::before {
@@ -51,9 +55,10 @@ export const ListOver = styled.li`
     color: #fff;
     font-size: 18px;
     opacity: 0;
+    font-size: 25px;
   }
   &&:hover:before {
-    border-width: 213px 200px 100px 100px;
+    border-width: 213px 200px 88px 100px;
     border-color: rgba(30, 57, 50, 0.8);
     transform: rotate(0deg);
     border-radius: 10px 0 10px 0px;
@@ -65,6 +70,7 @@ export const ListOver = styled.li`
   img {
     width: 300px;
     border-radius: 15px 0 15px 0;
+    background-color: #f4f4f4;
   }
   h3 {
     margin: 0;
@@ -75,21 +81,17 @@ export const ListOver = styled.li`
 export const Menu = styled.ul`
   display: flex;
   justify-content: center;
-  margin: 50px 0 40px 0;
+  margin: 50px 0 10px 0;
   li {
-    padding: 5px 60px;
-    background: tomato;
-    border-radius: 5px;
-    border: 1px solid tomato;
-    color: #fff;
-    margin: 15px 15px 0 0;
-    font-size: 20px;
-    cursor: pointer;
-    font-weight: 600;
-    line-height: 28px;
-    &:last-of-type {
-      margin-right: 0;
-    }
+    font-size: 40px;
+    font-weight: 100;
+    text-align: center;
+    color: #333;
+    font-family: "Libre Bodoni", serif;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    -webkit-font-smoothing: antialiased;
+
     &:hover {
       background: transparent;
       border: 1px solid tomato;
