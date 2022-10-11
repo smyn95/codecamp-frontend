@@ -60,6 +60,7 @@ export default function Freeboard(props: IBoardWriteProps) {
       password: input.password,
       updateBoardInput: {},
     };
+
     try {
       if (input.title) {
         myvariables.updateBoardInput.title = input.title;

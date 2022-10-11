@@ -150,6 +150,17 @@ export const Tags = styled.div`
     letter-spacing: -0.6px;
     color: #868e96;
   }
+  button {
+    background: gray;
+    color: #fff;
+    width: 100px;
+    font-size: 16px;
+    transition: 0.3s;
+    height: 50px;
+    &:hover {
+      filter: opacity(0.7);
+    }
+  }
 `;
 // 댓글
 export const PencilIcon = styled.img``;

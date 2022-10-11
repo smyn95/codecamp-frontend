@@ -43,7 +43,7 @@ export default function LayoutHeader(props) {
             <S.Navi>
               <S.Navibx>
                 {/* <li className="all_menue">전체메뉴</li> */}
-                <li onClick={onClickMoveToPage("/product/list")}>중고거래</li>
+                <li onClick={onClickMoveToPage("/product/")}>중고거래</li>
                 <li onClick={onClickMoveToPage("/board")}>게시판</li>
               </S.Navibx>
             </S.Navi>

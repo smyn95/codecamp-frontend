@@ -4,6 +4,7 @@ interface IProps {
   type: "text" | "password" | "number";
   register: UseFormRegisterReturn;
   placeholder: any;
+  defaultValue: String;
 }
 
 export default function Input01(props: IProps) {

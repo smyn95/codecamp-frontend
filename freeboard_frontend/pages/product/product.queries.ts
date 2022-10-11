@@ -109,3 +109,31 @@ export const FETCH_USED_ITEMS = gql`
     }
   }
 `;
+
+export const UPDATE_USED_ITEM = gql`
+  mutation updateUseditem(
+    $updateUseditemInput: UpdateUseditemInput!
+    $useditemId: ID!
+  ) {
+    updateUseditem(
+      updateUseditemInput: $updateUseditemInput
+      useditemId: $useditemId
+    ) {
+      _id
+      name
+      remarks
+      contents
+      price
+      tags
+      images
+      pickedCount
+      useditemAddress
+      buyer
+      seller
+      soldAt
+      createdAt
+      updatedAt
+      deletedAt
+    }
+  }
+`;

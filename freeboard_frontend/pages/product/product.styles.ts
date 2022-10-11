@@ -22,9 +22,9 @@ export const InputBox = styled.div`
   margin-top: 50px;
   position: relative;
   &.contentsBox {
-    display: flex;
+    /* display: flex;
     align-items: flex-start;
-    margin-top: 45px;
+    margin-top: 45px; */
     span {
       position: absolute;
       top: -25px;

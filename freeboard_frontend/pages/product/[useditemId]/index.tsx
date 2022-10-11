@@ -13,9 +13,11 @@ import {
 } from "../../../src/commons/types/generated/types";
 import { useRouter } from "next/router";
 import KakaoMapPage from "../../../src/components/commons/kakoMap";
+import { useMoveToPage } from "../../../src/components/commons/hooks/useMoveToPage";
 
 export default function ProductDetailPage() {
   const router = useRouter();
+  const { onClickMoveToPage } = useMoveToPage();
   const id = router.query.useditemId;
 
   const { data } = useQuery<
@@ -131,6 +133,14 @@ export default function ProductDetailPage() {
 
             <S.Tags>
               <span>{data ? data.fetchUseditem.tags : "로딩중입니다..."}</span>
+              <button
+                type="button"
+                onClick={onClickMoveToPage(
+                  `/product/${router.query.useditemId}/edit`
+                )}
+              >
+                수정하기
+              </button>
             </S.Tags>
           </S.Box>
         </div>
