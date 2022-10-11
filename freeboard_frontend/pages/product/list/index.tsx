@@ -1,6 +1,7 @@
 import { useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 import { MouseEvent } from "react";
+import InfiniteScroll from "react-infinite-scroller";
 import {
   IQuery,
   IQueryFetchUseditemsArgs,
@@ -10,7 +11,7 @@ import * as S from "./productList.styles";
 
 export default function ProductListPage() {
   const router = useRouter();
-  const { data } = useQuery<
+  const { data, fetchMore } = useQuery<
     Pick<IQuery, "fetchUseditems">,
     IQueryFetchUseditemsArgs
   >(FETCH_USED_ITEMS);
@@ -18,13 +19,32 @@ export default function ProductListPage() {
   const onClickMoveToProductDetail = (event: MouseEvent<HTMLLIElement>) => {
     void router.push(`/product/${event.currentTarget.id}`);
   };
+
+  const onLoadMore = () => {
+    if (!data) return;
+
+    void fetchMore({
+      variables: { page: Math.ceil(data?.fetchUseditems.length / 10) + 1 },
+      updateQuery: (prev, { fetchMoreResult }) => {
+        if (!fetchMoreResult?.fetchUseditems)
+          return { fetchUseditems: [...prev.fetchUseditems] };
+        return {
+          fetchUseditems: [
+            ...prev.fetchUseditems,
+            ...fetchMoreResult.fetchUseditems,
+          ],
+        };
+      },
+    });
+  };
+
   return (
     <>
       <S.ListPage>
         <S.Title>Product</S.Title>
         <S.Box>
-          {data?.fetchUseditems.map((el, index) => (
-            <>
+          <InfiniteScroll pageStart={0} loadMore={onLoadMore} hasMore={true}>
+            {data?.fetchUseditems.map((el, index) => (
               <S.ProductBox
                 key={el._id}
                 id={el._id}
@@ -39,8 +59,8 @@ export default function ProductListPage() {
                   <S.Price>{el.price}</S.Price>
                 </S.Name>
               </S.ProductBox>
-            </>
-          ))}
+            ))}
+          </InfiniteScroll>
         </S.Box>
       </S.ListPage>
     </>

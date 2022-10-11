@@ -6,9 +6,11 @@ export const ListPage = styled.div`
   margin: 0 auto;
 `;
 export const Box = styled.main`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 66px;
+  & > div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 66px;
+  }
 `;
 
 export const ProductBox = styled.section`
