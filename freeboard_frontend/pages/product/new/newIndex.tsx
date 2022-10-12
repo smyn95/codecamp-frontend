@@ -34,7 +34,7 @@ interface IFormData {
   remarks: string;
   contents: string;
   price: number;
-  tags: string;
+  tags: [string];
 }
 const ReactQuill = dynamic(async () => await import("React-quill"), {
   ssr: false,
@@ -107,11 +107,15 @@ export default function ProductWritePage(props) {
     }
   };
 
-  const onClickUpdate = async (data: any) => {
+  const onClickUpdate = async (data: IFormData) => {
     console.log(data);
+
     try {
       const result = await updateUseditem({
-        variables: data,
+        variables: {
+          updateUseditemInput: data,
+          useditemId: String(router.query.useditemId),
+        },
       });
       SuccessModal("수정이 완료되었습니다.");
       void router.push(`/product/${result.data?.updateUseditem._id}`);
@@ -119,7 +123,7 @@ export default function ProductWritePage(props) {
       ErrorModal(error.message);
     }
   };
-
+  // 수정하기 할때 패치의 데이터 말고 폼의 데이터를 받아와야한다. 주소lat lng 가 없으면 에러
   return (
     <>
       <S.Box>
@@ -149,7 +153,6 @@ export default function ProductWritePage(props) {
               placeholder="한줄요약을 작성해주세요."
               register={register("remarks")}
             />
-            <S.InputError>{formState.errors.remarks?.message}</S.InputError>
           </S.InputBox>
 
           <S.InputBox>
@@ -179,7 +182,6 @@ export default function ProductWritePage(props) {
               placeholder="#태그 #태그 #태그"
               register={register("tags")}
             />
-            <S.InputError>{formState.errors.tags?.message}</S.InputError>
           </S.InputBox>
 
           <S.AddressBox>

@@ -119,19 +119,29 @@ export const UPDATE_USED_ITEM = gql`
       updateUseditemInput: $updateUseditemInput
       useditemId: $useditemId
     ) {
-      _id
+      # _id
       name
       remarks
       contents
       price
       tags
-      images
-      pickedCount
-      # useditemAddress
-      soldAt
-      createdAt
-      updatedAt
-      deletedAt
+      # images
+      # pickedCount
+      useditemAddress {
+        # _id
+        zipcode
+        address
+        addressDetail
+        lat
+        lng
+        # createdAt
+        # updatedAt
+        # deletedAt
+      }
+      #   soldAt
+      #   createdAt
+      #   updatedAt
+      #   deletedAt
     }
   }
 `;

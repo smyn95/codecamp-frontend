@@ -57,7 +57,7 @@ export default function ReactHookFormPage() {
         },
       });
       SuccessModal("회원가입이 완료되었습니다.");
-      void router.push("/");
+      void router.push("/main");
     } catch (error) {
       ErrorModal(error.message);
     }

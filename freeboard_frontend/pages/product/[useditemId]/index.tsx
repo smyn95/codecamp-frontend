@@ -19,9 +19,10 @@ import { useMoveToPage } from "../../../src/components/commons/hooks/useMoveToPa
 import { ErrorModal, SuccessModal } from "../../../src/commons";
 import { useEffect } from "react";
 
-export default function ProductDetailPage() {
+export default function ProductDetailPage(props) {
   const router = useRouter();
   const { onClickMoveToPage } = useMoveToPage();
+
   const id = router.query.useditemId;
 
   const { data } = useQuery<
@@ -39,23 +40,24 @@ export default function ProductDetailPage() {
 
   const { Panel } = Collapse;
 
-  useEffect((basket) => {
-    // 1. 기존 장바구니 가져오기
-    const baskets = JSON.parse(localStorage.getItem(baskets) ?? "[]");
+  useEffect(() => {
+    let myProduct = JSON.parse(localStorage.getItem("myProducts") ?? "[]");
 
-    // 2. 이미 담겼는지 확인하기
-    const temp = baskets.filter((el) => el.useditemId === basket.useditemId);
-    if (temp.length === 1) {
-      alert("이미 담으신 물품입니다!!!");
-      return;
-    }
+    // 3.현재 상품 id를 myProduct에 저장한다.
+    myProduct.unshift(id);
 
-    // 3. 해당 장바구니에 담기
-    baskets.unshift(basket);
-    if (baskets.length >= 3) {
-      baskets.pop(basket);
+    // 4.중복된 데이터를 넣지 않는 set 자료형에 myProduct를 담아 중복을 제거한다.
+    myProduct = new Set(myProduct);
+
+    // 중복 제거된 set 자료형의 myProduct를 일반 배열로 변경한다.
+    myProduct = [...myProduct];
+
+    if (myProduct > 2) {
+      myProduct.pop();
+    } else {
+      localStorage.setItem("myProducts", JSON.stringify(myProduct));
     }
-    localStorage.setItem("baskets", JSON.stringify(baskets));
+    // 5.localStorage에 데이터를 JSON 자료형으로 저장한다.
   }, []);
 
   const onClickDelete = async (useditemId: any) => {
@@ -156,7 +158,9 @@ export default function ProductDetailPage() {
             <S.Kakaomap>
               <KakaoMapPage
                 id={id}
-                address={data ? data.fetchUseditem.useditemAddress.address : ""}
+                address={
+                  data ? data.fetchUseditem.useditemAddress?.address : ""
+                }
               />
             </S.Kakaomap>
 

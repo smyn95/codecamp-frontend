@@ -49,7 +49,7 @@ export default function Freeboard(props: IBoardWriteProps) {
     }
   );
 
-  //수정하기 함수
+  // 수정하기 함수
   const onClickUpdate = async () => {
     const currentFiles = JSON.stringify(imgUrl);
     const defaultFiles = JSON.stringify(props.data?.fetchBoard.images);
