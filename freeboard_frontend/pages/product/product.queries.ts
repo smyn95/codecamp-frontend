@@ -127,13 +127,17 @@ export const UPDATE_USED_ITEM = gql`
       tags
       images
       pickedCount
-      useditemAddress
-      buyer
-      seller
+      # useditemAddress
       soldAt
       createdAt
       updatedAt
       deletedAt
     }
+  }
+`;
+
+export const DELETE_USED_ITEM = gql`
+  mutation deleteUseditem($useditemId: ID!) {
+    deleteUseditem(useditemId: $useditemId)
   }
 `;

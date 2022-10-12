@@ -305,6 +305,18 @@ export const Badge = styled.div`
   margin-bottom: 12px;
   box-shadow: 4px 4px 10px, rgb(0 0 0 / 15%);
   cursor: pointer;
+  button {
+    width: 140px;
+    height: 50px;
+    background: #2fcab0;
+    color: #fff;
+    font-size: 18px;
+    line-height: 50px;
+    svg {
+      font-size: 16px;
+      font-weight: bold;
+    }
+  }
 `;
 //Badge End
 

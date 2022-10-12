@@ -160,6 +160,10 @@ export const Tags = styled.div`
     &:hover {
       filter: opacity(0.7);
     }
+    &:last-of-type {
+      margin-left: 15px;
+      background: #ef6253;
+    }
   }
 `;
 // 댓글

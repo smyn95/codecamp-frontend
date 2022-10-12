@@ -5,15 +5,18 @@ import {
   HeartOutlined,
   ShoppingCartOutlined,
 } from "@ant-design/icons";
-import { useQuery } from "@apollo/client";
-import { FETCH_USED_ITEM } from "../product.queries";
+import { useMutation, useQuery } from "@apollo/client";
+import { DELETE_USED_ITEM, FETCH_USED_ITEM } from "../product.queries";
 import {
+  IMutation,
+  IMutationDeleteUseditemArgs,
   IQuery,
   IQueryFetchUseditemArgs,
 } from "../../../src/commons/types/generated/types";
 import { useRouter } from "next/router";
 import KakaoMapPage from "../../../src/components/commons/kakoMap";
 import { useMoveToPage } from "../../../src/components/commons/hooks/useMoveToPage";
+import { ErrorModal, SuccessModal } from "../../../src/commons";
 
 export default function ProductDetailPage() {
   const router = useRouter();
@@ -27,6 +30,12 @@ export default function ProductDetailPage() {
     fetchPolicy: "network-only",
     variables: { useditemId: router.query.useditemId },
   });
+
+  const [deleteUseditem] = useMutation<
+    Pick<IMutation, "deleteUseditem">,
+    IMutationDeleteUseditemArgs
+  >(DELETE_USED_ITEM);
+
   const { Panel } = Collapse;
 
   const onClickBasket = (basket) => () => {
@@ -45,6 +54,24 @@ export default function ProductDetailPage() {
     // 3. 해당 장바구니에 담기
     baskets.push(basket);
     localStorage.setItem("baskets", JSON.stringify(baskets));
+  };
+
+  const onClickDelete = async (useditemId: any) => {
+    try {
+      await deleteUseditem({
+        variables: { useditemId: router.query.useditemId },
+        refetchQueries: [
+          {
+            query: FETCH_USED_ITEM,
+            variables: { useditemId: router.query.useditemId },
+          },
+        ],
+      });
+      SuccessModal("삭제가 완료되었습니다.");
+      void router.push("/product/");
+    } catch (error) {
+      ErrorModal(error.message);
+    }
   };
 
   return (
@@ -133,14 +160,19 @@ export default function ProductDetailPage() {
 
             <S.Tags>
               <span>{data ? data.fetchUseditem.tags : "로딩중입니다..."}</span>
-              <button
-                type="button"
-                onClick={onClickMoveToPage(
-                  `/product/${router.query.useditemId}/edit`
-                )}
-              >
-                수정하기
-              </button>
+              <div>
+                <button
+                  type="button"
+                  onClick={onClickMoveToPage(
+                    `/product/${router.query.useditemId}/edit`
+                  )}
+                >
+                  수정하기
+                </button>
+                <button type="button" onClick={onClickDelete}>
+                  삭제하기
+                </button>
+              </div>
             </S.Tags>
           </S.Box>
         </div>

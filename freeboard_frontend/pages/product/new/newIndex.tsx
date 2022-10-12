@@ -28,7 +28,6 @@ const schema = yup.object({
   contents: yup.string().required("상품설명을 입력해주세요."),
   price: yup.number().required("판매가격을 입력해주세요."),
   tags: yup.string(),
-  // address: yup.string().required("주소를 입력해주세요."),
 });
 interface IFormData {
   name: string;
@@ -96,19 +95,20 @@ export default function ProductWritePage(props) {
 
   const onClickSubmit = async (data: IFormData) => {
     try {
-      await createUseditem({
+      const result = await createUseditem({
         variables: {
           createUseditemInput: data,
         },
       });
       SuccessModal("상품등록이 완료되었습니다.");
-      void router.push(`/product/${data.createUseditem._id}`);
+      void router.push(`/product/${result.data.createUseditem._id}`);
     } catch (error) {
       ErrorModal(error.message);
     }
   };
 
-  const onClickUpdate = async () => {
+  const onClickUpdate = async (data: any) => {
+    console.log(data);
     try {
       const result = await updateUseditem({
         variables: data,
@@ -122,11 +122,16 @@ export default function ProductWritePage(props) {
 
   return (
     <>
-      {console.log(props.data)}
       <S.Box>
         <S.Title>Product registration</S.Title>
 
-        <form onSubmit={handleSubmit(onClickSubmit)}>
+        <form
+          onSubmit={
+            props.isEdit
+              ? handleSubmit(onClickUpdate)
+              : handleSubmit(onClickSubmit)
+          }
+        >
           <S.InputBox>
             <S.InputName>상품명</S.InputName>
             <Input01
@@ -279,9 +284,7 @@ export default function ProductWritePage(props) {
           <S.Submit>
             <S.Cancel onClick={onClickMoveToPage("/main")}>취소하기</S.Cancel>
 
-            <S.SubmitBtn onClick={props.isEdit ? onClickUpdate : onClickSubmit}>
-              {props.isEdit ? "수정하기 " : "등록하기"}
-            </S.SubmitBtn>
+            <S.SubmitBtn>{props.isEdit ? "수정하기 " : "등록하기"}</S.SubmitBtn>
           </S.Submit>
         </form>
       </S.Box>

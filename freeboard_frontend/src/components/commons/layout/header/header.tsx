@@ -2,6 +2,7 @@ import {
   CaretDownOutlined,
   DollarOutlined,
   LogoutOutlined,
+  PlusOutlined,
 } from "@ant-design/icons";
 import { useQuery } from "@apollo/client";
 import Link from "next/link";
@@ -100,6 +101,12 @@ export default function LayoutHeader(props) {
             </S.Badge>
             <S.Badge>
               <img src="/badge_02.png" alt="Badge" />
+            </S.Badge>
+            <S.Badge>
+              <button onClick={onClickMoveToPage("/product/new/")}>
+                상품등록 &nbsp;
+                <PlusOutlined />
+              </button>
             </S.Badge>
           </S.Badges>
         </S.Header>

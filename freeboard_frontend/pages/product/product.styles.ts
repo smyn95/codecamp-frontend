@@ -91,13 +91,15 @@ export const CoordinateBottom = styled.div`
 `;
 export const Address = styled.div`
   display: flex;
+  align-items: center;
   button {
-    width: 20%;
+    width: 15%;
     border: 1px solid #111;
     background-color: #111;
     color: #fff;
-    font-size: 18px;
+    font-size: 16px;
     margin-left: 5%;
+    padding: 5px 0;
     &:hover {
       background: transparent;
       color: #111;

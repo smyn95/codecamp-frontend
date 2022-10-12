@@ -49,6 +49,7 @@ export default function LoginPage(props) {
   const onClickLabel = () => {
     focusRef.current?.focus();
   };
+
   const onClickjoin = () => {
     void router.push("/join");
     setIsLogin(!isLogin);
