@@ -1,24 +1,21 @@
-import styles from "../styles/Home.module.css";
 import * as S from "../src/commons/styles";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
+import Link from "next/link";
 
 export default function Home() {
-  const router = useRouter();
-  const [loding, setLoding] = useState(true);
+  // const [loding, setLoding] = useState(true);
 
-  useEffect(() => {
-    setTimeout(() => {
-      setLoding(false);
-      void router.push("/main");
-    }, 2800);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setLoding(false);
+  //     void router.push("/main");
+  //   }, 2800);
 
-    return;
-  }, []);
+  //   return;
+  // }, []);
 
   return (
     <>
-      {loding ? (
+      {/* {loding ? (
         <div className={styles.container}>
           <S.Randing>
             <img src="/randing.png" alt="스타벅스로고" />
@@ -34,7 +31,26 @@ export default function Home() {
             <span> ...</span>
           </S.Container>
         </div>
-      ) : null}
+      ) : null} */}
+      <body style={{ background: "#000" }}>
+        <S.Square>
+          <S.Animantion></S.Animantion>
+          <S.Animantion></S.Animantion>
+          <S.Animantion></S.Animantion>
+          <S.ContentRanding>
+            <h2>랜딩페이지</h2>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat,
+              voluptas, a, expedita, vel maxime impedit aut saepe sit deserunt
+              voluptatem qui deleniti delectus repellat architecto consequatur
+              modi debitis molestias optio!
+            </p>
+            {/* <Link> */}
+            <a href="/main">Go Site</a>
+            {/* </Link> */}
+          </S.ContentRanding>
+        </S.Square>
+      </body>
     </>
   );
 }

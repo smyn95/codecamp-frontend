@@ -206,12 +206,14 @@ export default function ProductWritePage(props) {
                     type="text"
                     register={register("useditemAddress.lat")}
                     placeholder=""
+                    readOnly
                   />
                   <strong>경도 : </strong>
                   <Input01
                     type="text"
                     register={register("useditemAddress.lng")}
                     placeholder=""
+                    readOnly
                   />
                 </S.Coordinate>
 
@@ -222,6 +224,7 @@ export default function ProductWritePage(props) {
                       placeholder="주소가 입력됩니다."
                       type="text"
                       register={register("useditemAddress.address")}
+                      readOnly
                     />
                     <button type="button" onClick={onToggleModal}>
                       주소검색

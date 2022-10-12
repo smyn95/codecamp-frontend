@@ -36,16 +36,10 @@ export const FormInput = styled.span`
     outline: none;
     font-family: "Noto Sans KR", sans-serif;
     font-weight: 400;
-    &:focus ~ label {
-      transform: translate(0, -30px);
-      font-size: 12px;
-    }
-    & ~ label {
-      transform: ${(props) =>
-        props.email || props.name || props.password
-          ? "translate(0, -30px)"
-          : ""};
-    }
+  }
+  input:focus ~ label,
+  input:valid ~ label {
+    transform: translateY(-30px);
   }
 `;
 export const FormLabel = styled.label`

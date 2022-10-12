@@ -4,6 +4,7 @@ interface IProps {
   type: "text" | "password" | "number";
   register: UseFormRegisterReturn;
   placeholder: any;
+  readOnly: any;
 }
 
 export default function Input01(props: IProps) {
@@ -12,6 +13,7 @@ export default function Input01(props: IProps) {
       type={props.type}
       {...props.register}
       placeholder={props.placeholder}
+      readOnly={props.readOnly}
     />
   );
 }

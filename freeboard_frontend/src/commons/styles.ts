@@ -330,61 +330,141 @@ export const SubBaaner02 = styled.div`
   background-size: cover;
   height: 300px;
 `;
-
-//랜딩페이지
-export const Randing = styled.div`
-  img {
-    display: block;
-    margin: auto;
-  }
-`;
-const flip = keyframes`
-  35%{
-    transform: rotateX(360deg);
-  }
-  100%{
-    transform: rotateX(360deg);
-  
-  }
-`;
-
-export const Container = styled.div`
-  display: flex;
+// 랜딩페이지
+export const Square = styled.div`
   position: absolute;
-  left: 52%;
+  top: 50%;
+  left: 50%;
   transform: translate(-50%, -50%);
-  span {
-    font-size: 5vw;
-    letter-spacing: 10px;
-    animation: flip 2.6s infinite linear;
-    transform-origin: 0 70%;
-    transform-style: preserve-3d;
-  }
-  span:nth-child(even) {
-    color: #64a70b;
-  }
-  span:nth-child(2) {
-    animation-delay: 0.3s;
-    animation-name: ${flip};
-  }
-  span:nth-child(3) {
-    animation-delay: 0.6s;
-    animation-name: ${flip};
-  }
-  span:nth-child(4) {
-    animation-delay: 0.9s;
-    animation-name: ${flip};
-  }
-  span:nth-child(5) {
-    animation-delay: 1.2s;
-    animation-name: ${flip};
-  }
-  span:nth-child(6) {
-    animation-delay: 1.5s;
-    animation-name: ${flip};
-  }
-  span:nth-child(7) {
-    animation-delay: 1.8s;
-    animation-name: ${flip};
+  width: 400px;
+  height: 400px;
+  &:hover span {
+    border: none;
+    background: rgba(0, 0, 255, 0.8);
   }
 `;
+export const Animantion = styled.span`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 2px solid #fff;
+  transition: 0.5s;
+  border-radius: 38% 62% 63% 37% /41% 44% 56% 59%;
+  &:nth-child(1) {
+    animation: rotation1 6s linear infinite;
+    @keyframes rotation1 {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  }
+  &:nth-child(2) {
+    animation: rotation2 10s linear infinite;
+    @keyframes rotation2 {
+      0% {
+        transform: rotate(360deg);
+      }
+      100% {
+        transform: rotate(0deg);
+      }
+    }
+    @keyframes rotation3 {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  }
+  &:nth-child(3) {
+    animation: rotation3 8s linear infinite;
+  }
+`;
+export const ContentRanding = styled.div`
+  color: #fff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  transition: 0.5s;
+  p {
+    padding: 20px 0;
+  }
+  a {
+    display: inline-block;
+    padding: 6px 18px;
+    border: 2px solid #fff;
+    color: #fff;
+    border-radius: 73% 27% 44% 56% / 49% 44% 56% 51%;
+    transition: 0.5s;
+  }
+  a:hover {
+    background: #fff;
+    color: #0000ff;
+  }
+`;
+
+// 랜딩페이지
+// export const Randing = styled.div`
+//   img {
+//     display: block;
+//     margin: auto;
+//   }
+// `;
+// const flip = keyframes`
+//   35%{
+//     transform: rotateX(360deg);
+//   }
+//   100%{
+//     transform: rotateX(360deg);
+
+//   }
+// `;
+
+// export const Container = styled.div`
+//   display: flex;
+//   position: absolute;
+//   left: 52%;
+//   transform: translate(-50%, -50%);
+//   span {
+//     font-size: 5vw;
+//     letter-spacing: 10px;
+//     animation: flip 2.6s infinite linear;
+//     transform-origin: 0 70%;
+//     transform-style: preserve-3d;
+//   }
+//   span:nth-child(even) {
+//     color: #64a70b;
+//   }
+//   span:nth-child(2) {
+//     animation-delay: 0.3s;
+//     animation-name: ${flip};
+//   }
+//   span:nth-child(3) {
+//     animation-delay: 0.6s;
+//     animation-name: ${flip};
+//   }
+//   span:nth-child(4) {
+//     animation-delay: 0.9s;
+//     animation-name: ${flip};
+//   }
+//   span:nth-child(5) {
+//     animation-delay: 1.2s;
+//     animation-name: ${flip};
+//   }
+//   span:nth-child(6) {
+//     animation-delay: 1.5s;
+//     animation-name: ${flip};
+//   }
+//   span:nth-child(7) {
+//     animation-delay: 1.8s;
+//     animation-name: ${flip};
+//   }
+// `;

@@ -17,6 +17,7 @@ import { useRouter } from "next/router";
 import KakaoMapPage from "../../../src/components/commons/kakoMap";
 import { useMoveToPage } from "../../../src/components/commons/hooks/useMoveToPage";
 import { ErrorModal, SuccessModal } from "../../../src/commons";
+import { useEffect } from "react";
 
 export default function ProductDetailPage() {
   const router = useRouter();
@@ -38,11 +39,9 @@ export default function ProductDetailPage() {
 
   const { Panel } = Collapse;
 
-  const onClickBasket = (basket) => () => {
-    console.log(basket);
-
+  useEffect((basket) => {
     // 1. 기존 장바구니 가져오기
-    const baskets = JSON.parse(localStorage.getItem("baskets") ?? "[]");
+    const baskets = JSON.parse(localStorage.getItem(baskets) ?? "[]");
 
     // 2. 이미 담겼는지 확인하기
     const temp = baskets.filter((el) => el.useditemId === basket.useditemId);
@@ -52,9 +51,12 @@ export default function ProductDetailPage() {
     }
 
     // 3. 해당 장바구니에 담기
-    baskets.push(basket);
+    baskets.unshift(basket);
+    if (baskets.length >= 3) {
+      baskets.pop(basket);
+    }
     localStorage.setItem("baskets", JSON.stringify(baskets));
-  };
+  }, []);
 
   const onClickDelete = async (useditemId: any) => {
     try {
@@ -129,7 +131,7 @@ export default function ProductDetailPage() {
                 <DollarOutlined />
                 &nbsp; 구매
               </button>
-              <button className="cart" onClick={onClickBasket}>
+              <button className="cart">
                 <ShoppingCartOutlined />
                 &nbsp; 장바구니
               </button>

@@ -8,7 +8,7 @@ import {
   IMutation,
   IMutationCreateUserArgs,
 } from "../../src/commons/types/generated/types";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { ErrorModal, SuccessModal } from "../../src/commons";
 import { useRouter } from "next/router";
 
@@ -33,9 +33,7 @@ interface IFormData {
 
 export default function ReactHookFormPage() {
   const router = useRouter();
-  const focusJoinRef = useRef();
   const profileImg = useRef();
-  const [input, setInput] = useState("");
   const { register, handleSubmit, formState } = useForm<IFormData>({
     resolver: yupResolver(schema),
     mode: "onChange",
@@ -45,12 +43,10 @@ export default function ReactHookFormPage() {
     IMutationCreateUserArgs
   >(CREATE_USER);
 
-  const onClickLabel = () => {
-    focusJoinRef.current?.focus();
-  };
   const onClickProfile = () => {
     profileImg.current?.click();
   };
+
   const onClickJoin = async (data: IFormData) => {
     try {
       await createUser({
@@ -68,26 +64,25 @@ export default function ReactHookFormPage() {
   };
 
   // const { ref, ...rest } = register;
-  console.log(input);
   return (
     <S.Join>
       <S.Title>SIGN UP</S.Title>
       <div className="contents">
         <S.JoinForm onSubmit={handleSubmit(onClickJoin)}>
-          <S.FormInput onChange={(e) => setInput(e.target.value)}>
-            <input type="text" {...register("email")} />
+          <S.FormInput>
+            <input type="text" {...register("email")} required />
             <div>{formState.errors.email?.message}</div>
-            <S.FormLabel onClickLabel={onClickLabel}>이메일*</S.FormLabel>
+            <S.FormLabel>이메일*</S.FormLabel>
           </S.FormInput>
-          <S.FormInput onChange={(e) => setInput(e.target.value)}>
-            <input type="text" {...register("name")} />
+          <S.FormInput>
+            <input type="text" {...register("name")} required />
             <div>{formState.errors.name?.message}</div>
-            <S.FormLabel onClickLabel={onClickLabel}>이름*</S.FormLabel>
+            <S.FormLabel>이름*</S.FormLabel>
           </S.FormInput>
-          <S.FormInput onChange={(e) => setInput(e.target.value)}>
-            <input type="password" {...register("password")} />
+          <S.FormInput>
+            <input type="password" {...register("password")} required />
             <div>{formState.errors.password?.message}</div>
-            <S.FormLabel onClickLabel={onClickLabel}>비밀번호*</S.FormLabel>
+            <S.FormLabel>비밀번호*</S.FormLabel>
           </S.FormInput>
 
           <S.FormFile>

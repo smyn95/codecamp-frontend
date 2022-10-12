@@ -8,7 +8,7 @@ export const withAuth = (Component: any) => (props: any) => {
   useEffect(() => {
     if (!localStorage.getItem("accessToken")) {
       ErrorModal("로그인을 먼저 해주세요");
-      void router.push("/");
+      void router.push("/main");
     }
   }, []);
 
