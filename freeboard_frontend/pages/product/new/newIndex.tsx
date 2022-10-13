@@ -126,7 +126,7 @@ export default function ProductWritePage(props) {
     }
   };
   // 수정하기 할때 패치의 데이터 말고 폼의 데이터를 받아와야한다. 주소lat lng 가 없으면 에러
-
+  console.log(getValues("useditemAddress.address"));
   return (
     <>
       <S.Box>

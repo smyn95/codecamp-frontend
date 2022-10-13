@@ -102,9 +102,8 @@ const LoginSuccessPage = () => {
 
               <S.Right>
                 <Tooltip
-                  title={`${
-                    data?.fetchUseditem.useditemAddress?.address ?? ""
-                  }${data?.fetchUseditem.useditemAddress?.addressDetail ?? ""}`}
+                  title={`${data?.fetchUseditem.useditemAddress?.address ?? ""}
+                  ${data?.fetchUseditem.useditemAddress?.addressDetail ?? ""}`}
                   color={"lime"}
                 >
                   <S.Icon src="/location_on.png" alt="위치아이콘" />
