@@ -114,18 +114,22 @@ export const Detail = styled.main`
     background: transparent;
     border: none;
     & > div {
-      font-size: 16px;
+      font-size: 16px 0px 16px 16px;
     }
   }
   p {
     border: none;
-    max-width: 320px;
     font-size: 17px;
     line-height: 1.6;
     letter-spacing: -0.15px;
     margin: 16px 0;
     word-break: break-all;
     min-height: 150px;
+    max-height: 400px;
+    overflow: auto;
+    & > h1 {
+      border: none;
+    }
   }
   h1 {
     line-height: 22px;

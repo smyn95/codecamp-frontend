@@ -94,6 +94,9 @@ export const Price = styled.span`
   color: #aaa;
   font-weight: 600;
   font-size: 14px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 `;
 // 검색창 부분
 export const Searchbx = styled.div`

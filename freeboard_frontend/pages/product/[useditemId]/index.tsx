@@ -6,7 +6,11 @@ import {
   ShoppingCartOutlined,
 } from "@ant-design/icons";
 import { useMutation, useQuery } from "@apollo/client";
-import { DELETE_USED_ITEM, FETCH_USED_ITEM } from "../product.queries";
+import {
+  DELETE_USED_ITEM,
+  FETCH_USED_ITEM,
+  FETCH_USED_ITEMS,
+} from "../product.queries";
 import {
   IMutation,
   IMutationDeleteUseditemArgs,
@@ -18,8 +22,9 @@ import KakaoMapPage from "../../../src/components/commons/kakoMap";
 import { useMoveToPage } from "../../../src/components/commons/hooks/useMoveToPage";
 import { ErrorModal, SuccessModal } from "../../../src/commons";
 import { useEffect } from "react";
+import { withAuth } from "../../../src/commons/hocs/withAuth";
 
-export default function ProductDetailPage(props) {
+const LoginSuccessPage = () => {
   const router = useRouter();
   const { onClickMoveToPage } = useMoveToPage();
 
@@ -61,23 +66,19 @@ export default function ProductDetailPage(props) {
   }, []);
 
   const onClickDelete = async (useditemId: any) => {
-    try {
-      await deleteUseditem({
-        variables: { useditemId: router.query.useditemId },
-        refetchQueries: [
-          {
-            query: FETCH_USED_ITEM,
-            variables: { useditemId: router.query.useditemId },
-          },
-        ],
-      });
-      SuccessModal("삭제가 완료되었습니다.");
-      void router.push("/product/");
-    } catch (error) {
-      ErrorModal(error.message);
-    }
+    await deleteUseditem({
+      variables: { useditemId: router.query.useditemId },
+      refetchQueries: [
+        {
+          query: FETCH_USED_ITEMS,
+          variables: { useditemId: router.query.useditemId },
+        },
+      ],
+    });
+    SuccessModal("삭제가 완료되었습니다.");
+    void router.push("/product/");
   };
-
+  console.log(data);
   return (
     <>
       <S.Product>
@@ -101,11 +102,9 @@ export default function ProductDetailPage(props) {
 
               <S.Right>
                 <Tooltip
-                  title={`d${
+                  title={`${
                     data?.fetchUseditem.useditemAddress?.address ?? ""
-                  }d ${
-                    data?.fetchUseditem.useditemAddress?.addressDetail ?? ""
-                  }d`}
+                  }${data?.fetchUseditem.useditemAddress?.addressDetail ?? ""}`}
                   color={"lime"}
                 >
                   <S.Icon src="/location_on.png" alt="위치아이콘" />
@@ -113,7 +112,6 @@ export default function ProductDetailPage(props) {
                 <S.Icon src="/link.png" alt="링크아이콘" />
               </S.Right>
             </S.Left>
-
             <S.ProductInfo>
               <ul>
                 <S.ProductName>
@@ -127,7 +125,6 @@ export default function ProductDetailPage(props) {
                 {data ? data.fetchUseditem.price : "로딩중입니다..."} 원
               </S.ProductPrice>
             </S.ProductInfo>
-
             <S.DetailBtn>
               <button className="buy">
                 <DollarOutlined />
@@ -138,7 +135,6 @@ export default function ProductDetailPage(props) {
                 &nbsp; 장바구니
               </button>
             </S.DetailBtn>
-
             <S.Attention>
               <HeartOutlined />
               <span>관심상품</span>
@@ -148,13 +144,14 @@ export default function ProductDetailPage(props) {
               <Collapse accordion>
                 <h1>구매 전 꼭 확인해주세요!</h1>
                 <Panel header="상세내용" key="1">
-                  <p>
-                    {data ? data.fetchUseditem.contents : "로딩중입니다..."}
-                  </p>
+                  <p
+                    dangerouslySetInnerHTML={{
+                      __html: data?.fetchUseditem.contents,
+                    }}
+                  ></p>
                 </Panel>
               </Collapse>
             </S.Detail>
-
             <S.Kakaomap>
               <KakaoMapPage
                 id={id}
@@ -163,7 +160,6 @@ export default function ProductDetailPage(props) {
                 }
               />
             </S.Kakaomap>
-
             <S.Tags>
               <span>{data ? data.fetchUseditem.tags : "로딩중입니다..."}</span>
               <div>
@@ -206,4 +202,5 @@ export default function ProductDetailPage(props) {
       </S.Product>
     </>
   );
-}
+};
+export default withAuth(LoginSuccessPage);

@@ -17,6 +17,7 @@ import * as S from "../../../../commons/styles";
 import {
   IMutation,
   IMutationCreatePointTransactionOfLoadingArgs,
+  IQuery,
 } from "../../../../commons/types/generated/types";
 import { useMoveToPage } from "../../hooks/useMoveToPage";
 import {
@@ -29,6 +30,7 @@ declare const window: typeof globalThis & {
 };
 
 export default function LayoutHeader(props) {
+  const router = useRouter();
   const { data } = useQuery(FETCH_USER_LOGGED_IN);
 
   const [createPointTransactionOfLoading] = useMutation<
@@ -41,7 +43,6 @@ export default function LayoutHeader(props) {
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
 
   const { onClickMoveToPage } = useMoveToPage();
-  const router = useRouter();
   const onClickMyPage = () => {
     setMyPage(!myPage);
   };
@@ -57,10 +58,10 @@ export default function LayoutHeader(props) {
       ? localStorage.setItem("myProducts", JSON.stringify([]))
       : null;
   }, []);
-
+  console.log(data);
   const onClickPayment = () => {
     const IMP = window.IMP;
-    IMP.init("imp84275262");
+    IMP.init("imp49910675");
 
     // IMP.request_pay(param, callback) 결제창 호출
     IMP.request_pay(
@@ -69,10 +70,10 @@ export default function LayoutHeader(props) {
         pg: "nice",
         pay_method: "card", // card, vbank 등
         // merchant_uid: "ORD20180131-0000011", // 중복될 시, 결제 안됨!
-        name: "노르웨이 회전 의자",
+        name: "포인트 충전",
         amount: 100,
-        buyer_email: "gildong@gmail.com",
-        buyer_name: "홍길동",
+        buyer_email: data?.fetchUserLoggedIn.email,
+        buyer_name: data?.fetchUserLoggedIn.name,
         buyer_tel: "010-4242-4242",
         buyer_addr: "서울특별시 강남구 신사동",
         buyer_postcode: "01181",
@@ -82,7 +83,7 @@ export default function LayoutHeader(props) {
         if (rsp.success) {
           console.log(rsp);
           await createPointTransactionOfLoading({
-            variables: { impUid },
+            variables: { impUid: rsp.imp_uid },
           });
           void router.push("/main");
         } else {
@@ -138,7 +139,10 @@ export default function LayoutHeader(props) {
                         ></S.UserImg>
                         <S.UserPage>
                           {`${data?.fetchUserLoggedIn.name}`}
-                          <p>{data?.fetchUserLoggedIn.userPoint} &nbsp;P</p>
+                          <p>
+                            {data?.fetchUserLoggedIn.userPoint.amount || 0}{" "}
+                            &nbsp; P
+                          </p>
                         </S.UserPage>
                       </div>
                       <S.Logout>

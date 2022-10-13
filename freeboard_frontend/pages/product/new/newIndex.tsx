@@ -13,7 +13,11 @@ import {
 } from "../../../src/commons/types/generated/types";
 import { ErrorModal, SuccessModal } from "../../../src/commons";
 import { useRouter } from "next/router";
-import { CREATE_USED_ITEM, UPDATE_USED_ITEM } from "../product.queries";
+import {
+  CREATE_USED_ITEM,
+  FETCH_USED_ITEMS,
+  UPDATE_USED_ITEM,
+} from "../product.queries";
 import { useMoveToPage } from "../../../src/components/commons/hooks/useMoveToPage";
 import { useRecoilState } from "recoil";
 import { isOpenState } from "../../../src/commons/store";
@@ -44,25 +48,17 @@ export default function ProductWritePage(props) {
   const router = useRouter();
   const [isOpen, setIsOpen] = useRecoilState(isOpenState);
 
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState,
-    getValues,
-    setValue,
-    trigger,
-  } = useForm<IFormData>({
-    resolver: yupResolver(schema),
-    mode: "onChange",
-
-    defaultValues: {
-      name: props.data?.fetchUseditem.name,
-      remarks: props.data?.fetchUseditem.remarks,
-      price: props.data?.fetchUseditem.price,
-      tags: props.data?.fetchUseditem.tags,
-    },
-  });
+  const { register, handleSubmit, formState, getValues, setValue, trigger } =
+    useForm<IFormData>({
+      resolver: yupResolver(schema),
+      mode: "onChange",
+      defaultValues: {
+        name: props.data?.fetchUseditem.name,
+        remarks: props.data?.fetchUseditem.remarks,
+        price: props.data?.fetchUseditem.price,
+        tags: props.data?.fetchUseditem.tags,
+      },
+    });
 
   // console.log(typeof watch("price"));
   const [createUseditem] = useMutation<
@@ -99,6 +95,12 @@ export default function ProductWritePage(props) {
         variables: {
           createUseditemInput: data,
         },
+        refetchQueries: [
+          {
+            query: FETCH_USED_ITEMS,
+            variables: { search: "" },
+          },
+        ],
       });
       SuccessModal("상품등록이 완료되었습니다.");
       void router.push(`/product/${result.data.createUseditem._id}`);
@@ -124,6 +126,7 @@ export default function ProductWritePage(props) {
     }
   };
   // 수정하기 할때 패치의 데이터 말고 폼의 데이터를 받아와야한다. 주소lat lng 가 없으면 에러
+
   return (
     <>
       <S.Box>

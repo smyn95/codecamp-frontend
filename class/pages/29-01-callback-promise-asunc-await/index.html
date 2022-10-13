@@ -1,0 +1,60 @@
+<!-- `http://numbersapi.com/random?min=1&max=200` -->
+<!-- `https://koreanjson.com/posts/${num}` -->
+<!-- `https://koreanjson.com/posts?userId=${userId}` -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>콜백과 친구들</title>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+  <script>
+    const myCallback = () => {
+      const aa = new XMLHttpRequest();
+      aa.open("get", `http://numbersapi.com/random?min=1&max=200`); // method, endPoint 입력
+      aa.send(); //요청하기
+      aa.addEventListener("load", function (res) { // 기다리기("데이터 받아올때까지 기다린 후 콜백함수 실행할 것") -> 끝났을때 콜백함수 실행하기(function () {})
+        console.log(res);
+        const num = res.target.response.split(" ")[0]; // 공백이 있으니 0번째를 가져오겠다.
+
+        const bb = new XMLHttpRequest();
+        bb.open("get", `https://koreanjson.com/posts/${num}`);
+        bb.send();
+        bb.addEventListener("load", (res) => {
+          console.log(res);
+          const userId = JSON.parse(res.target.response).UserId;
+
+          const cc = new XMLHttpRequest();
+          cc.open("get", `https://koreanjson.com/posts?userId=${userId}`);
+          cc.send();
+          cc.addEventListener("load", (res) => {
+            console.log(res);
+            const userId = JSON.parse(res.target.response);
+          });
+        });
+      });
+    };
+
+    const myPromise = async () => {
+      axios.get("get", "http://numbersapi.com/random?min=1&max=200")
+        .then((res) => {
+          return axios.get("get", "http://numbersapi.com/random?min=1&max=200");
+        }).then((res) => {
+          return axios.get("get", "http://numbersapi.com/random?min=1&max=200");
+        });
+
+    };
+
+    const myAsyncAwait = () => {
+    }
+  </script>
+</head>
+
+<body>
+  <button onClick="myCallback()">Callback 연습하기</button>
+  <button onClick="myPromise()">Promise 연습하기</button>
+  <button onClick="myAsyncAwait()">AsyncAwait 연습하기</button>
+</body>
+
+</html>

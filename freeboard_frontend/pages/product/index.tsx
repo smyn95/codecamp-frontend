@@ -2,7 +2,7 @@ import { useQuery } from "@apollo/client";
 import { DatePicker, Space } from "antd";
 import Search from "antd/lib/transfer/search";
 import { useRouter } from "next/router";
-import { ChangeEvent, MouseEvent, useEffect } from "react";
+import { MouseEvent, useEffect } from "react";
 import InfiniteScroll from "react-infinite-scroller";
 import {
   IQuery,
@@ -15,11 +15,14 @@ import * as S from "./productList.styles";
 
 export default function ProductListPage() {
   const router = useRouter();
+  useEffect(() => {}, []);
+
   const { data, fetchMore, refetch } = useQuery<
     Pick<IQuery, "fetchUseditems">,
     IQueryFetchUseditemsArgs
-  >(FETCH_USED_ITEMS);
-
+  >(FETCH_USED_ITEMS, {
+    fetchPolicy: "network-only",
+  });
   const onClickMoveToProductDetail = (event: MouseEvent<HTMLLIElement>) => {
     void router.push(`/product/${event.currentTarget.id}`);
   };

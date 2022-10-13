@@ -7,6 +7,9 @@ export const FETCH_USER_LOGGED_IN = gql`
       email
       name
       picture
+      userPoint {
+        amount
+      }
       createdAt
       updatedAt
       deletedAt
@@ -18,16 +21,6 @@ export const CREATE_POINT_TRANSACTION_OF_LOADING = gql`
   mutation createPointTransactionOfLoading($impUid: ID!) {
     createPointTransactionOfLoading(impUid: $impUid) {
       _id
-      impUid
-      amount
-      balance
-      status
-      statusDetail
-      useditem
-      user
-      createdAt
-      updatedAt
-      deletedAt
     }
   }
 `;

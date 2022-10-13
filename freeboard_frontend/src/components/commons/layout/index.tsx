@@ -8,7 +8,7 @@ import { isLoginState } from "../../../commons/store";
 const HIDDEN_BANNER = ["/main", "/", "/join"];
 const HIDDEN_RANDING = ["/"];
 
-//prettier-ignore
+// prettier-ignore
 export default function Layout(props) {
   const router = useRouter();
   const isHiddenBanner = HIDDEN_BANNER.includes(router.asPath);
