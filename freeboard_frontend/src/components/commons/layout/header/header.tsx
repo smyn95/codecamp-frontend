@@ -76,15 +76,15 @@ export default function LayoutHeader(props) {
         buyer_tel: "010-4242-4242",
         buyer_addr: "서울특별시 강남구 신사동",
         buyer_postcode: "01181",
-        m_redirect_url: "http://localhost:3000/28-01-payment", // 모바일에서는 결제시, 결제페이지로 사이트가 이동됨
+        m_redirect_url: "http://localhost:3000/main", // 모바일에서는 결제시, 결제페이지로 사이트가 이동됨
       },
-      (rsp: any) => {
+      async (rsp: any) => {
         if (rsp.success) {
           console.log(rsp);
-          void createPointTransactionOfLoading({
+          await createPointTransactionOfLoading({
             variables: { impUid },
           });
-          void router.push("/");
+          void router.push("/main");
         } else {
           ErrorModal("결제에 실패했습니다! 다시 시도해 주세요!");
         }
@@ -111,7 +111,7 @@ export default function LayoutHeader(props) {
           <S.LeftLogo>
             <S.Logo>
               <Link href="/main">
-                <img src="/maket_logo.png" alt="shinmimall 로고" />
+                <img src="/market_logo.png" alt="shinmimall 로고" />
               </Link>
             </S.Logo>
             <S.Navi>

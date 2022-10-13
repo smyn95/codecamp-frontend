@@ -38,7 +38,7 @@ export default function Home() {
           <S.Animantion></S.Animantion>
           <S.Animantion></S.Animantion>
           <S.ContentRanding>
-            <h2>랜딩페이지</h2>
+            <h2>RandingPage</h2>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat,
               voluptas, a, expedita, vel maxime impedit aut saepe sit deserunt

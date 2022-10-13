@@ -294,7 +294,7 @@ export const Flex = styled.div`
   justify-content: space-between;
 `;
 
-//검색창 부분
+// 검색창 부분
 export const Searchbx = styled.div`
   margin-top: 70px;
   position: relative;

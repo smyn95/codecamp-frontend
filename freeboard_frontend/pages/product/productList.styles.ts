@@ -95,3 +95,50 @@ export const Price = styled.span`
   font-weight: 600;
   font-size: 14px;
 `;
+// 검색창 부분
+export const Searchbx = styled.div`
+  margin-bottom: 40px;
+  position: relative;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 0 !important;
+
+  .ant-picker-range {
+    position: relative;
+    display: inline-flex;
+    width: 450px;
+    height: 50px;
+  }
+  .ant-input-affix-wrapper {
+    width: 800px;
+  }
+`;
+
+export const SearchInput = styled.input`
+  background: #f2f2f2;
+  width: 780px;
+  height: 50px;
+  outline: none;
+  border-radius: 10px;
+  border: none;
+  padding: 0 20px;
+`;
+
+export const Calender = styled.div`
+  width: 300px;
+  height: 100%;
+  border: 1px solid #bdbdbd;
+  border-radius: 10px;
+`;
+export const Searchbtn = styled.button`
+  background-color: #00704a;
+  color: #fff;
+  width: 100px;
+  font-size: 16px;
+  transition: 0.3s;
+  &&:hover {
+    filter: opacity(0.7);
+  }
+`;

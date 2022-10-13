@@ -43,7 +43,7 @@ export const Navibx = styled.ul`
     display: block;
     padding: 0 15px;
     position: relative;
-    color: #2fcab0;
+    color: #111;
     letter-spacing: 1px;
     cursor: pointer;
     will-change: color;
@@ -330,6 +330,15 @@ export const SubBaaner02 = styled.div`
   background-size: cover;
   height: 300px;
 `;
+//
+//
+//
+//
+//
+//
+//
+//
+
 // 랜딩페이지
 export const Square = styled.div`
   position: absolute;
@@ -410,7 +419,14 @@ export const ContentRanding = styled.div`
     color: #0000ff;
   }
 `;
-
+//
+//
+//
+//
+//
+//
+//
+//
 // 랜딩페이지
 // export const Randing = styled.div`
 //   img {
