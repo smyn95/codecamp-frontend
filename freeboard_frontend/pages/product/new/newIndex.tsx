@@ -126,7 +126,49 @@ export default function ProductWritePage(props) {
     }
   };
   // 수정하기 할때 패치의 데이터 말고 폼의 데이터를 받아와야한다. 주소lat lng 가 없으면 에러
-  console.log(getValues("useditemAddress.address"));
+
+  // react-quill
+
+  const modules = {
+    toolbar: {
+      container: [
+        [{ header: [1, 2, 3, 4, 5, 6, false] }],
+        [{ font: [] }],
+        [{ align: [] }],
+        ["bold", "italic", "underline", "strike", "blockquote"],
+        [{ list: "ordered" }, { list: "bullet" }, "link"],
+        [
+          {
+            color: [
+              "#000000",
+              "#e60000",
+              ...// 원하는 글꼴색 색코드 넣기
+              "custom-color",
+            ],
+          },
+          { background: [] },
+        ],
+        ["image", "video"],
+        ["clean"],
+      ],
+    },
+  };
+  const formats = [
+    "header",
+    "bold",
+    "italic",
+    "underline",
+    "strike",
+    "blockquote",
+    "list",
+    "bullet",
+    "indent",
+    "link",
+    "image",
+    "align",
+    "color",
+    "background",
+  ];
   return (
     <>
       <S.Box>
@@ -163,6 +205,8 @@ export default function ProductWritePage(props) {
             <ReactQuill
               style={{ width: "100%", height: "300px" }}
               onChange={onChangeContents}
+              modules={modules}
+              formats={formats}
               defaultValue={props.data?.fetchUseditem.contents}
             />
             <S.InputError>{formState.errors.contents?.message}</S.InputError>

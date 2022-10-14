@@ -17,3 +17,4 @@ export default function observableFlatmapPage() {
     </>
   );
 }
+// promise_옵저버블

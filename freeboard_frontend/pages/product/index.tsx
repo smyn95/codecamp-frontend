@@ -15,7 +15,6 @@ import * as S from "./productList.styles";
 
 export default function ProductListPage() {
   const router = useRouter();
-  useEffect(() => {}, []);
 
   const { data, fetchMore, refetch } = useQuery<
     Pick<IQuery, "fetchUseditems">,

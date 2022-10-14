@@ -2,6 +2,7 @@ import * as S from "./productDetail.styles";
 import { Collapse, Tooltip } from "antd";
 import {
   DollarOutlined,
+  HeartFilled,
   HeartOutlined,
   ShoppingCartOutlined,
 } from "@ant-design/icons";
@@ -10,12 +11,16 @@ import {
   DELETE_USED_ITEM,
   FETCH_USED_ITEM,
   FETCH_USED_ITEMS,
+  FETCH_USED_ITEMS_I_PICKED,
+  TOGGLE_USED_ITEM_PICK,
 } from "../product.queries";
 import {
   IMutation,
   IMutationDeleteUseditemArgs,
+  IMutationToggleUseditemPickArgs,
   IQuery,
   IQueryFetchUseditemArgs,
+  IQueryFetchUseditemsIPickedArgs,
 } from "../../../src/commons/types/generated/types";
 import { useRouter } from "next/router";
 import KakaoMapPage from "../../../src/components/commons/kakoMap";
@@ -23,10 +28,13 @@ import { useMoveToPage } from "../../../src/components/commons/hooks/useMoveToPa
 import { ErrorModal, SuccessModal } from "../../../src/commons";
 import { useEffect } from "react";
 import { withAuth } from "../../../src/commons/hocs/withAuth";
+import { useRecoilState } from "recoil";
+import { isEditState } from "../../../src/commons/store";
 
 const LoginSuccessPage = () => {
   const router = useRouter();
   const { onClickMoveToPage } = useMoveToPage();
+  const [isEdit, setIsEdit] = useRecoilState(isEditState);
 
   const id = router.query.useditemId;
 
@@ -38,10 +46,25 @@ const LoginSuccessPage = () => {
     variables: { useditemId: router.query.useditemId },
   });
 
+  const { data: pickData } = useQuery<
+    Pick<IQuery, "fetchUseditemsIPicked">,
+    IQueryFetchUseditemsIPickedArgs
+  >(FETCH_USED_ITEMS_I_PICKED, {
+    variables: {
+      search: "",
+      page: 1,
+    },
+  });
+
   const [deleteUseditem] = useMutation<
     Pick<IMutation, "deleteUseditem">,
     IMutationDeleteUseditemArgs
   >(DELETE_USED_ITEM);
+
+  const [toggleUseditemPick] = useMutation<
+    Pick<IMutation, "toggleUseditemPick">,
+    IMutationToggleUseditemPickArgs
+  >(TOGGLE_USED_ITEM_PICK);
 
   const { Panel } = Collapse;
 
@@ -78,7 +101,20 @@ const LoginSuccessPage = () => {
     SuccessModal("삭제가 완료되었습니다.");
     void router.push("/product/");
   };
-  console.log(data);
+  console.log(pickData);
+
+  const onClickPick = async (useditemId) => {
+    if (pickData?.fetchUseditemsIPicked._id !== router.query.useditemId) {
+      const result = await toggleUseditemPick({
+        variables: { useditemId: router.query.useditemId },
+      });
+      setIsEdit((prev) => !prev);
+      // console.log(result);
+    } else {
+      ErrorModal("이미 찜하신 상품입니다.");
+    }
+  };
+
   return (
     <>
       <S.Product>
@@ -134,8 +170,9 @@ const LoginSuccessPage = () => {
                 &nbsp; 장바구니
               </button>
             </S.DetailBtn>
-            <S.Attention>
-              <HeartOutlined />
+            <S.Attention onClick={onClickPick}>
+              {isEdit ? <HeartFilled /> : <HeartOutlined />}
+
               <span>관심상품</span>
             </S.Attention>
 

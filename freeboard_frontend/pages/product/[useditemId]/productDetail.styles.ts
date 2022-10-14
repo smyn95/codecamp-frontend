@@ -104,6 +104,7 @@ export const Attention = styled.button`
   svg {
     font-size: 30px;
     margin-right: 15px;
+    color: red;
   }
 `;
 // 본문

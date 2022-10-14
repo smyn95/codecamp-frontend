@@ -24,5 +24,3 @@ export const getAccessToken = async () => {
     if (error instanceof Error) console.log(error.message);
   }
 };
-
-// promise_옵저버블
