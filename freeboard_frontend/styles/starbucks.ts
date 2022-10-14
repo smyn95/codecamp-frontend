@@ -91,11 +91,5 @@ export const Menu = styled.ul`
     text-transform: uppercase;
     letter-spacing: 3px;
     -webkit-font-smoothing: antialiased;
-
-    &:hover {
-      background: transparent;
-      border: 1px solid tomato;
-      color: tomato;
-    }
   }
 `;
