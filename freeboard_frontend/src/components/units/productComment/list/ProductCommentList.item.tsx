@@ -1,10 +1,6 @@
-import {
-  CommentOutlined,
-  EditOutlined,
-  PlusSquareOutlined,
-} from "@ant-design/icons";
+import { CommentOutlined, PlusSquareOutlined } from "@ant-design/icons";
 import { useMutation } from "@apollo/client";
-import { message, Modal, Popconfirm } from "antd";
+import { message, Popconfirm } from "antd";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { ErrorModal } from "../../../../commons";
@@ -14,6 +10,7 @@ import {
   IMutationDeleteUseditemQuestionArgs,
 } from "../../../../commons/types/generated/types";
 import ProductRecommentListPage from "../../productReComment/list/productReCommentList";
+import ProductReCommentWrite from "../../productReComment/write/productReCommentWirte";
 import ProductCommentWrite from "../write/productcommentWrite";
 import {
   DELETE_USED_ITEM_QUESTION,
@@ -24,8 +21,8 @@ import * as S from "./productCommentList.styles";
 export default function ProductCommentListUIItem(props) {
   const router = useRouter();
   const [isEdit, setIsEdit] = useState(false);
-  const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
   const [isComment, setIsComment] = useState(false);
+  const [isCommentWrite, setIsCommentWrite] = useState(false);
 
   const [deleteUseditemQuestion] = useMutation<
     Pick<IMutation, "deleteUseditemQuestion">,
@@ -34,6 +31,10 @@ export default function ProductCommentListUIItem(props) {
 
   const onClickComment = () => {
     setIsComment((prev) => !prev);
+  };
+
+  const onClickCommentWrite = () => {
+    setIsCommentWrite((prev) => !prev);
   };
 
   const cancel = (e) => {
@@ -69,7 +70,7 @@ export default function ProductCommentListUIItem(props) {
               <S.Avatar src="/avatar.png" />
               <S.MainWrapper>
                 <S.WriterWrapper>
-                  <S.Writer>{props.el?.writer}</S.Writer>
+                  <S.Writer>{props.el?.user.name}</S.Writer>
                 </S.WriterWrapper>
                 <S.Contents>{props.el?.contents}</S.Contents>
               </S.MainWrapper>
@@ -88,10 +89,11 @@ export default function ProductCommentListUIItem(props) {
               </S.OptionWrapper>
             </S.FlexWrapper>
             <S.DateString>{getDate(props.el?.createdAt)}</S.DateString>
-            <S.Answer>
+            <S.Answer onClick={onClickCommentWrite}>
               <PlusSquareOutlined /> &nbsp;&nbsp;답글 달기
             </S.Answer>
             {isComment && <ProductRecommentListPage />}
+            {isCommentWrite && <ProductReCommentWrite />}
           </S.ItemWrapper>
         </>
       )}

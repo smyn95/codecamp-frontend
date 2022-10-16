@@ -1,5 +1,5 @@
 import InfiniteScroll from "react-infinite-scroller";
-import ProductCommentListUIItem from "./ProductCommentList.presenteritem";
+import ProductCommentListUIItem from "./ProductCommentList.item";
 
 export default function ProductCommentListUI(props) {
   if (!props.data) return <div />;

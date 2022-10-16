@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
 import { ChangeEvent, useState } from "react";
 import * as S from "../list/productCommentList.styles";
@@ -92,15 +92,7 @@ export default function ProductCommentWrite(props) {
             <S.Font>댓글</S.Font>
           </>
         )}
-        <S.InputWrapper>
-          <S.Reviewinfo>
-            <div>
-              <S.Input placeholder="작성자" />
-              <S.Input type="password" placeholder="비밀번호" />
-            </div>
-          </S.Reviewinfo>
-        </S.InputWrapper>
-
+        <br />
         <S.ContentsWrapper>
           <S.CommntContents
             maxLength={100}

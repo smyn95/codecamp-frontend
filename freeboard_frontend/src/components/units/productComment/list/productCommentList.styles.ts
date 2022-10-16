@@ -23,7 +23,7 @@ export const Font = styled.p`
 `;
 export const ItemWrapper = styled.div`
   width: 1400px;
-  padding: 30px 0;
+  padding: 30px 0 0 0;
   margin: 0 auto;
   border-bottom: 1px solid #ccc;
 `;
@@ -170,7 +170,7 @@ export const Button = styled.button`
 export const Answer = styled.p`
   display: flex;
   align-items: center;
-  padding: 15px 0;
+  padding: 20px 0 15px 0;
   cursor: pointer;
   font-weight: 600;
   color: #2fcab0;
