@@ -57,6 +57,9 @@ export default function ProductCommentListUIItem(props) {
       ErrorModal(error.message);
     }
   };
+  const onClickUpdate = () => {
+    setIsEdit(true);
+  };
   return (
     <>
       {!isEdit && (
@@ -72,7 +75,7 @@ export default function ProductCommentListUIItem(props) {
               </S.MainWrapper>
               <S.OptionWrapper>
                 <CommentOutlined onClick={onClickComment} />
-                <p>수정</p>
+                <p onClick={onClickUpdate}>수정</p>
                 <Popconfirm
                   title="정말 삭제하시겠습니까?"
                   onConfirm={onClickDelete}
