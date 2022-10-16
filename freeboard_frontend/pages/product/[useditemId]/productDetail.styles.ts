@@ -181,71 +181,7 @@ export const Tags = styled.div`
     }
   }
 `;
-// 댓글
-export const PencilIcon = styled.img``;
 
-export const InputWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-bottom: 20px;
-`;
-
-export const ContentsWrapper = styled.div`
-  border: 1px solid lightgray;
-`;
-export const Reviewinfo = styled.div`
-  margin: 30px 0;
-  input {
-    margin-right: 30px;
-    width: 300px;
-  }
-  img {
-    height: 20px;
-    vertical-align: text-bottom;
-  }
-`;
-export const Input = styled.input`
-  height: 50px;
-  outline: none;
-  border: 1px solid transparent;
-  padding: 0 15px;
-  border-bottom: 1px solid #777;
-  width: 100%;
-  margin-bottom: 10px;
-  opacity: 0.5;
-`;
-
-export const Contents = styled.textarea`
-  width: 100%;
-  min-height: 108px;
-  padding: 20px;
-  border: none;
-  border-bottom: 1px solid lightgray;
-`;
-
-export const BottomWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-`;
-
-export const ContentsLength = styled.div`
-  width: 100%;
-  height: 51px;
-  line-height: 51px;
-  padding-left: 20px;
-  color: gray;
-`;
-
-export const Button = styled.button`
-  width: 91px;
-  height: 51px;
-  background-color: black;
-  color: white;
-  cursor: pointer;
-  background-color: #00704a;
-`;
 // 버튼
 export const DetailBtn = styled.div`
   display: flex;

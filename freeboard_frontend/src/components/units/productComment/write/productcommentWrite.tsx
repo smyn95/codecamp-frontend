@@ -1,15 +1,17 @@
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 import { ChangeEvent, useState } from "react";
-import * as S from "../../../../../pages/product/[useditemId]/productDetail.styles";
+import * as S from "../list/productCommentList.styles";
 import { ErrorModal, SuccessModal } from "../../../../commons";
 import {
   IMutation,
   IMutationCreateUseditemQuestionArgs,
+  IMutationUpdateUseditemQuestionArgs,
 } from "../../../../commons/types/generated/types";
 import {
   CREATE_USED_ITEM_QUESTION,
   FETCH_USED_ITEM_QUESTIONS,
+  UPDATE_USED_ITEM_QUESTION,
 } from "./productcommentWrite.queries";
 
 export default function ProductCommentWrite(props) {
@@ -20,6 +22,11 @@ export default function ProductCommentWrite(props) {
     Pick<IMutation, "createUseditemQuestion">,
     IMutationCreateUseditemQuestionArgs
   >(CREATE_USED_ITEM_QUESTION);
+
+  const [updateUseditemQuestion] = useMutation<
+    Pick<IMutation, "updateUseditemQuestion">,
+    IMutationUpdateUseditemQuestionArgs
+  >(UPDATE_USED_ITEM_QUESTION);
 
   const onChangeContents = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setContents(event.target.value);
@@ -47,8 +54,35 @@ export default function ProductCommentWrite(props) {
     } catch (error) {
       ErrorModal(error.message);
     }
-
     setContents("");
+  };
+
+  const onClickUpdate = async () => {
+    if (!contents) {
+      ErrorModal("내용이 수정되지 않았습니다.");
+      return;
+    }
+
+    try {
+      await updateUseditemQuestion({
+        variables: {
+          updateUseditemQuestionInput: {
+            contents,
+          },
+          useditemQuestionId: router.query.useditemQuestionId,
+        },
+        refetchQueries: [
+          {
+            query: FETCH_USED_ITEM_QUESTIONS,
+            variables: { useditemQuestionId: router.query.useditemQuestionId },
+          },
+        ],
+      });
+      props.setIsEdit?.(false);
+      SuccessModal("수정이 완료되었습니다.");
+    } catch (error) {
+      ErrorModal(error.message);
+    }
   };
 
   return (
@@ -69,14 +103,16 @@ export default function ProductCommentWrite(props) {
         </S.InputWrapper>
 
         <S.ContentsWrapper>
-          <S.Contents
+          <S.CommntContents
             maxLength={100}
             placeholder="개인정보를 공유 및 요청하거나, 명예 훼손, 무단 광고, 불법 정보 유포시 모니터링 후 삭제될 수 있으며, 이에 대한 민형사상 책임은 게시자에게 있습니다."
             onChange={onChangeContents}
           />
           <S.BottomWrapper>
             <S.ContentsLength>0/100</S.ContentsLength>
-            <S.Button onClick={onClickWrite}>등록하기</S.Button>
+            <S.Button onClick={props.isEdit ? onClickUpdate : onClickWrite}>
+              {props.isEdit ? "수정하기" : "등록하기"}
+            </S.Button>
           </S.BottomWrapper>
         </S.ContentsWrapper>
       </S.Product>

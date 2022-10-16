@@ -1,6 +1,10 @@
-import { EditOutlined } from "@ant-design/icons";
+import {
+  CommentOutlined,
+  EditOutlined,
+  PlusSquareOutlined,
+} from "@ant-design/icons";
 import { useMutation } from "@apollo/client";
-import { Modal, Popconfirm } from "antd";
+import { message, Modal, Popconfirm } from "antd";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { ErrorModal } from "../../../../commons";
@@ -9,6 +13,7 @@ import {
   IMutation,
   IMutationDeleteUseditemQuestionArgs,
 } from "../../../../commons/types/generated/types";
+import ProductRecommentListPage from "../../productReComment/list/productReCommentList";
 import ProductCommentWrite from "../write/productcommentWrite";
 import {
   DELETE_USED_ITEM_QUESTION,
@@ -20,27 +25,26 @@ export default function ProductCommentListUIItem(props) {
   const router = useRouter();
   const [isEdit, setIsEdit] = useState(false);
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
+  const [isComment, setIsComment] = useState(false);
 
   const [deleteUseditemQuestion] = useMutation<
     Pick<IMutation, "deleteUseditemQuestion">,
     IMutationDeleteUseditemQuestionArgs
   >(DELETE_USED_ITEM_QUESTION);
 
-  const onClickUpdate = () => {
-    setIsEdit(true);
+  const onClickComment = () => {
+    setIsComment((prev) => !prev);
   };
-  const onClickOpenDeleteModal = () => {
-    setIsOpenDeleteModal((prev) => !prev);
-  };
+
   const cancel = (e) => {
     console.log(e);
-    message.error("Click on No");
+    void message.error("Click on No");
   };
   const onClickDelete = async () => {
     try {
       await deleteUseditemQuestion({
         variables: {
-          useditemQuestion: props.el?._id,
+          useditemQuestionId: props.el?._id,
         },
         refetchQueries: [
           {
@@ -55,43 +59,38 @@ export default function ProductCommentListUIItem(props) {
   };
   return (
     <>
-      {isOpenDeleteModal && (
-        <Modal
-          visible={true}
-          onOk={onClickDelete}
-          onCancel={onClickOpenDeleteModal}
-        >
-          <p>정말 삭제하시겠습니까?</p>
-        </Modal>
-      )}
       {!isEdit && (
-        <S.ItemWrapper>
-          <S.FlexWrapper>
-            <S.Avatar src="/avatar.png" />
-            <S.MainWrapper>
-              <S.WriterWrapper>
-                <S.Writer>{props.el?.writer}</S.Writer>
-              </S.WriterWrapper>
-              <S.Contents>{props.el?.contents}</S.Contents>
-            </S.MainWrapper>
-            <S.OptionWrapper>
-              <EditOutlined
-                onClick={onClickUpdate}
-                style={{ fontSize: "20px", marginRight: "10px" }}
-              />
-              <Popconfirm
-                title="정말 삭제하시겠습니까?"
-                onConfirm={onClickOpenDeleteModal}
-                onCancel={cancel}
-                okText="Yes"
-                cancelText="No"
-              >
-                <a href="#">Delete</a>
-              </Popconfirm>
-            </S.OptionWrapper>
-          </S.FlexWrapper>
-          <S.DateString>{getDate(props.el?.createdAt)}</S.DateString>
-        </S.ItemWrapper>
+        <>
+          <S.ItemWrapper>
+            <S.FlexWrapper>
+              <S.Avatar src="/avatar.png" />
+              <S.MainWrapper>
+                <S.WriterWrapper>
+                  <S.Writer>{props.el?.writer}</S.Writer>
+                </S.WriterWrapper>
+                <S.Contents>{props.el?.contents}</S.Contents>
+              </S.MainWrapper>
+              <S.OptionWrapper>
+                <CommentOutlined onClick={onClickComment} />
+                <p>수정</p>
+                <Popconfirm
+                  title="정말 삭제하시겠습니까?"
+                  onConfirm={onClickDelete}
+                  onCancel={cancel}
+                  okText="Yes"
+                  cancelText="No"
+                >
+                  <p>삭제</p>
+                </Popconfirm>
+              </S.OptionWrapper>
+            </S.FlexWrapper>
+            <S.DateString>{getDate(props.el?.createdAt)}</S.DateString>
+            <S.Answer>
+              <PlusSquareOutlined /> &nbsp;&nbsp;답글 달기
+            </S.Answer>
+            {isComment && <ProductRecommentListPage />}
+          </S.ItemWrapper>
+        </>
       )}
       {isEdit && (
         <ProductCommentWrite
