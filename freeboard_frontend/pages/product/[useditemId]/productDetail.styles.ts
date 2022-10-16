@@ -13,6 +13,17 @@ export const Product = styled.div`
 export const Box = styled.div`
   width: 55%;
 `;
+export const Font = styled.p`
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  width: 200px;
+  color: #111;
+  text-align: left;
+  border-radius: 5px;
+  padding: 5px 0;
+  font-family: "Nanum Myeongjo", serif;
+`;
 export const ImageBox = styled.div`
   height: 550px;
   width: 550px;
@@ -143,7 +154,6 @@ export const Detail = styled.main`
 `;
 
 export const Tags = styled.div`
-  border-bottom: 1px solid #e9ecef;
   padding: 30px 0;
   display: flex;
   align-items: flex-end;

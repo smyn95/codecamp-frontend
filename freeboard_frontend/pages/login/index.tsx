@@ -62,14 +62,14 @@ export default function LoginPage(props) {
         variables: { email, password },
       });
       const accessToken = result.data?.loginUser.accessToken;
+      console.log(accessToken);
 
       // 2. accessToken을 globalState에 저장하기
       if (!accessToken) {
         ErrorModal("로그인에 실패했습니다. 다시 시도해 주세요.");
         return;
       }
-      // setAccessToken(accessToken);
-      localStorage.setItem("accessToken", accessToken); //임시 사용 (나중에 지울 예정)
+      // localStorage.setItem("accessToken", accessToken);
       SuccessModal("로그인에 성공하였습니다.");
       setAccessToken(accessToken);
       setIsLogin(!isLogin);

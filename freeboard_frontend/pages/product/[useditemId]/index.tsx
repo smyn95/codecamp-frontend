@@ -30,6 +30,8 @@ import { useEffect } from "react";
 import { withAuth } from "../../../src/commons/hocs/withAuth";
 import { useRecoilState } from "recoil";
 import { isEditState } from "../../../src/commons/store";
+import ProductCommentWrite from "../../../src/components/units/productComment/write/productcommentWrite";
+import ProductCommentList from "../../../src/components/units/productComment/list/productCommentList";
 
 const LoginSuccessPage = () => {
   const router = useRouter();
@@ -101,18 +103,17 @@ const LoginSuccessPage = () => {
     SuccessModal("삭제가 완료되었습니다.");
     void router.push("/product/");
   };
-  console.log(pickData);
 
   const onClickPick = async (useditemId) => {
-    if (pickData?.fetchUseditemsIPicked._id !== router.query.useditemId) {
-      const result = await toggleUseditemPick({
-        variables: { useditemId: router.query.useditemId },
-      });
-      setIsEdit((prev) => !prev);
-      // console.log(result);
-    } else {
-      ErrorModal("이미 찜하신 상품입니다.");
-    }
+    await toggleUseditemPick({
+      variables: { useditemId: router.query.useditemId },
+      update(cache, { data }) {
+        cache.modify({
+          fields: () => {},
+        });
+      },
+    });
+    console.log(pickData?.fetchUseditemsIPicked);
   };
 
   return (
@@ -157,7 +158,7 @@ const LoginSuccessPage = () => {
                 </S.Remarks>
               </ul>
               <S.ProductPrice>
-                {data ? data.fetchUseditem.price : "로딩중입니다..."} 원
+                {data ? data.fetchUseditem.price : "0"} 원
               </S.ProductPrice>
             </S.ProductInfo>
             <S.DetailBtn>
@@ -171,7 +172,11 @@ const LoginSuccessPage = () => {
               </button>
             </S.DetailBtn>
             <S.Attention onClick={onClickPick}>
-              {isEdit ? <HeartFilled /> : <HeartOutlined />}
+              {data?.fetchUseditem.pickedCount === 1 ? (
+                <HeartFilled />
+              ) : (
+                <HeartOutlined />
+              )}
 
               <span>관심상품</span>
             </S.Attention>
@@ -214,27 +219,9 @@ const LoginSuccessPage = () => {
             </S.Tags>
           </S.Box>
         </div>
-
-        <S.InputWrapper>
-          <S.Reviewinfo>
-            <div>
-              <S.Input placeholder="작성자" />
-              <S.Input type="password" placeholder="비밀번호" />
-              <S.Star />
-            </div>
-          </S.Reviewinfo>
-        </S.InputWrapper>
-
-        <S.ContentsWrapper>
-          <S.Contents
-            maxLength={100}
-            placeholder="개인정보를 공유 및 요청하거나, 명예 훼손, 무단 광고, 불법 정보 유포시 모니터링 후 삭제될 수 있으며, 이에 대한 민형사상 책임은 게시자에게 있습니다."
-          />
-          <S.BottomWrapper>
-            <S.ContentsLength>0/100</S.ContentsLength>
-            <S.Button>등록하기</S.Button>
-          </S.BottomWrapper>
-        </S.ContentsWrapper>
+        <hr />
+        <ProductCommentWrite />
+        <ProductCommentList />
       </S.Product>
     </>
   );
