@@ -24,6 +24,7 @@ export default function ProductCommentWrite(props) {
     Pick<IQuery, "fetchUseditemQuestions">,
     IQueryFetchUseditemQuestionsArgs
   >(FETCH_USED_ITEM_QUESTIONS);
+
   const [createUseditemQuestion] = useMutation<
     Pick<IMutation, "createUseditemQuestion">,
     IMutationCreateUseditemQuestionArgs
@@ -83,7 +84,7 @@ export default function ProductCommentWrite(props) {
         refetchQueries: [
           {
             query: FETCH_USED_ITEM_QUESTIONS,
-            variables: { useditemQuestionId: router.query.useditemQuestionId },
+            variables: { useditemQuestionId: props.el?._id },
           },
         ],
       });
@@ -110,7 +111,10 @@ export default function ProductCommentWrite(props) {
             value={(contents || props.el?.contents) ?? ""}
           />
           <S.BottomWrapper>
-            <S.ContentsLength>0/100</S.ContentsLength>
+            <S.ContentsLength>
+              {(contents ? contents.length : props.el?.contents.length) ?? 0}
+              /100
+            </S.ContentsLength>
             <S.Button onClick={props.isEdit ? onClickUpdate : onClickWrite}>
               {props.isEdit ? "수정하기" : "등록하기"}
             </S.Button>

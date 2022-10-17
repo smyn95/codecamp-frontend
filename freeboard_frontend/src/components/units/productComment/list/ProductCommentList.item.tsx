@@ -1,4 +1,8 @@
-import { CommentOutlined, PlusSquareOutlined } from "@ant-design/icons";
+import {
+  CommentOutlined,
+  MinusSquareOutlined,
+  PlusSquareOutlined,
+} from "@ant-design/icons";
 import { useMutation, useQuery } from "@apollo/client";
 import { message, Popconfirm } from "antd";
 import { useRouter } from "next/router";
@@ -89,7 +93,6 @@ export default function ProductCommentListUIItem(props) {
                 <S.Contents>{props.el?.contents}</S.Contents>
               </S.MainWrapper>
               <S.OptionWrapper>
-                <CommentOutlined onClick={onClickComment} />
                 <p onClick={onClickUpdate}>수정</p>
                 <Popconfirm
                   title="정말 삭제하시겠습니까?"
@@ -100,13 +103,23 @@ export default function ProductCommentListUIItem(props) {
                 >
                   <p>삭제</p>
                 </Popconfirm>
+                <CommentOutlined onClick={onClickComment} />
               </S.OptionWrapper>
             </S.FlexWrapper>
-            <S.DateString>{getDate(props.el?.createdAt)}</S.DateString>
             <S.Answer onClick={onClickCommentWrite}>
-              <PlusSquareOutlined /> &nbsp;&nbsp;답글 달기
+              {!isCommentWrite ? (
+                <p>
+                  <PlusSquareOutlined /> &nbsp;&nbsp;답글 달기
+                </p>
+              ) : (
+                <p>
+                  <MinusSquareOutlined /> &nbsp;&nbsp;숨기기
+                </p>
+              )}
+              <S.DateString>{getDate(props.el?.createdAt)}</S.DateString>
             </S.Answer>
             {isComment && <ProductRecommentListPage el={props.el} />}
+
             {isCommentWrite && <ProductReCommentWrite el={props.el} />}
           </S.ItemWrapper>
         </>

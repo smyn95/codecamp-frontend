@@ -170,7 +170,8 @@ export const Button = styled.button`
 export const Answer = styled.p`
   display: flex;
   align-items: center;
-  padding: 20px 0 15px 0;
+  justify-content: space-between;
+  padding: 20px 10px 15px 0;
   cursor: pointer;
   font-weight: 600;
   color: #2fcab0;
@@ -187,4 +188,8 @@ export const Recomment = styled.div`
   padding: 20px 0;
   margin: 0 auto;
   margin-top: 15px;
+  border-bottom: 1px solid #eee;
+  &:last-child {
+    border: none;
+  }
 `;
