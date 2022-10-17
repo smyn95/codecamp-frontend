@@ -106,8 +106,8 @@ export default function ProductCommentListUIItem(props) {
             <S.Answer onClick={onClickCommentWrite}>
               <PlusSquareOutlined /> &nbsp;&nbsp;답글 달기
             </S.Answer>
-            {isComment && <ProductRecommentListPage />}
-            {isCommentWrite && <ProductReCommentWrite />}
+            {isComment && <ProductRecommentListPage el={props.el} />}
+            {isCommentWrite && <ProductReCommentWrite el={props.el} />}
           </S.ItemWrapper>
         </>
       )}

@@ -1,4 +1,4 @@
-import { useLazyQuery, useMutation } from "@apollo/client";
+import { useLazyQuery, useMutation, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 import { ChangeEvent, useState } from "react";
 import { ErrorModal, SuccessModal } from "../../../../commons";
@@ -16,10 +16,11 @@ export default function ProductReCommentWrite(props) {
   const router = useRouter();
   const [reComment, setReComment] = useState("");
 
-  const [LazyQuery, { data, loading, called, refetch }] = useLazyQuery<
+  const { data } = useQuery<
     Pick<IQuery, "fetchUseditemQuestionAnswers">,
     IQueryFetchUseditemQuestionAnswersArgs
   >(FETCH_USED_ITEM_QUESTION_ANSWERS, {
+    variables: { useditemQuestionId: router.query.useditemQuestionId },
     fetchPolicy: "network-only",
   });
 
@@ -31,8 +32,6 @@ export default function ProductReCommentWrite(props) {
     setReComment(event.target.value);
   };
 
-  if (called && loading) return <p>Loading ...</p>;
-
   const onClickReCommentWrite = async () => {
     // console.log(router.query.useditemId);
     if (typeof router.query.useditemId !== "string") return;
@@ -43,12 +42,12 @@ export default function ProductReCommentWrite(props) {
           createUseditemQuestionAnswerInput: {
             contents: reComment,
           },
-          useditemQuestionId: router.query.useditemId,
+          useditemQuestionId: props.el._id,
         },
         refetchQueries: [
           {
             query: FETCH_USED_ITEM_QUESTION_ANSWERS,
-            variables: { useditemQuestionId: router.query.useditemId },
+            variables: { useditemQuestionId: props.el._id },
           },
         ],
       });
@@ -58,6 +57,7 @@ export default function ProductReCommentWrite(props) {
     }
     setReComment("");
   };
+  console.log("recomment쓰는거", data);
   return (
     <>
       <S.Recomment>
