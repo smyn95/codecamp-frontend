@@ -1,4 +1,4 @@
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 import { ChangeEvent, useState } from "react";
 import * as S from "../list/productCommentList.styles";
@@ -7,6 +7,8 @@ import {
   IMutation,
   IMutationCreateUseditemQuestionArgs,
   IMutationUpdateUseditemQuestionArgs,
+  IQuery,
+  IQueryFetchUseditemQuestionsArgs,
 } from "../../../../commons/types/generated/types";
 import {
   CREATE_USED_ITEM_QUESTION,
@@ -18,6 +20,10 @@ export default function ProductCommentWrite(props) {
   const router = useRouter();
   const [contents, setContents] = useState("");
 
+  const { data } = useQuery<
+    Pick<IQuery, "fetchUseditemQuestions">,
+    IQueryFetchUseditemQuestionsArgs
+  >(FETCH_USED_ITEM_QUESTIONS);
   const [createUseditemQuestion] = useMutation<
     Pick<IMutation, "createUseditemQuestion">,
     IMutationCreateUseditemQuestionArgs
@@ -43,12 +49,15 @@ export default function ProductCommentWrite(props) {
           },
           useditemId: router.query.useditemId,
         },
-        refetchQueries: [
-          {
-            query: FETCH_USED_ITEM_QUESTIONS,
-            variables: { useditemId: router.query.useditemId },
-          },
-        ],
+        update(cache, { data }) {
+          cache.modify({
+            fields: {
+              fetchUseditemQuestions: (prev) => {
+                return [data?.createUseditemQuestion, ...prev];
+              },
+            },
+          });
+        },
       });
       SuccessModal("댓글이 등록되었습니다.");
     } catch (error) {

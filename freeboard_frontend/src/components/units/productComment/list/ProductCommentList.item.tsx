@@ -1,5 +1,5 @@
 import { CommentOutlined, PlusSquareOutlined } from "@ant-design/icons";
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { message, Popconfirm } from "antd";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -8,6 +8,8 @@ import { getDate } from "../../../../commons/libraries/utils";
 import {
   IMutation,
   IMutationDeleteUseditemQuestionArgs,
+  IQuery,
+  IQueryFetchUseditemQuestionsArgs,
 } from "../../../../commons/types/generated/types";
 import ProductRecommentListPage from "../../productReComment/list/productReCommentList";
 import ProductReCommentWrite from "../../productReComment/write/productReCommentWirte";
@@ -23,6 +25,11 @@ export default function ProductCommentListUIItem(props) {
   const [isEdit, setIsEdit] = useState(false);
   const [isComment, setIsComment] = useState(false);
   const [isCommentWrite, setIsCommentWrite] = useState(false);
+
+  const { data } = useQuery<
+    Pick<IQuery, "fetchUseditemQuestions">,
+    IQueryFetchUseditemQuestionsArgs
+  >(FETCH_USED_ITEM_QUESTIONS);
 
   const [deleteUseditemQuestion] = useMutation<
     Pick<IMutation, "deleteUseditemQuestion">,
@@ -47,12 +54,19 @@ export default function ProductCommentListUIItem(props) {
         variables: {
           useditemQuestionId: props.el?._id,
         },
-        refetchQueries: [
-          {
-            query: FETCH_USED_ITEM_QUESTIONS,
-            variables: { useditemId: router.query.useditemId },
-          },
-        ],
+        update(cache, { data }) {
+          cache.modify({
+            fields: {
+              fetchUseditemQuestions: (prev, { readField }) => {
+                const deleteId = data?.deleteUseditemQuestion;
+                const filterdPrev = prev.filter(
+                  (el) => readField("_id", el) !== deleteId
+                );
+                return [...filterdPrev];
+              },
+            },
+          });
+        },
       });
     } catch (error) {
       ErrorModal(error.message);

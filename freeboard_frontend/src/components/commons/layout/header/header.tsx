@@ -17,7 +17,6 @@ import * as S from "../../../../commons/styles";
 import {
   IMutation,
   IMutationCreatePointTransactionOfLoadingArgs,
-  IQuery,
 } from "../../../../commons/types/generated/types";
 import { useMoveToPage } from "../../hooks/useMoveToPage";
 import {

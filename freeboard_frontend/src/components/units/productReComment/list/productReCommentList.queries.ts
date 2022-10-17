@@ -10,47 +10,6 @@ export const CREATE_USED_ITEM_QUESTION_ANSWER = gql`
       useditemQuestionId: $useditemQuestionId
     ) {
       _id
-      contents
-      useditemQuestion {
-        _id
-        contents
-        useditem {
-          _id
-          name
-          remarks
-          contents
-          price
-          tags
-          # images
-          pickedCount
-          # useditemAddress
-          soldAt
-          createdAt
-        }
-        user {
-          _id
-          email
-          name
-          picture
-          userPoint {
-            amount
-          }
-          createdAt
-        }
-        createdAt
-      }
-      user {
-        _id
-        email
-        name
-        picture
-        userPoint {
-          amount
-        }
-      }
-      createdAt
-      updatedAt
-      deletedAt
     }
   }
 `;
