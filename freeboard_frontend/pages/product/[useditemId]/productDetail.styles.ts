@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { Rate } from "antd";
+import { Rate, Carousel } from "antd";
 
 export const Product = styled.div`
   width: 1400px;
@@ -24,23 +24,19 @@ export const Font = styled.p`
   padding: 5px 0;
   font-family: "Nanum Myeongjo", serif;
 `;
-export const ImageBox = styled.div`
+export const ImageBox = styled(Carousel)`
   height: 550px;
   width: 550px;
   border-radius: 8px;
   overflow: hidden;
-  /* position: fixed; */
-  img {
-    width: 550px;
-    height: 550px;
-    border-radius: 8px;
-    position: relative;
-    min-width: 100%;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    color: transparent;
-  }
+  border: 3px solid #2fcab0;
+`;
+export const ImgDetail = styled.img`
+  width: 550px;
+  border-radius: 8px;
+  position: relative;
+  min-width: 100%;
+  color: transparent;
 `;
 export const Left = styled.div`
   display: flex;

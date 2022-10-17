@@ -18,10 +18,10 @@ export const ProductBox = styled.section`
   height: 320px;
   overflow: hidden;
   border-radius: 10px;
-  background: gray;
   position: relative;
   position: relative;
   cursor: pointer;
+  border: 3px solid #2fcab0;
 
   &:hover .Layer {
     opacity: 1;
@@ -35,10 +35,15 @@ export const ProductBox = styled.section`
       color: #fff;
     }
   }
+`;
+export const ProductImg = styled.div`
   img {
+    display: block;
+    margin: 0 auto;
     width: 100%;
   }
 `;
+
 export const BgLayer = styled.div`
   position: absolute;
   top: 0;

@@ -1,5 +1,5 @@
 import * as S from "./productDetail.styles";
-import { Collapse, Tooltip } from "antd";
+import { Collapse, Tooltip, Carousel } from "antd";
 import {
   DollarOutlined,
   HeartFilled,
@@ -116,12 +116,20 @@ const LoginSuccessPage = () => {
     console.log(pickData?.fetchUseditemsIPicked);
   };
 
+  console.log(data);
   return (
     <>
       <S.Product>
         <div className="flexBox">
-          <S.ImageBox>
-            <img src="/dd.jpeg" alt="상품이미지" />
+          <S.ImageBox autoplay>
+            {data?.fetchUseditem.images
+              ?.filter((el: string) => el)
+              .map((el: string) => (
+                <S.ImgDetail
+                  key={el}
+                  src={`https://storage.googleapis.com/${el}`}
+                />
+              ))}
           </S.ImageBox>
           <S.Box>
             <S.Left>

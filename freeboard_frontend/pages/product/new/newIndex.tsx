@@ -4,7 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import Input01 from "../../../src/components/commons/inputs/01";
 import { Modal, Tooltip } from "antd";
-import { EnvironmentOutlined, PlusOutlined } from "@ant-design/icons";
+import { EnvironmentOutlined } from "@ant-design/icons";
 import { useMutation } from "@apollo/client";
 import {
   IMutation,
@@ -25,6 +25,9 @@ import DaumPostcodeEmbed from "react-daum-postcode";
 import KakaoMapPage from "../../../src/components/commons/kakoMap";
 import "react-quill/dist/quill.snow.css";
 import dynamic from "next/dynamic";
+import { useEffect, useRef, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
+import Uploads01 from "../../../src/components/commons/uploads/01/Uploads01.container";
 
 const schema = yup.object({
   name: yup.string().required("상품명을 입력해주세요."),
@@ -47,6 +50,8 @@ const ReactQuill = dynamic(async () => await import("React-quill"), {
 export default function ProductWritePage(props) {
   const router = useRouter();
   const [isOpen, setIsOpen] = useRecoilState(isOpenState);
+  const [imgUrl, setimgUrl] = useState(["", "", ""]);
+  const FileRef = useRef<HTMLInputElement>(null);
 
   const { register, handleSubmit, formState, getValues, setValue, trigger } =
     useForm<IFormData>({
@@ -93,7 +98,7 @@ export default function ProductWritePage(props) {
     try {
       const result = await createUseditem({
         variables: {
-          createUseditemInput: data,
+          createUseditemInput: { ...data, images: [...imgUrl] },
         },
         refetchQueries: [
           {
@@ -103,11 +108,24 @@ export default function ProductWritePage(props) {
         ],
       });
       SuccessModal("상품등록이 완료되었습니다.");
+      console.log(result);
       void router.push(`/product/${result.data.createUseditem._id}`);
     } catch (error) {
       ErrorModal(error.message);
     }
   };
+
+  const onChangeFileUrls = (imgUrlIndex: String, index: number) => {
+    const newImgUrl = [...imgUrl];
+    newImgUrl[index] = imgUrlIndex;
+    setimgUrl(newImgUrl);
+  };
+
+  useEffect(() => {
+    if (props.data?.fetchUseditem.images?.length) {
+      setimgUrl([...props.data?.fetchUseditem.images]);
+    }
+  }, [props.data]);
 
   const onClickUpdate = async (data: IFormData) => {
     console.log(data);
@@ -300,24 +318,14 @@ export default function ProductWritePage(props) {
 
           <S.InputBox>
             <S.InputName>사진첨부</S.InputName>
-            <S.Imgbx>
-              <div>
-                <PlusOutlined />
-                <span>Upload</span>
-              </div>
-            </S.Imgbx>
-            <S.Imgbx>
-              <div>
-                <PlusOutlined />
-                <span>Upload</span>
-              </div>
-            </S.Imgbx>
-            <S.Imgbx>
-              <div>
-                <PlusOutlined />
-                <span>Upload</span>
-              </div>
-            </S.Imgbx>
+            {imgUrl.map((el, index) => (
+              <Uploads01
+                key={uuidv4()}
+                index={index}
+                imgUrlIndex={el}
+                onChangeFileUrls={onChangeFileUrls}
+              />
+            ))}
           </S.InputBox>
           <S.Setting>
             <S.InputBox>

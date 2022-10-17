@@ -22,26 +22,6 @@ export const CREATE_USED_ITEM = gql`
         updatedAt
         deletedAt
       }
-      # buyer {
-      #   _id
-      #   email
-      #   name
-      #   picture
-      #   userPoint
-      #   createdAt
-      #   updatedAt
-      #   deletedAt
-      # }
-      # seller {
-      #   _id
-      #   email
-      #   name
-      #   picture
-      #   userPoint
-      #   createdAt
-      #   updatedAt
-      #   deletedAt
-      # }
       soldAt
       createdAt
       updatedAt

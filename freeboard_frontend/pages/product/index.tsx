@@ -80,7 +80,17 @@ export default function ProductListPage() {
                 <S.BgLayer className="Layer">
                   <p>{el.remarks}</p>
                 </S.BgLayer>
-                <img src="/dd.jpeg" alt="상품이미지" />
+                <S.ProductImg>
+                  {" "}
+                  <img
+                    className="scale"
+                    src={
+                      (el.images[0] &&
+                        `https://storage.googleapis.com/${el.images[0]}`) ||
+                      `/no-image.png`
+                    }
+                  />
+                </S.ProductImg>
                 <S.Name className="priceover">
                   {el.name || "　 "} <S.Price>{el.price}</S.Price>
                 </S.Name>
