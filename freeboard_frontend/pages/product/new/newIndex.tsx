@@ -51,7 +51,6 @@ export default function ProductWritePage(props) {
   const router = useRouter();
   const [isOpen, setIsOpen] = useRecoilState(isOpenState);
   const [imgUrl, setimgUrl] = useState(["", "", ""]);
-  const FileRef = useRef<HTMLInputElement>(null);
 
   const { register, handleSubmit, formState, getValues, setValue, trigger } =
     useForm<IFormData>({
@@ -333,7 +332,7 @@ export default function ProductWritePage(props) {
           </S.InputBox>
           <S.Setting>
             <S.InputBox>
-              <S.InputName style={{}}>메인설정</S.InputName>
+              <S.InputName>메인설정</S.InputName>
               <div className="radio">
                 <input type="radio" id="youtube" name="youtube" />
                 <label htmlFor="youtube">사진 (1)</label>
