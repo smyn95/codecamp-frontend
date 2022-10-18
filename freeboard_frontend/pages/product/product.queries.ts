@@ -41,6 +41,13 @@ export const FETCH_USED_ITEM = gql`
       tags
       images
       pickedCount
+      seller {
+        _id
+        email
+        name
+        picture
+        createdAt
+      }
       useditemAddress {
         _id
         zipcode
@@ -156,6 +163,29 @@ export const FETCH_USED_ITEMS_I_PICKED = gql`
       createdAt
       updatedAt
       deletedAt
+    }
+  }
+`;
+
+export const CREATE_POINT_TRANSACTION_OF_BUYING_AND_SELLING = gql`
+  mutation createPointTransactionOfBuyingAndSelling($useritemId: ID!) {
+    createPointTransactionOfBuyingAndSelling(useritemId: $useritemId) {
+      _id
+      name
+      remarks
+      contents
+      price
+      tags
+      images
+      pickedCount
+      seller {
+        _id
+        email
+        name
+        picture
+        createdAt
+      }
+      soldAt
     }
   }
 `;

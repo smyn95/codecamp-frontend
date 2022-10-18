@@ -211,3 +211,11 @@ export const Kakaomap = styled.div`
 `;
 
 export const Star = styled(Rate)``;
+
+export const Address = styled.p`
+  padding: 10px 10px;
+  background: aliceblue;
+  text-align: right;
+  font-size: 16px;
+  font-weight: 500;
+`;

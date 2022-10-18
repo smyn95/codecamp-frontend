@@ -8,6 +8,7 @@ import {
 } from "@ant-design/icons";
 import { useMutation, useQuery } from "@apollo/client";
 import {
+  CREATE_POINT_TRANSACTION_OF_BUYING_AND_SELLING,
   DELETE_USED_ITEM,
   FETCH_USED_ITEM,
   FETCH_USED_ITEMS,
@@ -16,6 +17,7 @@ import {
 } from "../product.queries";
 import {
   IMutation,
+  IMutationCreatePointTransactionOfBuyingAndSellingArgs,
   IMutationDeleteUseditemArgs,
   IMutationToggleUseditemPickArgs,
   IQuery,
@@ -47,6 +49,11 @@ const LoginSuccessPage = () => {
     fetchPolicy: "network-only",
     variables: { useditemId: router.query.useditemId },
   });
+
+  const [createPointTransactionOfBuyingAndSelling] = useMutation<
+    Pick<IMutation, "createPointTransactionOfBuyingAndSelling">,
+    IMutationCreatePointTransactionOfBuyingAndSellingArgs
+  >(CREATE_POINT_TRANSACTION_OF_BUYING_AND_SELLING);
 
   const { data: pickData } = useQuery<
     Pick<IQuery, "fetchUseditemsIPicked">,
@@ -104,7 +111,7 @@ const LoginSuccessPage = () => {
     void router.push("/product/");
   };
 
-  const onClickPick = async (useditemId) => {
+  const onClickPick = async (useditemId: any) => {
     await toggleUseditemPick({
       variables: { useditemId: router.query.useditemId },
       update(cache, { data }) {
@@ -116,6 +123,17 @@ const LoginSuccessPage = () => {
     console.log(pickData?.fetchUseditemsIPicked);
   };
 
+  const onClickBuying = async (useditemId: any) => {
+    try {
+      await createPointTransactionOfBuyingAndSelling({
+        variables: { useritemId: router.query.useditemId },
+      });
+      void router.push("/product");
+      SuccessModal("구매가 완료되었습니다.");
+    } catch (error) {
+      ErrorModal(error.message);
+    }
+  };
   console.log(data);
   return (
     <>
@@ -134,12 +152,12 @@ const LoginSuccessPage = () => {
           <S.Box>
             <S.Left>
               <S.Leftbx>
-                <img src="/avatar.png" style={{ height: "60px" }} />
+                {data?.fetchUseditem.seller?.picture}
                 <S.Namebx>
-                  <S.Name>유저네임</S.Name>
+                  <S.Name>{data?.fetchUseditem.seller?.name}</S.Name>
                   <S.Date>
                     {data
-                      ? data.fetchUseditem.createdAt.slice(0, 10)
+                      ? data.fetchUseditem.seller?.createdAt.slice(0, 10)
                       : "로딩중입니다..."}
                   </S.Date>
                 </S.Namebx>
@@ -170,7 +188,7 @@ const LoginSuccessPage = () => {
               </S.ProductPrice>
             </S.ProductInfo>
             <S.DetailBtn>
-              <button className="buy">
+              <button className="buy" onClick={onClickBuying}>
                 <DollarOutlined />
                 &nbsp; 구매
               </button>
@@ -209,6 +227,9 @@ const LoginSuccessPage = () => {
                 }
               />
             </S.Kakaomap>
+            <S.Address>
+              주소 : {data ? data.fetchUseditem.useditemAddress?.address : ""}
+            </S.Address>
             <S.Tags>
               <span>{data ? data.fetchUseditem.tags : "로딩중입니다..."}</span>
               <div>

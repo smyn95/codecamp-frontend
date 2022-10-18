@@ -3,6 +3,7 @@ import {
   DollarOutlined,
   LogoutOutlined,
   PlusOutlined,
+  UserOutlined,
 } from "@ant-design/icons";
 import { useMutation, useQuery } from "@apollo/client";
 import Head from "next/head";
@@ -149,6 +150,9 @@ export default function LayoutHeader(props) {
                         </S.UserPage>
                       </div>
                       <S.Logout>
+                        <li>
+                          <UserOutlined /> 마이페이지
+                        </li>
                         <li onClick={onClickPayment}>
                           <DollarOutlined /> 충전하기
                         </li>
