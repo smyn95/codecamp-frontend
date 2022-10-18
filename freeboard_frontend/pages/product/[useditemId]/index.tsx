@@ -152,7 +152,9 @@ const LoginSuccessPage = () => {
           <S.Box>
             <S.Left>
               <S.Leftbx>
-                {data?.fetchUseditem.seller?.picture}
+                <S.UserProfile
+                  src={data?.fetchUseditem.seller?.picture ?? ""}
+                />
                 <S.Namebx>
                   <S.Name>{data?.fetchUseditem.seller?.name}</S.Name>
                   <S.Date>

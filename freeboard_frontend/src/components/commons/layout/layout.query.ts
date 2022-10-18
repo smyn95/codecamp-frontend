@@ -24,3 +24,9 @@ export const CREATE_POINT_TRANSACTION_OF_LOADING = gql`
     }
   }
 `;
+
+export const FETCH_USED_ITEMS_COUNT_I_PICKED = gql`
+  query fetchUseditemsCountIPicked {
+    fetchUseditemsCountIPicked
+  }
+`;

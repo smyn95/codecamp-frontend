@@ -48,6 +48,11 @@ export const Left = styled.div`
 export const Leftbx = styled.div`
   display: flex;
 `;
+export const UserProfile = styled.img`
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+`;
 export const Namebx = styled.div`
   display: flex;
   flex-direction: column;

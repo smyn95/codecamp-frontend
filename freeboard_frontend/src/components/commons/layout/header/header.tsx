@@ -23,6 +23,7 @@ import { useMoveToPage } from "../../hooks/useMoveToPage";
 import {
   FETCH_USER_LOGGED_IN,
   CREATE_POINT_TRANSACTION_OF_LOADING,
+  FETCH_USED_ITEMS_COUNT_I_PICKED,
 } from "../layout.query";
 
 declare const window: typeof globalThis & {
@@ -32,7 +33,9 @@ declare const window: typeof globalThis & {
 export default function LayoutHeader(props) {
   const router = useRouter();
   const { data } = useQuery(FETCH_USER_LOGGED_IN);
+  const { data: pickData } = useQuery(FETCH_USED_ITEMS_COUNT_I_PICKED);
 
+  console.log(pickData);
   const [createPointTransactionOfLoading] = useMutation<
     Pick<IMutation, "createPointTransactionOfLoading">,
     IMutationCreatePointTransactionOfLoadingArgs
@@ -173,11 +176,14 @@ export default function LayoutHeader(props) {
               />
             )}
             <img src="/car.svg" alt="배송 아이콘" />
-            <img src="/cart.svg" alt="장바구니 아이콘" />
-            <input type="text" />
+            <S.CartList>
+              <img src="/cart.svg" alt="장바구니 아이콘" />
+              <S.pickNum>{pickData?.fetchUseditemsCountIPicked}</S.pickNum>
+            </S.CartList>
+            {/* <input type="text" />
             <S.Material onClick={props.onClickText}>
               <img src="/search.png" alt="검색아이콘" />
-            </S.Material>
+            </S.Material> */}
           </S.TopSearch>
           <S.Badges>
             {typeof window !== "undefined" &&

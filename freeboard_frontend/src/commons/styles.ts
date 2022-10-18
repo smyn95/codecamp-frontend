@@ -208,9 +208,23 @@ export const Material = styled.div`
     cursor: pointer;
   }
 `;
-//HEADER -End
+export const CartList = styled.div`
+  position: relative;
+`;
+export const pickNum = styled.span`
+  position: absolute;
+  top: 3px;
+  right: -4px;
+  padding: 3px 7px;
+  background: #faad14de;
+  border-radius: 50%;
+  font-weight: 700;
+  color: #fff;
+  font-size: 12px;
+`;
+// HEADER -End
 
-//BANNER
+// BANNER
 export const Visual = styled.div`
   background: url("/main_bg.jpeg") no-repeat 50% 50%;
   background-size: cover;
