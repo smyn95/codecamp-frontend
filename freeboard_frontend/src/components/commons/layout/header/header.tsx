@@ -48,16 +48,20 @@ export default function LayoutHeader(props) {
   const onclickIsOpne = () => {
     setIsLogin((prev) => !prev);
   };
+
   if (typeof window !== "undefined") {
     const myProduct = JSON.parse(localStorage.getItem("myProducts") ?? "[]");
+    // const setItem = {
+    //   id: router.query.detail,
+    //   imageUrl: imageUrl,
+    // };
   }
   useEffect(() => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     myProduct === null
       ? localStorage.setItem("myProducts", JSON.stringify([]))
       : null;
   }, []);
-  console.log(data);
+
   const onClickPayment = () => {
     const IMP = window.IMP;
     IMP.init("imp49910675");

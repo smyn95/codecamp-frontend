@@ -128,12 +128,16 @@ export default function ProductWritePage(props) {
   }, [props.data]);
 
   const onClickUpdate = async (data: IFormData) => {
-    console.log(data);
+    const currentFiles = JSON.stringify(imgUrl);
+    const defaultFiles = JSON.stringify(props.data?.fetchUseditem.images);
+    const isChangedFiles = currentFiles !== defaultFiles;
 
     try {
+      if (isChangedFiles) updateUseditem.images = imgUrl;
+
       const result = await updateUseditem({
         variables: {
-          updateUseditemInput: data,
+          updateUseditemInput: { ...data, images: [...imgUrl] },
           useditemId: String(router.query.useditemId),
         },
       });

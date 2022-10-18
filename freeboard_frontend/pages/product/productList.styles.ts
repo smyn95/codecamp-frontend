@@ -22,6 +22,7 @@ export const ProductBox = styled.section`
   position: relative;
   cursor: pointer;
   border: 3px solid #2fcab0;
+  background: aliceblue;
 
   &:hover .Layer {
     opacity: 1;

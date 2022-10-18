@@ -87,7 +87,7 @@ export default function ProductListPage() {
                     src={
                       (el.images[0] &&
                         `https://storage.googleapis.com/${el.images[0]}`) ||
-                      `/no-image.png`
+                      ``
                     }
                   />
                 </S.ProductImg>
