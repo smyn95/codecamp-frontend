@@ -34,6 +34,7 @@ import { useRecoilState } from "recoil";
 import { isEditState } from "../../../src/commons/store";
 import ProductCommentWrite from "../../../src/components/units/productComment/write/productcommentWrite";
 import ProductCommentList from "../../../src/components/units/productComment/list/productCommentList";
+import { FETCH_POINT_TRANSACTIONS_OF_SELLING } from "../../myPage/mypage.queries";
 
 const LoginSuccessPage = () => {
   const router = useRouter();
@@ -127,6 +128,12 @@ const LoginSuccessPage = () => {
     try {
       await createPointTransactionOfBuyingAndSelling({
         variables: { useritemId: router.query.useditemId },
+        refetchQueries: [
+          {
+            query: FETCH_POINT_TRANSACTIONS_OF_SELLING,
+            variables: { useritemId: router.query.useditemId },
+          },
+        ],
       });
       void router.push("/product");
       SuccessModal("구매가 완료되었습니다.");

@@ -35,7 +35,6 @@ export default function LayoutHeader(props) {
   const { data } = useQuery(FETCH_USER_LOGGED_IN);
   const { data: pickData } = useQuery(FETCH_USED_ITEMS_COUNT_I_PICKED);
 
-  console.log(pickData);
   const [createPointTransactionOfLoading] = useMutation<
     Pick<IMutation, "createPointTransactionOfLoading">,
     IMutationCreatePointTransactionOfLoadingArgs
@@ -153,7 +152,7 @@ export default function LayoutHeader(props) {
                         </S.UserPage>
                       </div>
                       <S.Logout>
-                        <li>
+                        <li onClick={onClickMoveToPage("/myPage")}>
                           <UserOutlined /> 마이페이지
                         </li>
                         <li onClick={onClickPayment}>
