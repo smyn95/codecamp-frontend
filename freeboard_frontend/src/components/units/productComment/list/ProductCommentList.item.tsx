@@ -128,6 +128,7 @@ export default function ProductCommentListUIItem(props) {
                     isCommentState={isCommentState}
                     key={el}
                     answersData={answersData}
+                    setIsCommentWrite={setIsCommentWrite}
                   />
                 ))}
               </>
@@ -137,6 +138,8 @@ export default function ProductCommentListUIItem(props) {
               <ProductReCommentWrite
                 el={props.el}
                 isCommentState={isCommentState}
+                answersData={answersData}
+                setIsCommentWrite={setIsCommentWrite}
               />
             )}
           </S.ItemWrapper>

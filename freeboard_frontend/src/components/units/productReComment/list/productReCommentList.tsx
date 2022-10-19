@@ -42,6 +42,7 @@ export default function ProductRecommentListPage(props) {
       },
     });
   };
+  console.log(props.el, "dd");
   return (
     <>
       {!props.isCommentState && (
@@ -75,6 +76,7 @@ export default function ProductRecommentListPage(props) {
       {props.isCommentState && (
         <ProductReCommentWrite
           isCommentState={props.isCommentState}
+          setIsCommentState={props.setIsCommentState}
           el={props.el}
           answersData={props.answersData}
         />

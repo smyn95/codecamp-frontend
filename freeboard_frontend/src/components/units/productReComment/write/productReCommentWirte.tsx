@@ -54,6 +54,7 @@ export default function ProductReCommentWrite({ answersData, ...props }) {
         },
       });
       SuccessModal("답글이 등록되었습니다.");
+      props.setIsCommentWrite((prev) => !prev);
     } catch (error) {
       ErrorModal(error.message);
     }
@@ -75,6 +76,7 @@ export default function ProductReCommentWrite({ answersData, ...props }) {
         },
       });
       SuccessModal("답글이 수정되었습니다.");
+      props.setIsCommentState(false);
     } catch (error) {
       ErrorModal(error.message);
     }
