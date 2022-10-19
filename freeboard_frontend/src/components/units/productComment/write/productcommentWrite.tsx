@@ -74,7 +74,6 @@ export default function ProductCommentWrite(props) {
     }
 
     try {
-      if (contents) updateUseditemQuestionInput.contents = contents;
       if (typeof props.el?._id !== "string") return;
       await updateUseditemQuestion({
         variables: {
@@ -90,7 +89,7 @@ export default function ProductCommentWrite(props) {
       ErrorModal(error.message);
     }
   };
-  console.log(contents);
+  console.log(props.isEdit);
 
   return (
     <>
@@ -113,10 +112,8 @@ export default function ProductCommentWrite(props) {
               {(contents ? contents.length : props.el?.contents.length) ?? 0}
               /100
             </S.ContentsLength>
-            <S.Button
-              onClick={props.isCommentState ? onClickUpdate : onClickWrite}
-            >
-              {props.isCommentState ? "수정하기" : "등록하기"}
+            <S.Button onClick={props.isEdit ? onClickUpdate : onClickWrite}>
+              {props.isEdit ? "수정하기" : "등록하기"}
             </S.Button>
           </S.BottomWrapper>
         </S.ContentsWrapper>

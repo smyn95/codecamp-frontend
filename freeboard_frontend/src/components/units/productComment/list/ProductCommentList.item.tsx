@@ -13,16 +13,12 @@ import {
   IMutationDeleteUseditemQuestionArgs,
   IQuery,
   IQueryFetchUseditemQuestionAnswersArgs,
-  IQueryFetchUseditemQuestionsArgs,
 } from "../../../../commons/types/generated/types";
 import ProductRecommentListPage from "../../productReComment/list/productReCommentList";
 import { FETCH_USED_ITEM_QUESTION_ANSWERS } from "../../productReComment/list/productReCommentList.queries";
 import ProductReCommentWrite from "../../productReComment/write/productReCommentWirte";
 import ProductCommentWrite from "../write/productcommentWrite";
-import {
-  DELETE_USED_ITEM_QUESTION,
-  FETCH_USED_ITEM_QUESTIONS,
-} from "../write/productcommentWrite.queries";
+import { DELETE_USED_ITEM_QUESTION } from "../write/productcommentWrite.queries";
 import * as S from "./productCommentList.styles";
 
 export default function ProductCommentListUIItem(props) {
@@ -38,10 +34,6 @@ export default function ProductCommentListUIItem(props) {
     variables: { useditemQuestionId: props.el._id },
     fetchPolicy: "network-only",
   });
-  const { data } = useQuery<
-    Pick<IQuery, "fetchUseditemQuestions">,
-    IQueryFetchUseditemQuestionsArgs
-  >(FETCH_USED_ITEM_QUESTIONS);
 
   const [deleteUseditemQuestion] = useMutation<
     Pick<IMutation, "deleteUseditemQuestion">,
@@ -85,7 +77,7 @@ export default function ProductCommentListUIItem(props) {
     }
   };
   const onClickUpdate = () => {
-    setIsEdit(true);
+    setIsEdit((prev) => !prev);
   };
   return (
     <>
@@ -135,6 +127,7 @@ export default function ProductCommentListUIItem(props) {
                     setIsCommentState={setIsCommentState}
                     isCommentState={isCommentState}
                     key={el}
+                    answersData={answersData}
                   />
                 ))}
               </>

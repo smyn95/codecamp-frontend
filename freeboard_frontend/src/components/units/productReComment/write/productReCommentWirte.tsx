@@ -11,11 +11,10 @@ import {
 import * as S from "../../productComment/list/productCommentList.styles";
 import {
   CREATE_USED_ITEM_QUESTION_ANSWER,
-  FETCH_USED_ITEM_QUESTION_ANSWERS,
   UPDATE_USED_ITEM_QUESTION_ANSWER,
 } from "../list/productReCommentList.queries";
 
-export default function ProductReCommentWrite(props) {
+export default function ProductReCommentWrite({ answersData, ...props }) {
   const router = useRouter();
   const [reComment, setReComment] = useState("");
 
@@ -44,12 +43,15 @@ export default function ProductReCommentWrite(props) {
           },
           useditemQuestionId: props.el._id,
         },
-        refetchQueries: [
-          {
-            query: FETCH_USED_ITEM_QUESTION_ANSWERS,
-            variables: { useditemQuestionId: props.el._id },
-          },
-        ],
+        update(cache, { answersData }) {
+          cache.modify({
+            fields: {
+              fetchUseditemQuestionAnswers: (prev) => {
+                return [answersData?.createUseditemQuestionAnswer, ...prev];
+              },
+            },
+          });
+        },
       });
       SuccessModal("답글이 등록되었습니다.");
     } catch (error) {

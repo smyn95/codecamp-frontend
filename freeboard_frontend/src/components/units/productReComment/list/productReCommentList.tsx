@@ -76,6 +76,7 @@ export default function ProductRecommentListPage(props) {
         <ProductReCommentWrite
           isCommentState={props.isCommentState}
           el={props.el}
+          answersData={props.answersData}
         />
       )}
     </>
