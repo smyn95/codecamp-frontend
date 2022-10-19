@@ -152,7 +152,7 @@ export default function LayoutHeader(props) {
                         </S.UserPage>
                       </div>
                       <S.Logout>
-                        <li onClick={onClickMoveToPage("/myPage")}>
+                        <li onClick={onClickMoveToPage("/myPage/sell")}>
                           <UserOutlined /> 마이페이지
                         </li>
                         <li onClick={onClickPayment}>

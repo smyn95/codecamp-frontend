@@ -81,7 +81,6 @@ export default function ProductListPage() {
                   <p>{el.remarks}</p>
                 </S.BgLayer>
                 <S.ProductImg>
-                  {" "}
                   <img
                     className="scale"
                     src={

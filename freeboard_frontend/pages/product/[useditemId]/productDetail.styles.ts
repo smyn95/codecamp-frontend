@@ -37,6 +37,7 @@ export const ImgDetail = styled.img`
   position: relative;
   min-width: 100%;
   color: transparent;
+  height: 100%; ;
 `;
 export const Left = styled.div`
   display: flex;

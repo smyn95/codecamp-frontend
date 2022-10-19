@@ -33,3 +33,36 @@ export const FETCH_USED_ITEMS_COUNT_I_PICKED = gql`
     fetchUseditemsCountIPicked
   }
 `;
+
+export const FETCH_POINT_TRANSACTIONS_COUNT_OF_SELLING = gql`
+  query fetchPointTransactionsCountOfSelling {
+    fetchPointTransactionsCountOfSelling
+  }
+`;
+export const FETCH_POINT_TRANSACTIONS_COUNT_OF_BUYING = gql`
+  query fetchPointTransactionsCountOfBuying {
+    fetchPointTransactionsCountOfBuying
+  }
+`;
+
+export const FETCH_POINT_TRANSACTIONS = gql`
+  query fetchPointTransactions($search: String, $page: Int) {
+    fetchPointTransactions(search: $search, page: $page) {
+      _id
+      amount
+      balance
+      statusDetail
+      useditem {
+        _id
+        name
+        contents
+        price
+        images
+        pickedCount
+        soldAt
+        createdAt
+      }
+      createdAt
+    }
+  }
+`;

@@ -190,6 +190,7 @@ export default function ProductWritePage(props) {
     "color",
     "background",
   ];
+
   return (
     <>
       <S.Box>
@@ -260,7 +261,7 @@ export default function ProductWritePage(props) {
                 setValue={setValue}
               />
             </S.MapBox>
-
+            {console.log(getValues("useditemAddress.address"))}
             <S.MapAddressBox>
               <S.InputName>
                 GPS &nbsp;&nbsp;

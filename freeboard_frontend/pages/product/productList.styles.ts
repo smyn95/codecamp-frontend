@@ -38,10 +38,12 @@ export const ProductBox = styled.section`
   }
 `;
 export const ProductImg = styled.div`
+  height: 100%;
   img {
     display: block;
     margin: 0 auto;
     width: 100%;
+    height: 100%;
   }
 `;
 

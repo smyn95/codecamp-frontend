@@ -1,7 +1,7 @@
 import { UseFormRegisterReturn } from "react-hook-form";
 
 interface IProps {
-  type: "text" | "password" | "number";
+  type: "text" | "password" | "number" | "any";
   register: UseFormRegisterReturn;
   placeholder: any;
   readOnly: any;
