@@ -5,7 +5,6 @@ import {
 } from "@ant-design/icons";
 import { useMutation, useQuery } from "@apollo/client";
 import { message, Popconfirm } from "antd";
-import { useRouter } from "next/router";
 import { useState } from "react";
 import { ErrorModal } from "../../../../commons";
 import { getDate } from "../../../../commons/libraries/utils";
@@ -13,9 +12,11 @@ import {
   IMutation,
   IMutationDeleteUseditemQuestionArgs,
   IQuery,
+  IQueryFetchUseditemQuestionAnswersArgs,
   IQueryFetchUseditemQuestionsArgs,
 } from "../../../../commons/types/generated/types";
 import ProductRecommentListPage from "../../productReComment/list/productReCommentList";
+import { FETCH_USED_ITEM_QUESTION_ANSWERS } from "../../productReComment/list/productReCommentList.queries";
 import ProductReCommentWrite from "../../productReComment/write/productReCommentWirte";
 import ProductCommentWrite from "../write/productcommentWrite";
 import {
@@ -25,11 +26,18 @@ import {
 import * as S from "./productCommentList.styles";
 
 export default function ProductCommentListUIItem(props) {
-  const router = useRouter();
   const [isEdit, setIsEdit] = useState(false);
   const [isComment, setIsComment] = useState(false);
   const [isCommentWrite, setIsCommentWrite] = useState(false);
+  const [isCommentState, setIsCommentState] = useState(false);
 
+  const { data: answersData } = useQuery<
+    Pick<IQuery, "fetchUseditemQuestionAnswers">,
+    IQueryFetchUseditemQuestionAnswersArgs
+  >(FETCH_USED_ITEM_QUESTION_ANSWERS, {
+    variables: { useditemQuestionId: props.el._id },
+    fetchPolicy: "network-only",
+  });
   const { data } = useQuery<
     Pick<IQuery, "fetchUseditemQuestions">,
     IQueryFetchUseditemQuestionsArgs
@@ -118,9 +126,26 @@ export default function ProductCommentListUIItem(props) {
               )}
               <S.DateString>{getDate(props.el?.createdAt)}</S.DateString>
             </S.Answer>
-            {isComment && <ProductRecommentListPage el={props.el} />}
 
-            {isCommentWrite && <ProductReCommentWrite el={props.el} />}
+            {isComment && (
+              <>
+                {answersData?.fetchUseditemQuestionAnswers.map((el) => (
+                  <ProductRecommentListPage
+                    el={el}
+                    setIsCommentState={setIsCommentState}
+                    isCommentState={isCommentState}
+                    key={el}
+                  />
+                ))}
+              </>
+            )}
+
+            {isCommentWrite && (
+              <ProductReCommentWrite
+                el={props.el}
+                isCommentState={isCommentState}
+              />
+            )}
           </S.ItemWrapper>
         </>
       )}

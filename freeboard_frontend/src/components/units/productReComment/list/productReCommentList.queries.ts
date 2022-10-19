@@ -41,3 +41,26 @@ export const DELETE_USED_ITEM_QUESTION_ANSWER = gql`
     )
   }
 `;
+
+export const UPDATE_USED_ITEM_QUESTION_ANSWER = gql`
+  mutation updateUseditemQuestionAnswer(
+    $updateUseditemQuestionAnswerInput: UpdateUseditemQuestionAnswerInput!
+    $useditemQuestionAnswerId: ID!
+  ) {
+    updateUseditemQuestionAnswer(
+      updateUseditemQuestionAnswerInput: $updateUseditemQuestionAnswerInput
+      useditemQuestionAnswerId: $useditemQuestionAnswerId
+    ) {
+      _id
+      contents
+      createdAt
+      user {
+        _id
+        email
+        name
+        picture
+        createdAt
+      }
+    }
+  }
+`;

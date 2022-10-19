@@ -74,6 +74,8 @@ export default function ProductCommentWrite(props) {
     }
 
     try {
+      if (contents) updateUseditemQuestionInput.contents = contents;
+      if (typeof props.el?._id !== "string") return;
       await updateUseditemQuestion({
         variables: {
           updateUseditemQuestionInput: {
@@ -81,12 +83,6 @@ export default function ProductCommentWrite(props) {
           },
           useditemQuestionId: props.el?._id,
         },
-        refetchQueries: [
-          {
-            query: FETCH_USED_ITEM_QUESTIONS,
-            variables: { useditemQuestionId: props.el?._id },
-          },
-        ],
       });
       props.setIsEdit?.(false);
       SuccessModal("수정이 완료되었습니다.");
@@ -94,6 +90,8 @@ export default function ProductCommentWrite(props) {
       ErrorModal(error.message);
     }
   };
+  console.log(contents);
+
   return (
     <>
       <S.Product>
@@ -108,15 +106,17 @@ export default function ProductCommentWrite(props) {
             maxLength={100}
             placeholder="개인정보를 공유 및 요청하거나, 명예 훼손, 무단 광고, 불법 정보 유포시 모니터링 후 삭제될 수 있으며, 이에 대한 민형사상 책임은 게시자에게 있습니다."
             onChange={onChangeContents}
-            value={(contents || props.el?.contents) ?? ""}
+            value={contents || (props.el?.contents ?? "")}
           />
           <S.BottomWrapper>
             <S.ContentsLength>
               {(contents ? contents.length : props.el?.contents.length) ?? 0}
               /100
             </S.ContentsLength>
-            <S.Button onClick={props.isEdit ? onClickUpdate : onClickWrite}>
-              {props.isEdit ? "수정하기" : "등록하기"}
+            <S.Button
+              onClick={props.isCommentState ? onClickUpdate : onClickWrite}
+            >
+              {props.isCommentState ? "수정하기" : "등록하기"}
             </S.Button>
           </S.BottomWrapper>
         </S.ContentsWrapper>
