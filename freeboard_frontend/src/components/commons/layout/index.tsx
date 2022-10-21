@@ -10,7 +10,7 @@ const HIDDEN_RANDING = ["/"];
 
 // prettier-ignore
 export default function Layout(props) {
-  const router = useRouter();
+  const router = useRouter()
   const isHiddenBanner = HIDDEN_BANNER.includes(router.asPath);
   const isHiddenRanding = HIDDEN_RANDING.includes(router.asPath);
   const [isLogin, setIsLogin] = useRecoilState(isLoginState);

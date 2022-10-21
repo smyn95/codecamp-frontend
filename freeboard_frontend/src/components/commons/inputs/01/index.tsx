@@ -5,6 +5,7 @@ interface IProps {
   register: UseFormRegisterReturn;
   placeholder: any;
   readOnly: any;
+  onChange: any;
 }
 
 export default function Input01(props: IProps) {
@@ -14,6 +15,7 @@ export default function Input01(props: IProps) {
       {...props.register}
       placeholder={props.placeholder}
       readOnly={props.readOnly}
+      onChange={props.onChange}
     />
   );
 }

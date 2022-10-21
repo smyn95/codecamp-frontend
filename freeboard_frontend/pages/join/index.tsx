@@ -15,10 +15,12 @@ import { useRouter } from "next/router";
 const schema = yup.object({
   email: yup
     .string()
-    .email("이메일 형식에 적합하지 않습니다.")
+    .email("이메일 아이디를 @까지 정확하게 입력해주세요.")
     .required("이메일은 필수 입력입니다."),
   name: yup.string().required("이름을 입력해주세요."),
-  password: yup.string().required("비밀번호는 필수 입력입니다."),
+  password: yup
+    .string()
+    .required("영문+숫자 조합 8~16자리의 비밀번호를 입력해주세요."),
   // phone: yup
   //   .string()
   //   .matches(/^\d{3}-\d{3,4}-\d{4}$/, "휴대폰 형식에 알맞지 않습니다.")

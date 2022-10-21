@@ -1,5 +1,5 @@
-import styled from '@emotion/styled';
-import { styleBgColor, stylePrimaryColor } from '../../src/styles/commonStyles';
+import styled from "@emotion/styled";
+import { styleBgColor, stylePrimaryColor } from "../../src/styles/commonStyles";
 
 const Wrapper = styled.section``;
 
@@ -8,30 +8,27 @@ const Title = styled.h1`
 `;
 
 const Content = styled.div`
-  padding: 30px;
-  background-color: ${styleBgColor};
   color: ${stylePrimaryColor};
+  background-color: ${styleBgColor};
+  padding: 30px;
   margin-bottom: 20px;
 `;
 
 const Button = styled.button`
   background-color: ${stylePrimaryColor};
-  border: 0;
-  color: #fff;
+  border: none;
   padding: 10px 20px;
   cursor: pointer;
 `;
 
 export default function CommonsJsPage() {
   return (
-    <>
-      <Wrapper>
-        <Title>공통 CSS 연습</Title>
-        <Content>
-          <p>테스트용 박스 영역입니다.</p>
-        </Content>
-        <Button>버튼입니다.</Button>
-      </Wrapper>
-    </>
+    <Wrapper>
+      <Title>공통 CSS 연습</Title>
+      <Content>
+        <p>테스트용 박스 영역 입니다.</p>
+      </Content>
+      <Button>버튼입니다.</Button>
+    </Wrapper>
   );
 }

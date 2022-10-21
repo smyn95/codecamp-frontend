@@ -80,8 +80,14 @@ export default function ProductWritePage(props) {
     setIsOpen((prev) => !prev);
   };
 
+  const onChangeAddress = (value) => {
+    getValues("useditemAddress.address");
+    void trigger("useditemAddress.address");
+  };
+
   const handleComplete = (value: any) => {
     setValue("useditemAddress.address", value.address);
+    setValue("useditemAddress.zipcode", value.zonecode);
     onToggleModal();
     // 모달에서 검색한 주소를 동적으로  input value값에 넣어주겠다 (출력)
   };
@@ -295,6 +301,7 @@ export default function ProductWritePage(props) {
                       placeholder="주소가 입력됩니다."
                       type="text"
                       register={register("useditemAddress.address")}
+                      onChange={onChangeAddress}
                       readOnly
                     />
                     <button type="button" onClick={onToggleModal}>

@@ -1,7 +1,7 @@
-import { useTheme } from '@emotion/react';
-import styled from '@emotion/styled';
-import { useRecoilState } from 'recoil';
-import { themeState } from '../../src/store';
+import styled from "@emotion/styled";
+import { useRecoilState } from "recoil";
+import { themeState } from "../../src/store";
+import { styleBgColor, stylePrimaryColor } from "../../src/styles/commonStyles";
 
 const Wrapper = styled.section``;
 
@@ -13,41 +13,32 @@ const Content = styled.div`
   padding: 30px;
   margin-bottom: 20px;
   color: ${(props) => props.theme.primaryColor};
-  background: ${(props) => props.theme.bgColor};
+  background-color: ${(props) => props.theme.bgColor};
 `;
 
 const Button = styled.button`
-  border: 0;
+  border: none;
   padding: 10px 20px;
   cursor: pointer;
-  background: ${(props) => props.theme.primaryColor};
-  color: ${(props) => props.theme.bgColor};
+  color: ${(props) => props.theme.backgroundColor};
 `;
 
-export default function CommonsThemePage(props) {
-  // const theme = useTheme();
+export default function Page() {
   const [theme, setTheme] = useRecoilState(themeState);
 
-  const onClickButton = () => {
-    setTheme((prev) => {
-      if (prev === 'light') {
-        return 'dark';
-      } else {
-        return 'light';
-      }
-    });
+  const onClickBtn = () => {
+    setTheme(theme);
   };
 
   console.log(theme);
+
   return (
-    <>
-      <Wrapper>
-        <Title>공통 CSS 연습</Title>
-        <Content>
-          <p>테스트용 박스 영역입니다.</p>
-        </Content>
-        <Button onClick={onClickButton}>버튼입니다.</Button>
-      </Wrapper>
-    </>
+    <Wrapper>
+      <Title>공통 CSS 연습</Title>
+      <Content>
+        <p>테스트용 박스 영역 입니다.</p>
+      </Content>
+      <Button onClick={onClickBtn}>버튼입니다.</Button>
+    </Wrapper>
   );
 }

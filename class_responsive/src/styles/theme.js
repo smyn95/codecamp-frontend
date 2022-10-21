@@ -1,10 +1,10 @@
 export const themeStyle = {
   light: {
-    primaryColor: 'hotpink',
-    bgColor: 'white',
+    primaryColor: "hotpink",
+    bgColor: "white",
   },
   dark: {
-    primaryColor: 'white',
-    bgColor: 'hotpink',
+    primaryColor: "white",
+    bgColor: "hotpink",
   },
 };

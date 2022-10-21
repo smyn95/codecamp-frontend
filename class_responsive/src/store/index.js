@@ -1,6 +1,6 @@
-import { atom } from 'recoil';
+import { atom } from "recoil";
 
 export const themeState = atom({
-  key: 'themeState',
-  default: 'light',
+  key: "themeState",
+  default: "light",
 });
