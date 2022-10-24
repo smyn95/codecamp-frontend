@@ -1,4 +1,4 @@
-export default function JestunitTestPage() {
+export default function JestUnitTestPage() {
   return (
     <>
       <div>철수는 13살 입니다.</div>
