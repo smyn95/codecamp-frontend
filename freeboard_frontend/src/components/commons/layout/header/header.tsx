@@ -12,7 +12,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import LoginPage from "../../../../../pages/login";
-import { ErrorModal } from "../../../../commons";
+import { ErrorModal, SuccessModal } from "../../../../commons";
 import { accessTokenState, isLoginState } from "../../../../commons/store";
 import * as S from "../../../../commons/styles";
 import {
@@ -20,10 +20,12 @@ import {
   IMutationCreatePointTransactionOfLoadingArgs,
 } from "../../../../commons/types/generated/types";
 import { useMoveToPage } from "../../hooks/useMoveToPage";
+import PointModal from "../../modal/point";
 import {
   FETCH_USER_LOGGED_IN,
   CREATE_POINT_TRANSACTION_OF_LOADING,
   FETCH_USED_ITEMS_COUNT_I_PICKED,
+  LOGOUT_USER,
 } from "../layout.query";
 
 declare const window: typeof globalThis & {
@@ -43,6 +45,20 @@ export default function LayoutHeader(props) {
   const [myPage, setMyPage] = useState(false);
   const [isLogin, setIsLogin] = useRecoilState(isLoginState);
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
+  const [payment, setPayment] = useState(false);
+  const [choose, setChoose] = useState(false);
+  const [option, setOption] = useState("");
+
+  const [logoutUser] = useMutation(LOGOUT_USER);
+
+  const onClickLogout = async () => {
+    await logoutUser();
+    localStorage.removeItem("refreshToken");
+    // removeCookie('refreshToken', { path: '/' });
+    setAccessToken("");
+    void router.push("/main");
+    SuccessModal("로그아웃되었습니다.");
+  };
 
   const { onClickMoveToPage } = useMoveToPage();
   const onClickMyPage = () => {
@@ -65,6 +81,16 @@ export default function LayoutHeader(props) {
       : null;
   }, []);
 
+  const onClickChoose = () => {
+    setPayment((prev) => !prev);
+  };
+
+  const onChangeValue = (event) => {
+    setChoose(true);
+    setOption(event.currentTarget.value);
+    console.log(event.currentTarget.value, "qqq");
+  };
+
   const onClickPayment = () => {
     const IMP = window.IMP;
     IMP.init("imp49910675");
@@ -77,7 +103,7 @@ export default function LayoutHeader(props) {
         pay_method: "card", // card, vbank 등
         // merchant_uid: "ORD20180131-0000011", // 중복될 시, 결제 안됨!
         name: "포인트 충전",
-        amount: 100,
+        amount: Number(option),
         buyer_email: data?.fetchUserLoggedIn.email,
         buyer_name: data?.fetchUserLoggedIn.name,
         buyer_tel: "010-4242-4242",
@@ -155,10 +181,10 @@ export default function LayoutHeader(props) {
                         <li onClick={onClickMoveToPage("/myPage/sell")}>
                           <UserOutlined /> 마이페이지
                         </li>
-                        <li onClick={onClickPayment}>
+                        <li onClick={onClickChoose}>
                           <DollarOutlined /> 충전하기
                         </li>
-                        <li>
+                        <li onClick={onClickLogout}>
                           <LogoutOutlined />
                           로그아웃
                         </li>
@@ -172,6 +198,13 @@ export default function LayoutHeader(props) {
                 onClick={props.onclickIsOpne}
                 src="/mypage.svg"
                 alt="마이페이지 아이콘"
+              />
+            )}
+            {payment && (
+              <PointModal
+                onClickPayment={onClickPayment}
+                onChangeValue={onChangeValue}
+                choose={choose}
               />
             )}
             <img src="/car.svg" alt="배송 아이콘" />

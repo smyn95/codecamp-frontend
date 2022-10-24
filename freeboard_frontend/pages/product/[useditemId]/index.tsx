@@ -240,7 +240,14 @@ const LoginSuccessPage = () => {
               주소 : {data ? data.fetchUseditem.useditemAddress?.address : ""}
             </S.Address>
             <S.Tags>
-              <span>{data ? data.fetchUseditem.tags : "로딩중입니다..."}</span>
+              <div>
+                {data
+                  ? data.fetchUseditem.tags
+                      ?.join("")
+                      .split(" ")
+                      .map((el) => <span key={el}>{el}</span>)
+                  : "로딩중입니다."}
+              </div>
               <div>
                 <button
                   type="button"

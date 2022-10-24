@@ -30,3 +30,9 @@ export const FETCH_USED_ITEMS_COUNT_I_PICKED = gql`
     fetchUseditemsCountIPicked
   }
 `;
+
+export const LOGOUT_USER = gql`
+  mutation logoutUser {
+    logoutUser
+  }
+`;

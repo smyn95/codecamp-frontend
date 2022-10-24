@@ -47,18 +47,18 @@ export default function ProductReCommentWrite({ answersData, ...props }) {
           cache.modify({
             fields: {
               fetchUseditemQuestionAnswers: (prev) => {
-                return [answersData?.createUseditemQuestionAnswer, ...prev];
+                return [answersData, ...prev];
               },
             },
           });
         },
       });
+      setReComment("");
       SuccessModal("답글이 등록되었습니다.");
       props.setIsCommentWrite((prev) => !prev);
     } catch (error) {
       ErrorModal(error.message);
     }
-    setReComment("");
   };
 
   const onClickReCommentUpdate = async () => {
@@ -74,14 +74,20 @@ export default function ProductReCommentWrite({ answersData, ...props }) {
           },
           useditemQuestionAnswerId: props.el._id,
         },
+        update(cache) {
+          cache.modify({
+            fields: () => {},
+          });
+        },
       });
+      setReComment("");
       SuccessModal("답글이 수정되었습니다.");
       props.setIsCommentState(false);
     } catch (error) {
       ErrorModal(error.message);
     }
-    setReComment("");
   };
+
   return (
     <>
       <S.Recomment>

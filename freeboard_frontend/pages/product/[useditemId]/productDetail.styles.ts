@@ -161,11 +161,14 @@ export const Tags = styled.div`
   align-items: flex-end;
   justify-content: space-between;
   span {
-    margin-top: 4px;
+    margin: 4px 10px 0 0;
     font-size: 13px;
     line-height: 1.46;
     letter-spacing: -0.6px;
-    color: #868e96;
+    background: yellow;
+    padding: 5px 15px;
+    color: #000;
+    border-radius: 10px;
   }
   button {
     background: gray;
