@@ -14,7 +14,7 @@ import {
   UPDATE_USED_ITEM_QUESTION_ANSWER,
 } from "../list/productReCommentList.queries";
 
-export default function ProductReCommentWrite({ answersData, ...props }) {
+export default function ProductReCommentWrite(props) {
   const router = useRouter();
   const [reComment, setReComment] = useState("");
 
@@ -43,11 +43,11 @@ export default function ProductReCommentWrite({ answersData, ...props }) {
           },
           useditemQuestionId: props.el._id,
         },
-        update(cache, { answersData }) {
+        update(cache, { data }) {
           cache.modify({
             fields: {
               fetchUseditemQuestionAnswers: (prev) => {
-                return [answersData, ...prev];
+                return [data, ...prev];
               },
             },
           });
@@ -82,7 +82,7 @@ export default function ProductReCommentWrite({ answersData, ...props }) {
       });
       setReComment("");
       SuccessModal("답글이 수정되었습니다.");
-      props.setIsCommentState(false);
+      props.setCommentUp(false);
     } catch (error) {
       ErrorModal(error.message);
     }
@@ -90,31 +90,60 @@ export default function ProductReCommentWrite({ answersData, ...props }) {
 
   return (
     <>
-      <S.Recomment>
-        <S.ContentsWrapper>
-          <S.CommntContents
-            maxLength={100}
-            onChange={onChangeReContents}
-            placeholder="개인정보를 공유 및 요청하거나, 명예 훼손, 무단 광고, 불법 정보 유포시 모니터링 후 삭제될 수 있으며, 이에 대한 민형사상 책임은 게시자에게 있습니다."
-            value={(reComment || reComment) ?? ""}
-          />
-          <S.BottomWrapper>
-            <S.ContentsLength>
-              {(reComment ? reComment.length : reComment.length) ?? 0}
-              /100
-            </S.ContentsLength>
-            <S.Button
-              onClick={
-                props.isCommentState
-                  ? onClickReCommentUpdate
-                  : onClickReCommentWrite
-              }
-            >
-              {props.isCommentState ? "수정하기" : "등록하기"}
-            </S.Button>
-          </S.BottomWrapper>
-        </S.ContentsWrapper>
-      </S.Recomment>
+      {!props.isCommentWrite && (
+        <S.Recomment>
+          <S.ContentsWrapper>
+            <S.CommntContents
+              maxLength={100}
+              onChange={onChangeReContents}
+              placeholder="개인정보를 공유 및 요청하거나, 명예 훼손, 무단 광고, 불법 정보 유포시 모니터링 후 삭제될 수 있으며, 이에 대한 민형사상 책임은 게시자에게 있습니다."
+              value={reComment || (props.el?.contents ?? "")}
+            />
+            <S.BottomWrapper>
+              <S.ContentsLength>
+                {(reComment ? reComment.length : props.el?.contents?.length) ??
+                  0}
+                /100
+              </S.ContentsLength>
+              <S.Button
+                onClick={
+                  props.commentUp
+                    ? onClickReCommentUpdate
+                    : onClickReCommentWrite
+                }
+              >
+                {props.commentUp ? "수정하기" : "등록하기"}
+              </S.Button>
+            </S.BottomWrapper>
+          </S.ContentsWrapper>
+        </S.Recomment>
+      )}
+      {props.isCommentWrite && (
+        <S.Recomment>
+          <S.ContentsWrapper>
+            <S.CommntContents
+              maxLength={100}
+              onChange={onChangeReContents}
+              placeholder="개인정보를 공유 및 요청하거나, 명예 훼손, 무단 광고, 불법 정보 유포시 모니터링 후 삭제될 수 있으며, 이에 대한 민형사상 책임은 게시자에게 있습니다."
+            />
+            <S.BottomWrapper>
+              <S.ContentsLength>
+                {reComment.length || 0}
+                /100
+              </S.ContentsLength>
+              <S.Button
+                onClick={
+                  props.commentUp
+                    ? onClickReCommentUpdate
+                    : onClickReCommentWrite
+                }
+              >
+                {props.commentUp ? "수정하기" : "등록하기"}
+              </S.Button>
+            </S.BottomWrapper>
+          </S.ContentsWrapper>
+        </S.Recomment>
+      )}
     </>
   );
 }

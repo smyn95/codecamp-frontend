@@ -124,8 +124,6 @@ export default function ProductCommentListUIItem(props) {
                 {answersData?.fetchUseditemQuestionAnswers.map((el) => (
                   <ProductRecommentListPage
                     el={el}
-                    setIsCommentState={setIsCommentState}
-                    isCommentState={isCommentState}
                     key={el}
                     answersData={answersData}
                     setIsCommentWrite={setIsCommentWrite}
@@ -137,8 +135,8 @@ export default function ProductCommentListUIItem(props) {
             {isCommentWrite && (
               <ProductReCommentWrite
                 el={props.el}
-                isCommentState={isCommentState}
                 answersData={answersData}
+                isCommentWrite={isCommentWrite}
                 setIsCommentWrite={setIsCommentWrite}
               />
             )}

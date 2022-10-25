@@ -1,5 +1,8 @@
 import { useMutation } from "@apollo/client";
 import { message, Popconfirm } from "antd";
+import { useState } from "react";
+import { useRecoilState } from "recoil";
+import { isEditState } from "../../../../commons/store";
 import {
   IMutation,
   IMutationDeleteUseditemQuestionAnswerArgs,
@@ -9,6 +12,8 @@ import ProductReCommentWrite from "../write/productReCommentWirte";
 import { DELETE_USED_ITEM_QUESTION_ANSWER } from "./productReCommentList.queries";
 
 export default function ProductRecommentListPage(props) {
+  const [isEdit, setIsEdit] = useRecoilState(isEditState);
+  const [commentUp, setCommentUp] = useState(false);
   const [deleteUseditemQuestionAnswer] = useMutation<
     Pick<IMutation, "deleteUseditemQuestionAnswer">,
     IMutationDeleteUseditemQuestionAnswerArgs
@@ -19,7 +24,7 @@ export default function ProductRecommentListPage(props) {
   };
 
   const onClickUpdate = () => {
-    props.setIsCommentState((prev) => !prev);
+    setCommentUp((prev) => !prev);
   };
 
   const onClickDeleteRe = async () => {
@@ -42,10 +47,9 @@ export default function ProductRecommentListPage(props) {
       },
     });
   };
-  console.log(props.el, "dd");
   return (
     <>
-      {!props.isCommentState && (
+      {!commentUp && (
         <>
           <S.Recomment>
             <S.FlexWrapper>
@@ -73,12 +77,11 @@ export default function ProductRecommentListPage(props) {
           </S.Recomment>
         </>
       )}
-      {props.isCommentState && (
+      {commentUp && (
         <ProductReCommentWrite
-          isCommentState={props.isCommentState}
-          setIsCommentState={props.setIsCommentState}
+          commentUp={true}
+          setCommentUp={setCommentUp}
           el={props.el}
-          answersData={props.answersData}
         />
       )}
     </>
