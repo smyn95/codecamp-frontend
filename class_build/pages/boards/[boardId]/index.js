@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 export default function BoardsPage() {
   const router = useRouter();
   return (
