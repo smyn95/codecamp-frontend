@@ -50,7 +50,7 @@ export default function PaginationPage({ onClickPage }) {
           }
           if (type === "page") {
             return (
-              <li onClick={onClickPage} id={page}>
+              <li onClick={onClickPage} id={page} defaultCurrent={1}>
                 {page}
               </li>
             );

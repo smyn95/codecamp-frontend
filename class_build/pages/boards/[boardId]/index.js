@@ -1,7 +1,11 @@
 export default function BoardsPage() {
+  const router = useRouter();
   return (
     <>
-      <div>안녕하세요 게시판 입니다. 동적 페이지예요!</div>
+      <div>
+        안녕하세요 게시판 입니다. 동적 페이지예요! <br />
+        게시글 아이디: {router.query.boardId}
+      </div>
     </>
   );
 }
