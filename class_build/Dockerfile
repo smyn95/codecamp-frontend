@@ -6,8 +6,8 @@
 
 FROM node:14
 
-COPY ./package.json /class_build
-COPY ./yarn.lock /class_build
+COPY ./package.json /class_build/
+COPY ./yarn.lock /class_build/
 # 커서깜박깜박 시간 얼마 안걸림
 WORKDIR /class_build/ 
 # 위쪽에서부터 실행되므로 바뀐게 있기 전 순간에 적어준다.
