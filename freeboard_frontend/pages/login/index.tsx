@@ -18,7 +18,7 @@ const LOGIN_USER = gql`
   }
 `;
 
-export default function LoginPage(props) {
+export default function LoginPage(props: any) {
   const router = useRouter();
   const focusRef = useRef();
   const [email, setEmail] = useState("");
@@ -62,21 +62,19 @@ export default function LoginPage(props) {
         variables: { email, password },
       });
       const accessToken = result.data?.loginUser.accessToken;
-      console.log(accessToken);
-
-      // 2. accessToken을 globalState에 저장하기
       if (!accessToken) {
         ErrorModal("로그인에 실패했습니다. 다시 시도해 주세요.");
         return;
       }
-      // localStorage.setItem("accessToken", accessToken);
+      sessionStorage.setItem("accessToken", accessToken);
       SuccessModal("로그인에 성공하였습니다.");
       setAccessToken(accessToken);
       setIsLogin(!isLogin);
     } catch (error) {
-      ErrorModal(error.message);
+      ErrorModal(error as string);
     }
   };
+
   return (
     <>
       <S.BgLayer>
@@ -102,7 +100,6 @@ export default function LoginPage(props) {
                     type="text"
                     name="tbuser_id"
                     onChange={onChangeEmail}
-                    required=""
                     ref={focusRef}
                   />
                   <label onClick={onClickLabel}>Email</label>
@@ -113,7 +110,6 @@ export default function LoginPage(props) {
                     type="password"
                     name="tbuser_pw"
                     onChange={onChangePassword}
-                    required=""
                     ref={focusRef}
                   />
                   <label onClick={onClickLabel}>passWord</label>

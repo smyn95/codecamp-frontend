@@ -67,7 +67,7 @@ const Selectbx = styled.select`
   padding: 10px 0;
 `;
 
-const PointModal = (props) => {
+const PointModal = (props: any) => {
   // const { Option } = Select;
   const [cancel, setCancel] = useState(false);
 

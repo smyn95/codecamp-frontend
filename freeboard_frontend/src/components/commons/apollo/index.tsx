@@ -21,17 +21,11 @@ export default function ApolloSetting(props: IApolloSettingProps) {
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
 
   useEffect(() => {
-    // 1. 기존방식(refreshToken 이전)
-    // console.log("지금은 브라우저다!!!!!");
-    // const result = localStorage.getItem("accessToken");
-    // console.log(result);
-    // if (result) setAccessToken(result);
-
-    // 2. 새로운방식(refreshToken 이후)
     void getAccessToken().then((newAccessToken) => {
       setAccessToken(newAccessToken);
+      sessionStorage.setItem("accessToken", newAccessToken);
     });
-  }, []);
+  }, [setAccessToken]);
 
   const errorLink = onError(({ graphQLErrors, operation, forward }) => {
     if (graphQLErrors) {
@@ -40,8 +34,8 @@ export default function ApolloSetting(props: IApolloSettingProps) {
           return fromPromise(
             getAccessToken().then((newAccessToken) => {
               setAccessToken(newAccessToken);
+              sessionStorage.setItem("accessToken", newAccessToken);
 
-              if (typeof newAccessToken !== "string") return;
               operation.setContext({
                 Headers: {
                   ...operation.getContext().headers,
@@ -52,7 +46,7 @@ export default function ApolloSetting(props: IApolloSettingProps) {
           ).flatMap(() => forward(operation));
         }
       }
-    }
+    } else return forward(operation);
   });
 
   const uploadLink = createUploadLink({

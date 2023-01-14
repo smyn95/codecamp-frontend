@@ -1,8 +1,7 @@
 import { gql } from "@apollo/client";
 import { GraphQLClient } from "graphql-request";
-import { ErrorModal } from "..";
 
-const RESTORE_ACCESS_TOKEN = gql`
+export const RESTORE_ACCESS_TOKEN = gql`
   mutation restoreAccessToken {
     restoreAccessToken {
       accessToken
@@ -17,10 +16,12 @@ export const getAccessToken = async () => {
       { credentials: "include" }
     );
     const result = await graphQLClient.request(RESTORE_ACCESS_TOKEN);
-    const newAccessToken = result.restoreAccessToken.accessToken;
+    const newAccessToken = result.restoreAccessToken?.accessToken;
+    sessionStorage.setItem("accessToken", newAccessToken);
+
+    console.log(graphQLClient);
     return newAccessToken;
   } catch (error) {
-    ErrorModal(error.message);
-    console.log(error.message);
+    if (error instanceof Error) console.log(error.message);
   }
 };

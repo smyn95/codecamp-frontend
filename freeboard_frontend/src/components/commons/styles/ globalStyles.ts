@@ -13,6 +13,7 @@ export const globalStyles = css`
   }
   html,
   body {
+    background: white !important;
     padding: 0;
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,

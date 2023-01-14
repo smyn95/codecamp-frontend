@@ -2,18 +2,21 @@ import {
   CaretDownOutlined,
   DollarOutlined,
   LogoutOutlined,
-  PlusOutlined,
   UserOutlined,
 } from "@ant-design/icons";
 import { useMutation, useQuery } from "@apollo/client";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import LoginPage from "../../../../../pages/login";
 import { ErrorModal, SuccessModal } from "../../../../commons";
-import { accessTokenState, isLoginState } from "../../../../commons/store";
+import {
+  accessTokenState,
+  badgeCountState,
+  isLoginState,
+} from "../../../../commons/store";
 import * as S from "../../../../commons/styles";
 import {
   IMutation,
@@ -32,7 +35,7 @@ declare const window: typeof globalThis & {
   IMP: any;
 };
 
-export default function LayoutHeader(props) {
+export default function LayoutHeader(props: any) {
   const router = useRouter();
   const { data } = useQuery(FETCH_USER_LOGGED_IN);
   const { data: pickData } = useQuery(FETCH_USED_ITEMS_COUNT_I_PICKED);
@@ -45,6 +48,7 @@ export default function LayoutHeader(props) {
   const [myPage, setMyPage] = useState(false);
   const [isLogin, setIsLogin] = useRecoilState(isLoginState);
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
+  const [badgeCount, setBadgeCount] = useRecoilState<string>(badgeCountState);
   const [payment, setPayment] = useState(false);
   const [choose, setChoose] = useState(false);
   const [option, setOption] = useState("");
@@ -60,6 +64,11 @@ export default function LayoutHeader(props) {
     SuccessModal("로그아웃되었습니다.");
   };
 
+  useEffect(() => {
+    const baskets = JSON.parse(String(localStorage.getItem("baskets")));
+    setBadgeCount(baskets?.length || "0");
+  }, []);
+
   const { onClickMoveToPage } = useMoveToPage();
   const onClickMyPage = () => {
     setMyPage(!myPage);
@@ -68,24 +77,11 @@ export default function LayoutHeader(props) {
     setIsLogin((prev) => !prev);
   };
 
-  if (typeof window !== "undefined") {
-    const myProduct = JSON.parse(localStorage.getItem("myProducts") ?? "[]");
-    // const setItem = {
-    //   id: router.query.detail,
-    //   imageUrl: imageUrl,
-    // };
-  }
-  useEffect(() => {
-    myProduct === null
-      ? localStorage.setItem("myProducts", JSON.stringify([]))
-      : null;
-  }, []);
-
   const onClickChoose = () => {
     setPayment((prev) => !prev);
   };
 
-  const onChangeValue = (event) => {
+  const onChangeValue = (event: ChangeEvent<HTMLOptionElement>) => {
     setChoose(true);
     setOption(event.currentTarget.value);
     console.log(event.currentTarget.value, "qqq");
@@ -210,23 +206,11 @@ export default function LayoutHeader(props) {
             <img src="/car.svg" alt="배송 아이콘" />
             <S.CartList>
               <img src="/cart.svg" alt="장바구니 아이콘" />
-              <S.pickNum>{pickData?.fetchUseditemsCountIPicked}</S.pickNum>
+              {pickData?.fetchUseditemsCountIPicked && (
+                <S.pickNum>{pickData?.fetchUseditemsCountIPicked}</S.pickNum>
+              )}
             </S.CartList>
-            {/* <input type="text" />
-            <S.Material onClick={props.onClickText}>
-              <img src="/search.png" alt="검색아이콘" />
-            </S.Material> */}
           </S.TopSearch>
-          <S.Badges>
-            {typeof window !== "undefined" &&
-              myProduct.map((a) => <S.Badge key={a}>{a}</S.Badge>)}
-            <S.Badge>
-              <button onClick={onClickMoveToPage("/product/new/")}>
-                상품등록 &nbsp;
-                <PlusOutlined />
-              </button>
-            </S.Badge>
-          </S.Badges>
         </S.Header>
         {isLogin && <LoginPage onclickIsOpne={onclickIsOpne} />}
       </S.Inner>

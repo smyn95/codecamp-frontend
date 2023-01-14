@@ -1,4 +1,5 @@
 import { atom } from "recoil";
+import { v4 } from "uuid";
 import { getAccessToken } from "../libraries/getAccessToken";
 
 export const isEditState = atom({
@@ -7,7 +8,7 @@ export const isEditState = atom({
 });
 
 export const accessTokenState = atom({
-  key: "accessTokenState",
+  key: `accessTokenState/${v4()}`,
   default: "",
 });
 
@@ -19,4 +20,14 @@ export const isLoginState = atom({
 export const isOpenState = atom({
   key: "isOpenState",
   default: false,
+});
+
+export const badgeCountState = atom({
+  key: "badgeCountState",
+  default: "0",
+});
+
+export const nowProductState = atom({
+  key: "nowProductState",
+  default: [],
 });
