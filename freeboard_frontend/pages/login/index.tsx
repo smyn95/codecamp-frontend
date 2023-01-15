@@ -62,13 +62,11 @@ export default function LoginPage(props: any) {
         variables: { email, password },
       });
       const accessToken = result.data?.loginUser.accessToken;
-      if (!accessToken) {
-        ErrorModal("로그인에 실패했습니다. 다시 시도해 주세요.");
-        return;
+      if (setAccessToken) {
+        setAccessToken(accessToken || "");
+        localStorage.setItem(accessToken, "accessToken");
       }
-      sessionStorage.setItem("accessToken", accessToken);
       SuccessModal("로그인에 성공하였습니다.");
-      setAccessToken(accessToken);
       setIsLogin(!isLogin);
     } catch (error) {
       ErrorModal(error as string);

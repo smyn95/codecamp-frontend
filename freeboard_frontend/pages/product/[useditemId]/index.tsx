@@ -31,7 +31,7 @@ import { ErrorModal, SuccessModal } from "../../../src/commons";
 import { useEffect } from "react";
 import { withAuth } from "../../../src/commons/hocs/withAuth";
 import { useRecoilState } from "recoil";
-import { isEditState } from "../../../src/commons/store";
+import { isEditState, nowProductState } from "../../../src/commons/store";
 import ProductCommentWrite from "../../../src/components/units/productComment/write/productcommentWrite";
 import ProductCommentList from "../../../src/components/units/productComment/list/productCommentList";
 import { FETCH_POINT_TRANSACTIONS_OF_SELLING } from "../../myPage/mypage.queries";
@@ -40,6 +40,7 @@ const LoginSuccessPage = () => {
   const router = useRouter();
   const { onClickMoveToPage } = useMoveToPage();
   const [isEdit, setIsEdit] = useRecoilState(isEditState);
+  const [nowProduct, setNowProduct] = useRecoilState(nowProductState);
 
   const id = router.query.useditemId;
 
@@ -78,29 +79,9 @@ const LoginSuccessPage = () => {
 
   const { Panel } = Collapse;
 
-  useEffect(() => {
-    let myProduct = JSON.parse(localStorage.getItem("myProducts") ?? "[]");
-
-    // 3.현재 상품 id를 myProduct에 저장한다.
-    myProduct.unshift(id);
-
-    // 4.중복된 데이터를 넣지 않는 set 자료형에 myProduct를 담아 중복을 제거한다.
-    myProduct = new Set(myProduct);
-
-    // 중복 제거된 set 자료형의 myProduct를 일반 배열로 변경한다.
-    myProduct = [...myProduct];
-
-    if (myProduct > 2) {
-      myProduct.pop();
-    } else {
-      localStorage.setItem("myProducts", JSON.stringify(myProduct));
-    }
-    // 5.localStorage에 데이터를 JSON 자료형으로 저장한다.
-  }, []);
-
   const onClickDelete = async (useditemId: any) => {
     await deleteUseditem({
-      variables: { useditemId: router.query.useditemId },
+      variables: { useditemId: String(router.query.useditemId) },
       refetchQueries: [
         {
           query: FETCH_USED_ITEMS,
@@ -141,7 +122,19 @@ const LoginSuccessPage = () => {
       ErrorModal(error.message);
     }
   };
-  console.log(data);
+
+  // badge
+  useEffect(() => {
+    const watched = JSON.parse(sessionStorage.getItem("watched") ?? "[]");
+
+    watched.unshift(id);
+    if (watched.length > 3) watched.pop();
+
+    setNowProduct(watched);
+    sessionStorage.setItem("watched", JSON.stringify(watched));
+  }, []);
+  // badge end
+
   return (
     <>
       <S.Product>

@@ -3,21 +3,28 @@ import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 import { nowProductState } from "../../../../commons/store";
 
-export default function LayoutBadgePage() {
+export default function LayoutBadgePage(props: any) {
   const [nowProduct, setNowProduct] = useRecoilState(nowProductState);
 
   useEffect(() => {
-    const watched = JSON.parse(String(sessionStorage.getItem("watched")));
+    const watched =
+      typeof window !== "undefined" &&
+      JSON.parse(String(sessionStorage.getItem("watched")));
     setNowProduct(watched);
+    console.log(watched, "watched");
   }, []);
-  console.log(nowProduct, "최근 본 상품");
+  // console.log(nowProduct, "최근 본 상품nowProduct");
+
+  // el 의 id와 id가 일치하는 id의 image를 뿌려주어라
 
   return (
     <>
       <Badge>
         <Badgebx>
           <h1>최근 본 상품</h1>
-          <FixImg></FixImg>
+          {nowProduct.map((el) => (
+            <FixImg>{console.log(el, "mapel")}</FixImg>
+          ))}
         </Badgebx>
       </Badge>
     </>
@@ -46,8 +53,12 @@ const Badgebx = styled.aside`
   align-items: center;
 `;
 const FixImg = styled.div`
-  background: #c4c4c4;
   width: 85px;
   height: 85px;
   margin-bottom: 10px;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
 `;

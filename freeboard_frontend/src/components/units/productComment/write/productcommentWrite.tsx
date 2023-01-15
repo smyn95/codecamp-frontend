@@ -89,7 +89,6 @@ export default function ProductCommentWrite(props) {
       ErrorModal(error.message);
     }
   };
-  console.log(props.isEdit);
 
   return (
     <>

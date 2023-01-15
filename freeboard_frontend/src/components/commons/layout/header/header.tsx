@@ -21,6 +21,8 @@ import * as S from "../../../../commons/styles";
 import {
   IMutation,
   IMutationCreatePointTransactionOfLoadingArgs,
+  IQuery,
+  IQueryFetchUseditemsIPickedArgs,
 } from "../../../../commons/types/generated/types";
 import { useMoveToPage } from "../../hooks/useMoveToPage";
 import PointModal from "../../modal/point";
@@ -38,7 +40,15 @@ declare const window: typeof globalThis & {
 export default function LayoutHeader(props: any) {
   const router = useRouter();
   const { data } = useQuery(FETCH_USER_LOGGED_IN);
-  const { data: pickData } = useQuery(FETCH_USED_ITEMS_COUNT_I_PICKED);
+  const { data: pickData } = useQuery<
+    Pick<IQuery, "fetchUseditemsCountIPicked">,
+    IQueryFetchUseditemsIPickedArgs
+  >(FETCH_USED_ITEMS_COUNT_I_PICKED, {
+    variables: {
+      search: "",
+      page: 1,
+    },
+  });
 
   const [createPointTransactionOfLoading] = useMutation<
     Pick<IMutation, "createPointTransactionOfLoading">,
@@ -48,7 +58,7 @@ export default function LayoutHeader(props: any) {
   const [myPage, setMyPage] = useState(false);
   const [isLogin, setIsLogin] = useRecoilState(isLoginState);
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
-  const [badgeCount, setBadgeCount] = useRecoilState<string>(badgeCountState);
+  const [badgeCount, setBadgeCount] = useRecoilState(badgeCountState);
   const [payment, setPayment] = useState(false);
   const [choose, setChoose] = useState(false);
   const [option, setOption] = useState("");
@@ -84,7 +94,6 @@ export default function LayoutHeader(props: any) {
   const onChangeValue = (event: ChangeEvent<HTMLOptionElement>) => {
     setChoose(true);
     setOption(event.currentTarget.value);
-    console.log(event.currentTarget.value, "qqq");
   };
 
   const onClickPayment = () => {
@@ -109,7 +118,6 @@ export default function LayoutHeader(props: any) {
       },
       async (rsp: any) => {
         if (rsp.success) {
-          console.log(rsp);
           await createPointTransactionOfLoading({
             variables: { impUid: rsp.imp_uid },
           });

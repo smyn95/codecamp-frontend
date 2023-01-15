@@ -1,6 +1,4 @@
 import { atom } from "recoil";
-import { v4 } from "uuid";
-import { getAccessToken } from "../libraries/getAccessToken";
 
 export const isEditState = atom({
   key: "isEditState",
@@ -8,7 +6,7 @@ export const isEditState = atom({
 });
 
 export const accessTokenState = atom({
-  key: `accessTokenState/${v4()}`,
+  key: "accessTokenState",
   default: "",
 });
 

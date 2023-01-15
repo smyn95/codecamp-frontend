@@ -60,7 +60,6 @@ export default function BoardCommentListUIItem(
     setMyPassword(event.target.value);
   };
   const cancel = (e: React.MouseEvent<HTMLElement>) => {
-    console.log(e);
     message.error("Click on No");
   };
   return (

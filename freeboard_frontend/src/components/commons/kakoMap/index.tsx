@@ -54,7 +54,6 @@ export default function KakaoMapPage(props) {
       });
     };
   }, [props.address]);
-  console.log(props.address);
   return (
     <>
       <div id="map" style={{ minWidth: 400 }}></div>

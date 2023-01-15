@@ -64,7 +64,6 @@ export default function ProductWritePage(props) {
       },
     });
 
-  // console.log(typeof watch("price"));
   const [createUseditem] = useMutation<
     Pick<IMutation, "createUseditem">,
     IMutationCreateUseditemArgs

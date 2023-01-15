@@ -39,7 +39,6 @@ export default function MyPageSell() {
     fetchPolicy: "network-only",
     variables: { search: "", page: 1 },
   });
-  console.log(pointData);
 
   return (
     <>

@@ -10,7 +10,6 @@ export default function BoardDetailUI({
   onClickDisLike,
   onClickDelete,
 }) {
-  console.log(data);
   return (
     <S.Board>
       <S.Box>

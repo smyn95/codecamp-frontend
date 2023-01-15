@@ -5,6 +5,8 @@ import LayoutSubBanner from "./subBanner";
 import { useRecoilState } from "recoil";
 import { isLoginState } from "../../../commons/store";
 import LayoutBadgePage from "./badge";
+import { useQuery } from "@apollo/client";
+import { FETCH_USED_ITEMS } from "../../../../pages/product/product.queries";
 
 const HIDDEN_BANNER = ["/main", "/", "/join"];
 const HIDDEN_RANDING = ["/"];
@@ -14,6 +16,7 @@ export default function Layout(props: any) {
   const isHiddenBanner = HIDDEN_BANNER.includes(router.asPath);
   const isHiddenRanding = HIDDEN_RANDING.includes(router.asPath);
   const [isLogin, setIsLogin] = useRecoilState(isLoginState);
+  const { data: fetchUseditems } = useQuery(FETCH_USED_ITEMS);
 
   const [inputClass, setInputClass] = useState("test");
 
@@ -31,7 +34,9 @@ export default function Layout(props: any) {
 
   return (
     <>
-      <LayoutBadgePage />
+      {fetchUseditems?.fetchUseditems.map((fetch: any, idx: number) => (
+        <LayoutBadgePage fetch={fetch} key={idx} />
+      ))}
       {!isHiddenRanding && (
         <LayoutHeader
           inputClass={inputClass}

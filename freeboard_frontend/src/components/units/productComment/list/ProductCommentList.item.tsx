@@ -49,7 +49,6 @@ export default function ProductCommentListUIItem(props) {
   };
 
   const cancel = (e) => {
-    console.log(e);
     void message.error("Click on No");
   };
   const onClickDelete = async () => {
